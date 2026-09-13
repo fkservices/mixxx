@@ -46,6 +46,8 @@ There was no application dependency setup, build, mapping execution, MIDI round 
 
 ## External documentation
 
+- [Node.js timers](https://nodejs.org/api/timers.html#settimeoutcallback-delay-args): timer callback timing is not guaranteed. This informs the accepted TypeScript/Node.js architecture and its measurement gate.
+- [`@julusian/midi`](https://github.com/julusian/node-midi): candidate native RtMidi binding, virtual ports on macOS/Linux, installation requirements, and explicit input filtering for SysEx. Documentation reviewed; package installation and performance have not been tested in this project.
 - [Mixxx 2.7 control reference](https://manual.mixxx.org/2.7/en/chapters/appendix/mixxx_controls): shared control groups/keys and developer-mode inspection. Development documentation must match the chosen runtime.
 - [Mixxx 2.5 control reference](https://manual.mixxx.org/2.5/en/chapters/appendix/mixxx_controls.html): stable-version comparison for the initial common-control profile.
 - [Controller scripting](https://github.com/mixxxdj/mixxx/wiki/MIDI-Scripting): normalized parameter setters and callbacks for controller feedback.

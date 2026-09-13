@@ -6,6 +6,8 @@ We are building a DJ player/controller that sends and receives MIDI to perform a
 
 **Current scope: fork, source research, and planning only.** All initial development and testing will run locally on one computer. Raspberry Pi deployment comes later.
 
+**Accepted stack:** TypeScript/Node.js communicator, native RtMidi access (`@julusian/midi` as the initial candidate), JavaScript Mixxx mapping, and an isolated AI planner process. The first implementation milestone measures bidirectional MIDI latency and jitter. Responsive control is the target; hard real-time timing is not guaranteed. Details are in the [implementation stack](PLAN.md#accepted-implementation-stack).
+
 ## Documents
 
 - [Interactive direction page](direction.html): visual pitch, simulated transition, manual takeover, and local-to-Pi deployment diagram. Self-contained HTML; no real audio or MIDI connection.
