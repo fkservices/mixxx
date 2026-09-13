@@ -4,7 +4,7 @@
 
 **Current work: implementation authorized and started.** The active goal is “perform tasks.md as proposed.” [GOALS.md](GOALS.md) remains authoritative. The reference catalog has 171 cards and 17 expansion templates. [Execution state and acceptance evidence](docs/ai-dj/work/state.json) are authoritative; a card's presence is not completion.
 
-**Now: twenty-two reference tasks and eight expansion tasks accepted.** M11 is split: its manual fixture service core now connects transport callbacks, codecs, raw observed state and diagnostics, starts disarmed and rejects stale feedback. The package passes 96 tests. Next is the separate local CLI/IPC client with durable capture and proof that client exit leaves the service running. The native diagnostic keeper is unchanged; full M11 and delivery gates remain open.
+**Now: twenty-three reference tasks and nine expansion tasks accepted.** M11 provides a separate local CLI, disarmed communicator service and durable capture; 101 tests, typecheck and build pass. Native service startup and client independence are observed. Mixxx feedback is currently unknown after the port handoff, and native UI inspection times out. Restore the mapping and fixture state for M12/M13; performance, timing and all later delivery gates remain open.
 
 [Visual progress page](docs/ai-dj/progress.html) stays synchronized with the ledger. Add real screenshots and their evidence context as UI/runtime checks produce them.
 

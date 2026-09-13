@@ -495,11 +495,15 @@
       ]
     },
     "M11": {
-      "status": "split",
-      "source_revision": "fb10682",
+      "status": "accepted",
+      "source_revision": "a6bcf07",
       "checks": [
-        "Service core accepted as M11-SERVICE; M11-CLI remains required for separate-client persistence and durable capture."
-      ]
+        "Both required communicator children accepted against unchanged catalog requirements.",
+        "101 tests, typecheck and build passed. Native performance and feedback proof remain open."
+      ],
+      "accepted_at": "2026-09-13T20:40:09.439513+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M11.md",
+      "evidence_sha256": "04bef7c334b981583e8d6034d640cb9014232a5796e007635af0cd39a461922d"
     }
   },
   "jobs": {
@@ -569,8 +573,7 @@
     }
   },
   "resource_leases": {
-    "mixxx-runtime": "M11-CLI",
-    "app-entry": "M11-CLI"
+    "mixxx-runtime": "M11-runtime-job"
   },
   "external_requirements": {
     "musical_fixtures": {

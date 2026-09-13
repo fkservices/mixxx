@@ -450,7 +450,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "running",
+      "status": "accepted",
       "perform": [
         "Add local bounded IPC service runner and separate CLI client, preserving service lifetime when a client exits.",
         "Add durable capture output and native transport startup with explicit profile/session and no automatic arming."
@@ -461,12 +461,14 @@
       ],
       "evidence": "docs/ai-dj/work/evidence/M11-CLI.md",
       "executor": "coordinator",
-      "source_revision": "9dfdfb9",
+      "source_revision": "a6bcf07",
       "started_at": "2026-09-13T20:31:32.313518+00:00",
       "checks": [
-        "101 integrated tests, typecheck and build passed; separate client, durable capture failures and pending-arm cancellation verified.",
-        "Native service remains disarmed with unknown feedback; Mixxx is alive but native UI inspection times out. Host reconnection acceptance remains pending."
-      ]
+        "101 tests, typecheck and build passed; separate client lifetime, durable capture, failure cleanup and queued-arm cancellation verified.",
+        "Native startup observed disarmed; Mixxx feedback and performance remain M12/M13 work."
+      ],
+      "accepted_at": "2026-09-13T20:40:09.439513+00:00",
+      "evidence_sha256": "711d89b91c417a18d8fc613837e3b91f823112c54b46a3fb63aced86802f560e"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

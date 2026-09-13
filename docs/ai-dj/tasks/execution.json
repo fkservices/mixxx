@@ -26,7 +26,7 @@
     "M08": "accepted",
     "M09": "accepted",
     "M10": "accepted",
-    "M11": "split",
+    "M11": "accepted",
     "M12": "planned",
     "M13": "planned",
     "M14": "planned",
@@ -198,9 +198,12 @@
     "M07",
     "M08",
     "M09",
-    "M10"
+    "M10",
+    "M11"
   ],
   "dependency_frontier": [
+    "M12",
+    "M14",
     "I01",
     "I02",
     "I03",
@@ -235,7 +238,7 @@
     "INTEGRATE-F09-SYNC-VALIDATION": "accepted",
     "INTEGRATE-F09-SYNC-PROFILE": "accepted",
     "M11-SERVICE": "accepted",
-    "M11-CLI": "running"
+    "M11-CLI": "accepted"
   },
   "dynamic_dependency_frontier": [],
   "global_requirements": [

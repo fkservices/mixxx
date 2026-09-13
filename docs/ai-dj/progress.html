@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T20:31:32.313518+00:00",
+  "updated_at": "2026-09-13T20:40:09.439513+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -386,14 +386,15 @@
       "id": "M11",
       "title": "Wire a minimal local communicator CLI",
       "stage": "01-local-midi",
-      "status": "split",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
+      "evidence": "work/evidence/M11.md",
+      "verified": true,
       "checks": [
-        "Service core accepted as M11-SERVICE; M11-CLI remains required for separate-client persistence and durable capture."
+        "Both required communicator children accepted against unchanged catalog requirements.",
+        "101 tests, typecheck and build passed. Native performance and feedback proof remain open."
       ],
-      "updated": null,
+      "updated": "2026-09-13T20:40:09.439513+00:00",
       "dynamic": false
     },
     {
@@ -2307,15 +2308,15 @@
       "id": "M11-CLI",
       "title": "Expose service through separate local CLI client",
       "stage": "setup",
-      "status": "running",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
+      "evidence": "work/evidence/M11-CLI.md",
+      "verified": true,
       "checks": [
-        "101 integrated tests, typecheck and build passed; separate client, durable capture failures and pending-arm cancellation verified.",
-        "Native service remains disarmed with unknown feedback; Mixxx is alive but native UI inspection times out. Host reconnection acceptance remains pending."
+        "101 tests, typecheck and build passed; separate client lifetime, durable capture, failure cleanup and queued-arm cancellation verified.",
+        "Native startup observed disarmed; Mixxx feedback and performance remain M12/M13 work."
       ],
-      "updated": "2026-09-13T20:31:32.313518+00:00",
+      "updated": "2026-09-13T20:40:09.439513+00:00",
       "dynamic": true
     }
   ],
