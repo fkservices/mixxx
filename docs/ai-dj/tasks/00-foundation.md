@@ -290,11 +290,11 @@
 
 **Worker:** L3 / `gpt-5.6-sol` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F01, F09, F05. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F01, F09, F05. **Leases:** mixxx-runtime. **Status:** accepted.
 
 **Owns:** `docs/ai-dj/work/runtime-fixture.md`
 
-**Scope:** One host profile, two tracks, fixed audio settings; no controller mapping implementation.
+**Scope:** One host profile, two tracks, fixed audio settings; no performance mapping implementation. A private diagnostic ping/pong mapping is allowed solely for route verification.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
@@ -305,6 +305,7 @@
 1. Prepare isolated profile with chosen skin; record track identities, tempo and safe output routing.
 2. Configure the two directional virtual MIDI endpoints and record exact pairing; capture baseline audio-overload counters.
 3. Follow work/contracts/ports.md: hold two directional native virtual endpoints with a pairable logical name; record actual host pairing and durable port-process identity.
+4. Use an isolated non-performance diagnostic handshake if needed to prove both directions; reserve real control mappings for M05 onward.
 
 **Validate:**
 

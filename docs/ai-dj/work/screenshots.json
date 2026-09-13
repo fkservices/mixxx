@@ -14,6 +14,20 @@
       "caption": "Seven foundation tasks and both setup tasks accepted. The live browser updated without reload; all seven delivery gates remain open. This is a build-journal screenshot, not Mixxx playback evidence.",
       "captured_at": "2026-09-13T19:08:47.474Z",
       "evidence": "work/evidence/progress-page.md"
+    },
+    {
+      "path": "work/screenshots/mixxx-audio-baseline-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Actual Mixxx 2.5.6 audio preferences: 48 kHz, 5.33 ms buffer and built-in stereo output. Settings evidence, not playback or measured latency proof.",
+      "captured_at": "2026-09-13T19:30:12.802Z",
+      "evidence": "work/evidence/F11.md"
+    },
+    {
+      "path": "work/screenshots/mixxx-midi-probe-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Actual Mixxx AI DJ virtual device with a route-only diagnostic mapping enabled. A fixed MIDI probe returned on the separate feedback channel; performance controls remain to build.",
+      "captured_at": "2026-09-13T19:30:50.589Z",
+      "evidence": "work/evidence/F11.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

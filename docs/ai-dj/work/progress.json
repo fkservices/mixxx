@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T19:22:12.165682+00:00",
+  "updated_at": "2026-09-13T19:34:42.046150+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -164,12 +164,17 @@
       "id": "F11",
       "title": "Prepare one disposable Mixxx runtime fixture",
       "stage": "00-foundation",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/F11.md",
+      "verified": true,
+      "checks": [
+        "Verified isolated container-profile launch and both approved tracks loaded with native waveforms/tempo/key.",
+        "Observed real paired input/output and one bounded MIDI diagnostic round trip without echo; helper never sends on receive.",
+        "Captured native audio/controller screenshots and post-load underflow baseline; original music hashes unchanged.",
+        "Runtime, musical and latency-distribution acceptance remain later gates; physical controller explicitly deferred."
+      ],
+      "updated": "2026-09-13T19:34:42.046150+00:00",
       "dynamic": false
     },
     {
@@ -192,12 +197,16 @@
       "id": "M01",
       "title": "Implement transport port discovery",
       "stage": "01-local-midi",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/M01.md",
+      "verified": true,
+      "checks": [
+        "Coordinator read full source and tests; exact per-direction names and fresh enumeration reviewed.",
+        "Coordinator reran all four focused port discovery tests; passed.",
+        "One real enumeration found zero endpoints before F11 setup; no open/send and both handles destroyed."
+      ],
+      "updated": "2026-09-13T19:31:52.293221+00:00",
       "dynamic": false
     },
     {
@@ -2150,12 +2159,12 @@
       "id": "F08-STATE-VALIDATION",
       "title": "Complete state reference and transaction admission",
       "stage": "setup",
-      "status": "planned",
+      "status": "running",
       "model": "gpt-6-astra",
       "evidence": null,
       "verified": false,
       "checks": [],
-      "updated": null,
+      "updated": "2026-09-13T19:23:06.920Z",
       "dynamic": true
     },
     {
@@ -2272,8 +2281,8 @@
     "detail": "User explicitly said they will connect later. Exact model identified; physical MIDI/controller evidence remains pending. Continue independent software work without asking again."
   },
   "music": {
-    "status": "two_local_fixtures_verified",
-    "detail": "Two full-length local MP3 tracks in authorized Music library passed complete decoding; private manifest outside Git. Mixxx playback and musical analysis remain pending."
+    "status": "two_native_fixtures_loaded",
+    "detail": "Two approved local Music-library tracks are loaded and analyzed in isolated Mixxx. They are diagnostic fixtures; natural transition, audible playback and musical quality are unverified."
   },
   "screenshots": [
     {
@@ -2289,6 +2298,20 @@
       "caption": "Seven foundation tasks and both setup tasks accepted. The live browser updated without reload; all seven delivery gates remain open. This is a build-journal screenshot, not Mixxx playback evidence.",
       "captured_at": "2026-09-13T19:08:47.474Z",
       "evidence": "work/evidence/progress-page.md"
+    },
+    {
+      "path": "work/screenshots/mixxx-audio-baseline-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Actual Mixxx 2.5.6 audio preferences: 48 kHz, 5.33 ms buffer and built-in stereo output. Settings evidence, not playback or measured latency proof.",
+      "captured_at": "2026-09-13T19:30:12.802Z",
+      "evidence": "work/evidence/F11.md"
+    },
+    {
+      "path": "work/screenshots/mixxx-midi-probe-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Actual Mixxx AI DJ virtual device with a route-only diagnostic mapping enabled. A fixed MIDI probe returned on the separate feedback channel; performance controls remain to build.",
+      "captured_at": "2026-09-13T19:30:50.589Z",
+      "evidence": "work/evidence/F11.md"
     }
   ]
 }

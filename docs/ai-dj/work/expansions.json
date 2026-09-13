@@ -176,7 +176,7 @@
         "F03",
         "F07"
       ],
-      "status": "planned",
+      "status": "running",
       "owns": [
         "ai-dj/core/validate.ts",
         "ai-dj/test/core/validate.test.ts",
@@ -191,7 +191,14 @@
         "Reject dangling/mismatched deck and instance references, conflicting keys, wrong profile or lineage, unhandled reading invalidation, and invalid full projection; verify original baseline unchanged.",
         "Run all focused validator tests, typecheck and build; preserve F06 action regressions and explicit unknown sync rejection."
       ],
-      "evidence": "docs/ai-dj/work/evidence/F08-STATE-VALIDATION.md"
+      "evidence": "docs/ai-dj/work/evidence/F08-STATE-VALIDATION.md",
+      "worker": "/root/f09_midi_contract",
+      "source_revision": "e058660bbf2a1612ab7bd8ba76cf8e1d65ff865b",
+      "started_at": "2026-09-13T19:23:06.920Z",
+      "interrupt_by": "2026-09-13T19:50:06.920Z",
+      "deadline": "2026-09-13T19:53:06.920Z",
+      "monitor_cell": "254",
+      "supervisor_monotonic_registered_seconds": 10086.826187958
     },
     {
       "parent": "M03",

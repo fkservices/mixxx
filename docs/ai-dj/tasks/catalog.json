@@ -515,11 +515,12 @@
         "mixxx-runtime"
       ],
       "conditions": "Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.",
-      "scope": "One host profile, two tracks, fixed audio settings; no controller mapping implementation.",
+      "scope": "One host profile, two tracks, fixed audio settings; no performance mapping implementation. A private diagnostic ping/pong mapping is allowed solely for route verification.",
       "perform": [
         "Prepare isolated profile with chosen skin; record track identities, tempo and safe output routing.",
         "Configure the two directional virtual MIDI endpoints and record exact pairing; capture baseline audio-overload counters.",
-        "Follow work/contracts/ports.md: hold two directional native virtual endpoints with a pairable logical name; record actual host pairing and durable port-process identity."
+        "Follow work/contracts/ports.md: hold two directional native virtual endpoints with a pairable logical name; record actual host pairing and durable port-process identity.",
+        "Use an isolated non-performance diagnostic handshake if needed to prove both directions; reserve real control mappings for M05 onward."
       ],
       "validate": [
         "Verify commands and feedback have distinct routes without an echo path.",

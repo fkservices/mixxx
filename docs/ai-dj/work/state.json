@@ -288,6 +288,54 @@
         "Ordered capture, explicit gaps, late observations, copy isolation and redacted artifact references verified with fixtures."
       ],
       "monitor_status": "terminated_after_all_handoffs"
+    },
+    "M01": {
+      "status": "accepted",
+      "worker": "/root/f03_scaffold",
+      "model": "gpt-5.6-terra",
+      "reasoning_effort": "high",
+      "source_revision": "e058660bbf2a1612ab7bd8ba76cf8e1d65ff865b",
+      "started_at": "2026-09-13T19:23:06.920Z",
+      "interrupt_by": "2026-09-13T19:50:06.920Z",
+      "deadline": "2026-09-13T19:53:06.920Z",
+      "monitor_cell": "254",
+      "owned_paths": [
+        "ai-dj/midi/ports.ts",
+        "ai-dj/test/midi/ports.test.ts",
+        "docs/ai-dj/work/evidence/M01.md"
+      ],
+      "supervisor_monotonic_registered_seconds": 10086.828171,
+      "accepted_at": "2026-09-13T19:31:52.293221+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M01.md",
+      "evidence_sha256": "52bcf86931180e63f61d9b8fb169c3ce127a82e0515e469ae1c3f6de6af27986",
+      "checks": [
+        "Coordinator read full source and tests; exact per-direction names and fresh enumeration reviewed.",
+        "Coordinator reran all four focused port discovery tests; passed.",
+        "One real enumeration found zero endpoints before F11 setup; no open/send and both handles destroyed."
+      ],
+      "monitor_status": "worker_finished_shared_monitor_still_covers_state_validation"
+    },
+    "F11": {
+      "status": "accepted",
+      "worker": "/root",
+      "model": "coordinator-inherited",
+      "reasoning_effort": "high",
+      "source_revision": "e058660bbf2a1612ab7bd8ba76cf8e1d65ff865b",
+      "started_at": "2026-09-13T19:25:07.234527+00:00",
+      "owned_paths": [
+        "docs/ai-dj/work/runtime-fixture.md",
+        "docs/ai-dj/work/evidence/F11.md"
+      ],
+      "dispatch_note": "Coordinator owns native UI and fixture setup after M01 real enumeration released the MIDI lease. All source/profile/tracks prerequisites accepted.",
+      "accepted_at": "2026-09-13T19:34:42.046150+00:00",
+      "evidence": "docs/ai-dj/work/evidence/F11.md",
+      "evidence_sha256": "72841889f6dc9a3c240810bf50e1cf98bbab55808ae5cadfdcfad09a4a8310d4",
+      "checks": [
+        "Verified isolated container-profile launch and both approved tracks loaded with native waveforms/tempo/key.",
+        "Observed real paired input/output and one bounded MIDI diagnostic round trip without echo; helper never sends on receive.",
+        "Captured native audio/controller screenshots and post-load underflow baseline; original music hashes unchanged.",
+        "Runtime, musical and latency-distribution acceptance remain later gates; physical controller explicitly deferred."
+      ]
     }
   },
   "jobs": {
@@ -320,13 +368,25 @@
       "record": "docs/ai-dj/work/jobs/native-install.json",
       "ended_at": "2026-09-13T19:00:52Z",
       "exit_code": 0
+    },
+    "f11-runtime": {
+      "status": "running",
+      "source_revision": "e058660bbf2a1612ab7bd8ba76cf8e1d65ff865b",
+      "record": "~/Library/Application Support/Mixxx-AI-DJ/jobs/f11-runtime/job.json",
+      "ports_pid": 49495,
+      "mixxx_pid": 50241,
+      "scope": "Private non-performance diagnostic ports and isolated Mixxx profile",
+      "expected_end": "Explicit shutdown/fixture handoff; ports auto-close after two hours; no automatic restart"
     }
   },
-  "resource_leases": {},
+  "resource_leases": {
+    "core-validation": "F08-STATE-VALIDATION",
+    "mixxx-runtime": "F11-fixture-job"
+  },
   "external_requirements": {
     "musical_fixtures": {
-      "status": "two_local_fixtures_verified",
-      "detail": "Two full-length local MP3 tracks in authorized Music library passed complete decoding; private manifest outside Git. Mixxx playback and musical analysis remain pending."
+      "status": "two_native_fixtures_loaded",
+      "detail": "Two approved local Music-library tracks are loaded and analyzed in isolated Mixxx. They are diagnostic fixtures; natural transition, audible playback and musical quality are unverified."
     },
     "physical_controller": {
       "status": "operator_will_connect_later",

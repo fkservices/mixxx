@@ -8,7 +8,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F05, F07. **Leases:** midi-enumeration. **Status:** planned.
+**Dependencies:** F05, F07. **Leases:** midi-enumeration. **Status:** accepted.
 
 **Owns:** `ai-dj/midi/ports.ts`, `ai-dj/test/midi/ports.test.ts`
 

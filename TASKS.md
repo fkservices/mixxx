@@ -4,7 +4,7 @@
 
 **Current work: implementation authorized and started.** The active goal is “perform tasks.md as proposed.” [GOALS.md](GOALS.md) remains authoritative. The reference catalog has 171 cards and 17 expansion templates. [Execution state and acceptance evidence](docs/ai-dj/work/state.json) are authoritative; a card's presence is not completion.
 
-**Now: ten reference tasks and three expansion tasks accepted.** F09 fixes the first MIDI profile, F10 defines evidence-backed inventory pages, and F12 provides bounded diagnostic capture. F08 action validation is accepted as a child; full state admission remains a required continuation. Mixxx 2.5.6 ARM and two local Music library fixtures are ready for F11. The full goal remains active through all runtime, feature, UI, endurance and listening gates.
+**Now: twelve reference tasks and three expansion tasks accepted.** F09 fixes the first MIDI profile, F10 defines evidence-backed inventory pages, and F12 provides bounded diagnostic capture. F08 action validation is accepted as a child; full state admission remains a required continuation. M01 port discovery is accepted. F11 is accepted: isolated Mixxx 2.5.6, two natively loaded fixtures, paired MIDI routes and a diagnostic round trip. Performance-control, audio and timing tests are next. The full goal remains active through all runtime, feature, UI, endurance and listening gates.
 
 [Visual progress page](docs/ai-dj/progress.html) stays synchronized with the ledger. Add real screenshots and their evidence context as UI/runtime checks produce them.
 
@@ -12,7 +12,7 @@
 
 | Checkpoint | Outcome | Exit cards | Status |
 | --- | --- | --- | --- |
-| G0 | Local baseline, package and action/state contracts | F01, F02, F03, F07, F09, F10, F12 | In progress |
+| G0 | Local baseline, package and action/state contracts | F01, F02, F03, F07, F09, F10, F12 | Accepted foundation contracts |
 | G1 | Five real MIDI controls, feedback, timing and initial inventory | M20 | Not started |
 | G2 | Reliable executor, three modes and real-controller B2B | R24, R26 | Not started |
 | G3 | Native playlist selection, saved sets and deterministic mixing | P18, D07 | Not started |
