@@ -416,7 +416,7 @@
       "id": "M13",
       "title": "Prove cue, sync and manual feedback",
       "stage": "01-local-midi",
-      "status": "running",
+      "status": "split",
       "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
@@ -425,7 +425,9 @@
         "Short SYNC click emitted on/off and changed tempo; restored to 117 BPM. Native CUE marker creation was not represented by cue_preview feedback.",
         "Incomplete: raw cue press/release, sustained sync and full manual cue visibility still require verification.",
         "Separate raw fixture sent cue press/release on both decks; play/cue feedback returned false with no pending cue on runner exit.",
-        "Native sustained sync observed on both decks; mouse disabled deck 1, MIDI disabled deck 2. Tempo restored; service remains stopped after test handoff."
+        "Native sustained sync observed on both decks; mouse disabled deck 1, MIDI disabled deck 2. Tempo restored; service remains stopped after test handoff.",
+        "Held cue native UI verified on both decks with 15-second automatic release; paused positions and returned play/cue false observed.",
+        "Required M13-MANUAL-CUE-VISIBILITY continuation preserves native CUE semantics gap before M13 acceptance."
       ],
       "updated": "2026-09-13T21:02:01.120249+00:00",
       "dynamic": false
@@ -2355,6 +2357,18 @@
       "checks": [],
       "updated": null,
       "dynamic": true
+    },
+    {
+      "id": "M13-MANUAL-CUE-VISIBILITY",
+      "title": "Resolve native CUE telemetry mismatch without changing cue-preview meaning",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": true
     }
   ],
   "milestones": [
@@ -2435,7 +2449,7 @@
   },
   "music": {
     "status": "two_native_fixtures_loaded",
-    "detail": "Both approved fixtures remain loaded and paused in isolated host PID34918; tempo/mixer restored. MIDI port runner stopped cleanly; restart communicator before further feedback tests."
+    "detail": "Approved fixtures loaded and paused in isolated host PID40819. Both cue preview readings false on last sample; fixture runner exited cleanly. Communicator remains stopped."
   },
   "screenshots": [
     {

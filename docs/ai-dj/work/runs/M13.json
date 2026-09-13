@@ -61,9 +61,7 @@
     }
   ],
   "remaining": [
-    "Sustained cue native UI visual proof",
-    "Manual cue semantic visibility beyond cue_preview",
-    "Complete five-control native agreement"
+    "Manual cue semantic visibility beyond cue_preview; required continuation M13-MANUAL-CUE-VISIBILITY"
   ],
   "rawFixture": {
     "hostPid": 34918,
@@ -344,6 +342,199 @@
       {
         "file": "raw-sync2-on.jpg",
         "sha256": "4f3afe2da448482b2bb9205e1986b85c54cfb7e5ecb8cdbc1020ba9e4b359e81"
+      }
+    ]
+  },
+  "heldCueVisual": {
+    "hostPid": 40819,
+    "runnerPid": 40196,
+    "exitCode": 0,
+    "cueReleaseMs": 15000,
+    "commands": [
+      {
+        "atMs": 106149.370333,
+        "kind": "send-returned",
+        "bytes": [
+          144,
+          35,
+          127
+        ]
+      },
+      {
+        "atMs": 121149.89958299999,
+        "kind": "send-returned",
+        "bytes": [
+          128,
+          35,
+          0
+        ]
+      },
+      {
+        "atMs": 150211.04662500002,
+        "kind": "send-returned",
+        "bytes": [
+          145,
+          35,
+          127
+        ]
+      },
+      {
+        "atMs": 165213.061667,
+        "kind": "send-returned",
+        "bytes": [
+          129,
+          35,
+          0
+        ]
+      }
+    ],
+    "feedbackChanges": [
+      {
+        "atMs": 81583.1755,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          32,
+          0
+        ]
+      },
+      {
+        "atMs": 81583.28416699999,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          35,
+          0
+        ]
+      },
+      {
+        "atMs": 81583.38945799999,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          32,
+          0
+        ]
+      },
+      {
+        "atMs": 81583.46829199999,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          35,
+          0
+        ]
+      },
+      {
+        "atMs": 106150.145833,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          32,
+          127
+        ]
+      },
+      {
+        "atMs": 106150.257917,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          35,
+          127
+        ]
+      },
+      {
+        "atMs": 121151.28074999999,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          32,
+          0
+        ]
+      },
+      {
+        "atMs": 121151.36958299999,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          35,
+          0
+        ]
+      },
+      {
+        "atMs": 150212.269208,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          32,
+          127
+        ]
+      },
+      {
+        "atMs": 150212.29654200003,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          35,
+          127
+        ]
+      },
+      {
+        "atMs": 165214.43679200002,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          32,
+          0
+        ]
+      },
+      {
+        "atMs": 165214.46975000002,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          35,
+          0
+        ]
+      }
+    ],
+    "eventCounts": {
+      "opened": 1,
+      "feedback": 16688,
+      "send-attempt": 4,
+      "send-returned": 4,
+      "closed": 1
+    },
+    "nativeObservations": [
+      "Deck 1 held preview: play lit, meters active, waveform advanced, position 3.64 seconds.",
+      "Deck 1 released: paused, returned to cue at displayed -0.15 seconds.",
+      "Deck 2 held preview: play lit, meters active, waveform advanced, position 3.78 seconds.",
+      "Deck 2 released: paused, returned to displayed 0.00 seconds."
+    ],
+    "artifacts": [
+      {
+        "file": "cue-visual.mjs",
+        "sha256": "619da6ebb8dcd5377b1d9a3a6baf34dfcd13181dffdae6e06d7ecb3f23327b18"
+      },
+      {
+        "file": "cue-visual.jsonl",
+        "sha256": "ee8fa264ec16ffb8671118f11ed7de418e81da931869bc829cf03d5556daddd1"
+      },
+      {
+        "file": "cue-visual-held.jpg",
+        "sha256": "a73a7ed8a9e4f234299f175429aed7558f228af722f30e673cf91e52bbf3bc04"
+      },
+      {
+        "file": "cue-visual-released.jpg",
+        "sha256": "16a5eb38212fab1fc0a05849526c6d53bb8ba6d5688a50cc100b5a2f310a4d90"
+      },
+      {
+        "file": "cue2-visual-held.jpg",
+        "sha256": "242f6d8aefc9c406d51684636b17e187ed35fbd5a21c2f346460e4dce865eb2d"
+      },
+      {
+        "file": "cue2-visual-released.jpg",
+        "sha256": "3570b769a8693d7651a25bdd9957c33e58f0440e2b197fbdaabeb019e3527eff"
       }
     ]
   }

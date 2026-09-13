@@ -571,7 +571,7 @@
       "evidence_sha256": "9b47485b0e83a744c43a57d627c66f4b4a1ef7ebdf13fc4d37be4680d109f5a1"
     },
     "M13": {
-      "status": "running",
+      "status": "split",
       "executor": "coordinator",
       "source_revision": "93e700e",
       "started_at": "2026-09-13T21:02:01.120249+00:00",
@@ -580,7 +580,9 @@
         "Short SYNC click emitted on/off and changed tempo; restored to 117 BPM. Native CUE marker creation was not represented by cue_preview feedback.",
         "Incomplete: raw cue press/release, sustained sync and full manual cue visibility still require verification.",
         "Separate raw fixture sent cue press/release on both decks; play/cue feedback returned false with no pending cue on runner exit.",
-        "Native sustained sync observed on both decks; mouse disabled deck 1, MIDI disabled deck 2. Tempo restored; service remains stopped after test handoff."
+        "Native sustained sync observed on both decks; mouse disabled deck 1, MIDI disabled deck 2. Tempo restored; service remains stopped after test handoff.",
+        "Held cue native UI verified on both decks with 15-second automatic release; paused positions and returned play/cue false observed.",
+        "Required M13-MANUAL-CUE-VISIBILITY continuation preserves native CUE semantics gap before M13 acceptance."
       ]
     },
     "M14": {
@@ -674,6 +676,15 @@
       "scope": "Bounded private raw MIDI experiment; runtime evidence incomplete",
       "result": "docs/ai-dj/work/runs/M13.json",
       "expected_end": "Explicit stop completed before five-minute hard lifetime"
+    },
+    "m13-cue-visual": {
+      "status": "succeeded",
+      "pid": 40196,
+      "exec_session_id": 23963,
+      "exit_code": 0,
+      "mixxx_pid": 40819,
+      "result": "docs/ai-dj/work/runs/M13.json",
+      "scope": "Native held preview and automatic release on both approved fixture decks"
     }
   },
   "resource_leases": {
@@ -682,7 +693,7 @@
   "external_requirements": {
     "musical_fixtures": {
       "status": "two_native_fixtures_loaded",
-      "detail": "Both approved fixtures remain loaded and paused in isolated host PID34918; tempo/mixer restored. MIDI port runner stopped cleanly; restart communicator before further feedback tests."
+      "detail": "Approved fixtures loaded and paused in isolated host PID40819. Both cue preview readings false on last sample; fixture runner exited cleanly. Communicator remains stopped."
     },
     "physical_controller": {
       "status": "operator_will_connect_later",

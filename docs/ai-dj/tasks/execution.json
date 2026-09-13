@@ -28,7 +28,7 @@
     "M10": "accepted",
     "M11": "accepted",
     "M12": "accepted",
-    "M13": "running",
+    "M13": "split",
     "M14": "accepted",
     "M15": "planned",
     "M16": "planned",
@@ -245,9 +245,12 @@
     "INTEGRATE-F09-SYNC-PROFILE": "accepted",
     "M11-SERVICE": "accepted",
     "M11-CLI": "accepted",
-    "R08-PAGED-VALIDATION": "planned"
+    "R08-PAGED-VALIDATION": "planned",
+    "M13-MANUAL-CUE-VISIBILITY": "planned"
   },
-  "dynamic_dependency_frontier": [],
+  "dynamic_dependency_frontier": [
+    "M13-MANUAL-CUE-VISIBILITY"
+  ],
   "global_requirements": [
     "User instruction to start implementation",
     "Current integrated revision and scoped context",

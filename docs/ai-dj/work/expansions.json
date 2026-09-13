@@ -508,6 +508,44 @@
         "Test aggregate byte/node/page/record bounds, late/conflicting pages and timeout; no partial authoritative state."
       ],
       "evidence": "docs/ai-dj/work/evidence/R08-PAGED-VALIDATION.md"
+    },
+    {
+      "id": "M13-MANUAL-CUE-VISIBILITY",
+      "title": "Resolve native CUE telemetry mismatch without changing cue-preview meaning",
+      "parent": "M13",
+      "blocks": [
+        "M13"
+      ],
+      "template": "SPLIT",
+      "level": "L4",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "M12",
+        "F09",
+        "M10"
+      ],
+      "owns": [
+        "docs/ai-dj/work/contracts/manual-cue-observation.md"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 5,
+        "execute": 10,
+        "validate": 7,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Inspect version-pinned native cue_default, cue_indicator, cue_point and cue_preview behavior and binding; distinguish marker placement, preview activity, transport and indicator.",
+        "Specify bounded additional host observations and transport/profile compatibility. Materialize required implementation and native-validation children with exact ownership before accepting this continuation; do not merely document away the gap."
+      ],
+      "validate": [
+        "Require independent native manual CUE changes to become observable without falsely attributing actor or interpreting cue_preview as cue placement.",
+        "Preserve initial cue note press/release, installed mapping lifecycle, unknown/unavailable state, raw/semantic event distinction and zero feedback echo."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/M13-MANUAL-CUE-VISIBILITY.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."
