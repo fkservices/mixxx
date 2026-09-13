@@ -134,4 +134,19 @@ mapping without the temporary bootstrap. No performance message was sent.
 Native expiry, reset, capacity and lifecycle cases still remain; this supporting
 probe does not accept the native endpoint card or its integration prerequisite.
 
+## Native fragmented-message idle expiry
+
+A two-fragment JSON fixture sent its first frame, waited 600 ms, then sent its
+remaining frame. The native 350 ms observation, before that tail arrived, showed
+zero incomplete messages and zero retained payload bytes with one pending
+diagnostic. The late tail reported `message-timeout` and dispatched nothing.
+A fresh sequence sent both fragments and dispatched once; Node received exactly
+that new sequence and the complete object, including its 700-byte padding field.
+
+This proves native automatic idle expiry and successful fragmented recovery for
+this bounded case. It does not prove every absolute-expiry or saturation case.
+The helper and host exited, and the repository mapping was restored. Capture,
+probe, runner and filtered native-log hashes are added to the existing partial
+native run record. Reset, capacity and lifecycle evidence remain required.
+
 > End of autonomously AI-generated investigation.

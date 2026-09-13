@@ -3,7 +3,7 @@
   "task": "R05-ENDPOINT-NATIVE",
   "status": "partial",
   "sourceRevision": "abae078",
-  "recordedAt": "2026-09-13T22:21:05.991116+00:00",
+  "recordedAt": "2026-09-13T22:22:14.841534+00:00",
   "hostVersion": "custom Mixxx 2.7.0",
   "nativeClock": "engine.getMonotonicTime",
   "fixture": "Private opcode 9 JSON echo; no production service or performance action handler",
@@ -50,8 +50,80 @@
   },
   "installedMappingSha256": "72f796c0e1a4c30142bad127d58804c93a558c533dcd81d94c25c1389d17e441",
   "limitations": [
-    "Single-frame JSON and checksum corruption only; expiry/reset/capacity/lifecycle coverage remains.",
+    "Native JSON/checksum and two-fragment idle expiry passed; reset/capacity/lifecycle and absolute expiry remain.",
     "Opcode 9 payload is a private codec fixture, not a valid production session message.",
     "No setters exist in the probe handler; no performance input sent. This is not an exhaustive hostile-message setter audit."
-  ]
+  ],
+  "expiryProbe": {
+    "sourceRevision": "cbaa92c",
+    "status": "passed",
+    "lateSequence": 4,
+    "freshSequence": 5,
+    "freshPayloadPaddingBytes": 700,
+    "inputResults": [
+      {
+        "dispatched": 0,
+        "rejected": 0,
+        "closed": false,
+        "diagnostics": [],
+        "droppedDiagnostics": 0
+      },
+      {
+        "dispatched": 0,
+        "rejected": 0,
+        "closed": false,
+        "diagnostics": [
+          "message-timeout"
+        ],
+        "droppedDiagnostics": 0
+      },
+      {
+        "dispatched": 0,
+        "rejected": 0,
+        "closed": false,
+        "diagnostics": [],
+        "droppedDiagnostics": 0
+      },
+      {
+        "dispatched": 1,
+        "rejected": 0,
+        "closed": false,
+        "diagnostics": [],
+        "droppedDiagnostics": 0
+      }
+    ],
+    "idleBeforeTail": {
+      "enabled": true,
+      "clock": {
+        "kind": "monotonic",
+        "id": "native-expiry-probe"
+      },
+      "clockProvenance": "caller-supplied-unverified",
+      "endpoint": {
+        "closed": false,
+        "fault": null,
+        "generation": 1,
+        "parser": {
+          "generation": 1,
+          "closed": false,
+          "failed": false,
+          "partialBytes": 0,
+          "incompleteMessages": 0,
+          "retainedPayloadBytes": 0,
+          "pendingDiagnostics": 1,
+          "droppedDiagnostics": 0
+        }
+      }
+    },
+    "helperExitCode": 0,
+    "hostStopped": true,
+    "diagnosticBootstrapRemoved": true,
+    "evidenceHashes": {
+      "runner.mjs": "d60bc601ebd40bca3e83d98d77a378427c6593a97bf8460c71847b7360248ec6",
+      "probe.js": "e7f1d2311129f0a8419f001f7015872abf2b5ab3579c26df5d5ff04947d2caf2",
+      "capture.jsonl": "d4422d0c0887d8ffefdeb1fd5799ee81b45ecdc91060f321f9c480c47229c256",
+      "host-evidence.log": "99282500231c8d3747a380a54f97bad216fe6b30b3382491f5d680973a3bdbfa"
+    },
+    "installedMappingSha256": "c625c2584b17a65a2873d0e7ecca0075a68e7fbc828613b57c8d7bdd08a90428"
+  }
 }
