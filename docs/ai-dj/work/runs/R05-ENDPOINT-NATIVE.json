@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "task": "R05-ENDPOINT-NATIVE",
-  "status": "partial",
+  "status": "accepted-bounded-endpoint",
   "sourceRevision": "abae078",
   "recordedAt": "2026-09-13T22:27:41.963935+00:00",
   "hostVersion": "custom Mixxx 2.7.0",
@@ -13,7 +13,7 @@
     "session": "0123456789abcdef0123456789abcdef",
     "payload": {
       "probe": "json-only",
-      "text": "é🎧",
+      "text": "\u00e9\ud83c\udfa7",
       "values": [
         1,
         true,
@@ -50,10 +50,9 @@
   },
   "installedMappingSha256": "72f796c0e1a4c30142bad127d58804c93a558c533dcd81d94c25c1389d17e441",
   "limitations": [
-    "Native JSON/checksum, idle expiry and four-slot capacity passed; reset/lifecycle and absolute expiry remain.",
-    "Opcode 9 payload is a private codec fixture, not a valid production session message.",
-    "No setters exist in the probe handler; no performance input sent. This is not an exhaustive hostile-message setter audit.",
-    "Observed reset-routing failure and rapid seven-frame callback shortfall must be resolved before native endpoint acceptance."
+    "Wrapper/codec scope only. Production semantic sessions, authority, loaded timing, hardware handover and musical acceptance remain separate.",
+    "Private JSON service fixture; no production opcode 9 implementation. Setter exclusion combines native rejected-handler observations with source and VM evidence.",
+    "Maximum reply needs an explicit admission deadline that covers encoding/queue residence; partial-send bounds remain unchanged."
   ],
   "expiryProbe": {
     "sourceRevision": "cbaa92c",
@@ -455,5 +454,172 @@
       "R05-NATIVE-INPUT-LOSS",
       "R05-FRAGMENT-SENDER"
     ]
-  }
+  },
+  "consolidatedProbe": {
+    "sourceRevision": "8717960",
+    "recordedAt": "2026-09-13T22:59:35.613724+00:00",
+    "status": "passed",
+    "replies": [
+      {
+        "opcode": 112,
+        "sequence": 91,
+        "payload": -1.5
+      },
+      {
+        "opcode": 113,
+        "sequence": 92,
+        "payload": "\u00e9\ud83c\udfa7"
+      },
+      {
+        "opcode": 9,
+        "sequence": 93,
+        "payload": {
+          "probe": "json-only",
+          "text": "\u00e9\ud83c\udfa7",
+          "values": [
+            1,
+            true,
+            null
+          ]
+        }
+      },
+      {
+        "opcode": 112,
+        "sequence": 96,
+        "payload": -1.5
+      }
+    ],
+    "inputResults": [
+      {
+        "dispatched": 0,
+        "rejected": 0,
+        "closed": false,
+        "diagnostics": [
+          "checksum-mismatch"
+        ],
+        "droppedDiagnostics": 0
+      },
+      {
+        "dispatched": 1,
+        "rejected": 0,
+        "closed": false,
+        "diagnostics": [],
+        "droppedDiagnostics": 0
+      },
+      {
+        "dispatched": 1,
+        "rejected": 0,
+        "closed": false,
+        "diagnostics": [],
+        "droppedDiagnostics": 0
+      },
+      {
+        "dispatched": 1,
+        "rejected": 0,
+        "closed": false,
+        "diagnostics": [],
+        "droppedDiagnostics": 0
+      },
+      {
+        "dispatched": 0,
+        "rejected": 1,
+        "closed": false,
+        "diagnostics": [],
+        "droppedDiagnostics": 0
+      },
+      {
+        "dispatched": 0,
+        "rejected": 1,
+        "closed": false,
+        "diagnostics": [],
+        "droppedDiagnostics": 0
+      },
+      {
+        "dispatched": 1,
+        "rejected": 0,
+        "closed": false,
+        "diagnostics": [],
+        "droppedDiagnostics": 0
+      }
+    ],
+    "exactNativeIncomingFrames": 7,
+    "exactNativeOutgoingFrames": 4,
+    "conventionalVolume": {
+      "initial": 127,
+      "target": 64,
+      "observed": 64,
+      "restored": 127
+    },
+    "playStayedStopped": true,
+    "finalState": {
+      "handled": [
+        91,
+        92,
+        93,
+        96
+      ],
+      "results": [],
+      "state": {
+        "enabled": true,
+        "clock": {
+          "kind": "monotonic",
+          "id": "endpoint-final"
+        },
+        "clockProvenance": "caller-supplied-unverified",
+        "endpoint": {
+          "closed": false,
+          "fault": null,
+          "generation": 1,
+          "parser": {
+            "generation": 1,
+            "closed": false,
+            "failed": false,
+            "partialBytes": 0,
+            "incompleteMessages": 0,
+            "retainedPayloadBytes": 0,
+            "pendingDiagnostics": 0,
+            "droppedDiagnostics": 0
+          },
+          "sender": {
+            "closed": false,
+            "fault": null,
+            "generation": 1,
+            "queued": 0,
+            "retainedBytes": 0,
+            "pendingResults": 0
+          }
+        }
+      },
+      "play": 0,
+      "volume": 1
+    },
+    "helperExitCode": 0,
+    "hostStopped": true,
+    "diagnosticBootstrapRemoved": true,
+    "mappingSourceHashes": {
+      "AI-DJ-scripts.js": "fbcfcd0cad05ea96dee41ea0aac233102dc999bfad710b9be6e76f0f73436102",
+      "AI-DJ.midi.xml": "4523f3cddd4c72f2847d623ff3db7ab8b19e324457df0c4a527e323f8b243bad"
+    },
+    "evidenceHashes": {
+      "capture.jsonl": "34f2b6b152feec2c946f73c7f60ff99a77dfeb39c32def8f68aabdc61e2e4dab",
+      "host-evidence.log": "3679b0b94de72ad04153506a2bfd45f5112ba1f620d2b6ecdc6707059b782d9f",
+      "runner.mjs": "2e2008f6bbd5c65591dbcf0fe2ecded5f2e3916487e17a2d6cf8cded306d0091",
+      "active-mapping.js": "d66946676b0e0d840c8c84686e564f2a1738f690a8bfee16c86208d6e936904b",
+      "full-host.log": "eb97f45b9804800423f39a538608504ad62455dd2c05517bdcd17886894b7576",
+      "probe.js": "d9b61146b7f8544a0c3e4224c02ed89cf33a4edc3f1cc5d331618d73edac6690"
+    },
+    "boundaries": [
+      "Private opcode 9 fixture tests JSON framing only; no production opcode 9 service was installed.",
+      "Native checks prove rejected inputs did not invoke the registered codec handlers. Setter exclusion is also established by source composition and VM setter regression; no native setter interception is claimed.",
+      "Conventional volume was intentionally exercised and restored; no track playback was started."
+    ]
+  },
+  "historicalLimitations": [
+    "Native JSON/checksum, idle expiry and four-slot capacity passed; reset/lifecycle and absolute expiry remain.",
+    "Opcode 9 payload is a private codec fixture, not a valid production session message.",
+    "No setters exist in the probe handler; no performance input sent. This is not an exhaustive hostile-message setter audit.",
+    "Observed reset-routing failure and rapid seven-frame callback shortfall must be resolved before native endpoint acceptance."
+  ],
+  "acceptedAt": "2026-09-13T23:00:11.179195+00:00",
+  "acceptedSourceRevision": "8717960"
 }

@@ -1,6 +1,13 @@
 # Extended endpoint native integration findings
 
-> Autonomously AI-generated investigation. Integration is not accepted.
+> Autonomously AI-generated investigation history. R05 wrapper and native endpoint scopes are now accepted.
+
+Current acceptance: the eight-fragment mapping passed final native numeric,
+Unicode, JSON, checksum/schema/handler rejection and conventional volume
+coexistence checks. Required clock, loss, bounded sender and lifecycle children
+are accepted. See [R05 acceptance](../evidence/R05.md). The sections below retain
+the chronology, including failed investigations that were subsequently resolved.
+Production semantic services, timing and musical gates remain separate.
 
 The upstream 2.5.6 tag resolved to commit
 `3ebac449e7e5fe2a0186596657696e87ce8b0e56`. Its legacy script engine wraps

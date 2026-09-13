@@ -26,7 +26,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T22:55:25.714068+00:00",
+  "updated_at": "2026-09-13T23:00:11.179195+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -861,16 +861,15 @@
       "id": "R05",
       "title": "Implement the Mixxx wire endpoint",
       "stage": "03-reliability",
-      "status": "split",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
+      "evidence": "work/evidence/R05.md",
+      "verified": true,
       "checks": [
-        "Endpoint wrapper implemented; eight endpoint tests and all 150 integrated tests passed.",
-        "Typecheck, build and whitespace passed.",
-        "Required mapping integration and native validation children materialized; R05 remains unaccepted."
+        "Wire wrapper accepted with all required children and final native golden/rejection/coexistence proof.",
+        "178 software tests plus source/native evidence pass; production sessions, authority, timing and musical gates remain."
       ],
-      "updated": "2026-09-13T21:30:24.283238+00:00",
+      "updated": "2026-09-13T23:00:11.179195+00:00",
       "dynamic": false
     },
     {
@@ -2477,12 +2476,15 @@
       "id": "R05-ENDPOINT-NATIVE",
       "title": "Verify extended endpoint on installed isolated Mixxx",
       "stage": "setup",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/R05-ENDPOINT-NATIVE.md",
+      "verified": true,
+      "checks": [
+        "Current mapping: four exact replies, checksum/schema/handler rejections and conventional volume restoration verified in native Mixxx.",
+        "Capacity, expiry and lifecycle evidence reconciled; helper/app stopped and private bootstrap removed. Wrapper scope only."
+      ],
+      "updated": "2026-09-13T23:00:11.179195+00:00",
       "dynamic": true
     },
     {

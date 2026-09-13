@@ -63,7 +63,7 @@
     "R02": "accepted",
     "R03": "accepted",
     "R04": "accepted",
-    "R05": "split",
+    "R05": "accepted",
     "R06": "planned",
     "R07": "planned",
     "R08": "planned",
@@ -206,6 +206,7 @@
     "R02",
     "R03",
     "R04",
+    "R05",
     "R15",
     "R20"
   ],
@@ -253,7 +254,7 @@
     "R05-HOST-ENCODER": "accepted",
     "R05-HOST-DECODER": "accepted",
     "R05-ENDPOINT-INTEGRATE": "accepted",
-    "R05-ENDPOINT-NATIVE": "planned",
+    "R05-ENDPOINT-NATIVE": "accepted",
     "R05-NATIVE-CLOCK": "accepted",
     "R12-SUSPEND-RESUME": "planned",
     "R05-NATIVE-INPUT-LOSS": "accepted",
@@ -262,7 +263,7 @@
     "R05-NATIVE-SEND-TIMER": "accepted"
   },
   "dynamic_dependency_frontier": [
-    "R05-ENDPOINT-NATIVE"
+    "M13-CUE-TRANSPORT"
   ],
   "global_requirements": [
     "User instruction to start implementation",

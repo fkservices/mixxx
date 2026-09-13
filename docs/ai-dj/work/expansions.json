@@ -860,7 +860,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "accepted",
       "perform": [
         "Run bounded golden numeric/text/JSON diagnostic frames through actual host input/output with explicit opt-in and no performance action handler.",
         "Record installed profile/source hashes, received packets, rejected malformed frames and lifecycle cleanup."
@@ -869,7 +869,17 @@
         "Require native endpoint evidence rather than VM or injected receiver data.",
         "Verify invalid data cannot invoke a setter, conventional controls remain intact, clock limitations are named and runtime handoff is explicit."
       ],
-      "evidence": "docs/ai-dj/work/evidence/R05-ENDPOINT-NATIVE.md"
+      "evidence": "docs/ai-dj/work/evidence/R05-ENDPOINT-NATIVE.md",
+      "executor": "coordinator",
+      "source_revision": "8717960",
+      "started_at": "2026-09-13T22:58:34.540571+00:00",
+      "checks": [
+        "Current mapping: four exact replies, checksum/schema/handler rejections and conventional volume restoration verified in native Mixxx.",
+        "Capacity, expiry and lifecycle evidence reconciled; helper/app stopped and private bootstrap removed. Wrapper scope only."
+      ],
+      "accepted_at": "2026-09-13T23:00:11.179195+00:00",
+      "updated_at": "2026-09-13T23:00:11.179195+00:00",
+      "evidence_sha256": "ad0d2f218bd08a77812b0c1bda7dcd7a59fc33eaa73385ce1767f0e525c514ba"
     },
     {
       "parent": "R05",

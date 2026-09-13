@@ -600,15 +600,18 @@
       "evidence_sha256": "c0496a4220a0b49b6abdff222f77c42974026c49f6c9e1a35586c8d840b34ae1"
     },
     "R05": {
-      "status": "split",
+      "status": "accepted",
       "executor": "coordinator",
-      "source_revision": "cdce5b9",
+      "source_revision": "8717960",
       "started_at": "2026-09-13T21:30:24.283238+00:00",
       "checks": [
-        "Endpoint wrapper implemented; eight endpoint tests and all 150 integrated tests passed.",
-        "Typecheck, build and whitespace passed.",
-        "Required mapping integration and native validation children materialized; R05 remains unaccepted."
-      ]
+        "Wire wrapper accepted with all required children and final native golden/rejection/coexistence proof.",
+        "178 software tests plus source/native evidence pass; production sessions, authority, timing and musical gates remain."
+      ],
+      "accepted_at": "2026-09-13T23:00:11.179195+00:00",
+      "updated_at": "2026-09-13T23:00:11.179195+00:00",
+      "evidence": "docs/ai-dj/work/evidence/R05.md",
+      "evidence_sha256": "0110f99b4b0d5de639b98d74a9f31a1ead62044b606c154df88e1266a9c6a3d5"
     },
     "R15": {
       "status": "accepted",
