@@ -543,6 +543,19 @@
       "accepted_at": "2026-09-13T20:48:23.105731+00:00",
       "evidence": "docs/ai-dj/work/evidence/R02.md",
       "evidence_sha256": "5682752e83b3703378087603466f89e086b7f889a54997dc40e3e943e673c438"
+    },
+    "R04": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "3117ce8",
+      "started_at": "2026-09-13T20:49:55.133598+00:00",
+      "checks": [
+        "Bounded framing, reassembly, strict decoding and automatic expiry reviewed; no host dispatcher.",
+        "114 tests, typecheck and build passed, including malformed/interleaved/over-limit traffic and timer expiry."
+      ],
+      "accepted_at": "2026-09-13T20:51:54.160761+00:00",
+      "evidence": "docs/ai-dj/work/evidence/R04.md",
+      "evidence_sha256": "41f155e6baa499c931a9171c2872167ea0aa3a3579916b3ab64487eeef1c0775"
     }
   },
   "jobs": {

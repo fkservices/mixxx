@@ -62,7 +62,7 @@
     "R01": "accepted",
     "R02": "accepted",
     "R03": "accepted",
-    "R04": "planned",
+    "R04": "accepted",
     "R05": "planned",
     "R06": "planned",
     "R07": "planned",
@@ -202,7 +202,8 @@
     "M11",
     "R01",
     "R02",
-    "R03"
+    "R03",
+    "R04"
   ],
   "dependency_frontier": [
     "M12",
@@ -229,8 +230,9 @@
     "I20",
     "I21",
     "I22",
-    "R04",
-    "R15"
+    "R05",
+    "R15",
+    "R20"
   ],
   "dispatchable_now": [],
   "dynamic_task_status": {

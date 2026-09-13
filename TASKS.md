@@ -4,7 +4,7 @@
 
 **Current work: implementation authorized and started.** The active goal is “perform tasks.md as proposed.” [GOALS.md](GOALS.md) remains authoritative. The reference catalog has 171 cards and 17 expansion templates. [Execution state and acceptance evidence](docs/ai-dj/work/state.json) are authoritative; a card's presence is not completion.
 
-**Now: twenty-six reference tasks and nine of ten expansion tasks accepted.** R02 freezes lifecycle, atomic snapshot recovery, outcome correlation and epoch cancellation; R03 supplies the encoder. Paged aggregate validation is an explicit required continuation. The package passes 105 tests. Next: incoming parsing and actual host integration, while restoring Mixxx feedback for M12/M13. Performance, timing, AI/B2B and later delivery gates remain open.
+**Now: twenty-seven reference tasks and nine of ten expansion tasks accepted.** R04 adds bounded incoming SysEx parsing, strict payload decoding and fragment expiry. The package passes 114 tests, typecheck and build. Next: actual host endpoint and lifecycle integration, alongside restoring native Mixxx feedback for M12/M13. Performance, timing, AI/B2B and later delivery gates remain open.
 
 [Visual progress page](docs/ai-dj/progress.html) stays synchronized with the ledger. Add real screenshots and their evidence context as UI/runtime checks produce them.
 
