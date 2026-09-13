@@ -373,7 +373,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** M11, F12. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** M11, F12. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/diagnostics/timing.ts`, `ai-dj/test/diagnostics/timing.test.ts`
 

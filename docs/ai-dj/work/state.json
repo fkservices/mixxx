@@ -582,6 +582,20 @@
         "Separate raw fixture sent cue press/release on both decks; play/cue feedback returned false with no pending cue on runner exit.",
         "Native sustained sync observed on both decks; mouse disabled deck 1, MIDI disabled deck 2. Tempo restored; service remains stopped after test handoff."
       ]
+    },
+    "M14": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "47ba993d21cd1a8856c49ca0038e74277c30150e",
+      "started_at": "2026-09-13T21:12:55.458413+00:00",
+      "checks": [
+        "Eight synthetic timing tests and all 122 integrated tests passed.",
+        "Typecheck, build and diff whitespace passed.",
+        "Independent bounded metrics, explicit sample loss and monotonic-clock fault handling; no live latency target claimed."
+      ],
+      "accepted_at": "2026-09-13T21:14:12.395239+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M14.md",
+      "evidence_sha256": "c0496a4220a0b49b6abdff222f77c42974026c49f6c9e1a35586c8d840b34ae1"
     }
   },
   "jobs": {
