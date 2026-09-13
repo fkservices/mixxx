@@ -4,7 +4,7 @@
 
 We are building a DJ player/controller that sends and receives MIDI to perform a DJ set. Mixxx is the first host it controls and the visible reference application. The AI DJ is a separate product, with its own decision making, execution, and observed state.
 
-**Current scope: fork, source research, and planning only.** All initial development and testing will run locally on one computer. Raspberry Pi deployment comes later.
+**Current scope: fork, source research, and planning only.** The product is a desktop app running alongside the DJ host through virtual MIDI. All initial development and testing will run locally on one computer. Raspberry Pi deployment is optional and does not block desktop delivery.
 
 **Accepted stack:** TypeScript/Node.js communicator, native RtMidi access (`@julusian/midi` as the initial candidate), JavaScript Mixxx mapping, and an isolated AI planner process. The first implementation milestone measures bidirectional MIDI latency and jitter. Responsive control is the target; hard real-time timing is not guaranteed. Details are in the [implementation stack](PLAN.md#accepted-implementation-stack).
 
@@ -12,6 +12,7 @@ We are building a DJ player/controller that sends and receives MIDI to perform a
 
 - [Interactive direction page](direction.html): visual pitch, simulated transition, manual takeover, and local-to-Pi deployment diagram. Self-contained HTML; no real audio or MIDI connection.
 - [Architecture and milestones](PLAN.md): product boundaries, local setup, MIDI protocol, execution, and acceptance criteria.
+- [Desktop deployment and host compatibility](HOST-STRATEGY.md): why an external AI device is optional, and what we must verify for Mixxx, Serato, and Traktor.
 - [Feature coverage and gaps](CONTROL-COVERAGE.md): how to reach the full-feature goal without assuming every UI action is already MIDI accessible.
 - [Research evidence](RESEARCH.md): pinned source references, documentation, version differences, and limits of this investigation.
 

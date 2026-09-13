@@ -6,7 +6,9 @@ Date: 2026-09-13. Status: planning; TypeScript/Node.js direction accepted by the
 
 ## 1. Product and scope
 
-Build an AI DJ player/controller that performs by sending MIDI commands and receiving MIDI feedback. Mixxx supplies the initial decks, audio engine, library, effects, and visible controls. All initial processes run on the same local computer. Later, the controller can move to a Raspberry Pi without relocating the DJ decision logic into Mixxx.
+Build a desktop AI DJ player/controller that performs by sending MIDI commands and receiving MIDI feedback. Mixxx supplies the initial decks, audio engine, library, effects, and visible controls. The controller and DJ host run on the same local computer, connected through virtual MIDI. This is a complete product direction; a Raspberry Pi is an optional later deployment, not a required destination.
+
+See [desktop deployment and host compatibility](HOST-STRATEGY.md) for the same-computer design and the separate investigations required for Serato, Traktor, or another host.
 
 The user must see the actual Mixxx controls and playback state change. An activity display that merely says a MIDI command was sent does not satisfy this requirement.
 
@@ -182,7 +184,7 @@ See [feature coverage](CONTROL-COVERAGE.md). The complete inventory is a deliver
 | 3 — Deterministic DJ set | Two-deck transition policy and stable track selection/load adapter. | Repeated local transitions with recorded MIDI/state traces, visible controls, confirmed track identity, and reviewed audio. |
 | 4 — AI planning | Local model/runtime evaluation, track analysis, structured plan generation. | Invalid/late model output is rejected; model failure does not interrupt playback; musical quality judged on recorded sets. |
 | 5 — Full Mixxx coverage | Complete audited feature inventory; extend missing operations and feedback. | Every inventoried feature has send/receive/UI evidence or an explicitly unresolved gap; no silent scope reduction. |
-| 6 — Raspberry Pi | Move the same controller to Linux ARM; substitute physical transport. | Local parity suite plus cable removal, power/reboot recovery, CPU/thermal/memory and latency measurements. |
+| 6 — Optional Raspberry Pi branch | If justified after desktop validation, move the same controller to Linux ARM and substitute physical transport. This does not block desktop delivery. | Local parity suite plus cable removal, power/reboot recovery, CPU/thermal/memory and latency measurements. |
 
 Prototype acceptance targets, to be tuned from measurements: p95 command-to-observed-state under 100 ms for simple controls; visible update within 150 ms; takeover cancellation within 100 ms while connected; disarm within 1 second of lost heartbeat. These are proposed budgets, not measured performance or musical timing guarantees. Run a 30-minute two-deck local set with no additional audio-overload events attributable to the controller, plus manual listening for glitches and transitions.
 
@@ -190,13 +192,13 @@ The first milestone must record the chosen Node version, MIDI binding, host vers
 
 Validation should include protocol parser tests, malformed/duplicate/out-of-order frames, control scaling boundaries, snapshot races, unavailable features, hotcue press/release, track load failure, human changes during curves, focus changes, and reconnect. Each UI gate needs a real Mixxx run. Logs should include monotonic timestamps and correlation IDs but avoid unnecessary local file paths and library metadata.
 
-## 8. Raspberry Pi path, later
+## 8. Optional Raspberry Pi path
 
-Nothing in the current milestone requires a Pi, external network host, or hardware purchase. Keep OS-specific MIDI port management behind the transport interface now.
+The desktop product does not require a Pi, external network host, or custom hardware purchase. Consider another computer only for a measured resource constraint or an explicit appliance requirement. Keep OS-specific MIDI port management behind the transport interface now. A physical MIDI device would not automatically increase a host's available commands or feedback.
 
 Later options are USB MIDI gadget mode on a validated board/port/kernel, or a conventional MIDI interface. Linux documents a bidirectional MIDI gadget function. Raspberry Pi documents OTG-capable ports, but its networking gadget setup is not automatically a MIDI configuration. Validate MIDI enumeration, routing, power, and reconnect on the actual target. See [hardware sources](RESEARCH.md#external-documentation).
 
-A Pi running only the controller is the first portability target. A standalone enclosure running both Mixxx and the AI additionally needs audio-interface routing, display strategy, scheduling, storage, thermal, and inference benchmarks. Treat that as another system configuration. Do not assume the same Pi can handle local inference, stem processing, and low-latency audio simultaneously.
+If this optional branch is pursued, a Pi running only the controller is the first portability target. A standalone enclosure running both Mixxx and the AI additionally needs audio-interface routing, display strategy, scheduling, storage, thermal, and inference benchmarks. Treat that as another system configuration. Do not assume the same Pi can handle local inference, stem processing, and low-latency audio simultaneously.
 
 ## 9. Decisions deferred until implementation
 
