@@ -249,7 +249,8 @@
     "M13-MANUAL-CUE-VISIBILITY": "split",
     "M13-CUE-OBSERVER": "accepted",
     "M13-CUE-TRANSPORT": "planned",
-    "M13-CUE-NATIVE": "planned"
+    "M13-CUE-NATIVE": "planned",
+    "R05-HOST-ENCODER": "accepted"
   },
   "dynamic_dependency_frontier": [],
   "global_requirements": [

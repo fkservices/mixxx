@@ -678,6 +678,54 @@
         "Verify no stuck preview, no echo, unknown actor preserved, generation cleanup and paused handoff."
       ],
       "evidence": "docs/ai-dj/work/evidence/M13-CUE-NATIVE.md"
+    },
+    {
+      "id": "R05-HOST-ENCODER",
+      "parent": "R05",
+      "blocks": [
+        "R05"
+      ],
+      "template": "SPLIT",
+      "title": "Encode extended MIDI frames in host-compatible JavaScript",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "R03",
+        "R02"
+      ],
+      "owns": [
+        "ai-dj/hosts/mixxx/fragments/wire-encode.js",
+        "ai-dj/test/host/wire-encode.test.ts"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "94be3e4615f8842902f13c36fe90ee0400fa8a64",
+      "started_at": "2026-09-13T21:24:55.692259+00:00",
+      "perform": [
+        "Implement R01 numeric, Unicode and closed JSON payload framing without Node APIs, BigInt or TextEncoder.",
+        "Preserve 128-bit session and 53-bit sequence digits, fragmentation, seven-bit packing and CRC. No MIDI output or control handlers."
+      ],
+      "validate": [
+        "Compare complete byte arrays against frozen vectors and Node encoder across boundaries and all valid opcode roles.",
+        "Reject malformed headers, Unicode, nonfinite values, hooks and resource excess; keep installed runtime compatibility an explicit later check."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/R05-HOST-ENCODER.md",
+      "accepted_at": "2026-09-13T21:26:06.885507+00:00",
+      "evidence_sha256": "a5c9c98c1289c4af8e19a81a442a1e8953586ac312a66e56e9f69c82fb41fcde",
+      "checks": [
+        "Six codec tests and 136 integrated tests passed.",
+        "Typecheck, build and whitespace passed.",
+        "Exact shared frame comparisons passed; installed Qt execution and remaining R05 endpoint scope unverified."
+      ]
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."
