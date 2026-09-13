@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T20:19:23.192763+00:00",
+  "updated_at": "2026-09-13T20:20:50.263514+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -315,12 +315,16 @@
       "id": "M08",
       "title": "Map the chosen sync operation",
       "stage": "01-local-midi",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/M08.md",
+      "verified": true,
+      "checks": [
+        "Fixed raw sync boolean routes and independent host-value sample reviewed against accepted F09 semantics.",
+        "85 tests, strict typecheck and build passed; rejected requests do not become observations and shutdown emits no compensation.",
+        "No installed/live sync proof; full production host guard and tempo/phase effects remain required."
+      ],
+      "updated": "2026-09-13T20:20:50.263514+00:00",
       "dynamic": false
     },
     {

@@ -453,6 +453,19 @@
         "80 tests, typecheck and build passed; shutdown releases and partial cleanup failure exercised.",
         "Raw pending-release bookkeeping is not a production lease; fragment not installed and actual audio/host proof remains."
       ]
+    },
+    "M08": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "7eedc57",
+      "accepted_at": "2026-09-13T20:20:50.263514+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M08.md",
+      "evidence_sha256": "7ffe3a3230624fe4510ebf82b00aa105846825ad94a136eef2e14e44a7faa56b",
+      "checks": [
+        "Fixed raw sync boolean routes and independent host-value sample reviewed against accepted F09 semantics.",
+        "85 tests, strict typecheck and build passed; rejected requests do not become observations and shutdown emits no compensation.",
+        "No installed/live sync proof; full production host guard and tempo/phase effects remain required."
+      ]
     }
   },
   "jobs": {

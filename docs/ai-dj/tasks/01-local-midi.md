@@ -205,7 +205,7 @@
 
 **Worker:** L3 / `gpt-5.6-sol` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** M05. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** M05. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/hosts/mixxx/fragments/sync.js`, `ai-dj/test/host/sync.test.ts`
 

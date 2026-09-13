@@ -23,7 +23,7 @@
     "M05": "accepted",
     "M06": "accepted",
     "M07": "accepted",
-    "M08": "planned",
+    "M08": "accepted",
     "M09": "planned",
     "M10": "planned",
     "M11": "planned",
@@ -195,10 +195,10 @@
     "M04",
     "M05",
     "M06",
-    "M07"
+    "M07",
+    "M08"
   ],
   "dependency_frontier": [
-    "M08",
     "M09",
     "I01",
     "I02",
