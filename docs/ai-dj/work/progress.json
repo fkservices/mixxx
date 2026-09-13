@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T21:14:12.395239+00:00",
+  "updated_at": "2026-09-13T21:20:18.653618+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2339,8 +2339,46 @@
       "id": "M13-MANUAL-CUE-VISIBILITY",
       "title": "Resolve native CUE telemetry mismatch without changing cue-preview meaning",
       "stage": "setup",
-      "status": "planned",
+      "status": "split",
       "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [
+        "Versioned source and installed skin inspected; observation contract written. Required implementation, transport and native children materialized."
+      ],
+      "updated": "2026-09-13T21:20:18.653618+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "M13-CUE-OBSERVER",
+      "title": "Implement fixed read-only native cue observer",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": true
+    },
+    {
+      "id": "M13-CUE-TRANSPORT",
+      "title": "Carry cue observations through the extended MIDI endpoint",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": true
+    },
+    {
+      "id": "M13-CUE-NATIVE",
+      "title": "Verify manual cue observations end to end in native Mixxx",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
       "checks": [],

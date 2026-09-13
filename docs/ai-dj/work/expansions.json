@@ -536,7 +536,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "split",
       "perform": [
         "Inspect version-pinned native cue_default, cue_indicator, cue_point and cue_preview behavior and binding; distinguish marker placement, preview activity, transport and indicator.",
         "Specify bounded additional host observations and transport/profile compatibility. Materialize required implementation and native-validation children with exact ownership before accepting this continuation; do not merely document away the gap."
@@ -545,7 +545,129 @@
         "Require independent native manual CUE changes to become observable without falsely attributing actor or interpreting cue_preview as cue placement.",
         "Preserve initial cue note press/release, installed mapping lifecycle, unknown/unavailable state, raw/semantic event distinction and zero feedback echo."
       ],
-      "evidence": "docs/ai-dj/work/evidence/M13-MANUAL-CUE-VISIBILITY.md"
+      "evidence": "docs/ai-dj/work/evidence/M13-MANUAL-CUE-VISIBILITY.md",
+      "executor": "coordinator",
+      "started_at": "2026-09-13T21:20:18.653618+00:00",
+      "checks": [
+        "Versioned source and installed skin inspected; observation contract written. Required implementation, transport and native children materialized."
+      ]
+    },
+    {
+      "id": "M13-CUE-OBSERVER",
+      "title": "Implement fixed read-only native cue observer",
+      "parent": "M13",
+      "blocks": [
+        "M13"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "M10"
+      ],
+      "owns": [
+        "ai-dj/hosts/mixxx/fragments/manual-cue-observer.js",
+        "ai-dj/test/host/manual-cue-observer.test.ts"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Implement the eight-key two-deck observation contract, explicit presence, per-generation ordering and host-local timestamps.",
+        "Preserve callback edges, bound queue and gap reporting, and disconnect/retire all callbacks on shutdown; no control setters."
+      ],
+      "validate": [
+        "Test initial/callback/refresh distinctions, transient edges, unknown values, unavailable connections, overflow and generation invalidation.",
+        "Prove lifecycle cleanup and no command emission with synthetic engine fixtures."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/M13-CUE-OBSERVER.md"
+    },
+    {
+      "id": "M13-CUE-TRANSPORT",
+      "title": "Carry cue observations through the extended MIDI endpoint",
+      "parent": "M13",
+      "blocks": [
+        "M13"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "M13-CUE-OBSERVER",
+        "R05"
+      ],
+      "owns": [
+        "ai-dj/diagnostics/manual-cue.ts",
+        "ai-dj/test/diagnostics/manual-cue.test.ts",
+        "ai-dj/hosts/mixxx/fragments/manual-cue-wire.js",
+        "docs/ai-dj/work/integrations/manual-cue-transport.md"
+      ],
+      "locks": [
+        "mapping-entry"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Integrate diagnostic-opt-in closed JSON observation records through existing R01/R05 diagnostic text framing and closed receiver.",
+        "Update assembled mapping through its reproducible builder and required exact-path INTEGRATE continuation if ownership is shared; preserve conventional command semantics and production guards."
+      ],
+      "validate": [
+        "Test precise numeric round trips, bounded invalid-record rejection, explicit loss and generation/context distinction.",
+        "Verify only host-produced observations reach diagnostic capture; no fixture injection, actor claim or production authoritative state."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/M13-CUE-TRANSPORT.md"
+    },
+    {
+      "id": "M13-CUE-NATIVE",
+      "title": "Verify manual cue observations end to end in native Mixxx",
+      "parent": "M13",
+      "blocks": [
+        "M13"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "M13-CUE-TRANSPORT"
+      ],
+      "owns": [
+        "docs/ai-dj/work/runs/M13-CUE-NATIVE.json"
+      ],
+      "locks": [
+        "mixxx-runtime"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Capture manual marker placement, default CUE and right-click behavior on the isolated installed profile while AI remains disarmed.",
+        "Correlate native screenshots and actual MIDI observations; retain raw cue press/release regression evidence and mode-specific limits."
+      ],
+      "validate": [
+        "Require marker/control changes visible at the receiver without AI commands or fabricated state.",
+        "Verify no stuck preview, no echo, unknown actor preserved, generation cleanup and paused handoff."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/M13-CUE-NATIVE.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."
