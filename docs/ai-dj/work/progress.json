@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T22:00:18.689313+00:00",
+  "updated_at": "2026-09-13T22:04:36.470494+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2466,16 +2466,16 @@
       "id": "R05-NATIVE-CLOCK",
       "title": "Expose and verify a native monotonic script clock",
       "stage": "setup",
-      "status": "waiting_for_job",
+      "status": "in_review",
       "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
       "checks": [
-        "Native clock helper compiled with Apple clang 17 and passed 100000 nondecreasing samples and elapsed progression.",
-        "Qt invocation and interface replacement tests added but not yet executed; custom host and resume policy unverified.",
-        "Pinned dependency checksum verified; CMake configure/generate exited 0. Native test/application build started as session 24903, PID76087."
+        "Native build completed successfully; custom Mixxx 2.7.0 bundle and test binary hashes recorded.",
+        "Three native clock tests passed, including actual Qt/JavaScript invocation and shared-origin progression.",
+        "All 43 native controller-script regression tests passed; application mapping clock probe and resume policy remain unverified."
       ],
-      "updated": "2026-09-13T21:45:51.364274+00:00",
+      "updated": "2026-09-13T22:04:36.470494+00:00",
       "dynamic": true
     }
   ],

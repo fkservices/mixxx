@@ -23,7 +23,7 @@ def entry(task, state, dynamic=False):
                 status=state.get('status', 'planned'), model=task['model'],
                 evidence=evidence.removeprefix('docs/ai-dj/') if verified else None,
                 verified=verified, checks=state.get('checks', []),
-                updated=state.get('accepted_at', state.get('started_at')),
+                updated=state.get('updated_at', state.get('accepted_at', state.get('started_at'))),
                 dynamic=dynamic)
 
 rows = [entry(t, ledger['tasks'].get(t['id'], {})) for t in catalog['tasks']]

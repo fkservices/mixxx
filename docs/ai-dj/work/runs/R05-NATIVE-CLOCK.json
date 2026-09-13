@@ -3,7 +3,7 @@
   "task": "R05-NATIVE-CLOCK",
   "status": "partial",
   "sourceRevision": "2c5c19d",
-  "recordedAt": "2026-09-13T21:48:54.458691+00:00",
+  "recordedAt": "2026-09-13T22:03:12.705203+00:00",
   "nativeClockHeaderSha256": "7554e3ca565a4fd886c12bbb4978ff1d1a6b32392efa03f072d8ce13dadd9d43",
   "compiler": "Apple clang 17.0.0, arm64-apple-darwin27.0.0",
   "flags": [
@@ -23,7 +23,24 @@
       "clock-smoke.log": "1a3b88921b2a6ed7ee737f25d17a02e5877268c249a46698ead3a29f83fd5aa7"
     }
   },
-  "nativeQtInvocationTests": "not yet run",
+  "nativeQtInvocationTests": {
+    "passed": 3,
+    "failed": 0,
+    "exitCode": 0,
+    "binarySha256": "761f376029b97c6880dce338d179946551b756733dcabe580258eda1098e8062",
+    "checks": [
+      "JavaScript native clock invocation and progress without script timers",
+      "Shared origin across interface replacement",
+      "Existing steady-clock resolution test"
+    ],
+    "evidenceHashes": {
+      "build-job.json": "ad67c04ff9f9686047b92d686a3f42c5d6352e95507a2cd6ab427115d9e73864",
+      "build.log": "10c57c2f0fdd59278ae4cd839fa77865a30b1f021bb297a3cbd82ad1eb51b69e",
+      "clock-test-job.json": "b757c48cade49dabdb2f7b01ec0e875290f54deb436a2bbcb9f9840c9d749933",
+      "clock-tests.log": "3018bd8f1dd1916cbfa6f90f7a40b7bc319f1bb9becd32c5ae23f4613dd76da0",
+      "clock-tests.json": "91f7bd8b233b5c9aab8ec581a64315bc5d3d47ac73a91fba4c971d965ab90e68"
+    }
+  },
   "installedHostApi": "not installed",
   "buildDependencySha256": "4dec26e22803decbf0ce664ef53c12e6d846df7222bb48d3a47999878e9ba02c",
   "buildDependencyVerification": "CMake download hash matched repository pin",
@@ -40,9 +57,30 @@
     "Sleep/resume session invalidation and cross-process clock mapping remain required."
   ],
   "buildJob": {
-    "status": "running",
+    "status": "succeeded",
     "execSessionId": 24903,
     "pid": 76087,
-    "record": "~/Library/Application Support/Mixxx-AI-DJ/native-build/clock-2c5c19d/build-job.json"
+    "record": "~/Library/Application Support/Mixxx-AI-DJ/native-build/clock-2c5c19d/build-job.json",
+    "exitCode": 0
+  },
+  "customApp": {
+    "path": "~/Library/Application Support/Mixxx-AI-DJ/native-build/clock-2c5c19d/build/Mixxx.app",
+    "version": "2.7.0",
+    "binarySha256": "d9c039eea32dd27c394649748b2e610d91b8042a86799508fa48d0b88aa1fe5f",
+    "launched": false
+  },
+  "scriptRegression": {
+    "status": "succeeded",
+    "execSessionId": 55157,
+    "pid": 98963,
+    "testCount": 43,
+    "exitCode": 0,
+    "passed": 43,
+    "failed": 0,
+    "evidenceHashes": {
+      "script-regression-job.json": "d09675bc1c81f7e668c6ebc6f352d73e6bde15fa87b17ec1eb9b4ad6692e5312",
+      "script-regression.log": "35d7d86ace84877d71f8324d7af01b8dd22a919d7f0b2fb15c9ddc26b330fd8a",
+      "script-regression.json": "0294b5817ae4ab431acd141e991bbb6dc6eaa3fc3bdb43d88647d7e488169010"
+    }
   }
 }

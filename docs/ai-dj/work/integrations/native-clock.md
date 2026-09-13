@@ -36,24 +36,30 @@ with C++20, `-Wall -Wextra -Werror`. The executable passed 100,000 nondecreasing
 finite samples and elapsed-time progression after a 20 ms thread sleep. This
 checks the real clock helper, not Qt registration or the installed application.
 
-Two tests were added to the existing controller script-engine suite: JavaScript
-invocation and progression without script timer callbacks, plus a shared origin
-across interface replacement. These tests have not yet run. Full native compile,
-Qt invocation, mapping use and runtime clock-domain checks remain required.
+The full native build completed successfully. Both added controller script-engine
+tests passed: JavaScript invocation/progression without script timers and shared
+origin across interface replacement. The existing steady-clock resolution test
+also passed (three native tests, zero failures). The actual native test binary
+hash is in the run record. Mapping use in the custom application and runtime
+clock-domain checks remain required. The broader controller-script regression also passed all 43 tests, with
+zero failures, errors or disabled tests. These counts overlap: both new clock
+tests are included in the broader suite.
 
 CMake 4.4.3 and Ninja 1.13.2 were installed successfully. The source-selected
 native ARM release dependency archive responds with HTTP 200 and a size of
 1,282,214,190 bytes. The repository pins its SHA256 in `tools/macos_buildenv.sh`;
 the configure job downloaded the archive and confirmed the pinned SHA256.
 Extraction, CMake configuration and generation completed successfully.
-The native test/application build is now running with four compiler jobs in the
-private build directory; no installed application was modified.
+The native test/application build completed with four compiler jobs in the
+private build directory; no installed application was modified. The separate
+Mixxx.app bundle reports version 2.7.0 and has not been launched yet.
 The machine has Apple command-line compiler tools, but no selected full Xcode.
 Any concrete configure/compiler failure must be recorded rather than treated as
 successful native verification.
 
 The [partial run record](../runs/R05-NATIVE-CLOCK.json) records the compiled helper
-fixture hashes and the tracked native configure job. A live job is not build
-success; inspect its terminal result before advancing.
+fixture hashes and terminal configure/build/clock-test/regression results.
+No build or test process remains running. The next required step is an isolated
+custom-application mapping probe; the native-clock task remains in review.
 
 > End of autonomously AI-generated implementation notes.

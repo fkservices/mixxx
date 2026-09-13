@@ -748,7 +748,7 @@
       "result": "Dependency SHA256 verified; CMake configure and generate succeeded."
     },
     "native-clock-build": {
-      "status": "running",
+      "status": "succeeded",
       "exec_session_id": 24903,
       "runner_pid": 76085,
       "process_pid": 76087,
@@ -756,7 +756,27 @@
       "record": "~/Library/Application Support/Mixxx-AI-DJ/native-build/clock-2c5c19d/build-job.json",
       "log": "~/Library/Application Support/Mixxx-AI-DJ/native-build/clock-2c5c19d/build.log",
       "scope": "Build mixxx-test and separate Mixxx application with four compiler jobs; no installed app changes",
-      "expected_end": "3600 second bounded build; poll existing exec session or verified process before retry."
+      "expected_end": "3600 second bounded build; poll existing exec session or verified process before retry.",
+      "exit_code": 0,
+      "ended_at": "2026-09-13T22:02:06.912264+00:00"
+    },
+    "native-clock-tests": {
+      "status": "succeeded",
+      "exec_session_id": 64177,
+      "exit_code": 0,
+      "passed": 3,
+      "record": "~/Library/Application Support/Mixxx-AI-DJ/native-build/clock-2c5c19d/clock-test-job.json"
+    },
+    "native-script-regression": {
+      "status": "succeeded",
+      "exec_session_id": 55157,
+      "pid": 98963,
+      "record": "~/Library/Application Support/Mixxx-AI-DJ/native-build/clock-2c5c19d/script-regression-job.json",
+      "scope": "43 controller script-engine regression tests; offscreen and temporary test databases",
+      "expected_end": "Bounded 600 seconds; poll same session before retry",
+      "exit_code": 0,
+      "passed": 43,
+      "ended_at": "2026-09-13T22:03:29.985544+00:00"
     }
   },
   "resource_leases": {},
