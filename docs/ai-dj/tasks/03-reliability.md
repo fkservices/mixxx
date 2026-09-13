@@ -400,7 +400,7 @@
 
 **Worker:** L4 / `gpt-6-astra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** R02. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** R02. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/core/modes.ts`, `docs/ai-dj/work/contracts/modes.md`
 

@@ -609,6 +609,21 @@
         "Typecheck, build and whitespace passed.",
         "Required mapping integration and native validation children materialized; R05 remains unaccepted."
       ]
+    },
+    "R15": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "34a3a0b",
+      "started_at": "2026-09-13T21:51:57.361766+00:00",
+      "deadline_at": "2026-09-13T22:21:57.361766+00:00",
+      "checks": [
+        "Reviewed all three modes with bass intervention and queued transition, switch epochs and retained human holds.",
+        "Playlist Only forbids AI deck load/performance; mode selection cannot clear explicit disarm; launch always disarmed.",
+        "Typecheck/build passed; 154 existing regression tests passed. Contract only: runtime reducer, host enforcement and measured handover remain required."
+      ],
+      "accepted_at": "2026-09-13T21:54:54.121635+00:00",
+      "evidence": "docs/ai-dj/work/evidence/R15.md",
+      "evidence_sha256": "aebaa323be8d2ea6312870296a4fc3688a49197ad687475e7b72c2f74c45a6ae"
     }
   },
   "jobs": {

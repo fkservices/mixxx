@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T21:45:51.364274+00:00",
+  "updated_at": "2026-09-13T21:54:54.121635+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -984,12 +984,16 @@
       "id": "R15",
       "title": "Define three modes and switching epochs",
       "stage": "03-reliability",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-6-astra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/R15.md",
+      "verified": true,
+      "checks": [
+        "Reviewed all three modes with bass intervention and queued transition, switch epochs and retained human holds.",
+        "Playlist Only forbids AI deck load/performance; mode selection cannot clear explicit disarm; launch always disarmed.",
+        "Typecheck/build passed; 154 existing regression tests passed. Contract only: runtime reducer, host enforcement and measured handover remain required."
+      ],
+      "updated": "2026-09-13T21:54:54.121635+00:00",
       "dynamic": false
     },
     {
