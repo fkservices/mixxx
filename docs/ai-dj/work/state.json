@@ -624,6 +624,21 @@
       "accepted_at": "2026-09-13T21:54:54.121635+00:00",
       "evidence": "docs/ai-dj/work/evidence/R15.md",
       "evidence_sha256": "aebaa323be8d2ea6312870296a4fc3688a49197ad687475e7b72c2f74c45a6ae"
+    },
+    "R20": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "0af74d9",
+      "started_at": "2026-09-13T21:57:23.831466+00:00",
+      "deadline_at": "2026-09-13T22:27:23.831466+00:00",
+      "checks": [
+        "Frozen one unbound gain/tempo pair profile, center/scaling and strict ordered pair policy.",
+        "Seven focused tests cover ordering, timeout, generation, malformed input, writer reentry/failure and quantization.",
+        "Integrated 161 tests, typecheck and build passed. Native binding, hardware and audible/timing evidence are not claimed."
+      ],
+      "accepted_at": "2026-09-13T22:00:18.689313+00:00",
+      "evidence": "docs/ai-dj/work/evidence/R20.md",
+      "evidence_sha256": "f500270725f92288e3bd20e48a8e78026ebcb8c7f969ac0f82c32c9a17a3d1f8"
     }
   },
   "jobs": {

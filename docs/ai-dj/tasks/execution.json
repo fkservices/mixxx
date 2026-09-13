@@ -78,7 +78,7 @@
     "R17": "planned",
     "R18": "planned",
     "R19": "planned",
-    "R20": "planned",
+    "R20": "accepted",
     "R21": "planned",
     "R22": "planned",
     "R23": "planned",
@@ -206,7 +206,8 @@
     "R02",
     "R03",
     "R04",
-    "R15"
+    "R15",
+    "R20"
   ],
   "dependency_frontier": [
     "I01",
@@ -231,7 +232,6 @@
     "I20",
     "I21",
     "I22",
-    "R20",
     "P01"
   ],
   "dispatchable_now": [],

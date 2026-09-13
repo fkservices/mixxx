@@ -540,7 +540,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** R04, F09. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** R04, F09. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/midi/cc14.ts`, `ai-dj/test/midi/cc14.test.ts`
 
