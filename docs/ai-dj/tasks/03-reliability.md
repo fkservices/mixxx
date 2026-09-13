@@ -8,7 +8,7 @@
 
 **Worker:** L4 / `gpt-6-astra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F08, F09. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** F08, F09. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `docs/ai-dj/work/contracts/wire.md`
 

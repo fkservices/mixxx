@@ -504,6 +504,19 @@
       "accepted_at": "2026-09-13T20:40:09.439513+00:00",
       "evidence": "docs/ai-dj/work/evidence/M11.md",
       "evidence_sha256": "04bef7c334b981583e8d6034d640cb9014232a5796e007635af0cd39a461922d"
+    },
+    "R01": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "c04486c",
+      "started_at": "2026-09-13T20:41:01.561925+00:00",
+      "checks": [
+        "Frame layout, numeric/Unicode packing, CRC vectors, finite rejection and bounded reassembly reviewed.",
+        "Independent arithmetic round trips passed; production codec, host endpoint and lifecycle validation remain subsequent work."
+      ],
+      "accepted_at": "2026-09-13T20:42:49.246252+00:00",
+      "evidence": "docs/ai-dj/work/evidence/R01.md",
+      "evidence_sha256": "fe78b9fc9bad3613098b49260cc9e6759478385bb8635a9a7a138aabe09cb603"
     }
   },
   "jobs": {
