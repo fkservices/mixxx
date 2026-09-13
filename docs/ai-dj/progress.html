@@ -26,7 +26,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T23:19:58.392860+00:00",
+  "updated_at": "2026-09-13T23:24:15.994428+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -417,20 +417,16 @@
       "id": "M13",
       "title": "Prove cue, sync and manual feedback",
       "stage": "01-local-midi",
-      "status": "split",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
+      "evidence": "work/evidence/M13.md",
+      "verified": true,
       "checks": [
-        "Mouse play, volume and crossfader feedback observed while disarmed; 45,596 feedback packets and zero outgoing commands in frozen capture.",
-        "Short SYNC click emitted on/off and changed tempo; restored to 117 BPM. Native CUE marker creation was not represented by cue_preview feedback.",
-        "Incomplete: raw cue press/release, sustained sync and full manual cue visibility still require verification.",
-        "Separate raw fixture sent cue press/release on both decks; play/cue feedback returned false with no pending cue on runner exit.",
-        "Native sustained sync observed on both decks; mouse disabled deck 1, MIDI disabled deck 2. Tempo restored; service remains stopped after test handoff.",
-        "Held cue native UI verified on both decks with 15-second automatic release; paused positions and returned play/cue false observed.",
-        "Required M13-MANUAL-CUE-VISIBILITY continuation preserves native CUE semantics gap before M13 acceptance."
+        "Current integrated host and all required cue visibility children accepted.",
+        "Native five-control agreement, both-deck raw preview release and sustained sync/manual cancellation verified.",
+        "Timing and release remain open, including the independently tracked Qt accessibility crash."
       ],
-      "updated": "2026-09-13T21:02:01.120249+00:00",
+      "updated": "2026-09-13T23:24:15.994428+00:00",
       "dynamic": false
     },
     {
@@ -2606,12 +2602,16 @@
       "id": "M13-FINAL-HOST",
       "title": "Close five-control agreement on the integrated custom host",
       "stage": "setup",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": "2026-09-13T23:19:58.392860+00:00",
+      "evidence": "work/evidence/M13-FINAL-HOST.md",
+      "verified": true,
+      "checks": [
+        "All five manual controls agreed on integrated custom host with zero commands in manual interval.",
+        "21,826 conventional packets and 9,765 SysEx frames matched native output; 19,453 cue observations, zero gaps/errors.",
+        "One sustained sync command, manual cancellation without echo, paused/restored handoff and clean shutdown verified."
+      ],
+      "updated": "2026-09-13T23:24:15.994428+00:00",
       "dynamic": true
     },
     {
@@ -2833,6 +2833,41 @@
       "caption": "Both decks paused after raw MIDI cue release. Capture confirms play and preview zero, exactly four intended commands, and no extra incoming MIDI commands.",
       "captured_at": "2026-09-13T23:18:45.513705+00:00",
       "evidence": "work/runs/M13-CUE-NATIVE.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-final-controls-mouse-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Native mouse play action: deck-one playback and returned play state changed before any companion MIDI command. Volume and fader changes were captured separately.",
+      "captured_at": "2026-09-13T23:21:50.938785+00:00",
+      "evidence": "work/runs/M13-FINAL-HOST.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-final-controls-moved-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Native manual volume and crossfader moves with a newly placed cue marker. Feedback recorded volume 48/127, crossfader 113/127, cue position and separate default-button edges.",
+      "captured_at": "2026-09-13T23:22:13.135910+00:00",
+      "evidence": "work/runs/M13-FINAL-HOST.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-final-controls-sync-tap-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Native mouse sync tap changed tempo to 102 BPM, then the sync flag returned off. A final false sync flag does not mean no tempo action occurred.",
+      "captured_at": "2026-09-13T23:22:22.499094+00:00",
+      "evidence": "work/runs/M13-FINAL-HOST.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-final-controls-sync-held-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Sustained MIDI sync lit on the native UI. It remained true for 6.79 seconds until manual cancellation, with no companion reassertion.",
+      "captured_at": "2026-09-13T23:22:36.733447+00:00",
+      "evidence": "work/runs/M13-FINAL-HOST.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-final-controls-restored-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Final native handoff: both decks paused, sync off, volumes restored, crossfader centered and deck-one tempo back to 117 BPM. This completes initial five-control agreement, not latency or musical acceptance.",
+      "captured_at": "2026-09-13T23:22:45.010055+00:00",
+      "evidence": "work/runs/M13-FINAL-HOST.json"
     }
   ],
   "transport_checks": [

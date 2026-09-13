@@ -1284,7 +1284,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "accepted",
       "perform": [
         "Repeat initial five-control mouse agreement and chosen sustained sync operation on the integrated custom host with conventional and cue capture together.",
         "Compare current native evidence with prior 2.5.6 results; restore paused decks, sync off, volumes and fader."
@@ -1294,7 +1294,15 @@
         "Accept M13 only after reviewing all required children and current host differences."
       ],
       "evidence": "docs/ai-dj/work/evidence/M13-FINAL-HOST.md",
-      "updated_at": "2026-09-13T23:19:58.392860+00:00"
+      "updated_at": "2026-09-13T23:24:15.994428+00:00",
+      "source_revision": "512713595b186f1a7d1eeae5f9ea29a5dc57d2ed",
+      "accepted_at": "2026-09-13T23:24:15.994428+00:00",
+      "evidence_sha256": "182a62a3e3cc52e952e6e3adbd49f85ba8cbd57ed95a56767b27f169e5db47c6",
+      "checks": [
+        "All five manual controls agreed on integrated custom host with zero commands in manual interval.",
+        "21,826 conventional packets and 9,765 SysEx frames matched native output; 19,453 cue observations, zero gaps/errors.",
+        "One sustained sync command, manual cancellation without echo, paused/restored handoff and clean shutdown verified."
+      ]
     },
     {
       "id": "L12-NATIVE-ACCESSIBILITY",

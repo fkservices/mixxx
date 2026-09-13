@@ -126,6 +126,41 @@
       "caption": "Both decks paused after raw MIDI cue release. Capture confirms play and preview zero, exactly four intended commands, and no extra incoming MIDI commands.",
       "captured_at": "2026-09-13T23:18:45.513705+00:00",
       "evidence": "work/runs/M13-CUE-NATIVE.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-final-controls-mouse-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Native mouse play action: deck-one playback and returned play state changed before any companion MIDI command. Volume and fader changes were captured separately.",
+      "captured_at": "2026-09-13T23:21:50.938785+00:00",
+      "evidence": "work/runs/M13-FINAL-HOST.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-final-controls-moved-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Native manual volume and crossfader moves with a newly placed cue marker. Feedback recorded volume 48/127, crossfader 113/127, cue position and separate default-button edges.",
+      "captured_at": "2026-09-13T23:22:13.135910+00:00",
+      "evidence": "work/runs/M13-FINAL-HOST.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-final-controls-sync-tap-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Native mouse sync tap changed tempo to 102 BPM, then the sync flag returned off. A final false sync flag does not mean no tempo action occurred.",
+      "captured_at": "2026-09-13T23:22:22.499094+00:00",
+      "evidence": "work/runs/M13-FINAL-HOST.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-final-controls-sync-held-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Sustained MIDI sync lit on the native UI. It remained true for 6.79 seconds until manual cancellation, with no companion reassertion.",
+      "captured_at": "2026-09-13T23:22:36.733447+00:00",
+      "evidence": "work/runs/M13-FINAL-HOST.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-final-controls-restored-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Final native handoff: both decks paused, sync off, volumes restored, crossfader centered and deck-one tempo back to 117 BPM. This completes initial five-control agreement, not latency or musical acceptance.",
+      "captured_at": "2026-09-13T23:22:45.010055+00:00",
+      "evidence": "work/runs/M13-FINAL-HOST.json"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

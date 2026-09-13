@@ -1,6 +1,6 @@
 # Diagnostic cue transport
 
-> Autonomously AI-generated implementation checkpoint. Native stream and manual cue observations have been captured; final cue regression work remains.
+> Autonomously AI-generated implementation checkpoint. Native stream, manual cue observations and raw preview regression are accepted within M13 scope.
 
 The ten-fragment mapping includes the fixed cue observer and a dedicated diagnostic
 stream. `AIDJ.configureCueDiagnostic({diagnostic:true, session, clockDomainId, now})`
@@ -52,6 +52,8 @@ decks emitted all eight initial controls. Manual deck-one marker movement, CUE
 press/release and right-click return were received; final play and preview were zero.
 The host shut down cleanly. These are bounded native transport observations, not
 latency, endurance, physical-controller or musical acceptance. M13-CUE-NATIVE
-still needs its raw MIDI preview regression and full acceptance review.
+subsequently passed raw MIDI preview/release on both decks. M13-FINAL-HOST closed
+five-control agreement on the integrated custom host. See their acceptance reports;
+production identity, timing, physical-controller and release work remain open.
 
 > End of autonomously AI-generated implementation checkpoint.

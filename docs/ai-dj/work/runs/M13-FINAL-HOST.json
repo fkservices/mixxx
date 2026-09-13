@@ -1,0 +1,132 @@
+{
+  "status": "passed-bounded-five-control-native",
+  "commands": [
+    {
+      "atMs": 97762.339584,
+      "kind": "command",
+      "action": "sync-on",
+      "bytes": [
+        176,
+        34,
+        127
+      ]
+    }
+  ],
+  "manualIntervalCommands": 0,
+  "conventionalPackets": 21826,
+  "sysexFrames": 9765,
+  "cueObservations": 19453,
+  "decoderErrors": 0,
+  "gaps": 0,
+  "exactNativeShortOutputMatches": 21826,
+  "exactNativeSysexOutputMatches": 9765,
+  "exactNativeInputMatches": 1,
+  "syncChanges": [
+    {
+      "atMs": 10546.994459,
+      "value": 0
+    },
+    {
+      "atMs": 89738.714834,
+      "value": 127
+    },
+    {
+      "atMs": 89744.818084,
+      "value": 0
+    },
+    {
+      "atMs": 97762.957125,
+      "value": 127
+    },
+    {
+      "atMs": 104550.594625,
+      "value": 0
+    }
+  ],
+  "sustainedSyncMs": 6787.637499999997,
+  "manualValues": {
+    "play": [
+      0,
+      127
+    ],
+    "volume": [
+      48,
+      87,
+      127
+    ],
+    "crossfader": [
+      64,
+      113
+    ],
+    "sync": [
+      0,
+      127
+    ]
+  },
+  "manualCueEdges": [
+    {
+      "schemaVersion": 1,
+      "generation": 1,
+      "sequence": 11267,
+      "deck": 1,
+      "controlKey": "cue_default",
+      "clockDomainId": "cue-native",
+      "observedAtMs": 69825.870291,
+      "trigger": "callback",
+      "presence": "present",
+      "value": 1
+    },
+    {
+      "schemaVersion": 1,
+      "generation": 1,
+      "sequence": 11268,
+      "deck": 1,
+      "controlKey": "cue_default",
+      "clockDomainId": "cue-native",
+      "observedAtMs": 69827.464333,
+      "trigger": "callback",
+      "presence": "present",
+      "value": 0
+    }
+  ],
+  "finalConventionalValues": {
+    "184:112": 127,
+    "184:32": 0,
+    "184:113": 127,
+    "184:33": 127,
+    "184:114": 127,
+    "184:35": 0,
+    "184:115": 127,
+    "184:34": 0,
+    "185:112": 127,
+    "185:32": 0,
+    "185:113": 127,
+    "185:33": 127,
+    "185:114": 127,
+    "185:35": 0,
+    "185:115": 127,
+    "185:34": 0,
+    "186:116": 127,
+    "186:36": 64
+  },
+  "noReassertAfterManualSyncOff": true,
+  "cleanShutdown": true,
+  "helperExitCode": 0,
+  "limits": [
+    "Diagnostic fixture, not production mode/ownership arbitration.",
+    "Selected mode 0 and default LateNight controls on custom Mixxx 2.7.",
+    "No latency percentile, audio quality, physical-controller or endurance acceptance.",
+    "Native macOS accessibility selection crash remains an independent open release issue."
+  ],
+  "hashes": {
+    "capture.jsonl": "b25e8e1af37af22a68afc5a754c82a8a486081013f9b4052e886adf5b9ad53bd",
+    "host.log": "d4399062e326c991f3c3ad9aa21382e62178108beb0992632f28c49a9460ebdd",
+    "runner.mjs": "70117b7e1df813664cdf440e37c9e55412f03cb1f4423792789042656af58f57",
+    "probe.js": "be61420e9c0581d1d805e054575c0f3bc42594f6009acf6e5ae552b585a72463",
+    "active-mapping.js": "cdc51f6c35eedf6f2ca6717b9ed66df6b3255639ab82a3318d54a284bf64d1b7"
+  },
+  "disclosure": "Autonomously AI-generated native five-control acceptance evidence.",
+  "source_revision": "512713595b186f1a7d1eeae5f9ea29a5dc57d2ed",
+  "verified_at": "2026-09-13T23:24:15.994428+00:00",
+  "endDisclosure": "End of autonomously AI-generated evidence."
+}

@@ -571,19 +571,19 @@
       "evidence_sha256": "9b47485b0e83a744c43a57d627c66f4b4a1ef7ebdf13fc4d37be4680d109f5a1"
     },
     "M13": {
-      "status": "split",
+      "status": "accepted",
       "executor": "coordinator",
-      "source_revision": "93e700e",
+      "source_revision": "512713595b186f1a7d1eeae5f9ea29a5dc57d2ed",
       "started_at": "2026-09-13T21:02:01.120249+00:00",
       "checks": [
-        "Mouse play, volume and crossfader feedback observed while disarmed; 45,596 feedback packets and zero outgoing commands in frozen capture.",
-        "Short SYNC click emitted on/off and changed tempo; restored to 117 BPM. Native CUE marker creation was not represented by cue_preview feedback.",
-        "Incomplete: raw cue press/release, sustained sync and full manual cue visibility still require verification.",
-        "Separate raw fixture sent cue press/release on both decks; play/cue feedback returned false with no pending cue on runner exit.",
-        "Native sustained sync observed on both decks; mouse disabled deck 1, MIDI disabled deck 2. Tempo restored; service remains stopped after test handoff.",
-        "Held cue native UI verified on both decks with 15-second automatic release; paused positions and returned play/cue false observed.",
-        "Required M13-MANUAL-CUE-VISIBILITY continuation preserves native CUE semantics gap before M13 acceptance."
-      ]
+        "Current integrated host and all required cue visibility children accepted.",
+        "Native five-control agreement, both-deck raw preview release and sustained sync/manual cancellation verified.",
+        "Timing and release remain open, including the independently tracked Qt accessibility crash."
+      ],
+      "accepted_at": "2026-09-13T23:24:15.994428+00:00",
+      "updated_at": "2026-09-13T23:24:15.994428+00:00",
+      "evidence_sha256": "a697137a470d195df5f8603ddb0e1c5889d1fe7d52e409e1ab5212f5565e8db7",
+      "evidence": "docs/ai-dj/work/evidence/M13.md"
     },
     "M14": {
       "status": "accepted",

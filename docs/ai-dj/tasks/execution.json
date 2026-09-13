@@ -28,7 +28,7 @@
     "M10": "accepted",
     "M11": "accepted",
     "M12": "accepted",
-    "M13": "split",
+    "M13": "accepted",
     "M14": "accepted",
     "M15": "planned",
     "M16": "planned",
@@ -201,6 +201,7 @@
     "M10",
     "M11",
     "M12",
+    "M13",
     "M14",
     "R01",
     "R02",
@@ -211,6 +212,9 @@
     "R20"
   ],
   "dependency_frontier": [
+    "M15",
+    "M17",
+    "M18",
     "I01",
     "I02",
     "I03",
@@ -262,11 +266,10 @@
     "R05-HOST-FRAGMENT-SENDER": "accepted",
     "R05-NATIVE-SEND-TIMER": "accepted",
     "M13-CUE-INTEGRATE": "accepted",
-    "M13-FINAL-HOST": "planned",
+    "M13-FINAL-HOST": "accepted",
     "L12-NATIVE-ACCESSIBILITY": "planned"
   },
   "dynamic_dependency_frontier": [
-    "M13-FINAL-HOST",
     "L12-NATIVE-ACCESSIBILITY"
   ],
   "global_requirements": [

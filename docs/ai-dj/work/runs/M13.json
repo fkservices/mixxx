@@ -537,5 +537,13 @@
         "sha256": "3570b769a8693d7651a25bdd9957c33e58f0440e2b197fbdaabeb019e3527eff"
       }
     ]
+  },
+  "currentIntegratedHostAcceptance": {
+    "status": "accepted",
+    "source_revision": "512713595b186f1a7d1eeae5f9ea29a5dc57d2ed",
+    "verified_at": "2026-09-13T23:24:15.994428+00:00",
+    "evidence": "M13-FINAL-HOST.json",
+    "cueRegression": "M13-CUE-NATIVE.json",
+    "scope": "Initial five controls, selected sync and manual cue visibility; no production or release claim"
   }
 }
