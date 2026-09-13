@@ -111,3 +111,19 @@ test("clock regression retires assembled wire input before any handler can run",
   assert.equal(h.mapping.shutdown(),true);assert.equal(h.timers.size,0);assert.equal(h.connections.size,0);
 });
 // End of autonomously AI-generated activation regressions.
+
+// Autonomously AI-generated system reset regression.
+test("native short reset route retires endpoint without performance writes",()=>{
+  const h=createHostHarness([],true);
+  h.evaluate(`var faults=[];AIDJ.configureWire({clockKind:'monotonic',clockDomainId:'fixture',now:()=>0,onFault:r=>faults.push(r),handlers:[]});`);
+  h.mapping.init("AI DJ",false);
+  h.evaluate("AIDJ.resetInput(15,0,0,254,'[Master]')");
+  assert.equal(h.evaluate("AIDJ.wireStatus().enabled"),true);
+  h.evaluate("AIDJ.resetInput(15,0,0,255,'[Master]')");
+  assert.equal(h.evaluate("AIDJ.wireStatus().enabled"),false);
+  assert.equal(h.evaluate("faults.length"),1);assert.equal(h.writes.length,0);
+  h.mapping.shutdown();assert.equal(h.timers.size,0);assert.equal(h.connections.size,0);
+  const xml=readFileSync(new URL("../../../res/controllers/AI-DJ.midi.xml",import.meta.url),"utf8");
+  assert.match(xml,/<key>AIDJ.resetInput<\/key>.*<status>0xFF<\/status><midino>0x00<\/midino>/);
+});
+// End of autonomously AI-generated system reset regression.

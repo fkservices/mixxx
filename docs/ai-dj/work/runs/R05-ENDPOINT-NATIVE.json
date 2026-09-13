@@ -3,7 +3,7 @@
   "task": "R05-ENDPOINT-NATIVE",
   "status": "partial",
   "sourceRevision": "abae078",
-  "recordedAt": "2026-09-13T22:24:43.621517+00:00",
+  "recordedAt": "2026-09-13T22:26:29.801074+00:00",
   "hostVersion": "custom Mixxx 2.7.0",
   "nativeClock": "engine.getMonotonicTime",
   "fixture": "Private opcode 9 JSON echo; no production service or performance action handler",
@@ -391,5 +391,30 @@
       "host-evidence.log": "31fc1c20673d393c61314bcc1d4355141394cd46722d87188b52fa2128a456d8"
     },
     "installedMappingSha256": "7c4af67beea2658f2e5c3d2100b6c765eb970382f111e7ba37049cfab30acd63"
+  },
+  "resetFixProbe": {
+    "status": "passed",
+    "baseRevision": "e316020",
+    "changes": "Explicit XML 0xFF/0x00 resetInput mapping retires active endpoint",
+    "preResetReply": 30,
+    "postResetSequence": 31,
+    "postResetResult": {
+      "dispatched": 0,
+      "rejected": 0,
+      "closed": true
+    },
+    "helperExitCode": 0,
+    "hostStopped": true,
+    "diagnosticBootstrapRemoved": true,
+    "evidenceHashes": {
+      "runner.mjs": "b2be04b0de10d1751c9f1b124a489afebee8a08578b43cefce5d2c0104497ea9",
+      "probe.js": "c11ef664d4f980151a19177fef3fac74077514785d8ef1a659417eb35f14138e",
+      "capture.jsonl": "c1a23b3d30b9fad599bb0695d70d711847ea591df9567ae70ddf1076197104a3",
+      "host-evidence.log": "4db110a839df6f8eeaa08e72a3253608a7303a98ae7aa39f6385db7316feec6b"
+    },
+    "mappingSourceHashes": {
+      "AI-DJ-scripts.js": "1235b13c8c937aff789e3e89091fb89d061ec4e088ffaecf3bc8037bbb410a8c",
+      "AI-DJ.midi.xml": "4523f3cddd4c72f2847d623ff3db7ab8b19e324457df0c4a527e323f8b243bad"
+    }
   }
 }

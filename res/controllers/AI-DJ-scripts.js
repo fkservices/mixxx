@@ -37,6 +37,12 @@ var AIDJ = (function() {
         if (wireClock.kind === "diagnostic-wall" && message.opcode !== 112 && message.opcode !== 113) throw new Error("Diagnostic clock cannot send semantic messages");
         return wireEndpoint.send(message);
     };
+    // Autonomously AI-generated native short-message reset route.
+    api.resetInput = function(channel, control, value, status, group) {
+        if (!active || !wireEndpoint || status !== 0xFF || control !== 0 || value !== 0 || group !== "[Master]") return;
+        return wireEndpoint.receive(new Uint8Array([0xFF]), 1, wireGeneration);
+    };
+    // End of autonomously AI-generated reset route.
     api.profileId = "mixxx-2.5.6-latenight-conventional-v1";
     api.metadataSchemaVersion = 2;
     api.register = function(name, module) {

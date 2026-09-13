@@ -5,6 +5,7 @@
   <controller id="AI DJ">
     <scriptfiles><file functionprefix="AIDJ" filename="AI-DJ-scripts.js"/></scriptfiles>
     <controls>
+      <control><group>[Master]</group><key>AIDJ.resetInput</key><description>Retire extended endpoint on MIDI system reset</description><status>0xFF</status><midino>0x00</midino><options><script-binding/></options></control>
       <control><group>[Master]</group><key>AIDJ.incomingData</key><description>Extended MIDI; explicit endpoint configuration required</description><status>0xF0</status><options><script-binding/></options></control>
       <control><group>[Channel1]</group><key>AIDJ.input</key><description>deck-1.play</description><status>0xB0</status><midino>0x20</midino><options><script-binding/></options></control>
       <control><group>[Channel1]</group><key>AIDJ.input</key><description>deck-1.volume</description><status>0xB0</status><midino>0x21</midino><options><script-binding/></options></control>

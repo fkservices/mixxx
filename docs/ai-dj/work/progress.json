@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T22:24:43.621517+00:00",
+  "updated_at": "2026-09-13T22:26:29.801074+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2443,11 +2443,11 @@
       "evidence": null,
       "verified": false,
       "checks": [
-        "Native probes found missing reset delivery to endpoint and six callbacks for seven-frame bursts; integration remains unaccepted pending fixes.",
-        "163 tests passed, including activation rollback and clock-regression dispatch retirement; typecheck/build passed.",
+        "Fixed native reset routing; actual pre-reset reply and post-reset rejection passed. Seven-frame burst shortfall remains open.",
+        "164 tests, typecheck/build and mapping generation check passed.",
         "Native JSON/checksum, idle expiry and four-slot capacity/recovery passed; reset/lifecycle evidence remains."
       ],
-      "updated": "2026-09-13T22:24:43.621517+00:00",
+      "updated": "2026-09-13T22:26:29.801074+00:00",
       "dynamic": true
     },
     {

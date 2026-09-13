@@ -183,4 +183,20 @@ Both findings keep integration unaccepted. No performance handlers were installe
 The helper exited, host stopped, and diagnostic bootstrap was removed. Filtered
 logs and capture hashes are in the absolute/reset section of the partial record.
 
+## Native reset routing fix
+
+Source inspection showed PortMidi delivers realtime reset as a short message with
+control/value zero. Short messages use exact status/control mappings; the SysEx
+route cannot receive that reset. The XML now explicitly maps `0xFF` / `0x00` to
+`AIDJ.resetInput`, which feeds reset into the active endpoint parser and retires
+it. Other statuses and inactive mappings do not use this route. The eleven
+conventional registrations and SysEx registration remain.
+
+The native check received sequence 30 before reset, logged the parser fault on
+reset, and rejected sequence 31 with `closed: true` and zero dispatch. Node
+received only sequence 30. This fixes the observed reset gap; rapid seven-frame
+loss and lifecycle checks remain. All 164 software tests, typecheck/build and
+mapping generation check passed. Both native processes exited and the diagnostic
+bootstrap was removed. Exact mapping and private evidence hashes are recorded.
+
 > End of autonomously AI-generated investigation.
