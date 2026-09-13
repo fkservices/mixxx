@@ -86,8 +86,10 @@ var AIDJ = (function() {
         if (closingWire) {
             try {
                 closingWire.close();
-                var wireFault = closingWire.status().fault;
-                if (wireFault && wireFault.indexOf("cleanup-failed") !== -1) failed = true;
+                var wireState = closingWire.status();
+                var wireFault = wireState.fault;
+                if ((wireFault && wireFault.indexOf("cleanup-failed") !== -1) ||
+                        wireState.sender.fault === "timer-cleanup") failed = true;
             } catch (error) { failed = true; }
         }
         while (started.length) {

@@ -161,3 +161,22 @@ test("queued native replies stop on cancellation, reset, input loss and shutdown
   }
 });
 // End of autonomously AI-generated queued lifecycle regression.
+
+// Autonomously AI-generated failed native timer cleanup latch regression.
+test("failed reply timer cleanup prevents reinitialization even after an earlier wire fault",()=>{
+  for(const priorFault of [false,true]){
+    const h=createHostHarness([],true);
+    h.evaluate(`var clock=0, output=[];midi.sendSysexMsg=(d,n)=>output.push(d);
+      AIDJ.configureWire({clockKind:'monotonic',clockDomainId:'fixture',now:()=>clock,allowDiagnostic:true,onFault:()=>{},handlers:[]});`);
+    h.mapping.init("AI DJ",false);
+    h.evaluate(`AIDJ.sendWire({opcode:113,session:'${'1'.repeat(32)}',sequence:1,payload:'x'.repeat(1200)});`);
+    const timer=[...h.timers.keys()].at(-1)!;
+    const stale=h.timers.get(timer)!;
+    h.evaluate(`var realStop=engine.stopTimer;engine.stopTimer=id=>{if(id===${timer})throw Error('cleanup failed');realStop(id);};`);
+    if(priorFault)h.evaluate("AIDJ.inputError('portmidi-overflow')");
+    assert.equal(h.mapping.shutdown(),false);
+    h.evaluate('clock=10');stale();assert.equal(h.evaluate('output.length'),0);
+    assert.throws(()=>h.mapping.init("AI DJ",false),/cleanup failed/);
+  }
+});
+// End of autonomously AI-generated cleanup latch regression.
