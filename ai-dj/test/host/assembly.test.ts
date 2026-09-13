@@ -195,17 +195,17 @@ test('assembled cue diagnostics require exclusive opt-in, preserve short control
  assert.throws(()=>h.evaluate("AIDJ.sendWire({})"));
  assert.throws(()=>h.evaluate('AIDJ.configureCueDiagnostic(cueOptions)'));
  h.mapping.input(0,0x21,64,0xb0,'[Channel1]');assert.equal(h.writes.at(-1)?.key,'volume');
- h.tick();
+ for(let i=0;i<20;i++){h.evaluate('cueTime+=5');h.tick();}
  const packets=JSON.parse(h.evaluate('JSON.stringify(cuePackets)')) as number[][];
  const receiver=createManualCueReceiver({diagnostic:true,transportGeneration:1,session:'1'.repeat(32),observerGeneration:1,hostClockDomainId:'host',now:()=>1000});
- assert.equal(packets.length,1);const result=receiver.receive(Uint8Array.from(packets[0]!),1);
- assert.deepEqual(result.errors,[]);assert.equal(result.events[0]?.kind,'observation');receiver.close();
+ assert.ok(packets.length>1);const events=[];for(const packet of packets){const result=receiver.receive(Uint8Array.from(packet),1);assert.deepEqual(result.errors,[]);events.push(...result.events);}
+ assert.equal(events[0]?.kind,'observation');receiver.close();
  h.evaluate('var oldCueInput=AIDJ.incomingData');assert.equal(h.mapping.shutdown(),true);
  assert.equal(h.connections.size,0);assert.equal(h.timers.size,0);
  h.mapping.init('AI DJ',false);assert.equal(h.connections.size,18);assert.equal(h.timers.size,1);
  assert.equal(h.evaluate('AIDJ.cueDiagnosticStatus().active'),false);
  h.evaluate('oldCueInput(new Uint8Array([255]),1)');h.tick();
- assert.equal(h.evaluate('cuePackets.length'),1);h.mapping.shutdown();
+ assert.equal(h.evaluate('cuePackets.length'),packets.length);h.mapping.shutdown();
 });
 test('assembled reset and native input-loss hooks stop cue stream timers',()=>{
  for(const command of ["AIDJ.resetInput(0,0,0,255,'[Master]')","AIDJ.inputError('portmidi-overflow')","AIDJ.inputError('portmidi-read-error')"]){

@@ -47,6 +47,18 @@ export function decodeCueRecordText(text:unknown):CueRecord {
 export function encodeCueRecordText(record:CueRecord):string {
   const text=canonical(record);decodeCueRecordText(text);return text;
 }
+export function decodeCueRecordsText(text:unknown):readonly CueRecord[] {
+  if(typeof text!=='string'||text.length>8192)throw Error('cue-batch-capacity');
+  let value:unknown;try{value=JSON.parse(text);}catch{throw Error('cue-json');}
+  if(!value||typeof value!=='object'||!('kind' in value)||value.kind!=='batch')return [decodeCueRecordText(text)];
+  const batch=value as {schemaVersion?:unknown;records?:unknown};
+  if(!keys(value as Record<string,unknown>,['schemaVersion','kind','records'])||batch.schemaVersion!==1||
+      !Array.isArray(batch.records)||batch.records.length<1||batch.records.length>8)throw Error('cue-batch-shape');
+  const records=batch.records.map(r=>decodeCueRecordText(canonical(r)));
+  const rebuilt='{"schemaVersion":1,"kind":"batch","records":['+records.map(canonical).join(',')+']}';
+  if(rebuilt!==text)throw Error('cue-noncanonical-batch');
+  return records;
+}
 export interface CueDiagnosticEvent {
   source:'unverified'; transportGeneration:number; session:string; wireSequence:number; receivedAtMs:number;
   kind:'observation'|'observer-gap'|'wire-gap'; record?:CueRecord;
@@ -73,16 +85,27 @@ export function createManualCueReceiver(options:{diagnostic:true;transportGenera
       if(result.failed){close();return {events,errors,closed};}
       for(const message of result.messages){
         if(message.session!==session||message.opcode!==113||message.encoding!==2){errors.push('cue-wire-context');continue;}
-        let record:CueRecord;try{record=decodeCueRecordText(message.payload);}catch(e){errors.push((e as Error).message);continue;}
-        if(record.generation!==observerGeneration||record.clockDomainId!==hostClockDomainId){errors.push('cue-observer-context');continue;}
-        const first='kind' in record?record.firstSequence:record.sequence;
-        if(message.sequence<=wireSequence||first<nextObserver){errors.push('cue-reordered-or-duplicate');continue;}
-        if(!('kind' in record)&&record.observedAtMs<lastHostTime){errors.push('cue-host-clock-regressed');continue;}
+        let records:readonly CueRecord[];try{records=decodeCueRecordsText(message.payload);}catch(e){errors.push((e as Error).message);continue;}
+        if(message.sequence<=wireSequence){errors.push('cue-reordered-or-duplicate');continue;}
+        // Validate the complete batch before publishing any record or advancing context.
+        let candidateNext=nextObserver,candidateTime=lastHostTime,bad:string|null=null;
+        for(const record of records){
+          if(record.generation!==observerGeneration||record.clockDomainId!==hostClockDomainId){bad='cue-observer-context';break;}
+          const first='kind' in record?record.firstSequence:record.sequence;
+          if(first<candidateNext){bad='cue-reordered-or-duplicate';break;}
+          if(!('kind' in record)&&record.observedAtMs<candidateTime){bad='cue-host-clock-regressed';break;}
+          candidateNext=('kind' in record?record.lastSequence:record.sequence)+1;
+          if(!('kind' in record))candidateTime=record.observedAtMs;
+        }
+        if(bad){errors.push(bad);continue;}
         const context={source:'unverified' as const,transportGeneration,session,wireSequence:message.sequence,receivedAtMs:at};
         if(wireSequence>=0&&message.sequence>wireSequence+1)events.push({...context,kind:'wire-gap',firstSequence:wireSequence+1,lastSequence:message.sequence-1,reason:'sequence-discontinuity'});
-        if(first>nextObserver)events.push({...context,kind:'observer-gap',firstSequence:nextObserver,lastSequence:first-1,reason:'sequence-discontinuity'});
-        if('kind' in record){events.push({...context,kind:'observer-gap',record,firstSequence:record.firstSequence,lastSequence:record.lastSequence,reason:'host-reported'});nextObserver=record.lastSequence+1;}
-        else{events.push({...context,kind:'observation',record});nextObserver=record.sequence+1;lastHostTime=record.observedAtMs;}
+        for(const record of records){
+          const first='kind' in record?record.firstSequence:record.sequence;
+          if(first>nextObserver)events.push({...context,kind:'observer-gap',firstSequence:nextObserver,lastSequence:first-1,reason:'sequence-discontinuity'});
+          if('kind' in record){events.push({...context,kind:'observer-gap',record,firstSequence:record.firstSequence,lastSequence:record.lastSequence,reason:'host-reported'});nextObserver=record.lastSequence+1;}
+          else{events.push({...context,kind:'observation',record});nextObserver=record.sequence+1;lastHostTime=record.observedAtMs;}
+        }
         wireSequence=message.sequence;
       }
       return {events,errors,closed};

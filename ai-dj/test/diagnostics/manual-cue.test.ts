@@ -1,7 +1,7 @@
 // Autonomously AI-generated receiver conformance tests; fixture packets are not native evidence.
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {createManualCueReceiver,decodeCueRecordText,encodeCueRecordText,type CueObservation,type CueGap} from '../../diagnostics/manual-cue.ts';
+import {createManualCueReceiver,decodeCueRecordsText,decodeCueRecordText,encodeCueRecordText,type CueObservation,type CueGap} from '../../diagnostics/manual-cue.ts';
 import {encodeSysex} from '../../midi/sysex-encode.ts';
 const session='1'.repeat(32);
 const observation=(sequence=0,value=0):CueObservation=>({schemaVersion:1,generation:1,sequence,deck:1,controlKey:'cue_point',clockDomainId:'host',observedAtMs:25.25,trigger:'callback',presence:'present',value});
@@ -125,8 +125,30 @@ test('diagnostic opt-in and immutable context are required; cleanup failure stay
  const h=streamHarness();
  for(const field of ['diagnostic:false','session:[]','generation:-1','clockDomainId:[]'])assert.throws(()=>h.evaluate(`AIDJ.createManualCueWire(Object.assign({},configuration,{${field}}))`));
  h.evaluate("configuration.session='2'.repeat(32);configuration.clockDomainId='changed';stream.start()");
- h.advance(10);assert.ok(h.capture().length>0);
+ h.advance(50);assert.ok(h.capture().length>0);
  h.failStop();assert.equal(h.evaluate('stream.shutdown()'),false);assert.equal(h.evaluate('stream.status().cleanupFailed'),true);
  const count=h.packets.length;h.advance(100);assert.equal(h.packets.length,count);h.receiver.close();
 });
 // End of autonomously AI-generated integration checks.
+
+// Autonomously AI-generated batching capacity and atomic rejection checks.
+const batchText=(records:unknown[])=>'{'+'"schemaVersion":1,"kind":"batch","records":['+records.map(r=>encodeCueRecordText(r as CueObservation)).join(',')+']}';
+test('closed cue batches preserve signed zero and reject malformed or oversized envelopes',()=>{
+ const valid=batchText([observation(0,-0),observation(1,Number.MAX_VALUE)]);
+ const records=decodeCueRecordsText(valid);assert.equal(records.length,2);assert.ok(Object.is((records[0] as CueObservation).value,-0));
+ for(const text of [batchText([]),batchText(Array.from({length:9},(_,i)=>observation(i))),valid.replace('"kind":"batch"','"kind":"batch","kind":"batch"'),valid.replace('"deck":1','"deck":1,"deck":1'),' '+valid,'x'.repeat(8193)])assert.throws(()=>decodeCueRecordsText(text));
+});
+test('invalid later batch context cannot publish or advance an earlier valid record',()=>{
+ for(const later of [observation(0),{...observation(1),generation:2},{...observation(1),observedAtMs:20}]){
+  const h=receiver(),events=[];
+  for(const bytes of encodeSysex({direction:1,opcode:113,session,sequence:1,payload:batchText([observation(0),later])},true))events.push(...h.receive(bytes,2).events);
+  assert.equal(events.length,0);assert.equal(h.status().nextObserver,0);assert.equal(h.status().wireSequence,-1);
+  assert.equal(h.receive(frame(encodeCueRecordText(observation(0)),1),2).events.length,1);h.close();
+ }
+});
+test('batched host refresh stays bounded without idle loss in the five-millisecond fixture',()=>{
+ const h=streamHarness();h.evaluate('stream.start()');h.advance(5000);const events=h.capture();
+ assert.ok(events.length>=780);assert.ok(events.every(e=>e.kind==='observation'));
+ assert.ok(h.evaluate('stream.status().pending')<=16);h.close();
+});
+// End of autonomously AI-generated batching checks.

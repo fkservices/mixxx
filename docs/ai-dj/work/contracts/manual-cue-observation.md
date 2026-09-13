@@ -62,10 +62,15 @@ and invalidates callbacks from the old generation. The sender has no setters,
 automatic retries of control actions or MIDI feedback echo path.
 
 The M13 diagnostic readout uses the R01/R05 extended MIDI framing with explicit
-diagnostic opt-in. Serialize one closed observation as bounded JSON text through
-the existing diagnostic text opcode; do not invent a parallel SysEx prefix,
+diagnostic opt-in. Serialize up to eight closed observations in a canonical batch envelope
+(`schemaVersion:1`, `kind:"batch"`, `records`) through the existing diagnostic text opcode; do not invent a parallel SysEx prefix,
 reassign conventional CCs or call this a negotiated authoritative state delta.
-The receiving diagnostic adapter validates the closed record and labels its
+Each record remains at most 1024 characters; an envelope is capped at 8192.
+The receiver validates the entire batch before publishing any observation or
+advancing sequence context. The original single-record form remains readable for
+older diagnostic captures. Native single-record-per-message traffic saturated
+the output slots; batching retains the full 100 ms refresh and callback edges.
+The receiving diagnostic adapter validates each closed record and labels its
 source unverified. Exact numeric JSON round trips preserve cue-position values.
 Host clock values remain host-local; compare receipt intervals only within the
 same measured clock. Existing cue press/release bytes retain their meaning.

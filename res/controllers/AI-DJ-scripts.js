@@ -1410,9 +1410,11 @@ AIDJ.createManualCueWire = function(options) {
                 }
                 if (pending.length) {
                     if (wireSequence >= 9007199254740991) { fail("cue-wire-sequence-exhausted"); return; }
-                    var reply = endpoint.send({opcode:113,session:session,sequence:wireSequence++,payload:text(pending[0])});
+                    var count = Math.min(8, pending.length);
+                    var payload = '{"schemaVersion":1,"kind":"batch","records":[' + pending.slice(0,count).map(text).join(",") + "]}";
+                    var reply = endpoint.send({opcode:113,session:session,sequence:wireSequence++,payload:payload});
                     if (!reply.queued) { fail("cue-stream-admission-failed"); return; }
-                    inFlight = reply.id; pending.shift();
+                    inFlight = reply.id; pending.splice(0,count);
                 }
             }
             schedule();
