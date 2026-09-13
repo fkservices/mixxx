@@ -61,9 +61,290 @@
     }
   ],
   "remaining": [
-    "Explicit raw MIDI cue press/release host proof",
-    "Sustained sync enable/off host proof",
+    "Sustained cue native UI visual proof",
     "Manual cue semantic visibility beyond cue_preview",
-    "Zero stuck cue and complete five-control native agreement"
-  ]
+    "Complete five-control native agreement"
+  ],
+  "rawFixture": {
+    "hostPid": 34918,
+    "runnerPid": 34424,
+    "runnerExitCode": 0,
+    "ttlMs": 300000,
+    "cueReleaseAfterMs": 4000,
+    "commands": [
+      {
+        "atMs": 121285.437584,
+        "kind": "send-returned",
+        "bytes": [
+          144,
+          35,
+          127
+        ]
+      },
+      {
+        "atMs": 125286.245209,
+        "kind": "send-returned",
+        "bytes": [
+          128,
+          35,
+          0
+        ]
+      },
+      {
+        "atMs": 138547.78991700002,
+        "kind": "send-returned",
+        "bytes": [
+          145,
+          35,
+          127
+        ]
+      },
+      {
+        "atMs": 142548.236875,
+        "kind": "send-returned",
+        "bytes": [
+          129,
+          35,
+          0
+        ]
+      },
+      {
+        "atMs": 149567.064084,
+        "kind": "send-returned",
+        "bytes": [
+          176,
+          34,
+          127
+        ]
+      },
+      {
+        "atMs": 162667.34512500002,
+        "kind": "send-returned",
+        "bytes": [
+          177,
+          34,
+          127
+        ]
+      },
+      {
+        "atMs": 171742.81108400002,
+        "kind": "send-returned",
+        "bytes": [
+          177,
+          34,
+          0
+        ]
+      }
+    ],
+    "stateChanges": [
+      {
+        "atMs": 67705.267959,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          32,
+          0
+        ]
+      },
+      {
+        "atMs": 67707.761292,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          35,
+          0
+        ]
+      },
+      {
+        "atMs": 67707.84662499999,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          34,
+          0
+        ]
+      },
+      {
+        "atMs": 67707.958459,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          32,
+          0
+        ]
+      },
+      {
+        "atMs": 67708.035834,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          35,
+          0
+        ]
+      },
+      {
+        "atMs": 67708.070417,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          34,
+          0
+        ]
+      },
+      {
+        "atMs": 121286.920334,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          32,
+          127
+        ]
+      },
+      {
+        "atMs": 121286.948667,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          35,
+          127
+        ]
+      },
+      {
+        "atMs": 125287.441584,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          32,
+          0
+        ]
+      },
+      {
+        "atMs": 125287.468417,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          35,
+          0
+        ]
+      },
+      {
+        "atMs": 138548.6815,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          32,
+          127
+        ]
+      },
+      {
+        "atMs": 138548.70295900002,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          35,
+          127
+        ]
+      },
+      {
+        "atMs": 142549.432,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          32,
+          0
+        ]
+      },
+      {
+        "atMs": 142549.461084,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          35,
+          0
+        ]
+      },
+      {
+        "atMs": 149568.479292,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          34,
+          127
+        ]
+      },
+      {
+        "atMs": 159600.770667,
+        "kind": "feedback",
+        "bytes": [
+          184,
+          34,
+          0
+        ]
+      },
+      {
+        "atMs": 162668.362667,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          34,
+          127
+        ]
+      },
+      {
+        "atMs": 171744.207292,
+        "kind": "feedback",
+        "bytes": [
+          185,
+          34,
+          0
+        ]
+      }
+    ],
+    "eventCounts": {
+      "opened": 1,
+      "feedback": 21846,
+      "send-attempt": 7,
+      "send-returned": 7,
+      "closed": 1
+    },
+    "limitations": [
+      "Cue screenshots show post-release state, not sustained preview",
+      "Raw fixture bypasses no production guards: separate port-owning process after service shutdown",
+      "No latency distribution, actor authority or audio proof"
+    ],
+    "artifacts": [
+      {
+        "file": "native-fixture.mjs",
+        "sha256": "91ab943ecdebb116431e442f0615be2624dd785b886ff24e03222e04409ea70c"
+      },
+      {
+        "file": "raw-fixture.jsonl",
+        "sha256": "8c9d1d00273b4a79fd4c7b0a08b1d023680d1fe00bc7a6f6ca2a70c056f7ffaa"
+      },
+      {
+        "file": "raw-cue1-after-release.jpg",
+        "sha256": "a273549924c1dd3012a56d27ce17f0352d5b3a4f7e50a543b95eacd20bf7022b"
+      },
+      {
+        "file": "raw-cue2-after-release.jpg",
+        "sha256": "10b0c72941b3f3dd801a62bd83666b31638645bd374b01e857a1ffee981664c1"
+      },
+      {
+        "file": "raw-restored.jpg",
+        "sha256": "ef06bfd069de96df29eeadbb85c88ae931279f0696ca72f23c00b2958fe91854"
+      },
+      {
+        "file": "raw-sync1-mouse-off.jpg",
+        "sha256": "33fb6be945f643451aa2308570a99a2df1fda41b46c75883714eaa463c61ab22"
+      },
+      {
+        "file": "raw-sync1-on.jpg",
+        "sha256": "f51eca441e844a6ba3dc7087d5d57ef48f0c7caef0082585a4c86d55bd1d7889"
+      },
+      {
+        "file": "raw-sync2-on.jpg",
+        "sha256": "4f3afe2da448482b2bb9205e1986b85c54cfb7e5ecb8cdbc1020ba9e4b359e81"
+      }
+    ]
+  }
 }

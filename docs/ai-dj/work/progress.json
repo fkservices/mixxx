@@ -400,7 +400,9 @@
       "checks": [
         "Mouse play, volume and crossfader feedback observed while disarmed; 45,596 feedback packets and zero outgoing commands in frozen capture.",
         "Short SYNC click emitted on/off and changed tempo; restored to 117 BPM. Native CUE marker creation was not represented by cue_preview feedback.",
-        "Incomplete: raw cue press/release, sustained sync and full manual cue visibility still require verification."
+        "Incomplete: raw cue press/release, sustained sync and full manual cue visibility still require verification.",
+        "Separate raw fixture sent cue press/release on both decks; play/cue feedback returned false with no pending cue on runner exit.",
+        "Native sustained sync observed on both decks; mouse disabled deck 1, MIDI disabled deck 2. Tempo restored; service remains stopped after test handoff."
       ],
       "updated": "2026-09-13T21:02:01.120249+00:00",
       "dynamic": false
@@ -2406,7 +2408,7 @@
   },
   "music": {
     "status": "two_native_fixtures_loaded",
-    "detail": "Both approved Music-library diagnostic fixtures restored paused in isolated Mixxx. Nine controls have fresh feedback; musical quality remains unverified."
+    "detail": "Both approved fixtures remain loaded and paused in isolated host PID34918; tempo/mixer restored. MIDI port runner stopped cleanly; restart communicator before further feedback tests."
   },
   "screenshots": [
     {
