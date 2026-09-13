@@ -11,11 +11,11 @@
     "F05": "accepted",
     "F06": "accepted",
     "F07": "accepted",
-    "F08": "planned",
-    "F09": "planned",
-    "F10": "planned",
+    "F08": "split",
+    "F09": "accepted",
+    "F10": "accepted",
     "F11": "planned",
-    "F12": "planned",
+    "F12": "accepted",
     "M01": "planned",
     "M02": "planned",
     "M03": "planned",
@@ -183,21 +183,28 @@
     "F04",
     "F05",
     "F06",
-    "F07"
-  ],
-  "dependency_frontier": [
-    "F08",
+    "F07",
     "F09",
     "F10",
-    "F12",
+    "F12"
+  ],
+  "dependency_frontier": [
+    "F11",
     "M01"
   ],
   "dispatchable_now": [],
   "dynamic_task_status": {
     "SETUP-F01-MIXXX-2.5.6-ARM": "accepted",
-    "SETUP-F01-FIXTURE-TRACKS": "accepted"
+    "SETUP-F01-FIXTURE-TRACKS": "accepted",
+    "F08-ACTION-VALIDATION": "accepted",
+    "F08-STATE-VALIDATION": "planned",
+    "INTEGRATE-F09-SYNC-CONTRACT": "planned",
+    "INTEGRATE-F09-SYNC-VALIDATION": "planned",
+    "INTEGRATE-F09-SYNC-PROFILE": "planned"
   },
-  "dynamic_dependency_frontier": [],
+  "dynamic_dependency_frontier": [
+    "F08-STATE-VALIDATION"
+  ],
   "global_requirements": [
     "User instruction to start implementation",
     "Current integrated revision and scoped context",
@@ -1153,7 +1160,7 @@
         "F12"
       ],
       "acceptance": "Named profile, package checks and typed contracts; no MIDI success claim.",
-      "status": "in_progress"
+      "status": "accepted"
     },
     {
       "id": "G1",

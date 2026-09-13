@@ -206,7 +206,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F07, F03. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** F07, F03. **Leases:** Exact path reservation. **Status:** split.
 
 **Owns:** `ai-dj/core/validate.ts`, `ai-dj/test/core/validate.test.ts`
 
@@ -234,7 +234,7 @@
 
 **Worker:** L4 / `gpt-6-astra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F07. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** F07. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `docs/ai-dj/work/contracts/conventional.md`, `ai-dj/hosts/mixxx/conventional-profile.json`
 
@@ -262,7 +262,7 @@
 
 **Worker:** L3 / `gpt-5.6-sol` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F07. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** F07. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `docs/ai-dj/work/inventory/schema.json`, `docs/ai-dj/work/inventory/README.md`
 
@@ -319,7 +319,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F07, F03. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** F07, F03. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/diagnostics/events.ts`, `ai-dj/test/diagnostics/events.test.ts`, `docs/ai-dj/work/evidence-format.md`
 

@@ -1,5 +1,5 @@
 {
-  "disclosure": "Autonomously AI-generated setup expansion manifest. These children gate F11, not F01 documentation acceptance.",
+  "disclosure": "Autonomously AI-generated execution expansion manifest. Required children gate their named parent work.",
   "schema_version": 1,
   "tasks": [
     {
@@ -92,6 +92,231 @@
         "Metadata, fingerprints and private manifest verified.",
         "No media or private source paths added to Git."
       ]
+    },
+    {
+      "parent": "F08",
+      "blocks": [
+        "F08"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "locks": [
+        "core-validation"
+      ],
+      "reasoning_effort": "high",
+      "template": "SPLIT",
+      "id": "F08-ACTION-VALIDATION",
+      "title": "Complete bounded action and outcome validation",
+      "level": "L2",
+      "model": "gpt-5.6-terra",
+      "depends_on": [
+        "F03",
+        "F06",
+        "F07"
+      ],
+      "status": "accepted",
+      "owns": [
+        "ai-dj/core/validate.ts",
+        "ai-dj/test/core/validate.test.ts",
+        "docs/ai-dj/work/evidence/F08-ACTION-VALIDATION.md"
+      ],
+      "perform": [
+        "Complete F06 closed action, outcome and release-obligation validation with exact fields, generations, leases, mandatory target/resources and consistent conditions.",
+        "Bound plain-JSON admission before traversal/cloning; reject accessors, extra fields and invalid payloads without execution or mutation."
+      ],
+      "validate": [
+        "Positive and negative fixtures cover every supported F06 action and outcome, lease/target mismatch, malformed generation, contradictory conditions and payload boundaries.",
+        "Run focused validator tests and strict typecheck; explicitly retain all F07 state gaps for sequential child."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/F08-ACTION-VALIDATION.md",
+      "worker": "/root/f08_validators",
+      "source_revision": "0ef0499db28c6c86bb7c75e390665da831f8c20c",
+      "started_at": "2026-09-13T19:10:04.592Z",
+      "interrupt_by": "2026-09-13T19:37:04.592Z",
+      "deadline": "2026-09-13T19:40:04.592Z",
+      "monitor_cell": "221",
+      "split_note": "Same original F08 worker clock; no restart or extra time.",
+      "accepted_at": "2026-09-13T19:22:12.165682+00:00",
+      "evidence_sha256": "f7b16a268138124e9623c11d609239b810920b9ccfe91a80ea686e8d38636e9a",
+      "checks": [
+        "All closed F06 action/outcome/obligation variants and corrected generation/lease/condition rules reviewed.",
+        "Bounded parsing and exact transport limit regressions passed; accepted data is copied/frozen.",
+        "Integrated typecheck/build and 18 tests passed; F07 state admission explicitly remains unaccepted."
+      ],
+      "monitor_status": "terminated_after_all_handoffs"
+    },
+    {
+      "parent": "F08",
+      "blocks": [
+        "F08"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "locks": [
+        "core-validation"
+      ],
+      "reasoning_effort": "high",
+      "template": "SPLIT",
+      "id": "F08-STATE-VALIDATION",
+      "title": "Complete state reference and transaction admission",
+      "level": "L4",
+      "model": "gpt-6-astra",
+      "depends_on": [
+        "F08-ACTION-VALIDATION",
+        "F03",
+        "F07"
+      ],
+      "status": "planned",
+      "owns": [
+        "ai-dj/core/validate.ts",
+        "ai-dj/test/core/validate.test.ts",
+        "docs/ai-dj/work/evidence/F08-STATE-VALIDATION.md"
+      ],
+      "perform": [
+        "Validate F07 observations with the correct deck-precondition versus capability-value shape; retain explicit stale old-context evidence.",
+        "Bind full immutable profile/catalog/deck/instance references and delta baseline; purely validate the resulting projection, including affected readings on track/instance removal or replacement, without mutating observed state."
+      ],
+      "validate": [
+        "Exercise valid observed loaded/empty decks, stale old-context state, current presence, exact dynamic incarnations and capability suffix/units/range checks.",
+        "Reject dangling/mismatched deck and instance references, conflicting keys, wrong profile or lineage, unhandled reading invalidation, and invalid full projection; verify original baseline unchanged.",
+        "Run all focused validator tests, typecheck and build; preserve F06 action regressions and explicit unknown sync rejection."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/F08-STATE-VALIDATION.md"
+    },
+    {
+      "parent": "M03",
+      "blocks": [
+        "M03"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "reasoning_effort": "high",
+      "locks": [
+        "core-contract-integration"
+      ],
+      "template": "INTEGRATE",
+      "id": "INTEGRATE-F09-SYNC-CONTRACT",
+      "title": "Add explicit participant-aware sync action contract",
+      "level": "L4",
+      "model": "gpt-6-astra",
+      "depends_on": [
+        "F06",
+        "F07",
+        "F08",
+        "F09"
+      ],
+      "owns": [
+        "ai-dj/core/actions.ts",
+        "ai-dj/core/capabilities.ts",
+        "docs/ai-dj/work/contracts/actions.md",
+        "docs/ai-dj/work/contracts/state.md"
+      ],
+      "perform": [
+        "Add versioned deck.set_sync_enabled boolean with exact participant/resources/guard and current-state outcome semantics.",
+        "Retain rapid-toggle one-shot side effects, passthrough/vinyl/tempo/phase constraints, manual authority and no blind compensating write; missing telemetry remains explicit unavailable guard."
+      ],
+      "validate": [
+        "Review against accepted F09 released-source findings and preserve all previous action meanings.",
+        "Run typecheck/build; do not enable the semantic profile before validator integration."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/INTEGRATE-F09-SYNC-CONTRACT.md"
+    },
+    {
+      "parent": "M03",
+      "blocks": [
+        "M03"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "reasoning_effort": "high",
+      "locks": [
+        "core-contract-integration"
+      ],
+      "template": "INTEGRATE",
+      "id": "INTEGRATE-F09-SYNC-VALIDATION",
+      "title": "Validate the explicit sync action and participant guards",
+      "level": "L2",
+      "model": "gpt-5.6-terra",
+      "depends_on": [
+        "F08",
+        "INTEGRATE-F09-SYNC-CONTRACT"
+      ],
+      "owns": [
+        "ai-dj/core/validate.ts",
+        "ai-dj/test/core/validate.test.ts"
+      ],
+      "perform": [
+        "Admit only the new reviewed versioned sync operation and its exact resources/guards.",
+        "Preserve closed unknown-operation rejection, immutable state and executor authority boundaries."
+      ],
+      "validate": [
+        "Test both booleans, malformed/extra fields, invalid participants/generations/authority and rejected unknown operations.",
+        "Run full tests, typecheck/build and whitespace checks."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/INTEGRATE-F09-SYNC-VALIDATION.md"
+    },
+    {
+      "parent": "M03",
+      "blocks": [
+        "M03"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "reasoning_effort": "high",
+      "locks": [
+        "core-contract-integration"
+      ],
+      "template": "INTEGRATE",
+      "id": "INTEGRATE-F09-SYNC-PROFILE",
+      "title": "Bind the reviewed sync action to the conventional profile",
+      "level": "L2",
+      "model": "gpt-5.6-terra",
+      "depends_on": [
+        "F09",
+        "INTEGRATE-F09-SYNC-CONTRACT",
+        "INTEGRATE-F09-SYNC-VALIDATION"
+      ],
+      "owns": [
+        "ai-dj/hosts/mixxx/conventional-profile.json",
+        "docs/ai-dj/work/contracts/conventional.md"
+      ],
+      "perform": [
+        "Bind only the accepted sync selector/version and required guards; retain production cue lease gate and runtime evidence gaps.",
+        "Keep frozen addresses and scaling unchanged unless a separately evidenced correction is required."
+      ],
+      "validate": [
+        "Reconcile new selector with closed core contract and validator acceptance; rerun profile vectors and collision checks.",
+        "No semantic readiness claim from static profile or send alone."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/INTEGRATE-F09-SYNC-PROFILE.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

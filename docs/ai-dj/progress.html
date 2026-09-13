@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T19:08:40.297569+00:00",
+  "updated_at": "2026-09-13T19:22:12.165682+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -143,36 +143,44 @@
       "id": "F08",
       "title": "Create runtime message validators",
       "stage": "00-foundation",
-      "status": "planned",
+      "status": "split",
       "model": "gpt-5.6-terra",
       "evidence": null,
       "verified": false,
       "checks": [],
-      "updated": null,
+      "updated": "2026-09-13T19:10:04.592Z",
       "dynamic": false
     },
     {
       "id": "F09",
       "title": "Define conventional MIDI addresses including sync",
       "stage": "00-foundation",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-6-astra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/F09.md",
+      "verified": true,
+      "checks": [
+        "Coordinator reviewed full tagged-source contract and reran embedded bounded profile checks.",
+        "Nine instances and all addresses/vectors/quantization/note edges passed; sync and cue extension gates retained.",
+        "No host, MIDI routing or musical runtime result claimed."
+      ],
+      "updated": "2026-09-13T19:22:12.165682+00:00",
       "dynamic": false
     },
     {
       "id": "F10",
       "title": "Define inventory record and pagination rules",
       "stage": "00-foundation",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/F10.md",
+      "verified": true,
+      "checks": [
+        "Draft2020-12 schema validation passed with six synthetic positive examples.",
+        "Twelve malformed/incomplete schema cases rejected; five required semantic rejection cases documented.",
+        "Inventory closure, canonical/instance counts and four independent evidence dimensions reviewed against F07."
+      ],
+      "updated": "2026-09-13T19:15:21.632663+00:00",
       "dynamic": false
     },
     {
@@ -191,12 +199,16 @@
       "id": "F12",
       "title": "Create evidence capture conventions",
       "stage": "00-foundation",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/F12.md",
+      "verified": true,
+      "checks": [
+        "Coordinator reviewed complete events implementation and corrected admission bounds and atomicity.",
+        "Integrated typecheck/build and 18 tests passed, including six diagnostics regressions.",
+        "Ordered capture, explicit gaps, late observations, copy isolation and redacted artifact references verified with fixtures."
+      ],
+      "updated": "2026-09-13T19:22:12.165682+00:00",
       "dynamic": false
     },
     {
@@ -2140,6 +2152,70 @@
       ],
       "updated": "2026-09-13T18:49:22.363218+00:00",
       "dynamic": true
+    },
+    {
+      "id": "F08-ACTION-VALIDATION",
+      "title": "Complete bounded action and outcome validation",
+      "stage": "setup",
+      "status": "accepted",
+      "model": "gpt-5.6-terra",
+      "evidence": "work/evidence/F08-ACTION-VALIDATION.md",
+      "verified": true,
+      "checks": [
+        "All closed F06 action/outcome/obligation variants and corrected generation/lease/condition rules reviewed.",
+        "Bounded parsing and exact transport limit regressions passed; accepted data is copied/frozen.",
+        "Integrated typecheck/build and 18 tests passed; F07 state admission explicitly remains unaccepted."
+      ],
+      "updated": "2026-09-13T19:22:12.165682+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "F08-STATE-VALIDATION",
+      "title": "Complete state reference and transaction admission",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": true
+    },
+    {
+      "id": "INTEGRATE-F09-SYNC-CONTRACT",
+      "title": "Add explicit participant-aware sync action contract",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": true
+    },
+    {
+      "id": "INTEGRATE-F09-SYNC-VALIDATION",
+      "title": "Validate the explicit sync action and participant guards",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": true
+    },
+    {
+      "id": "INTEGRATE-F09-SYNC-PROFILE",
+      "title": "Bind the reviewed sync action to the conventional profile",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": true
     }
   ],
   "milestones": [
@@ -2155,7 +2231,7 @@
         "F10",
         "F12"
       ],
-      "accepted": false
+      "accepted": true
     },
     {
       "id": "G1",

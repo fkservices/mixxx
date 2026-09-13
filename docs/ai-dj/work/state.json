@@ -183,6 +183,111 @@
         "No port opening, MIDI exchange, Mixxx playback or physical-controller support claimed."
       ],
       "monitor_status": "terminated_after_handoff"
+    },
+    "F08": {
+      "status": "split",
+      "worker": "/root/f08_validators",
+      "model": "gpt-5.6-terra",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-13T19:10:04.592Z",
+      "supervisor_monotonic_registered_seconds": 9297.827103708,
+      "interrupt_by": "2026-09-13T19:37:04.592Z",
+      "deadline": "2026-09-13T19:40:04.592Z",
+      "monitor_cell": "221",
+      "source_revision": "0ef0499db28c6c86bb7c75e390665da831f8c20c",
+      "owned_paths": [
+        "ai-dj/core/validate.ts",
+        "ai-dj/test/core/validate.test.ts",
+        "docs/ai-dj/work/evidence/F08.md"
+      ],
+      "children": [
+        "F08-ACTION-VALIDATION",
+        "F08-STATE-VALIDATION"
+      ],
+      "review_finding": "Root review found omitted F06 generation/lease checks and incomplete F07 state admission. Sequential children retain full requirements; original worker finishes F06 subset within original deadline.",
+      "monitor_status": "terminated_after_all_handoffs"
+    },
+    "F09": {
+      "status": "accepted",
+      "worker": "/root/f09_midi_contract",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-13T19:10:04.592Z",
+      "supervisor_monotonic_registered_seconds": 9297.8271055,
+      "interrupt_by": "2026-09-13T19:37:04.592Z",
+      "deadline": "2026-09-13T19:40:04.592Z",
+      "monitor_cell": "221",
+      "source_revision": "0ef0499db28c6c86bb7c75e390665da831f8c20c",
+      "owned_paths": [
+        "docs/ai-dj/work/contracts/conventional.md",
+        "ai-dj/hosts/mixxx/conventional-profile.json",
+        "docs/ai-dj/work/evidence/F09.md"
+      ],
+      "accepted_at": "2026-09-13T19:22:12.165682+00:00",
+      "evidence": "docs/ai-dj/work/evidence/F09.md",
+      "evidence_sha256": "5d889d37bf658dda72c8a7847d469f05fce32334abce71f837c2b76def55fbcb",
+      "checks": [
+        "Coordinator reviewed full tagged-source contract and reran embedded bounded profile checks.",
+        "Nine instances and all addresses/vectors/quantization/note edges passed; sync and cue extension gates retained.",
+        "No host, MIDI routing or musical runtime result claimed."
+      ],
+      "monitor_status": "terminated_after_all_handoffs"
+    },
+    "F10": {
+      "status": "accepted",
+      "worker": "/root",
+      "model": "coordinator-inherited",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-13T19:10:04.592Z",
+      "supervisor_monotonic_registered_seconds": 9297.827106416,
+      "interrupt_by": "2026-09-13T19:37:04.592Z",
+      "deadline": "2026-09-13T19:40:04.592Z",
+      "monitor_cell": "221",
+      "source_revision": "0ef0499db28c6c86bb7c75e390665da831f8c20c",
+      "owned_paths": [
+        "docs/ai-dj/work/inventory/schema.json",
+        "docs/ai-dj/work/inventory/README.md",
+        "docs/ai-dj/work/evidence/F10.md"
+      ],
+      "dispatch_note": "Requested Sol worker could not spawn because the available agent-thread limit was reached; coordinator owns this bounded schema task directly.",
+      "model_assignment_note": "Planned Sol worker unavailable at agent-thread limit; coordinator executed directly without model override.",
+      "accepted_at": "2026-09-13T19:15:21.632663+00:00",
+      "evidence": "docs/ai-dj/work/evidence/F10.md",
+      "evidence_sha256": "3d42b88c7f0fcffdaa82b55bb7e03fd17714c25675f6c72dd9a27d878e679936",
+      "checks": [
+        "Draft2020-12 schema validation passed with six synthetic positive examples.",
+        "Twelve malformed/incomplete schema cases rejected; five required semantic rejection cases documented.",
+        "Inventory closure, canonical/instance counts and four independent evidence dimensions reviewed against F07."
+      ],
+      "monitor_status": "terminated_after_all_handoffs"
+    },
+    "F12": {
+      "status": "accepted",
+      "worker": "/root/f03_scaffold",
+      "model": "gpt-5.6-terra",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-13T19:10:04.592Z",
+      "supervisor_monotonic_registered_seconds": 9297.827106416,
+      "interrupt_by": "2026-09-13T19:37:04.592Z",
+      "deadline": "2026-09-13T19:40:04.592Z",
+      "monitor_cell": "221",
+      "source_revision": "0ef0499db28c6c86bb7c75e390665da831f8c20c",
+      "owned_paths": [
+        "ai-dj/diagnostics/events.ts",
+        "ai-dj/test/diagnostics/events.test.ts",
+        "docs/ai-dj/work/evidence-format.md",
+        "docs/ai-dj/work/evidence/F12.md"
+      ],
+      "dispatch_note": "Reused completed Terra worker for independent F12; same conservative monitor221 deadline.",
+      "accepted_at": "2026-09-13T19:22:12.165682+00:00",
+      "evidence": "docs/ai-dj/work/evidence/F12.md",
+      "evidence_sha256": "06e843e264c1e16a867bc986b052a74617a51fef4eabbfebbdf50f3359b4f88a",
+      "checks": [
+        "Coordinator reviewed complete events implementation and corrected admission bounds and atomicity.",
+        "Integrated typecheck/build and 18 tests passed, including six diagnostics regressions.",
+        "Ordered capture, explicit gaps, late observations, copy isolation and redacted artifact references verified with fixtures."
+      ],
+      "monitor_status": "terminated_after_all_handoffs"
     }
   },
   "jobs": {
