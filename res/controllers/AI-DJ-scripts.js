@@ -43,6 +43,11 @@ var AIDJ = (function() {
         return wireEndpoint.receive(new Uint8Array([0xFF]), 1, wireGeneration);
     };
     // End of autonomously AI-generated reset route.
+    // Autonomously AI-generated opt-in native loss handler; no MIDI reset attribution.
+    api.inputError = function(reason) {
+        if (wireEndpoint && (reason === "portmidi-overflow" || reason === "portmidi-read-error")) wireEndpoint.invalidate();
+    };
+    // End of autonomously AI-generated loss handler.
     api.profileId = "mixxx-2.5.6-latenight-conventional-v1";
     api.metadataSchemaVersion = 2;
     api.register = function(name, module) {
@@ -1006,7 +1011,7 @@ AIDJ.createWireEndpoint = function(options) {
         return {sentFrames:sent,totalFrames:frames.length,closed:closed,delivery:"unconfirmed",
             diagnostics:checked.errors,droppedDiagnostics:checked.droppedDiagnostics};
     }
-    return {receive:receive,send:send,close:function() {
+    return {receive:receive,send:send,invalidate:function() { fail("native-input-loss"); },close:function() {
         if (closed) return;
         closed = true;
         try { parser.close(); } catch (error) { fail("parser-cleanup-failed"); }

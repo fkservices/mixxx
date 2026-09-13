@@ -40,6 +40,8 @@ class MockPortMidiController : public PortMidiController {
             void(unsigned char, unsigned char, unsigned char, mixxx::Duration));
     MOCK_METHOD2(receive, void(const QByteArray&, mixxx::Duration));
 
+    MOCK_METHOD(void, notifyInputLoss, (const QString&), (override));
+
     // These tests are unrelated to scripting.
     MOCK_METHOD0(startEngine, void());
     MOCK_METHOD0(stopEngine, void());
@@ -443,3 +445,25 @@ TEST_F(PortMidiControllerTest, Poll_Read_SysEx_BufferOverflow) {
     pollDevice();
     pollDevice();
 };
+
+// Autonomously AI-generated overflow recovery regression.
+TEST_F(PortMidiControllerTest, OverflowDiscardsPartialSysexAndNotifiesBeforeNewInput) {
+    const std::vector<PmEvent> partial{MakeEvent(0x332211F0, 0)};
+    const std::vector<PmEvent> fresh{MakeEvent(0xF75544F0, 1)};
+    Sequence order;
+    EXPECT_CALL(*m_mockInput, isOpen()).WillRepeatedly(Return(true));
+    EXPECT_CALL(*m_mockInput, read(NotNull(), _)).InSequence(order)
+            .WillOnce(DoAll(SetArrayArgument<0>(partial.begin(), partial.end()), Return(1)));
+    EXPECT_CALL(*m_mockInput, read(NotNull(), _)).InSequence(order)
+            .WillOnce(Return(pmBufferOverflow));
+    EXPECT_CALL(*m_pController, notifyInputLoss(QStringLiteral("portmidi-overflow")))
+            .InSequence(order);
+    EXPECT_CALL(*m_mockInput, read(NotNull(), _)).InSequence(order)
+            .WillOnce(DoAll(SetArrayArgument<0>(fresh.begin(), fresh.end()), Return(1)));
+    EXPECT_CALL(*m_pController, receive(QByteArray::fromHex("f04455f7"), _))
+            .InSequence(order);
+    pollDevice();
+    pollDevice();
+    pollDevice();
+}
+// End of autonomously AI-generated overflow regression.

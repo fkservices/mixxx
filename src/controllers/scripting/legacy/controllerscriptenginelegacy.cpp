@@ -106,6 +106,22 @@ bool ControllerScriptEngineLegacy::callFunctionOnObjects(
     return success;
 }
 
+// Autonomously AI-generated opt-in input-loss callback for legacy mapping prefixes.
+void ControllerScriptEngineLegacy::handleInputError(const QString& reason) {
+    if (!m_pJSEngine) {
+        return;
+    }
+    QList<QString> listeners;
+    const auto global = m_pJSEngine->globalObject();
+    for (const auto& prefix : m_scriptFunctionPrefixes) {
+        if (global.property(prefix).property(QStringLiteral("inputError")).isCallable()) {
+            listeners.append(prefix);
+        }
+    }
+    callFunctionOnObjects(listeners, QStringLiteral("inputError"), {QJSValue(reason)});
+}
+// End of autonomously AI-generated input-loss callback.
+
 bool ControllerScriptEngineLegacy::callShutdownFunction() {
     // There is no js engine if the mapping was not loaded from a file but by
     // creating a new, empty mapping LegacyMidiControllerMapping with the wizard

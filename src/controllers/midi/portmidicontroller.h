@@ -89,6 +89,10 @@ class PortMidiController : public MidiController {
     bool poll() override;
 
   protected:
+    // Autonomously AI-generated input-loss notification hook.
+    virtual void notifyInputLoss(const QString& reason);
+    // End of autonomously AI-generated hook.
+
     // MockPortMidiController needs this to not be private.
     void sendShortMsg(unsigned char status, unsigned char byte1,
                       unsigned char byte2) override;

@@ -983,7 +983,10 @@
       "owns": [
         "src/controllers/midi/portmidicontroller.cpp",
         "src/test/portmidicontroller_test.cpp",
-        "docs/ai-dj/work/integrations/native-input-loss.md"
+        "docs/ai-dj/work/integrations/native-input-loss.md",
+        "src/controllers/midi/portmidicontroller.h",
+        "src/controllers/scripting/legacy/controllerscriptenginelegacy.h",
+        "src/controllers/scripting/legacy/controllerscriptenginelegacy.cpp"
       ],
       "locks": [
         "mixxx-runtime"
@@ -995,7 +998,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "in_review",
       "perform": [
         "Clear partial native SysEx state after receive overflow and expose an explicit input-loss signal to interested mappings; distinguish input loss from a physical MIDI reset.",
         "Retire the AI DJ endpoint on the signal through the integration owner; preserve other controller compatibility. Do not merely log and continue with trusted state."
@@ -1004,7 +1007,15 @@
         "Add native tests for overflow during partial input and verify no stale assembly or dispatch after loss.",
         "Rebuild the custom application and reproduce actual overflow with bounded sender evidence; require observable endpoint retirement and clean recovery boundaries."
       ],
-      "evidence": "docs/ai-dj/work/evidence/R05-NATIVE-INPUT-LOSS.md"
+      "evidence": "docs/ai-dj/work/evidence/R05-NATIVE-INPUT-LOSS.md",
+      "executor": "coordinator",
+      "source_revision": "a862e22",
+      "started_at": "2026-09-13T22:29:13.753682+00:00",
+      "checks": [
+        "Input loss clears native partial SysEx and invokes optional mapping inputError hook; AI DJ retires endpoint.",
+        "165 software tests and 55 native PortMidi/script tests passed; native build passed. Staged application overflow proof remains pending."
+      ],
+      "updated_at": "2026-09-13T22:30:26.246459+00:00"
     },
     {
       "id": "R05-FRAGMENT-SENDER",

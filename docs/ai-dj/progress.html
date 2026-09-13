@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T22:27:41.963935+00:00",
+  "updated_at": "2026-09-13T22:30:26.246459+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2518,12 +2518,15 @@
       "id": "R05-NATIVE-INPUT-LOSS",
       "title": "Propagate native MIDI input loss to endpoint retirement",
       "stage": "setup",
-      "status": "planned",
+      "status": "in_review",
       "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
-      "checks": [],
-      "updated": null,
+      "checks": [
+        "Input loss clears native partial SysEx and invokes optional mapping inputError hook; AI DJ retires endpoint.",
+        "165 software tests and 55 native PortMidi/script tests passed; native build passed. Staged application overflow proof remains pending."
+      ],
+      "updated": "2026-09-13T22:30:26.246459+00:00",
       "dynamic": true
     },
     {

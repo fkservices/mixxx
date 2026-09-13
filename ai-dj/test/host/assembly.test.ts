@@ -127,3 +127,19 @@ test("native short reset route retires endpoint without performance writes",()=>
   assert.match(xml,/<key>AIDJ.resetInput<\/key>.*<status>0xFF<\/status><midino>0x00<\/midino>/);
 });
 // End of autonomously AI-generated system reset regression.
+
+// Autonomously AI-generated native input-loss callback regression.
+test("native input error closes endpoint and does not revive on later input",()=>{
+  const h=createHostHarness([],true);
+  h.evaluate(`var faults=[];AIDJ.configureWire({clockKind:'monotonic',clockDomainId:'fixture',now:()=>0,onFault:r=>faults.push(r),handlers:[]});`);
+  h.mapping.init("AI DJ",false);
+  h.evaluate("AIDJ.inputError('unrecognized')");
+  assert.equal(h.evaluate("AIDJ.wireStatus().enabled"),true);
+  h.evaluate("AIDJ.inputError('portmidi-overflow')");
+  assert.equal(h.evaluate("AIDJ.wireStatus().enabled"),false);
+  assert.equal(h.evaluate("faults[0]"),"native-input-loss");
+  assert.equal(h.evaluate("AIDJ.incomingData(new Uint8Array([]),0).closed"),true);
+  assert.equal(h.writes.length,0);h.mapping.shutdown();
+  assert.equal(h.connections.size,0);assert.equal(h.timers.size,0);
+});
+// End of autonomously AI-generated native input-loss regression.

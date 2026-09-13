@@ -35,6 +35,9 @@ class ControllerScriptEngineLegacy : public ControllerScriptEngineBase {
     bool initialize() override;
 
     bool handleIncomingData(const QByteArray& data);
+    // Autonomously AI-generated optional native input-loss callback.
+    void handleInputError(const QString& reason);
+    // End of autonomously AI-generated callback.
 
     /// Wrap a string of JS code in an anonymous function. This allows any JS
     /// string that evaluates to a function to be used in MIDI mapping XML files

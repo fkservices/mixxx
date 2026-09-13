@@ -79,7 +79,7 @@ AIDJ.createWireEndpoint = function(options) {
         return {sentFrames:sent,totalFrames:frames.length,closed:closed,delivery:"unconfirmed",
             diagnostics:checked.errors,droppedDiagnostics:checked.droppedDiagnostics};
     }
-    return {receive:receive,send:send,close:function() {
+    return {receive:receive,send:send,invalidate:function() { fail("native-input-loss"); },close:function() {
         if (closed) return;
         closed = true;
         try { parser.close(); } catch (error) { fail("parser-cleanup-failed"); }

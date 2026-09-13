@@ -1,0 +1,15 @@
+{
+  "task": "R05-NATIVE-INPUT-LOSS",
+  "status": "in_review",
+  "baseRevision": "a862e22",
+  "nativeBuildExitCode": 0,
+  "nativeTests": 55,
+  "nativeTestExitCode": 0,
+  "softwareTests": 165,
+  "runtimeProof": "pending",
+  "hashes": {
+    "input-loss-build.log": "ae084c746743bdd3da0c8f3599808636a1386c7b1728d7be74f08c9e097bc330",
+    "input-loss-tests.log": "e01e78e59c8506cfe42796db336bab0c45a6f55489dfea07493648f3f61b5857",
+    "input-loss-tests.json": "4589b8a35538641e880c280064f935dfe53cf32ab321e0d6a368cfe5acdc6411"
+  }
+}

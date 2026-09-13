@@ -1,6 +1,7 @@
 #include "controllers/midi/portmidicontroller.h"
 
 #include "controllers/midi/midiutils.h"
+#include "controllers/scripting/legacy/controllerscriptenginelegacy.h"
 #include "moc_portmidicontroller.cpp"
 
 namespace {
@@ -115,6 +116,14 @@ int PortMidiController::close() {
     return result;
 }
 
+// Autonomously AI-generated native input-loss delivery; never synthesize MIDI reset.
+void PortMidiController::notifyInputLoss(const QString& reason) {
+    if (auto engine = getScriptEngine()) {
+        engine->handleInputError(reason);
+    }
+}
+// End of autonomously AI-generated input-loss delivery.
+
 bool PortMidiController::poll() {
     // Poll the controller for new data if it's an input device
     if (m_pInputDevice.isNull() || !m_pInputDevice->isOpen()) {
@@ -126,6 +135,13 @@ bool PortMidiController::poll() {
     //qDebug() << "PortMidiController::poll()" << numEvents;
 
     if (numEvents < 0) {
+        // Autonomously AI-generated loss boundary: never retain pre-gap SysEx bytes.
+        m_bInSysex = false;
+        m_cReceiveMsg_index = 0;
+        notifyInputLoss(numEvents == pmBufferOverflow
+                        ? QStringLiteral("portmidi-overflow")
+                        : QStringLiteral("portmidi-read-error"));
+        // End of autonomously AI-generated loss boundary.
         qCWarning(m_logInput) << "PortMidi error:" << Pm_GetErrorText((PmError)numEvents);
         return false;
     }
