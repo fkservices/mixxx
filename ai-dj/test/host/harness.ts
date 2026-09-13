@@ -36,7 +36,7 @@ export function createHostHarness(fragments: readonly string[] = [], assembled =
       const connection = { get isConnected(): boolean { return connections.has(connection); }, group: g, key: k, callback, disconnect() { connections.delete(connection); }, trigger() { callback(read(values, g, k), g, k); } };
       connections.add(connection); return connection;
     },
-    beginTimer(interval: number, callback: Callback) { assert.ok(Number.isFinite(interval) && interval > 0); const id = nextTimer++; timers.set(id, callback); return id; },
+    beginTimer(interval: number, callback: Callback, once = false) { assert.ok(Number.isFinite(interval) && interval > 0); const id = nextTimer++; timers.set(id, (...args: unknown[]) => { if (once) timers.delete(id); callback(...args); }); return id; },
     stopTimer(id: number) { timers.delete(id); },
   };
   const context = vm.createContext({ engine, midi: { sendShortMsg: (...packet: number[]) => packets.push(packet) }, console: { log: (...v: unknown[]) => logs.push(v.join(" ")) } });

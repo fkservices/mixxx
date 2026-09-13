@@ -2,7 +2,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { resolve } from "node:path";
-export const FRAGMENT_ORDER = ["play-volume", "fader-cue", "sync", "conventional-feedback", "wire-encode", "wire-decode", "wire"] as const;
+export const FRAGMENT_ORDER = ["play-volume", "fader-cue", "sync", "conventional-feedback", "wire-encode", "wire-decode", "wire-send", "wire"] as const;
 const BEGIN = "// AI-DJ-FRAGMENTS-BEGIN";
 const END = "// AI-DJ-FRAGMENTS-END";
 

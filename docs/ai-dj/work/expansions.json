@@ -825,11 +825,11 @@
       "source_revision": "7149cf9",
       "started_at": "2026-09-13T21:44:13.483268+00:00",
       "checks": [
-        "Burst loss located in PortMidi input overflow: both seven-frame sends lost final frame; required input-loss and bounded-transmitter tasks added.",
-        "164 tests, typecheck/build and mapping generation check passed.",
+        "Eight-fragment mapping queues native replies; cancellation/reset/input-loss/shutdown stop pending frames and stale callbacks.",
+        "176 tests, typecheck and build passed; native maximum queued reply proof pending.",
         "Native JSON/checksum, idle expiry and four-slot capacity/recovery passed; reset/lifecycle evidence remains."
       ],
-      "updated_at": "2026-09-13T22:27:41.963935+00:00"
+      "updated_at": "2026-09-13T22:39:35.431169+00:00"
     },
     {
       "id": "R05-ENDPOINT-NATIVE",
@@ -1109,9 +1109,10 @@
       "source_revision": "4baf1f6",
       "started_at": "2026-09-13T22:37:54.767314+00:00",
       "checks": [
-        "Generated native-timer reply scheduler from the bounded Node sender with checked adaptation points.",
-        "175 software tests, typecheck/build and regeneration check passed; mapping integration and native outbound maximum proof pending."
-      ]
+        "Eight-fragment mapping queues native replies; cancellation/reset/input-loss/shutdown stop pending frames and stale callbacks.",
+        "176 tests, typecheck and build passed; native maximum queued reply proof pending."
+      ],
+      "updated_at": "2026-09-13T22:39:35.431169+00:00"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

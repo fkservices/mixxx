@@ -12,16 +12,18 @@ AIDJ.createWireEndpoint = function(options) {
                 Object.prototype.hasOwnProperty.call(handlers, h.opcode) || typeof h.validate !== "function" || typeof h.handle !== "function") throw new Error("Invalid or duplicate handler");
         handlers[h.opcode] = {validate:h.validate, handle:h.handle};
     }
-    var generation = options.generation;
+    var generation = options.generation, sender = null, sendId = 0;
     var parser = AIDJ.createWireParser({direction:0,generation:generation,now:options.now,allowDiagnostic:diagnostic});
     function fail(reason) {
         if (fault !== null) return;
         fault = reason; closed = true;
         try { parser.close(); } catch (error) { fault += "; parser-cleanup-failed"; }
+        if (sender) sender.close();
         try { onFault(fault); } catch (error) { /* Failure reporting cannot resume dispatch. */ }
     }
     function usable() {
         if (parser.status().failed) fail("parser-failed");
+        if (sender && sender.status().fault) fail("sender-" + sender.status().fault);
         return !closed;
     }
     function freeze(value) {
@@ -63,26 +65,27 @@ AIDJ.createWireEndpoint = function(options) {
         return {dispatched:dispatched,rejected:rejected,closed:closed,diagnostics:result ? result.errors : [],
             droppedDiagnostics:result ? result.droppedDiagnostics : 0};
     }
-    function send(message) {
+    sender = AIDJ.createWireSender({generation:generation,now:options.now,allowDiagnostic:diagnostic,
+        send:function(bytes) {
+            if (!usable()) throw new Error("Endpoint retired before send");
+            try { midi.sendSysexMsg(bytes,bytes.length); }
+            catch (error) { fail("send-failed-outcome-unknown"); throw error; }
+        }});
+    function send(message, deadline) {
         if (!usable()) throw new Error("Endpoint closed");
         var checked = parser.tick();
         if (checked.failed) { fail("parser-failed"); throw new Error("Endpoint clock or parser failed"); }
-        // Host direction is fixed here; caller cannot inject a client command direction.
-        var frames = AIDJ.encodeWire({direction:1,opcode:message.opcode,session:message.session,sequence:message.sequence,payload:message.payload}, diagnostic);
-        var sent = 0;
-        try {
-            for (var i = 0; i < frames.length; i++) {
-                if (!usable()) break;
-                midi.sendSysexMsg(frames[i], frames[i].length); sent++;
-            }
-        } catch (error) { fail("send-failed-outcome-unknown"); }
-        return {sentFrames:sent,totalFrames:frames.length,closed:closed,delivery:"unconfirmed",
-            diagnostics:checked.errors,droppedDiagnostics:checked.droppedDiagnostics};
+        if (sendId >= 9007199254740991) { fail("send-id-exhausted"); throw new Error("Send ID exhausted"); }
+        var id = "reply:" + (++sendId);
+        sender.enqueue(id,{direction:1,opcode:message.opcode,session:message.session,sequence:message.sequence,payload:message.payload},
+            deadline === undefined ? options.now()+900 : deadline,generation);
+        return {id:id,queued:!sender.status().closed,delivery:"unconfirmed"};
     }
-    return {receive:receive,send:send,invalidate:function() { fail("native-input-loss"); },close:function() {
+    return {receive:receive,send:send,cancelSend:function(id) {return sender.cancel(id);},drainSendResults:function() {return sender.drainResults();},invalidate:function() { fail("native-input-loss"); },close:function() {
         if (closed) return;
         closed = true;
+        sender.close();
         try { parser.close(); } catch (error) { fail("parser-cleanup-failed"); }
-    },status:function() { usable(); return {closed:closed,fault:fault,generation:generation,parser:parser.status()}; }};
+    },status:function() { usable(); return {closed:closed,fault:fault,generation:generation,parser:parser.status(),sender:sender.status()}; }};
 };
 // End of autonomously AI-generated file.

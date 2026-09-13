@@ -43,6 +43,7 @@ test("assembled SysEx route requires explicit configuration and survives alongsi
   const frame=encodeSysex({direction:0,opcode:113,session:"1".repeat(32),sequence:1,payload:"é🎧"},true)[0]!;
   const result=h.evaluate(`AIDJ.incomingData(new Uint8Array(${JSON.stringify(Array.from(frame))}),${frame.length})`);
   assert.equal(result.dispatched,1);assert.equal(h.writes.length,0);
+  h.tick();
   const packets=JSON.parse(h.evaluate("JSON.stringify(wirePackets)")) as number[][];
   const parser=createSysexParser({direction:1,generation:1,now:()=>0,allowDiagnostic:true,automaticExpiry:false});
   assert.equal(parser.push(Uint8Array.from(packets[0]!),1).messages[0]?.payload,"é🎧");parser.close();
@@ -143,3 +144,20 @@ test("native input error closes endpoint and does not revive on later input",()=
   assert.equal(h.connections.size,0);assert.equal(h.timers.size,0);
 });
 // End of autonomously AI-generated native input-loss regression.
+
+// Autonomously AI-generated queued reply lifecycle integration regression.
+test("queued native replies stop on cancellation, reset, input loss and shutdown",()=>{
+  for(const action of ["AIDJ.cancelWireSend(reply.id)","AIDJ.resetInput(15,0,0,255,'[Master]')","AIDJ.inputError('portmidi-overflow')","AIDJ.shutdown()"]){
+    const h=createHostHarness([],true);
+    h.evaluate(`var clock=0, output=[];midi.sendSysexMsg=(d,n)=>output.push(d);
+      AIDJ.configureWire({clockKind:'monotonic',clockDomainId:'fixture',now:()=>clock,allowDiagnostic:true,onFault:()=>{},handlers:[]});`);
+    h.mapping.init("AI DJ",false);
+    h.evaluate(`var reply=AIDJ.sendWire({opcode:113,session:'${'1'.repeat(32)}',sequence:1,payload:'x'.repeat(1200)});`);
+    assert.equal(h.evaluate('reply.queued'),true);assert.equal(h.evaluate('output.length'),0);
+    h.tick();assert.equal(h.evaluate('output.length'),1);
+    const retired=[...h.timers.values()];h.evaluate(action);h.evaluate('clock=10');
+    for(const cb of retired)cb();assert.equal(h.evaluate('output.length'),1);
+    h.mapping.shutdown();assert.equal(h.timers.size,0);assert.equal(h.connections.size,0);
+  }
+});
+// End of autonomously AI-generated queued lifecycle regression.

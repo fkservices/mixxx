@@ -20,9 +20,18 @@ fake native timers validate interval and one-shot mode. All 175 software tests,
 typecheck/build and deterministic regeneration check passed. These are VM checks;
 real Qt execution and native MIDI replies remain unverified.
 
-The endpoint must integrate this factory through its lifecycle owner. The old
-synchronous endpoint send path is still present, so this helper is not yet a fix
-for native large reply bursts. Integration must preserve result/queue semantics,
-retire sends on reset and input loss, and prove a maximum native-to-Node payload.
+The endpoint now integrates the factory in an eight-fragment mapping. The old
+synchronous send loop has been removed. `sendWire(message, deadline)` returns
+`{id, queued, delivery: "unconfirmed"}`; it does not claim frames were sent or
+observed. An omitted deadline uses 900 ms from admission. `cancelWireSend(id)`
+cancels pending output; `drainWireSendResults()` returns bounded local send
+results. Callers must drain results to avoid filling the 32-result admission cap.
+Later outcome reconciliation must still establish actual observed delivery.
+
+The sender is closed on endpoint fault and shutdown. Each write checks endpoint
+usability, preventing a queued callback from continuing after reset or input loss.
+Integration tests cover cancellation, reset, overflow notification, shutdown and
+stale callbacks. All 176 tests, typecheck and build passed. Native maximum reply
+verification remains pending; VM output alone does not establish Qt throughput.
 
 > End of autonomously AI-generated implementation notes.

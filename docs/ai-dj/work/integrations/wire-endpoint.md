@@ -216,4 +216,18 @@ or successful paced fixture alone cannot establish safe recovery after lost inpu
 The full log stays private; its hash and frame-correlation report are preserved in
 the run record. No new runtime was started for this read-only diagnosis.
 
+## Queued native reply integration
+
+The current bundle now contains eight fragments, including the generated host
+sender. Native replies enter its bounded queue rather than a synchronous frame
+loop. The send result now reports a queue ID, queued state and unconfirmed delivery.
+Bounded completion results and cancellation are exposed explicitly. Reset, native
+input loss and shutdown close pending output; a stale callback cannot resume it.
+The default admission deadline is 900 ms unless the caller supplies one.
+
+All 176 tests, typecheck and build passed, including the actual assembled mapping
+lifecycle scenarios. Earlier native run records predate this send-contract change;
+maximum native reply and lifecycle probes must validate the new bundle before
+acceptance. Conventional command routing remains separately tested.
+
 > End of autonomously AI-generated investigation.
