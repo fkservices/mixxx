@@ -569,6 +569,15 @@
       "accepted_at": "2026-09-13T20:59:39.235701+00:00",
       "evidence": "docs/ai-dj/work/evidence/M12.md",
       "evidence_sha256": "9b47485b0e83a744c43a57d627c66f4b4a1ef7ebdf13fc4d37be4680d109f5a1"
+    },
+    "M13": {
+      "status": "running",
+      "executor": "coordinator",
+      "source_revision": "93e700e",
+      "started_at": "2026-09-13T21:02:01.120249+00:00",
+      "checks": [
+        "Checking direct mouse feedback while service remains disarmed; raw cue/sync command proof remains required."
+      ]
     }
   },
   "jobs": {
@@ -638,7 +647,7 @@
     }
   },
   "resource_leases": {
-    "mixxx-runtime": "M11-runtime-job"
+    "mixxx-runtime": "M13"
   },
   "external_requirements": {
     "musical_fixtures": {
