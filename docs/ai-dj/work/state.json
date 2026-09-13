@@ -598,6 +598,17 @@
       "accepted_at": "2026-09-13T21:14:12.395239+00:00",
       "evidence": "docs/ai-dj/work/evidence/M14.md",
       "evidence_sha256": "c0496a4220a0b49b6abdff222f77c42974026c49f6c9e1a35586c8d840b34ae1"
+    },
+    "R05": {
+      "status": "split",
+      "executor": "coordinator",
+      "source_revision": "cdce5b9",
+      "started_at": "2026-09-13T21:30:24.283238+00:00",
+      "checks": [
+        "Endpoint wrapper implemented; eight endpoint tests and all 150 integrated tests passed.",
+        "Typecheck, build and whitespace passed.",
+        "Required mapping integration and native validation children materialized; R05 remains unaccepted."
+      ]
     }
   },
   "jobs": {

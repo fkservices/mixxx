@@ -775,6 +775,88 @@
         "Typecheck, build, reproducible generation and whitespace checks passed.",
         "No native endpoint or Qt execution claimed; R05 wrapper and cue transport remain required."
       ]
+    },
+    {
+      "id": "R05-ENDPOINT-INTEGRATE",
+      "parent": "R05",
+      "blocks": [
+        "R05"
+      ],
+      "template": "SPLIT",
+      "title": "Integrate extended endpoint into reproducible mapping",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "R05-HOST-ENCODER",
+        "R05-HOST-DECODER",
+        "M10"
+      ],
+      "owns": [
+        "ai-dj/tools/build-mapping.ts",
+        "res/controllers/AI-DJ-scripts.js",
+        "res/controllers/AI-DJ.midi.xml",
+        "ai-dj/test/host/assembly.test.ts",
+        "docs/ai-dj/work/integrations/wire-endpoint.md"
+      ],
+      "locks": [
+        "mapping-entry"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Verify installed-version native SysEx entry hook, data shape and usable clock source before wiring the endpoint factory.",
+        "Integrate codec and wrapper sources reproducibly, preserve conventional MIDI routing, lifecycle and default diagnostic/authority restrictions."
+      ],
+      "validate": [
+        "Assert reproducible assembly and lifecycle closure, including parser timer disposal and stale callbacks.",
+        "Require no conventional routing regression and no unvalidated handler installation."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/R05-ENDPOINT-INTEGRATE.md"
+    },
+    {
+      "id": "R05-ENDPOINT-NATIVE",
+      "parent": "R05",
+      "blocks": [
+        "R05"
+      ],
+      "template": "SPLIT",
+      "title": "Verify extended endpoint on installed isolated Mixxx",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "R05-ENDPOINT-INTEGRATE"
+      ],
+      "owns": [
+        "docs/ai-dj/work/runs/R05-ENDPOINT-NATIVE.json"
+      ],
+      "locks": [
+        "mixxx-runtime"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Run bounded golden numeric/text/JSON diagnostic frames through actual host input/output with explicit opt-in and no performance action handler.",
+        "Record installed profile/source hashes, received packets, rejected malformed frames and lifecycle cleanup."
+      ],
+      "validate": [
+        "Require native endpoint evidence rather than VM or injected receiver data.",
+        "Verify invalid data cannot invoke a setter, conventional controls remain intact, clock limitations are named and runtime handoff is explicit."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/R05-ENDPOINT-NATIVE.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

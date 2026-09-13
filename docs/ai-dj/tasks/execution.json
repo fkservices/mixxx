@@ -63,7 +63,7 @@
     "R02": "accepted",
     "R03": "accepted",
     "R04": "accepted",
-    "R05": "planned",
+    "R05": "split",
     "R06": "planned",
     "R07": "planned",
     "R08": "planned",
@@ -230,7 +230,6 @@
     "I20",
     "I21",
     "I22",
-    "R05",
     "R15",
     "R20"
   ],
@@ -251,9 +250,13 @@
     "M13-CUE-TRANSPORT": "planned",
     "M13-CUE-NATIVE": "planned",
     "R05-HOST-ENCODER": "accepted",
-    "R05-HOST-DECODER": "accepted"
+    "R05-HOST-DECODER": "accepted",
+    "R05-ENDPOINT-INTEGRATE": "planned",
+    "R05-ENDPOINT-NATIVE": "planned"
   },
-  "dynamic_dependency_frontier": [],
+  "dynamic_dependency_frontier": [
+    "R05-ENDPOINT-INTEGRATE"
+  ],
   "global_requirements": [
     "User instruction to start implementation",
     "Current integrated revision and scoped context",

@@ -120,7 +120,7 @@
 
 **Worker:** L3 / `gpt-5.6-sol` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** R04, M05, R02. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** R04, M05, R02. **Leases:** Exact path reservation. **Status:** split.
 
 **Owns:** `ai-dj/hosts/mixxx/fragments/wire.js`, `ai-dj/test/host/wire.test.ts`
 

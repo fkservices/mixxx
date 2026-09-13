@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T21:29:12.922497+00:00",
+  "updated_at": "2026-09-13T21:30:24.283238+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -860,12 +860,16 @@
       "id": "R05",
       "title": "Implement the Mixxx wire endpoint",
       "stage": "03-reliability",
-      "status": "planned",
+      "status": "split",
       "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
-      "checks": [],
-      "updated": null,
+      "checks": [
+        "Endpoint wrapper implemented; eight endpoint tests and all 150 integrated tests passed.",
+        "Typecheck, build and whitespace passed.",
+        "Required mapping integration and native validation children materialized; R05 remains unaccepted."
+      ],
+      "updated": "2026-09-13T21:30:24.283238+00:00",
       "dynamic": false
     },
     {
@@ -2442,6 +2446,30 @@
         "No native endpoint or Qt execution claimed; R05 wrapper and cue transport remain required."
       ],
       "updated": "2026-09-13T21:29:12.922497+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "R05-ENDPOINT-INTEGRATE",
+      "title": "Integrate extended endpoint into reproducible mapping",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": true
+    },
+    {
+      "id": "R05-ENDPOINT-NATIVE",
+      "title": "Verify extended endpoint on installed isolated Mixxx",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
       "dynamic": true
     }
   ],
