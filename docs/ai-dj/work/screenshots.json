@@ -161,6 +161,20 @@
       "caption": "Final native handoff: both decks paused, sync off, volumes restored, crossfader centered and deck-one tempo back to 117 BPM. This completes initial five-control agreement, not latency or musical acceptance.",
       "captured_at": "2026-09-13T23:22:45.010055+00:00",
       "evidence": "work/runs/M13-FINAL-HOST.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-idle-timing-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Native idle timing test: empty, paused decks while MIDI commands move deck-one volume. The screenshot shows the test state, not an audio-latency measurement.",
+      "captured_at": "2026-09-13T23:30:11.076154+00:00",
+      "evidence": "work/runs/M15.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-idle-buffer-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Idle-test sound configuration verified after sampling: Core Audio, 48 kHz, 21.3 ms audio buffer. This is configuration evidence, not measured audio response.",
+      "captured_at": "2026-09-13T23:34:27.092627+00:00",
+      "evidence": "work/runs/M15.json"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

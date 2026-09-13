@@ -49,6 +49,8 @@ payload = dict(schema_version=1, goal=ledger['authorization'], goal_status=ledge
                updated_at=updated, tasks=rows, children=children, milestones=milestones,
                controller=ledger['external_requirements']['physical_controller'],
                music=ledger['external_requirements']['musical_fixtures'], screenshots=gallery, transport_checks=transport_summary)
+timing_path = docs/'work/runs/M15.json'
+payload['timing'] = json.loads(timing_path.read_text())['visual_summary'] if timing_path.exists() else None
 data = json.dumps(payload, ensure_ascii=False, indent=2)
 template = (docs/'progress.template.html').read_text()
 html = template.replace('__PROGRESS_DATA__', data.replace('<', '\\u003c'))

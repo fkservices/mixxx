@@ -642,6 +642,21 @@
       "accepted_at": "2026-09-13T22:00:18.689313+00:00",
       "evidence": "docs/ai-dj/work/evidence/R20.md",
       "evidence_sha256": "f500270725f92288e3bd20e48a8e78026ebcb8c7f969ac0f82c32c9a17a3d1f8"
+    },
+    "M15": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "32418346fb1211e87987241389c7511d81312c8b",
+      "started_at": "2026-09-13T23:26:53.188506+00:00",
+      "checks": [
+        "400 loopback echoes and 1,000 native volume confirmations; zero missing samples; raw timing endpoints preserved.",
+        "Command feedback p95 2.90 ms, p99 4.59 ms; 84.73 ms dispatch maximum retained for M19 review.",
+        "Native buffer verified; original volume restored; helper exited 0; host quit; default mapping restored."
+      ],
+      "updated_at": "2026-09-13T23:34:27.093827+00:00",
+      "accepted_at": "2026-09-13T23:34:27.093823+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M15.md",
+      "evidence_sha256": "2efeac3b56c7900a060cedb5d37d0b18bb399a6848eeaba16e34e5962c1838e0"
     }
   },
   "jobs": {
@@ -786,7 +801,7 @@
   "external_requirements": {
     "musical_fixtures": {
       "status": "available_host_stopped",
-      "detail": "Approved local fixtures remain available. Isolated host stopped after R05 diagnostic tests; reload fixtures on the next performance test. No current loaded-deck state is claimed."
+      "detail": "Approved local music fixtures remain available. The idle timing run completed with empty, paused decks; the isolated host is now stopped."
     },
     "physical_controller": {
       "status": "operator_will_connect_later",
