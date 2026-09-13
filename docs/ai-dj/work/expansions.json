@@ -726,6 +726,55 @@
         "Typecheck, build and whitespace passed.",
         "Exact shared frame comparisons passed; installed Qt execution and remaining R05 endpoint scope unverified."
       ]
+    },
+    {
+      "id": "R05-HOST-DECODER",
+      "parent": "R05",
+      "blocks": [
+        "R05"
+      ],
+      "template": "SPLIT",
+      "title": "Build bounded host decoder from the verified parser",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "R04",
+        "R05-HOST-ENCODER"
+      ],
+      "owns": [
+        "ai-dj/scripts/build-host-parser.mjs",
+        "ai-dj/hosts/mixxx/fragments/wire-decode.js",
+        "ai-dj/test/host/wire-decode.test.ts"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "b52c403608c23a1ec04303f80dc9a50b6046a41b",
+      "started_at": "2026-09-13T21:27:50.858801+00:00",
+      "perform": [
+        "Generate a host-compatible parser retaining R04 framing, assembly, expiry and resource rules, using explicit checked source adaptations.",
+        "Replace BigInt, Unicode helpers and Node timer assumptions; preserve exact wide identifiers and strict UTF-8. No semantic handlers or setters."
+      ],
+      "validate": [
+        "Cross-check valid and malformed wire input with the Node parser, including full-width values, Unicode and generation/expiry behavior.",
+        "Check reproducible generation and native timer lifecycle; preserve installed Qt/native endpoint validation as required R05 work."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/R05-HOST-DECODER.md",
+      "accepted_at": "2026-09-13T21:29:12.922497+00:00",
+      "evidence_sha256": "29a353b7f95c4295566d59de39fb7fdf3c8bde3ebd1d2cf0955b0c448dceb422",
+      "checks": [
+        "Six generated-host conformance tests and all 142 integrated tests passed.",
+        "Typecheck, build, reproducible generation and whitespace checks passed.",
+        "No native endpoint or Qt execution claimed; R05 wrapper and cue transport remain required."
+      ]
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T21:26:06.885507+00:00",
+  "updated_at": "2026-09-13T21:29:12.922497+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2426,6 +2426,22 @@
         "Exact shared frame comparisons passed; installed Qt execution and remaining R05 endpoint scope unverified."
       ],
       "updated": "2026-09-13T21:26:06.885507+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "R05-HOST-DECODER",
+      "title": "Build bounded host decoder from the verified parser",
+      "stage": "setup",
+      "status": "accepted",
+      "model": "gpt-5.6-sol",
+      "evidence": "work/evidence/R05-HOST-DECODER.md",
+      "verified": true,
+      "checks": [
+        "Six generated-host conformance tests and all 142 integrated tests passed.",
+        "Typecheck, build, reproducible generation and whitespace checks passed.",
+        "No native endpoint or Qt execution claimed; R05 wrapper and cue transport remain required."
+      ],
+      "updated": "2026-09-13T21:29:12.922497+00:00",
       "dynamic": true
     }
   ],
