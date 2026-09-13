@@ -1062,9 +1062,48 @@
       "started_at": "2026-09-13T22:33:52.657465+00:00",
       "checks": [
         "Native 7-frame and 128-frame transfers reconstructed exact payloads; all 135 sent frames matched host receive logs with no overflow.",
-        "171 software tests passed; native cancellation and host outbound pacing remain open."
+        "Native mid-transfer cancellation passed with exact frame correlation and fresh-message recovery; host outbound pacing remains required."
       ],
-      "updated_at": "2026-09-13T22:35:06.018101+00:00"
+      "updated_at": "2026-09-13T22:36:18.941604+00:00"
+    },
+    {
+      "id": "R05-HOST-FRAGMENT-SENDER",
+      "parent": "R05",
+      "blocks": [
+        "R05"
+      ],
+      "template": "SPLIT",
+      "title": "Bound native host reply fragmentation and cancellation",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "R05-HOST-ENCODER",
+        "R05-NATIVE-CLOCK"
+      ],
+      "owns": [
+        "ai-dj/hosts/mixxx/fragments/wire-send.js",
+        "ai-dj/test/host/wire-send.test.ts",
+        "docs/ai-dj/work/integrations/host-fragment-sender.md"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Create a bounded native-clock scheduler for host replies using engine timers; cap queued bytes/results and avoid synchronous maximum-message bursts.",
+        "Integrate through the mapping owner so shutdown, input loss and cancellation retire pending replies; distinguish queue acceptance, send return and observed delivery."
+      ],
+      "validate": [
+        "Test maximum payload, cancellation, stale callbacks, timer cleanup and stalled-clock deadlines using actual generated mapping integration.",
+        "Verify native-to-Node maximum-message delivery with full payload comparison and no overflow; short receipt replies do not satisfy this check."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/R05-HOST-FRAGMENT-SENDER.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

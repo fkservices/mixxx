@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T22:35:06.018101+00:00",
+  "updated_at": "2026-09-13T22:36:18.941604+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2539,9 +2539,21 @@
       "verified": false,
       "checks": [
         "Native 7-frame and 128-frame transfers reconstructed exact payloads; all 135 sent frames matched host receive logs with no overflow.",
-        "171 software tests passed; native cancellation and host outbound pacing remain open."
+        "Native mid-transfer cancellation passed with exact frame correlation and fresh-message recovery; host outbound pacing remains required."
       ],
-      "updated": "2026-09-13T22:35:06.018101+00:00",
+      "updated": "2026-09-13T22:36:18.941604+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "R05-HOST-FRAGMENT-SENDER",
+      "title": "Bound native host reply fragmentation and cancellation",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
       "dynamic": true
     }
   ],

@@ -48,4 +48,18 @@ soak result. Native cancellation and outbound pacing remain required. The helper
 and host exited, and the diagnostic bootstrap was removed. The
 [partial run record](../runs/R05-FRAGMENT-SENDER.json) preserves exact evidence hashes.
 
+## Native cancellation proof
+
+A maximum-message send was cancelled 40 ms after enqueue. The capture confirms
+only its initial frames were emitted, cancellation cleared its queued bytes,
+and no additional cancelled-message frames followed. Mixxx never dispatched
+that incomplete message. After 400 ms a fresh seven-frame message completed;
+Node received only its sequence 61 receipt. All emitted frames match the native
+receive log and no overflow appeared. The helper and host exited and the fixture
+was restored. Exact partial-send counts and hashes are in the run record.
+
+R05-HOST-FRAGMENT-SENDER now explicitly tracks the remaining native reply path,
+including bounded queues, native timers, cancellation and maximum-payload proof.
+That required work blocks R05; client-side pacing cannot stand in for it.
+
 > End of autonomously AI-generated implementation notes.

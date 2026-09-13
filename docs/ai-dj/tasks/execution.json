@@ -257,9 +257,12 @@
     "R05-NATIVE-CLOCK": "accepted",
     "R12-SUSPEND-RESUME": "planned",
     "R05-NATIVE-INPUT-LOSS": "accepted",
-    "R05-FRAGMENT-SENDER": "in_review"
+    "R05-FRAGMENT-SENDER": "in_review",
+    "R05-HOST-FRAGMENT-SENDER": "planned"
   },
-  "dynamic_dependency_frontier": [],
+  "dynamic_dependency_frontier": [
+    "R05-HOST-FRAGMENT-SENDER"
+  ],
   "global_requirements": [
     "User instruction to start implementation",
     "Current integrated revision and scoped context",

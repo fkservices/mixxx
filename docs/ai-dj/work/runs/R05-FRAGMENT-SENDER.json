@@ -2,7 +2,7 @@
   "task": "R05-FRAGMENT-SENDER",
   "status": "partial",
   "sourceRevision": "81fb705",
-  "recordedAt": "2026-09-13T22:35:06.018101+00:00",
+  "recordedAt": "2026-09-13T22:36:18.941604+00:00",
   "receipts": [
     {
       "sequence": 50,
@@ -31,5 +31,28 @@
   "limitations": [
     "Client-to-host path only; receipt replies are short. Native large outbound messages are not verified.",
     "Single run per size; no timing percentile, load, cancellation or soak acceptance."
-  ]
+  ],
+  "cancellationProbe": {
+    "sourceRevision": "e97689c",
+    "status": "passed",
+    "cancelledResult": {
+      "id": "cancel-me",
+      "reason": "cancelled",
+      "attempted": 5,
+      "sent": 5,
+      "delivery": "unconfirmed"
+    },
+    "freshReplySequence": 61,
+    "exactFrameMatches": 12,
+    "noOverflow": true,
+    "helperExitCode": 0,
+    "hostStopped": true,
+    "diagnosticBootstrapRemoved": true,
+    "evidenceHashes": {
+      "runner.mjs": "90c409a128a098e8d01c1113a3b2ac75ee01826915697b862fd53b1aea5e7e32",
+      "probe.js": "04af4ac59a9da78753d3b33ffb1f2928dd927e80f614386a2c4b4e3a0cb14f1d",
+      "capture.jsonl": "ddb54a59caa078bfa497826c33c60040fbbbe9f66021c9d61882d27f90888a01",
+      "full-host.log": "7dc5c16a24627e2132c3d7e64835a1ac166c23b2fc7bd47ed34adfa91cde11d2"
+    }
+  }
 }
