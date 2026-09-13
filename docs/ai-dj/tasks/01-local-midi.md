@@ -261,9 +261,9 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** M06, M07, M08, M09. **Leases:** mapping-entry, mixxx-runtime. **Status:** planned.
+**Dependencies:** M06, M07, M08, M09. **Leases:** mapping-entry, mixxx-runtime. **Status:** accepted.
 
-**Owns:** `ai-dj/tools/build-mapping.ts`, `res/controllers/AI-DJ-scripts.js`
+**Owns:** `ai-dj/tools/build-mapping.ts`, `res/controllers/AI-DJ-scripts.js`, `ai-dj/test/host/harness.ts`, `ai-dj/test/host/assembly.test.ts`, `res/controllers/AI-DJ.midi.xml`
 
 **Scope:** One deterministic bundle; fragments are already accepted.
 

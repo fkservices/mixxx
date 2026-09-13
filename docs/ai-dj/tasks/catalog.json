@@ -1032,7 +1032,10 @@
       ],
       "owns": [
         "ai-dj/tools/build-mapping.ts",
-        "res/controllers/AI-DJ-scripts.js"
+        "res/controllers/AI-DJ-scripts.js",
+        "ai-dj/test/host/harness.ts",
+        "ai-dj/test/host/assembly.test.ts",
+        "res/controllers/AI-DJ.midi.xml"
       ],
       "locks": [
         "mapping-entry",

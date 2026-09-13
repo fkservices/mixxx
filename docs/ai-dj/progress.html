@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T20:22:32.163418+00:00",
+  "updated_at": "2026-09-13T20:25:04.480617+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -370,12 +370,16 @@
       "id": "M10",
       "title": "Assemble the initial mapping fragments",
       "stage": "01-local-midi",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/M10.md",
+      "verified": true,
+      "checks": [
+        "Fixed-order output matches trusted fragments; integrated harness covers all initial families and lifecycle cleanup.",
+        "92 tests, typecheck/build and reproducible bundle check passed.",
+        "Native Mixxx initialized four fragments and 18 subscriptions; all initial output routes logged and subset received by Node. No performance or timing claim."
+      ],
+      "updated": "2026-09-13T20:25:04.480617+00:00",
       "dynamic": false
     },
     {
@@ -2411,6 +2415,13 @@
       "caption": "Actual Mixxx loaded the AI DJ bootstrap and XML command registration. Native initialization/reload succeeded; performance fragments are not installed yet.",
       "captured_at": "2026-09-13T20:14:38.954Z",
       "evidence": "work/evidence/M05.md"
+    },
+    {
+      "path": "work/screenshots/mixxx-assembled-mapping-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Actual Mixxx loaded the four assembled control/feedback fragments. Native initialization and initial feedback were observed; playback, timing and musical tests remain pending.",
+      "captured_at": "2026-09-13T20:24:12.608Z",
+      "evidence": "work/evidence/M10.md"
     }
   ]
 }</script>

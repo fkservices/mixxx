@@ -49,6 +49,13 @@
       "caption": "Actual Mixxx loaded the AI DJ bootstrap and XML command registration. Native initialization/reload succeeded; performance fragments are not installed yet.",
       "captured_at": "2026-09-13T20:14:38.954Z",
       "evidence": "work/evidence/M05.md"
+    },
+    {
+      "path": "work/screenshots/mixxx-assembled-mapping-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Actual Mixxx loaded the four assembled control/feedback fragments. Native initialization and initial feedback were observed; playback, timing and musical tests remain pending.",
+      "captured_at": "2026-09-13T20:24:12.608Z",
+      "evidence": "work/evidence/M10.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

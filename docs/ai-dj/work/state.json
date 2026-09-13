@@ -479,6 +479,20 @@
         "90 tests, typecheck and build passed, including unknown handling, no echo, initial failure cleanup and stale callback generations.",
         "Configured refresh is not measured timing; receiver expiry and native feedback proof remain required."
       ]
+    },
+    "M10": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "4b7c06c",
+      "started_at": "2026-09-13T20:23:33.648140+00:00",
+      "accepted_at": "2026-09-13T20:25:04.480617+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M10.md",
+      "evidence_sha256": "274d21db80662f60a6137a7cc13a117abda243100b8b9c4c2e2b39b252b6653c",
+      "checks": [
+        "Fixed-order output matches trusted fragments; integrated harness covers all initial families and lifecycle cleanup.",
+        "92 tests, typecheck/build and reproducible bundle check passed.",
+        "Native Mixxx initialized four fragments and 18 subscriptions; all initial output routes logged and subset received by Node. No performance or timing claim."
+      ]
     }
   },
   "jobs": {
@@ -530,7 +544,7 @@
       "record": "~/Library/Application Support/Mixxx-AI-DJ/jobs/m02-runtime/job.json",
       "ports_pid": 73352,
       "mixxx_pid": 73988,
-      "scope": "Production virtual ports and isolated Mixxx with M05 AI DJ bootstrap enabled; diagnostic probe mapping superseded, no performance fragments",
+      "scope": "Production virtual ports with M10 assembled initial mapping and periodic feedback; no performance commands sent; diagnostic Node capture capped at 16",
       "expected_end": "Explicit verified handoff/stop or two-hour keeper lifetime from 2026-09-13T19:53:57Z; no auto-relaunch",
       "checks": [
         "Independent enumeration sees one AI DJ endpoint per direction.",

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Autonomously AI-generated fixed MIDI mapping registration. -->
 <MixxxControllerPreset mixxxVersion="2.5.6" schemaVersion="1">
-  <info><name>AI DJ</name><author>AI DJ project</author><description>Local AI DJ conventional mapping. Bootstrap only until control fragments are assembled.</description></info>
+  <info><name>AI DJ</name><author>AI DJ project</author><description>Local AI DJ initial mapping: play, volume, crossfader, cue, sync and sampled feedback. Production authority and host guards remain required.</description></info>
   <controller id="AI DJ">
     <scriptfiles><file functionprefix="AIDJ" filename="AI-DJ-scripts.js"/></scriptfiles>
     <controls>

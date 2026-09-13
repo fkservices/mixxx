@@ -10,7 +10,7 @@ export interface MappingLifecycle {
   input(channel: number, control: number, value: number, status: number, group: string): void;
   register(name: string, module: { init: Callback; shutdown: Callback; input: (...args: unknown[]) => boolean }): void;
 }
-export function createHostHarness(fragments: readonly string[] = []) {
+export function createHostHarness(fragments: readonly string[] = [], assembled = false) {
   const values = new Map<string, number>();
   const parameters = new Map<string, number>();
   const connections = new Set<{ readonly isConnected: boolean; group: string; key: string; callback: Callback; disconnect(): void; trigger(): void }>();
@@ -40,7 +40,13 @@ export function createHostHarness(fragments: readonly string[] = []) {
     stopTimer(id: number) { timers.delete(id); },
   };
   const context = vm.createContext({ engine, midi: { sendShortMsg: (...packet: number[]) => packets.push(packet) }, console: { log: (...v: unknown[]) => logs.push(v.join(" ")) } });
-  const source = readFileSync(new URL("../../../res/controllers/AI-DJ-scripts.js", import.meta.url), "utf8");
+  let source = readFileSync(new URL("../../../res/controllers/AI-DJ-scripts.js", import.meta.url), "utf8");
+  if (!assembled) {
+    const begin = source.indexOf("// AI-DJ-FRAGMENTS-BEGIN");
+    const end = source.indexOf("// AI-DJ-FRAGMENTS-END");
+    if (begin < 0 || end < begin) throw new Error("Missing mapping assembly markers");
+    source = source.slice(0, begin) + source.slice(end);
+  }
   vm.runInContext(source, context, { timeout: 1000, filename: "AI-DJ-scripts.js" });
   for (const [i, fragment] of fragments.entries()) vm.runInContext(fragment, context, { timeout: 1000, filename: `fragment-${i}.js` });
   const mapping = context.AIDJ as MappingLifecycle;
