@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T21:30:24.283238+00:00",
+  "updated_at": "2026-09-13T21:36:58.365939+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2430,12 +2430,16 @@
       "id": "R05-ENDPOINT-INTEGRATE",
       "title": "Integrate extended endpoint into reproducible mapping",
       "stage": "setup",
-      "status": "planned",
+      "status": "in_review",
       "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
-      "checks": [],
-      "updated": null,
+      "checks": [
+        "Reproducible seven-fragment assembly, XML SysEx hook and explicit one-initialization configuration implemented.",
+        "Five assembly tests and all 154 integrated tests, typecheck/build and both generation checks passed.",
+        "Native JavaScript/clock verification and installed mapping activation remain unverified; integration not accepted."
+      ],
+      "updated": "2026-09-13T21:36:58.365939+00:00",
       "dynamic": true
     },
     {

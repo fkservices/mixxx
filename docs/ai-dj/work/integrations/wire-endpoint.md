@@ -46,4 +46,30 @@ entry, preserve lifecycle cleanup and keep diagnostic opt-in explicit. Verify
 the clock and installed JavaScript capabilities in the isolated host, then run
 the existing golden frames and malformed-input fixtures over actual MIDI.
 
+## Implemented assembly and activation boundary
+
+The reproducible bundle now contains seven source fragments: four conventional
+modules plus the encoder, decoder and endpoint helper. XML adds one scripted
+SysEx route; all eleven conventional command registrations remain. The bootstrap
+exposes `configureWire`, `incomingData`, `sendWire` and `wireStatus`.
+
+Configuration is explicit, applies to one initialization and is consumed. Reload
+without a fresh configuration leaves the endpoint disabled. Shutdown retires its
+parser and input closure. The caller supplies a named clock and registered
+validators/handlers. Status labels clock provenance caller-supplied/unverified;
+declaring a clock kind is not proof that its source has been verified.
+
+A separately labeled diagnostic-wall mode requires diagnostic opt-in, accepts
+only diagnostic handler opcodes and refuses semantic output. It can support
+bounded framing investigations without pretending Date.now satisfies production
+clock requirements. Production clock verification remains open. No wall clock
+or performance handler is automatically installed by this change.
+
+Three new integration tests exercise the actual assembled bundle: opt-in
+round-trip through Node decoding, conventional coexistence, timer cleanup,
+retired closures, disabled reload, diagnostic clock restrictions and the XML
+route. Five assembly tests and all 154 integrated tests passed. Typecheck, build,
+host-parser regeneration and mapping regeneration checks passed. These are VM
+fixtures; the updated bundle has not yet been installed or tested in native Mixxx.
+
 > End of autonomously AI-generated investigation.

@@ -251,12 +251,10 @@
     "M13-CUE-NATIVE": "planned",
     "R05-HOST-ENCODER": "accepted",
     "R05-HOST-DECODER": "accepted",
-    "R05-ENDPOINT-INTEGRATE": "planned",
+    "R05-ENDPOINT-INTEGRATE": "in_review",
     "R05-ENDPOINT-NATIVE": "planned"
   },
-  "dynamic_dependency_frontier": [
-    "R05-ENDPOINT-INTEGRATE"
-  ],
+  "dynamic_dependency_frontier": [],
   "global_requirements": [
     "User instruction to start implementation",
     "Current integrated revision and scoped context",

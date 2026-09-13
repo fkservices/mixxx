@@ -810,7 +810,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "in_review",
       "perform": [
         "Verify installed-version native SysEx entry hook, data shape and usable clock source before wiring the endpoint factory.",
         "Integrate codec and wrapper sources reproducibly, preserve conventional MIDI routing, lifecycle and default diagnostic/authority restrictions."
@@ -819,7 +819,15 @@
         "Assert reproducible assembly and lifecycle closure, including parser timer disposal and stale callbacks.",
         "Require no conventional routing regression and no unvalidated handler installation."
       ],
-      "evidence": "docs/ai-dj/work/evidence/R05-ENDPOINT-INTEGRATE.md"
+      "evidence": "docs/ai-dj/work/evidence/R05-ENDPOINT-INTEGRATE.md",
+      "executor": "coordinator",
+      "source_revision": "7149cf9",
+      "started_at": "2026-09-13T21:36:58.365939+00:00",
+      "checks": [
+        "Reproducible seven-fragment assembly, XML SysEx hook and explicit one-initialization configuration implemented.",
+        "Five assembly tests and all 154 integrated tests, typecheck/build and both generation checks passed.",
+        "Native JavaScript/clock verification and installed mapping activation remain unverified; integration not accepted."
+      ]
     },
     {
       "id": "R05-ENDPOINT-NATIVE",
