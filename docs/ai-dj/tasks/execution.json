@@ -249,7 +249,7 @@
     "R08-PAGED-VALIDATION": "planned",
     "M13-MANUAL-CUE-VISIBILITY": "split",
     "M13-CUE-OBSERVER": "accepted",
-    "M13-CUE-TRANSPORT": "planned",
+    "M13-CUE-TRANSPORT": "running",
     "M13-CUE-NATIVE": "planned",
     "R05-HOST-ENCODER": "accepted",
     "R05-HOST-DECODER": "accepted",
@@ -262,9 +262,7 @@
     "R05-HOST-FRAGMENT-SENDER": "accepted",
     "R05-NATIVE-SEND-TIMER": "accepted"
   },
-  "dynamic_dependency_frontier": [
-    "M13-CUE-TRANSPORT"
-  ],
+  "dynamic_dependency_frontier": [],
   "global_requirements": [
     "User instruction to start implementation",
     "Current integrated revision and scoped context",

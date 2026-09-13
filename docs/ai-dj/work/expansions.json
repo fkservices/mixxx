@@ -631,7 +631,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "running",
       "perform": [
         "Integrate diagnostic-opt-in closed JSON observation records through existing R01/R05 diagnostic text framing and closed receiver.",
         "Update assembled mapping through its reproducible builder and required exact-path INTEGRATE continuation if ownership is shared; preserve conventional command semantics and production guards."
@@ -640,7 +640,13 @@
         "Test precise numeric round trips, bounded invalid-record rejection, explicit loss and generation/context distinction.",
         "Verify only host-produced observations reach diagnostic capture; no fixture injection, actor claim or production authoritative state."
       ],
-      "evidence": "docs/ai-dj/work/evidence/M13-CUE-TRANSPORT.md"
+      "evidence": "docs/ai-dj/work/evidence/M13-CUE-TRANSPORT.md",
+      "updated_at": "2026-09-13T23:04:39.430233+00:00",
+      "checks": [
+        "Diagnostic cue receiver implemented: exact numeric values, separate host and receipt clocks, explicit wire and observer gaps, and strict context validation.",
+        "All 183 software tests passed; TypeScript typecheck and build passed. Fixture packets are software evidence only.",
+        "Still required: host sender integration and host-produced capture. Native manual cue validation remains a separate pending task."
+      ]
     },
     {
       "id": "M13-CUE-NATIVE",

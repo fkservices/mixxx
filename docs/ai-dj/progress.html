@@ -26,7 +26,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T23:00:11.179195+00:00",
+  "updated_at": "2026-09-13T23:04:39.430233+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2405,12 +2405,16 @@
       "id": "M13-CUE-TRANSPORT",
       "title": "Carry cue observations through the extended MIDI endpoint",
       "stage": "setup",
-      "status": "planned",
+      "status": "running",
       "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
-      "checks": [],
-      "updated": null,
+      "checks": [
+        "Diagnostic cue receiver implemented: exact numeric values, separate host and receipt clocks, explicit wire and observer gaps, and strict context validation.",
+        "All 183 software tests passed; TypeScript typecheck and build passed. Fixture packets are software evidence only.",
+        "Still required: host sender integration and host-produced capture. Native manual cue validation remains a separate pending task."
+      ],
+      "updated": "2026-09-13T23:04:39.430233+00:00",
       "dynamic": true
     },
     {
