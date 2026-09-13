@@ -185,7 +185,7 @@
       "monitor_status": "terminated_after_handoff"
     },
     "F08": {
-      "status": "split",
+      "status": "accepted",
       "worker": "/root/f08_validators",
       "model": "gpt-5.6-terra",
       "reasoning_effort": "high",
@@ -194,7 +194,7 @@
       "interrupt_by": "2026-09-13T19:37:04.592Z",
       "deadline": "2026-09-13T19:40:04.592Z",
       "monitor_cell": "221",
-      "source_revision": "0ef0499db28c6c86bb7c75e390665da831f8c20c",
+      "source_revision": "2301c95",
       "owned_paths": [
         "ai-dj/core/validate.ts",
         "ai-dj/test/core/validate.test.ts",
@@ -205,7 +205,17 @@
         "F08-STATE-VALIDATION"
       ],
       "review_finding": "Root review found omitted F06 generation/lease checks and incomplete F07 state admission. Sequential children retain full requirements; original worker finishes F06 subset within original deadline.",
-      "monitor_status": "terminated_after_all_handoffs"
+      "monitor_status": "terminated_after_all_handoffs",
+      "accepted_at": "2026-09-13T19:40:54.723990+00:00",
+      "integrator": "/root",
+      "evidence": "docs/ai-dj/work/evidence/F08.md",
+      "evidence_sha256": "7808abbefeb2dcc193004e1dd3718bdb8b5f665d0048981081d05f66c4da376e",
+      "checks": [
+        "Both required action and state validation children accepted after coordinator review.",
+        "Independent integrated npm test: 39 passed; typecheck and build exited 0.",
+        "Exact identities/presence/full projection, immutable stale history and bounded non-executable input verified with synthetic fixtures.",
+        "Sync extension and actual host reconciliation remain separately required."
+      ]
     },
     "F09": {
       "status": "accepted",
@@ -313,7 +323,7 @@
         "Coordinator reran all four focused port discovery tests; passed.",
         "One real enumeration found zero endpoints before F11 setup; no open/send and both handles destroyed."
       ],
-      "monitor_status": "worker_finished_shared_monitor_still_covers_state_validation"
+      "monitor_status": "terminated_after_all_handoffs"
     },
     "F11": {
       "status": "accepted",
@@ -380,7 +390,6 @@
     }
   },
   "resource_leases": {
-    "core-validation": "F08-STATE-VALIDATION",
     "mixxx-runtime": "F11-fixture-job"
   },
   "external_requirements": {

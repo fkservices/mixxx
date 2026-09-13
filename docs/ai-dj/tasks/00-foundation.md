@@ -206,7 +206,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F07, F03. **Leases:** Exact path reservation. **Status:** split.
+**Dependencies:** F07, F03. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/core/validate.ts`, `ai-dj/test/core/validate.test.ts`
 

@@ -40,7 +40,7 @@
 
 **Owns:** `ai-dj/midi/connection.ts`, `ai-dj/test/midi/connection.test.ts`
 
-**Scope:** Open/close two routes with explicit filter configuration.
+**Scope:** Own the selected native virtual command-source/feedback-destination pair and close both with explicit filter configuration.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
@@ -48,8 +48,9 @@
 
 **Perform:**
 
-1. Open command output and feedback input; configure SysEx filter deliberately.
+1. Implement the native virtual-endpoint topology in work/contracts/ports.md: Output creates the command source and Input creates the feedback destination, with the pairable logical name AI DJ. Configure SysEx filtering deliberately.
 2. Close partially opened resources on errors and expose transport loss to caller.
+3. Coordinate takeover from the private F11 helper under the runtime lease; fail on name collisions and verify Mixxx pairs the replacement endpoints. Do not open the helper feedback destination as an outbound command route.
 
 **Validate:**
 

@@ -2,8 +2,8 @@
 // It is a data-admission boundary; it neither sends actions nor reconciles state.
 
 import { ACTION_LIMITS, type ActionOutcome, type MomentaryReleaseObligation, type SemanticAction } from "./actions.ts";
-import type { CapabilityReference } from "./capabilities.ts";
-import type { ObservedStateMessage } from "./state.ts";
+import type { CapabilityContext, CapabilityInstance, CapabilityReadSemantics, CapabilityReference } from "./capabilities.ts";
+import type { ObservedStateMessage, StateSnapshot } from "./state.ts";
 
 export const VALIDATION_LIMITS = {
   maxTransportBytes: 65_536,
@@ -25,34 +25,38 @@ export type ValidationResult<T> =
   | { readonly ok: true; readonly value: T }
   | { readonly ok: false; readonly errors: readonly ValidationError[] };
 
-/** Rules resolved from the active, immutable capability catalog. */
+/** A trusted catalog projection, supplied as data, never a callable resolver. */
+export type StatePresence =
+  | { readonly status: "present" | "absent"; readonly evidenceIds: readonly string[] }
+  | { readonly status: "unknown"; readonly reason: string };
+
 export interface CapabilityReferenceRules {
-  readonly value:
-    | { readonly kind: "boolean" }
-    | { readonly kind: "number"; readonly unit: string; readonly minimum: number; readonly maximum: number }
-    | { readonly kind: "enum"; readonly values: readonly string[] }
-    | { readonly kind: "track-identity" }
-    | { readonly kind: "occurrence-identity" };
-  readonly instanceIds?: readonly string[];
-  readonly maxAgeMs: number;
+  readonly target: CapabilityReference;
+  readonly read: CapabilityReadSemantics;
+  readonly availability: StatePresence;
+  readonly applicableDeck: { readonly deckId: string; readonly deckGeneration: number } | null;
+}
+
+export interface StateCatalogReference extends CapabilityContext {
+  readonly schemaVersion: 1;
+  readonly catalogId: string;
+  readonly instances: readonly CapabilityInstance[];
+  readonly entries: readonly CapabilityReferenceRules[];
+  readonly decks: readonly {
+    readonly deckId: string;
+    readonly deckGeneration: number;
+    readonly availability: StatePresence;
+    readonly maxAgeMs: number;
+  }[];
+  readonly retainedEvidenceIds: readonly string[];
 }
 
 export interface StateValidationReferences {
-  /** Must resolve the exact canonical target in the message's profile/revision. */
-  readonly resolveCapability: (target: CapabilityReference) => CapabilityReferenceRules | undefined;
-  /** A caller-owned immutable baseline. This validator reads it but never applies a delta. */
-  readonly baseline?: {
-    readonly snapshotId: string;
-    readonly stateRevision: number;
-    readonly sequence: number;
-    readonly sessionId: string;
-    readonly hostInstanceId: string;
-    readonly connectionGeneration: number;
-    readonly capabilityRevision: number;
-    readonly clockId: string;
-    readonly streamId: string;
-    readonly streamGeneration: number;
-  };
+  readonly catalog: StateCatalogReference;
+  /** Complete last accepted projection, with its latest sequence/message/revision. */
+  readonly baseline?: StateSnapshot;
+  /** Required when a replacement snapshot moves to a different catalog context. */
+  readonly baselineCatalog?: StateCatalogReference;
 }
 
 class Invalid extends Error {
@@ -106,6 +110,7 @@ function preflight(value: unknown, path = "$", depth = 0, seen = new Set<object>
   }
   seen.add(value);
   if (Array.isArray(value)) {
+    if (Object.getPrototypeOf(value) !== Array.prototype) issue(path, "non-json", "Arrays must use the ordinary JSON array prototype");
     if (value.length > VALIDATION_LIMITS.maxStateEntries) issue(path, "array-too-large", "Array exceeds the collection limit");
     for (const key of Object.keys(value)) if (!/^(0|[1-9][0-9]*)$/.test(key)) issue(`${path}.${key}`, "non-json", "Arrays cannot carry named properties");
     for (let index = 0; index < value.length; index += 1) {
@@ -132,16 +137,34 @@ function external(value: unknown): unknown {
     let nesting = 0;
     let quoted = false;
     let escaped = false;
-    for (const character of value) {
+    let stringStart = 0;
+    const objectKeys: Array<Set<string> | null> = [];
+    for (let index = 0; index < value.length; index += 1) {
+      const character = value[index];
       if (quoted) {
         if (escaped) escaped = false;
         else if (character === "\\") escaped = true;
-        else if (character === '"') quoted = false;
-      } else if (character === '"') quoted = true;
+        else if (character === '"') {
+          quoted = false;
+          let next = index + 1;
+          while (next < value.length && /\s/.test(value[next]!)) next += 1;
+          const keys = objectKeys.at(-1);
+          if (value[next] === ":" && keys) {
+            let key: unknown;
+            try { key = JSON.parse(value.slice(stringStart, index + 1)); }
+            catch { issue("$", "invalid-json", "Input has an invalid JSON property name"); }
+            if (typeof key !== "string") issue("$", "invalid-json", "Expected a string property name");
+            if (keys.has(key)) issue("$", "duplicate-json-key", "JSON object keys must be unique after unescaping");
+            keys.add(key);
+            if (keys.size > VALIDATION_LIMITS.maxObjectKeys) issue("$", "too-many-keys", "JSON record exceeds its key limit");
+          }
+        }
+      } else if (character === '"') { quoted = true; stringStart = index; }
       else if (character === "{" || character === "[") {
         nesting += 1;
+        objectKeys.push(character === "{" ? new Set<string>() : null);
         if (nesting > VALIDATION_LIMITS.maxDepth) issue("$", "too-deep", "JSON nesting exceeds the pre-parse limit");
-      } else if (character === "}" || character === "]") nesting -= 1;
+      } else if (character === "}" || character === "]") { nesting -= 1; objectKeys.pop(); }
     }
     try {
       const parsed: unknown = JSON.parse(value);
@@ -161,6 +184,25 @@ function external(value: unknown): unknown {
   }
   if (bytes(serialized) > VALIDATION_LIMITS.maxTransportBytes) issue("$", "payload-too-large", "Transport payload exceeds 65536 UTF-8 bytes");
   return value;
+}
+
+function referenceBundle(value: unknown): JsonObject {
+  if (!value || typeof value !== "object" || Array.isArray(value)) issue("$references", "expected-object", "Expected a reference bundle");
+  const prototype = Object.getPrototypeOf(value);
+  if (prototype !== Object.prototype && prototype !== null) issue("$references", "not-plain-object", "Reference bundle must be a plain object");
+  const allowed = new Set(["catalog", "baseline", "baselineCatalog"]);
+  const keys = Reflect.ownKeys(value);
+  if (keys.length > allowed.size) issue("$references", "too-many-keys", "Reference bundle has at most three components");
+  const result: JsonObject = {};
+  for (const key of keys) {
+    if (typeof key !== "string") issue("$references", "non-json", "Reference bundle cannot have symbol keys");
+    const descriptor = Object.getOwnPropertyDescriptor(value, key);
+    if (!descriptor || !("value" in descriptor) || !descriptor.enumerable) issue("$references", "non-json", "Reference bundle cannot have accessors or hidden fields");
+    if (!allowed.has(key)) issue(`$references.${key}`, "unknown-field", "Unknown reference component");
+    result[key] = freezeCopy(external(descriptor.value));
+  }
+  if (!Object.hasOwn(result, "catalog")) issue("$references.catalog", "missing-field", "Current catalog is required");
+  return Object.freeze(result);
 }
 
 function object(value: unknown, path: string, fields: readonly string[]): JsonObject {
@@ -379,124 +421,444 @@ export function validateSemanticAction(input: unknown): ValidationResult<Semanti
   } catch (error) { return rejected(error); }
 }
 
-function context(value: JsonObject, path: string): void {
-  for (const key of ["sessionId", "hostInstanceId"] as const) id(value[key], `${path}.${key}`);
-  for (const key of ["connectionGeneration", "capabilityRevision", "streamGeneration"] as const) safeInteger(value[key], `${path}.${key}`);
-  id(value.clockId, `${path}.clockId`); id(value.streamId, `${path}.streamId`);
-  const p = object(value.profile, `${path}.profile`, ["profileId", "profileRevision", "host", "version", "buildId", "platform", "skinId", "skinRevision", "configurationId"]);
-  for (const key of ["profileId", "buildId", "skinId", "skinRevision", "configurationId"] as const) id(p[key], `${path}.profile.${key}`);
-  safeInteger(p.profileRevision, `${path}.profile.profileRevision`); literal(p.host, "mixxx", `${path}.profile.host`); string(p.version, `${path}.profile.version`); oneOf(p.platform, new Set(["macos", "windows", "linux"]), `${path}.profile.platform`);
+const profileFields = ["profileId", "profileRevision", "host", "version", "buildId", "platform", "skinId", "skinRevision", "configurationId"];
+const catalogContextFields = ["sessionId", "hostInstanceId", "connectionGeneration", "capabilityRevision", "profile"];
+const stateContextFields = [...catalogContextFields, "clockId", "streamId", "streamGeneration"];
+const envelopeFields = [...stateContextFields, "schemaVersion", "messageId", "sequence", "producedAtMs", "stateRevision", "kind", "snapshotId"];
+const units = new Set(["normalized", "beats", "seconds", "bpm", "decibels", "ratio"]);
+
+function canonical(value: unknown): string {
+  if (Array.isArray(value)) return `[${value.map(canonical).join(",")}]`;
+  if (value && typeof value === "object") return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonical((value as JsonObject)[key])}`).join(",")}}`;
+  return JSON.stringify(value);
 }
 
-function evidence(value: unknown, path: string, state: JsonObject): { observedAtMs: number; validUntilMs: number } {
-  const r = object(value, path, ["observationId", "hostInstanceId", "connectionGeneration", "stateRevision", "clockId", "observedAtMs", "receivedAtMs", "validUntilMs", "source", "attribution"]);
-  for (const key of ["observationId", "hostInstanceId", "clockId"] as const) id(r[key], `${path}.${key}`);
-  safeInteger(r.connectionGeneration, `${path}.connectionGeneration`); const revision = safeInteger(r.stateRevision, `${path}.stateRevision`); if (revision > Number(state.stateRevision)) issue(`${path}.stateRevision`, "future-revision", "Evidence revision cannot exceed message revision");
-  if (r.hostInstanceId !== state.hostInstanceId || r.connectionGeneration !== state.connectionGeneration || r.clockId !== state.clockId) issue(path, "context-mismatch", "Current observation evidence must match state context");
-  const observed = time(r.observedAtMs, `${path}.observedAtMs`); const received = time(r.receivedAtMs, `${path}.receivedAtMs`); const valid = time(r.validUntilMs, `${path}.validUntilMs`); if (observed > received || received > Number(state.producedAtMs) || observed >= valid) issue(path, "invalid-evidence-times", "Evidence timestamps are inconsistent");
-  if (r.source === null || typeof r.source !== "object" || Array.isArray(r.source)) issue(`${path}.source`, "expected-object", "Expected evidence source");
-  if ((r.source as JsonObject).kind === "host-reconciled") { const source = object(r.source, `${path}.source`, ["kind", "eventIds"]); nonemptyIds(source.eventIds, `${path}.source.eventIds`); }
-  else { const source = object(r.source, `${path}.source`, ["kind", "eventId"]); oneOf(source.kind, new Set(["host-read", "host-feedback"]), `${path}.source.kind`); id(source.eventId, `${path}.source.eventId`); }
-  attribution(r.attribution, `${path}.attribution`);
-  return { observedAtMs: observed, validUntilMs: valid };
+function context(value: JsonObject, path: string, stream = true): void {
+  for (const key of ["sessionId", "hostInstanceId"]) id(value[key], `${path}.${key}`);
+  for (const key of ["connectionGeneration", "capabilityRevision"]) safeInteger(value[key], `${path}.${key}`);
+  if (stream) {
+    id(value.clockId, `${path}.clockId`); id(value.streamId, `${path}.streamId`);
+    safeInteger(value.streamGeneration, `${path}.streamGeneration`);
+  }
+  const p = object(value.profile, `${path}.profile`, profileFields);
+  for (const key of ["profileId", "buildId", "skinId", "skinRevision", "configurationId"]) id(p[key], `${path}.profile.${key}`);
+  safeInteger(p.profileRevision, `${path}.profile.profileRevision`);
+  literal(p.host, "mixxx", `${path}.profile.host`);
+  if (!string(p.version, `${path}.profile.version`).trim()) issue(path, "invalid-profile", "Host version must be nonempty");
+  oneOf(p.platform, new Set(["macos", "windows", "linux"]), `${path}.profile.platform`);
 }
 
-function observedValue(value: unknown, path: string): { kind: string; unit?: string } {
-  if (value === null || typeof value !== "object" || Array.isArray(value)) issue(path, "expected-object", "Expected observed value");
-  const kind = (value as JsonObject).kind;
-  if (kind === "boolean") { const r = object(value, path, ["kind", "value"]); bool(r.value, `${path}.value`); return { kind }; }
-  if (kind === "number") { const r = object(value, path, ["kind", "value", "unit"]); number(r.value, `${path}.value`); const unit = oneOf(r.unit, new Set(["normalized", "beats", "seconds", "bpm", "decibels", "ratio"]), `${path}.unit`); return { kind, unit }; }
-  if (kind === "enum") { const r = object(value, path, ["kind", "value"]); id(r.value, `${path}.value`); return { kind }; }
-  if (kind === "track-identity") { const r = object(value, path, ["kind", "value"]); track(r.value, `${path}.value`); return { kind }; }
-  if (kind === "occurrence-identity") { const r = object(value, path, ["kind", "value"]); occurrence(r.value, `${path}.value`); return { kind }; }
-  issue(`${path}.kind`, "invalid-value-kind", "Unknown observed value kind");
+function sameStreamEpoch(a: JsonObject, b: JsonObject): boolean {
+  return ["sessionId", "hostInstanceId", "connectionGeneration", "clockId", "streamId", "streamGeneration"].every((key) => a[key] === b[key]);
 }
 
-function observation(value: unknown, path: string, state: JsonObject, rules?: CapabilityReferenceRules): void {
-  if (value === null || typeof value !== "object" || Array.isArray(value)) issue(path, "expected-object", "Expected observation");
-  const status = (value as JsonObject).status;
-  if (status === "observed") { const r = object(value, path, ["status", "value", "evidence"]); const actual = observedValue(r.value, `${path}.value`); const times = evidence(r.evidence, `${path}.evidence`, state); if (rules) { validateValueRules(r.value, actual, rules, `${path}.value`); if (!Number.isFinite(rules.maxAgeMs) || rules.maxAgeMs <= 0 || times.validUntilMs - times.observedAtMs > rules.maxAgeMs) issue(`${path}.evidence.validUntilMs`, "catalog-age-mismatch", "Observation lifetime exceeds the catalog maximum age"); } return; }
-  if (status === "stale") { const r = object(value, path, ["status", "lastKnown", "reason"]); const last = object(r.lastKnown, `${path}.lastKnown`, ["value", "evidence"]); const actual = observedValue(last.value, `${path}.lastKnown.value`); const times = evidence(last.evidence, `${path}.lastKnown.evidence`, state); if (rules) { validateValueRules(last.value, actual, rules, `${path}.lastKnown.value`); if (!Number.isFinite(rules.maxAgeMs) || rules.maxAgeMs <= 0 || times.validUntilMs - times.observedAtMs > rules.maxAgeMs) issue(`${path}.lastKnown.evidence.validUntilMs`, "catalog-age-mismatch", "Observation lifetime exceeds the catalog maximum age"); } oneOf(r.reason, stateReasons, `${path}.reason`); return; }
-  if (status === "missing") { const r = object(value, path, ["status", "reason", "presenceEvidenceIds"]); oneOf(r.reason, new Set(["control-absent", "instance-absent"]), `${path}.reason`); nonemptyIds(r.presenceEvidenceIds, `${path}.presenceEvidenceIds`); return; }
-  if (status === "unknown") { const r = object(value, path, ["status", "reason"]); oneOf(r.reason, unknownReasons, `${path}.reason`); return; }
-  if (status === "uncertain") { const r = object(value, path, ["status", "reason", "evidenceIds"]); oneOf(r.reason, uncertainReasons, `${path}.reason`); nonemptyIds(r.evidenceIds, `${path}.evidenceIds`); return; }
-  issue(`${path}.status`, "invalid-observation", "Unknown observation status");
+function sameContext(a: JsonObject, b: JsonObject, stream = true): boolean {
+  return (stream ? stateContextFields : catalogContextFields).every((key) => canonical(a[key]) === canonical(b[key]));
 }
 
-function validateValueRules(raw: unknown, actual: { kind: string; unit?: string }, rules: CapabilityReferenceRules, path: string): void {
-  if (actual.kind !== rules.value.kind) issue(path, "catalog-value-kind-mismatch", "Reading does not match the resolved capability value kind");
-  if (rules.value.kind === "number") { if (actual.unit !== rules.value.unit) issue(`${path}.unit`, "catalog-unit-mismatch", "Reading unit does not match the catalog"); const v = Number((raw as JsonObject).value); if (v < rules.value.minimum || v > rules.value.maximum) issue(`${path}.value`, "catalog-range-mismatch", "Reading is outside the catalog range"); }
-  if (rules.value.kind === "enum" && !rules.value.values.includes(String((raw as JsonObject).value))) issue(`${path}.value`, "catalog-enum-mismatch", "Reading is not a catalog enum value");
+function capabilityId(value: unknown, path: string): string {
+  const result = id(value, path);
+  if (!result.startsWith("mixxx.") || result.length === 6) issue(path, "invalid-capability-id", "Capability requires a nonempty mixxx. suffix");
+  return result;
+}
+
+function instance(value: unknown, path: string): JsonObject {
+  const i = object(value, path, ["instanceId", "generation", "kind", "parent", "definitionId"]);
+  id(i.instanceId, `${path}.instanceId`); safeInteger(i.generation, `${path}.generation`);
+  oneOf(i.kind, featureKinds, `${path}.kind`); id(i.definitionId, `${path}.definitionId`);
+  if (i.parent !== null) {
+    const p = object(i.parent, `${path}.parent`, ["instanceId", "generation"]);
+    id(p.instanceId, `${path}.parent.instanceId`); safeInteger(p.generation, `${path}.parent.generation`);
+  }
+  return i;
 }
 
 function target(value: unknown, path: string): CapabilityReference {
   const r = object(value, path, ["capabilityId", "instance"]);
-  const capabilityId = id(r.capabilityId, `${path}.capabilityId`);
-  if (!capabilityId.startsWith("mixxx.")) issue(`${path}.capabilityId`, "invalid-capability-id", "Capability IDs must start with mixxx.");
-  if (r.instance === null) return { capabilityId: capabilityId as `mixxx.${string}`, instance: null };
-  const i = object(r.instance, `${path}.instance`, ["instanceId", "generation", "kind", "parent", "definitionId"]);
-  id(i.instanceId, `${path}.instance.instanceId`); safeInteger(i.generation, `${path}.instance.generation`); oneOf(i.kind, featureKinds, `${path}.instance.kind`); id(i.definitionId, `${path}.instance.definitionId`);
-  if (i.parent !== null) { const p = object(i.parent, `${path}.instance.parent`, ["instanceId", "generation"]); id(p.instanceId, `${path}.instance.parent.instanceId`); safeInteger(p.generation, `${path}.instance.parent.generation`); }
+  capabilityId(r.capabilityId, `${path}.capabilityId`);
+  if (r.instance !== null) instance(r.instance, `${path}.instance`);
   return r as unknown as CapabilityReference;
 }
 
-function reading(value: unknown, path: string, state: JsonObject, refs: StateValidationReferences | undefined): void {
-  const r = object(value, path, ["target", "deck", "observation"]); const cap = target(r.target, `${path}.target`); const rules = refs?.resolveCapability(cap);
-  if (!rules) issue(`${path}.target`, "unresolved-capability-reference", "State reading requires an explicit current catalog resolution");
-  if (r.deck !== null) {
-    if ((r.deck as JsonObject).kind === "known") { const d = object(r.deck, `${path}.deck`, ["kind", "precondition"]); const pre = deckPrecondition(d.precondition, `${path}.deck.precondition`); if (pre.binding !== "loaded" && (r.observation as JsonObject).status === "observed") issue(`${path}.deck`, "invalid-deck-binding", "Observed deck reading requires a known loaded binding"); }
-    else { const d = object(r.deck, `${path}.deck`, ["kind", "deckId", "deckGeneration"]); literal(d.kind, "unknown", `${path}.deck.kind`); id(d.deckId, `${path}.deck.deckId`); safeInteger(d.deckGeneration, `${path}.deck.deckGeneration`); if ((r.observation as JsonObject).status === "observed") issue(`${path}.observation`, "unknown-deck-observed", "Unknown deck context cannot carry an observed value"); }
+function targetKey(value: CapabilityReference): string {
+  return canonical([value.capabilityId, value.instance?.instanceId ?? null]);
+}
+
+function deckRef(value: unknown, path: string): JsonObject {
+  const r = object(value, path, ["deckId", "deckGeneration"]);
+  id(r.deckId, `${path}.deckId`); safeInteger(r.deckGeneration, `${path}.deckGeneration`);
+  return r;
+}
+
+function positiveAge(value: unknown, path: string): number {
+  const result = time(value, path);
+  if (result === 0) issue(path, "invalid-max-age", "Maximum age must be positive");
+  return result;
+}
+
+function valueShape(value: unknown, path: string): void {
+  const kind = (value as JsonObject)?.kind;
+  if (kind === "number") {
+    const r = object(value, path, ["kind", "unit", "minimum", "maximum", "step", "tolerance", "neutralValue", "mappingId"]);
+    oneOf(r.unit, units, `${path}.unit`); id(r.mappingId, `${path}.mappingId`);
+    const min = number(r.minimum, `${path}.minimum`), max = number(r.maximum, `${path}.maximum`);
+    if (min > max || number(r.tolerance, `${path}.tolerance`) < 0) issue(path, "invalid-value-range", "Range and tolerance are inconsistent");
+    if (r.unit === "normalized" && (min < 0 || max > 1)) issue(path, "invalid-value-range", "Normalized bounds must be in [0,1]");
+    if (r.step !== null && number(r.step, `${path}.step`) <= 0) issue(path, "invalid-step", "Quantization step must be positive");
+    if (r.neutralValue !== null) { const neutral = number(r.neutralValue, `${path}.neutralValue`); if (neutral < min || neutral > max) issue(path, "invalid-neutral", "Neutral must be in range"); }
+  } else if (kind === "enum") {
+    const r = object(value, path, ["kind", "values"]); nonemptyIds(r.values, `${path}.values`, VALIDATION_LIMITS.maxStateEntries);
+  } else {
+    const r = object(value, path, ["kind"]);
+    oneOf(r.kind, new Set(["boolean", "track-identity", "occurrence-identity"]), `${path}.kind`);
   }
-  observation(r.observation, `${path}.observation`, state, rules);
 }
 
-function deckObservation(value: unknown, path: string, state: JsonObject): { deckId: string; deckGeneration: number } {
-  const r = object(value, path, ["deckId", "deckGeneration", "current"]); const deckId = id(r.deckId, `${path}.deckId`); const generation = safeInteger(r.deckGeneration, `${path}.deckGeneration`); observation(r.current, `${path}.current`, state);
-  if ((r.current as JsonObject).status === "observed") { const pre = ((r.current as JsonObject).value) as JsonObject; if (pre.deckId !== deckId || pre.deckGeneration !== generation) issue(`${path}.current.value`, "deck-context-mismatch", "Observed deck precondition must match its enclosing deck"); deckPrecondition(pre, `${path}.current.value`); }
-  return { deckId, deckGeneration: generation };
+function readRules(value: unknown, path: string): void {
+  const kind = (value as JsonObject)?.kind;
+  if (kind !== "state") {
+    const r = object(value, path, ["kind", "reason"]);
+    oneOf(r.kind, new Set(["unresolved", "not-readable"]), `${path}.kind`);
+    if (!string(r.reason, `${path}.reason`).trim()) issue(path, "empty-reason", "A reason is required");
+    return;
+  }
+  const r = object(value, path, ["kind", "value", "delivery", "maxAgeMs", "existence"]);
+  valueShape(r.value, `${path}.value`);
+  oneOf(r.delivery, new Set(["poll", "change-events", "poll-and-change-events"]), `${path}.delivery`);
+  positiveAge(r.maxAgeMs, `${path}.maxAgeMs`); literal(r.existence, "explicit-presence-required", `${path}.existence`);
 }
 
-/** Parses one F07 snapshot or delta. It deliberately does not apply, order, or reconcile it. */
+interface StateReferences {
+  catalog: JsonObject;
+  entries: Map<string, JsonObject>;
+  decks: Map<string, JsonObject>;
+  retained: Set<string>;
+}
+
+function retainedIds(value: unknown, path: string, refs: StateReferences): string[] {
+  const ids = nonemptyIds(value, path);
+  if (ids.some((entry) => !refs.retained.has(entry))) issue(path, "unresolved-evidence", "Evidence must resolve in the trusted retained-evidence index");
+  return ids;
+}
+
+function presence(value: unknown, path: string, refs: StateReferences): void {
+  if ((value as JsonObject)?.status === "unknown") {
+    const r = object(value, path, ["status", "reason"]);
+    if (!string(r.reason, `${path}.reason`).trim()) issue(path, "empty-reason", "Unknown presence needs a reason");
+  } else {
+    const r = object(value, path, ["status", "evidenceIds"]);
+    oneOf(r.status, new Set(["present", "absent"]), `${path}.status`);
+    retainedIds(r.evidenceIds, `${path}.evidenceIds`, refs);
+  }
+}
+
+function referencesData(value: unknown): StateReferences {
+  const c = object(external(value), "$references.catalog", [...catalogContextFields, "schemaVersion", "catalogId", "instances", "entries", "decks", "retainedEvidenceIds"]);
+  context(c, "$references.catalog", false); literal(c.schemaVersion, 1, "$references.catalog.schemaVersion"); id(c.catalogId, "$references.catalog.catalogId");
+  const retained = array(c.retainedEvidenceIds, "$references.catalog.retainedEvidenceIds").map((v, i) => id(v, `$references.catalog.retainedEvidenceIds[${i}]`));
+  if (new Set(retained).size !== retained.length) issue("$references.catalog", "duplicate", "Retained evidence IDs must be unique");
+  const refs: StateReferences = { catalog: c, entries: new Map(), decks: new Map(), retained: new Set(retained) };
+  const instances = new Map<string, JsonObject>();
+  for (const [index, raw] of array(c.instances, "$references.catalog.instances").entries()) {
+    const path = `$references.catalog.instances[${index}]`, i = instance(raw, path), key = String(i.instanceId);
+    if (instances.has(key)) issue(path, "duplicate-instance", "One current incarnation per instance ID is required");
+    instances.set(key, i);
+  }
+  for (const i of instances.values()) {
+    const seen = new Set<string>([String(i.instanceId)]);
+    let cursor = i;
+    while (cursor.parent !== null) {
+      const parent = cursor.parent as JsonObject, p = instances.get(String(parent.instanceId));
+      if (!p || p.generation !== parent.generation) issue("$references.catalog.instances", "instance-parent-mismatch", "Parent must be a current discovered incarnation");
+      if (seen.has(String(p.instanceId))) issue("$references.catalog.instances", "instance-cycle", "Instance parent graph must be acyclic");
+      seen.add(String(p.instanceId)); cursor = p;
+    }
+  }
+  for (const [index, raw] of array(c.decks, "$references.catalog.decks").entries()) {
+    const path = `$references.catalog.decks[${index}]`, r = object(raw, path, ["deckId", "deckGeneration", "availability", "maxAgeMs"]);
+    id(r.deckId, `${path}.deckId`); safeInteger(r.deckGeneration, `${path}.deckGeneration`);
+    positiveAge(r.maxAgeMs, `${path}.maxAgeMs`); presence(r.availability, `${path}.availability`, refs);
+    if (refs.decks.has(String(r.deckId))) issue(path, "duplicate-deck", "One current incarnation per deck ID is required");
+    refs.decks.set(String(r.deckId), r);
+  }
+  const definitions = new Map<string, string>();
+  for (const [index, raw] of array(c.entries, "$references.catalog.entries").entries()) {
+    const path = `$references.catalog.entries[${index}]`, r = object(raw, path, ["target", "read", "availability", "applicableDeck"]);
+    const t = target(r.target, `${path}.target`), key = targetKey(t);
+    if (refs.entries.has(key)) issue(path, "duplicate-reading", "Catalog target resolutions must be unique");
+    if (t.instance && canonical(instances.get(t.instance.instanceId)) !== canonical(t.instance)) issue(path, "catalog-instance-mismatch", "Target must exactly match current instance including definition and parent");
+    readRules(r.read, `${path}.read`); presence(r.availability, `${path}.availability`, refs);
+    const definition = canonical({ read: r.read, instances: t.instance === null ? "singleton" : "dynamic" });
+    const existingDefinition = definitions.get(t.capabilityId);
+    if (existingDefinition !== undefined && existingDefinition !== definition) issue(path, "catalog-definition-conflict", "One canonical capability cannot resolve to conflicting definitions");
+    definitions.set(t.capabilityId, definition);
+    if (r.applicableDeck !== null) {
+      const d = deckRef(r.applicableDeck, `${path}.applicableDeck`), current = refs.decks.get(String(d.deckId));
+      if (!current || current.deckGeneration !== d.deckGeneration) issue(path, "catalog-deck-mismatch", "Applicable deck must resolve to the current incarnation");
+    }
+    refs.entries.set(key, r);
+  }
+  return refs;
+}
+
+function evidence(value: unknown, path: string, state: JsonObject, stale: boolean, refs: StateReferences, streamGap: boolean): JsonObject {
+  const r = object(value, path, ["observationId", "hostInstanceId", "connectionGeneration", "stateRevision", "clockId", "observedAtMs", "receivedAtMs", "validUntilMs", "source", "attribution"]);
+  for (const key of ["observationId", "hostInstanceId", "clockId"]) id(r[key], `${path}.${key}`);
+  safeInteger(r.connectionGeneration, `${path}.connectionGeneration`); safeInteger(r.stateRevision, `${path}.stateRevision`);
+  const sameEpoch = r.hostInstanceId === state.hostInstanceId && r.connectionGeneration === state.connectionGeneration && r.clockId === state.clockId;
+  if (!stale && !sameEpoch) issue(path, "context-mismatch", "Current observation must match host, connection and clock");
+  const observed = time(r.observedAtMs, `${path}.observedAtMs`), received = time(r.receivedAtMs, `${path}.receivedAtMs`), valid = time(r.validUntilMs, `${path}.validUntilMs`);
+  if (observed > received || observed >= valid) issue(path, "invalid-evidence-times", "Evidence timestamps are inconsistent");
+  if ((sameEpoch && !streamGap && Number(r.stateRevision) > Number(state.stateRevision)) || (r.clockId === state.clockId && received > Number(state.producedAtMs))) issue(path, "future-evidence", "Comparable evidence cannot be newer than the message");
+  if (!stale && Number(state.producedAtMs) >= valid) issue(path, "expired-observation", "Current observations must remain valid at production");
+  if ((r.source as JsonObject)?.kind === "host-reconciled") {
+    const source = object(r.source, `${path}.source`, ["kind", "eventIds"]); retainedIds(source.eventIds, `${path}.source.eventIds`, refs);
+  } else {
+    const source = object(r.source, `${path}.source`, ["kind", "eventId"]);
+    oneOf(source.kind, new Set(["host-read", "host-feedback"]), `${path}.source.kind`);
+    retainedIds([source.eventId], `${path}.source.eventId`, refs);
+  }
+  attribution(r.attribution, `${path}.attribution`);
+  const actor = r.attribution as JsonObject;
+  if (actor.actor === "human") retainedIds([actor.evidenceEventId], `${path}.attribution.evidenceEventId`, refs);
+  return r;
+}
+
+function observedValue(value: unknown, path: string, shape?: JsonObject): void {
+  const kind = (value as JsonObject)?.kind;
+  const r = object(value, path, kind === "number" ? ["kind", "value", "unit"] : ["kind", "value"]);
+  if (kind === "boolean") bool(r.value, `${path}.value`);
+  else if (kind === "number") {
+    const v = number(r.value, `${path}.value`); oneOf(r.unit, units, `${path}.unit`);
+    if (r.unit === "normalized" && (v < 0 || v > 1)) issue(path, "catalog-range-mismatch", "Normalized values must be in [0,1]");
+  } else if (kind === "enum") id(r.value, `${path}.value`);
+  else if (kind === "track-identity") track(r.value, `${path}.value`);
+  else if (kind === "occurrence-identity") occurrence(r.value, `${path}.value`);
+  else issue(path, "invalid-value-kind", "Unknown observed value kind");
+  if (!shape) return;
+  if (kind !== shape.kind) issue(path, "catalog-value-kind-mismatch", "Reading kind must match current catalog");
+  if (kind === "number") {
+    if (r.unit !== shape.unit) issue(path, "catalog-unit-mismatch", "Reading unit must match current catalog");
+    if (Number(r.value) < Number(shape.minimum) || Number(r.value) > Number(shape.maximum)) issue(path, "catalog-range-mismatch", "Reading is outside catalog bounds");
+  }
+  if (kind === "enum" && !(shape.values as string[]).includes(String(r.value))) issue(path, "catalog-enum-mismatch", "Reading is not a declared enum choice");
+}
+
+interface ObservationRecord { value: unknown; evidence: JsonObject; stale: boolean }
+function observation(value: unknown, path: string, state: JsonObject, refs: StateReferences, availability: JsonObject, validateValue: (raw: unknown, path: string, historical: boolean) => void, maxAge: number | null): ObservationRecord | null {
+  const status = (value as JsonObject)?.status;
+  if (status === "observed" || status === "stale") {
+    const stale = status === "stale";
+    const r = object(value, path, stale ? ["status", "lastKnown", "reason"] : ["status", "value", "evidence"]);
+    if (stale) oneOf(r.reason, stateReasons, `${path}.reason`);
+    const last = stale ? object(r.lastKnown, `${path}.lastKnown`, ["value", "evidence"]) : r;
+    validateValue(last.value, stale ? `${path}.lastKnown.value` : `${path}.value`, stale && r.reason === "profile-changed");
+    const ev = evidence(last.evidence, `${path}.evidence`, state, stale, refs, stale && r.reason === "stream-gap");
+    if (!stale && availability.status !== "present") issue(path, "presence-required", "Current values require explicit present evidence");
+    if (maxAge !== null && !(stale && r.reason === "profile-changed") && Number(ev.validUntilMs) - Number(ev.observedAtMs) > maxAge) issue(path, "catalog-age-mismatch", "Lifetime exceeds catalog maximum age");
+    return { value: last.value, evidence: ev, stale };
+  }
+  if (status === "missing") {
+    const r = object(value, path, ["status", "reason", "presenceEvidenceIds"]);
+    oneOf(r.reason, new Set(["control-absent", "instance-absent"]), `${path}.reason`);
+    const ids = retainedIds(r.presenceEvidenceIds, `${path}.presenceEvidenceIds`, refs);
+    if (availability.status !== "absent" || ids.some((entry) => !(availability.evidenceIds as string[]).includes(entry))) issue(path, "absence-required", "Missing observations require this target's confirmed absence evidence");
+  } else if (status === "unknown") {
+    const r = object(value, path, ["status", "reason"]); oneOf(r.reason, unknownReasons, `${path}.reason`);
+  } else if (status === "uncertain") {
+    const r = object(value, path, ["status", "reason", "evidenceIds"]); oneOf(r.reason, uncertainReasons, `${path}.reason`); retainedIds(r.evidenceIds, `${path}.evidenceIds`, refs);
+  } else issue(path, "invalid-observation", "Unknown observation status");
+  return null;
+}
+
+interface RememberedObservation { payload: string; context: string; stale: boolean }
+interface Projection { decks: Map<string, JsonObject>; readings: Map<string, JsonObject>; observations: Map<string, RememberedObservation> }
+function rememberObservation(record: ObservationRecord | null, owner: unknown, projection: Projection, path: string, state: JsonObject): void {
+  if (!record) return;
+  const key = canonical([record.evidence.hostInstanceId, record.evidence.connectionGeneration, record.evidence.observationId]);
+  const payload = canonical({ owner, value: record.value, evidence: record.evidence });
+  const previous = projection.observations.get(key);
+  const contextKey = canonical(stateContextFields.map((field) => state[field]));
+  if (previous !== undefined && previous.payload !== payload) issue(path, "observation-conflict", "Observation identity cannot be relabeled or refreshed");
+  if (previous && !record.stale && (previous.stale || previous.context !== contextKey)) issue(path, "observation-resurrection", "Invalidated or old-context evidence cannot become current without a fresh observation identity");
+  projection.observations.set(key, { payload, context: contextKey, stale: record.stale });
+}
+
+function validateProjection(state: JsonObject, refs: StateReferences, projection: Projection): void {
+  if (projection.decks.size > VALIDATION_LIMITS.maxStateEntries || projection.readings.size > VALIDATION_LIMITS.maxStateEntries) issue("$", "array-too-large", "Candidate projection exceeds the collection limit");
+  const candidate = { ...Object.fromEntries(envelopeFields.map((key) => [key, state[key]])), kind: "snapshot", replacement: "entire-context", decks: [...projection.decks.values()], readings: [...projection.readings.values()] };
+  external(candidate);
+  for (const [key, raw] of projection.decks) {
+    const path = `$.decks.${key}`, r = object(raw, path, ["deckId", "deckGeneration", "current"]);
+    const declared = refs.decks.get(id(r.deckId, `${path}.deckId`)); safeInteger(r.deckGeneration, `${path}.deckGeneration`);
+    if (!declared || declared.deckGeneration !== r.deckGeneration) issue(path, "catalog-deck-mismatch", "Deck must match current catalog incarnation");
+    const record = observation(r.current, `${path}.current`, state, refs, declared.availability as JsonObject, (rawValue, valuePath) => {
+      deckPrecondition(rawValue, valuePath);
+      const pre = rawValue as JsonObject;
+      if (pre.deckId !== r.deckId || ((r.current as JsonObject).status === "observed" && pre.deckGeneration !== r.deckGeneration)) issue(valuePath, "deck-context-mismatch", "Deck observation must match its enclosing identity");
+    }, Number(declared.maxAgeMs));
+    rememberObservation(record, { deckId: r.deckId, deckGeneration: record && (record.value as JsonObject).deckGeneration }, projection, path, state);
+  }
+  for (const [key, raw] of projection.readings) {
+    const path = `$.readings.${key}`, r = object(raw, path, ["target", "deck", "observation"]), t = target(r.target, `${path}.target`), rules = refs.entries.get(targetKey(t));
+    if (!rules || canonical(rules.target) !== canonical(t)) issue(path, "unresolved-capability-reference", "Target must resolve exactly in the current catalog");
+    const status = (r.observation as JsonObject)?.status, stale = status === "stale", applicable = rules.applicableDeck as JsonObject | null;
+    if (applicable === null) {
+      if (r.deck !== null) issue(path, "reading-deck-mismatch", "Independent control requires null deck context");
+    } else {
+      if (r.deck === null) issue(path, "reading-deck-mismatch", "Deck-associated control cannot omit its deck");
+      let pre: JsonObject;
+      if ((r.deck as JsonObject)?.kind === "known") {
+        const d = object(r.deck, `${path}.deck`, ["kind", "precondition"]); deckPrecondition(d.precondition, `${path}.deck.precondition`); pre = d.precondition as JsonObject;
+      } else {
+        const d = object(r.deck, `${path}.deck`, ["kind", "deckId", "deckGeneration"]); literal(d.kind, "unknown", `${path}.deck.kind`);
+        id(d.deckId, `${path}.deck.deckId`); safeInteger(d.deckGeneration, `${path}.deck.deckGeneration`); pre = d;
+        if (status === "observed") issue(path, "unknown-deck-observed", "Unknown binding cannot carry a current value");
+      }
+      if (pre.deckId !== applicable.deckId || (!stale && pre.deckGeneration !== applicable.deckGeneration)) issue(path, "reading-deck-mismatch", "Reading deck must match catalog applicability");
+      if (!stale) {
+        const current = projection.decks.get(String(pre.deckId));
+        if (!current || current.deckGeneration !== pre.deckGeneration) issue(path, "reading-deck-mismatch", "Reading references a removed or replaced deck");
+        if ((r.deck as JsonObject).kind === "known") {
+          const observed = current.current as JsonObject;
+          if (observed.status !== "observed" || canonical(observed.value) !== canonical(pre)) issue(path, "reading-binding-mismatch", "Known reading binding must equal the actual current deck binding");
+        }
+      }
+    }
+    const read = rules.read as JsonObject;
+    if (status === "observed" && read.kind !== "state") issue(path, "not-readable", "Current capability does not declare readable state");
+    const record = observation(r.observation, `${path}.observation`, state, refs, rules.availability as JsonObject,
+      (v, p, historical) => observedValue(v, p, read.kind === "state" && !historical ? read.value as JsonObject : undefined), read.kind === "state" ? Number(read.maxAgeMs) : null);
+    rememberObservation(record, { target: r.target, deck: r.deck }, projection, path, state);
+  }
+}
+
+function snapshotProjection(state: JsonObject): Projection {
+  const projection: Projection = { decks: new Map(), readings: new Map(), observations: new Map() };
+  for (const [index, raw] of array(state.decks, "$.decks").entries()) {
+    const r = object(raw, `$.decks[${index}]`, ["deckId", "deckGeneration", "current"]), key = id(r.deckId, `$.decks[${index}].deckId`);
+    if (projection.decks.has(key)) issue("$.decks", "duplicate-deck", "One entry per deck ID is allowed, regardless of generation");
+    projection.decks.set(key, r);
+  }
+  for (const [index, raw] of array(state.readings, "$.readings").entries()) {
+    const r = object(raw, `$.readings[${index}]`, ["target", "deck", "observation"]), key = targetKey(target(r.target, `$.readings[${index}].target`));
+    if (projection.readings.has(key)) issue("$.readings", "duplicate-reading", "One entry per canonical target and instance ID is allowed");
+    projection.readings.set(key, r);
+  }
+  return projection;
+}
+
+function envelope(raw: unknown, path: string): JsonObject {
+  const kind = (raw as JsonObject)?.kind;
+  const r = object(raw, path, kind === "snapshot" ? [...envelopeFields, "replacement", "decks", "readings"] : kind === "delta" ? [...envelopeFields, "baseRevision", "previousSequence", "changes"] : issue(path, "invalid-state-kind", "Expected a state snapshot or delta"));
+  context(r, path); literal(r.schemaVersion, 1, `${path}.schemaVersion`);
+  for (const key of ["messageId", "snapshotId"]) id(r[key], `${path}.${key}`);
+  for (const key of ["sequence", "stateRevision"]) safeInteger(r[key], `${path}.${key}`);
+  time(r.producedAtMs, `${path}.producedAtMs`);
+  if (kind === "snapshot") literal(r.replacement, "entire-context", `${path}.replacement`);
+  return r;
+}
+
+function deckTransition(previous: JsonObject, next: JsonObject, path: string): void {
+  if (Number(next.deckGeneration) < Number(previous.deckGeneration)) issue(path, "deck-generation-regression", "Deck incarnation cannot decrease in the current host");
+  if (next.deckGeneration !== previous.deckGeneration) return;
+  const oldObservation = previous.current as JsonObject, newObservation = next.current as JsonObject;
+  const oldValue = oldObservation.status === "observed" ? oldObservation.value : oldObservation.status === "stale" ? (oldObservation.lastKnown as JsonObject).value : null;
+  if (!oldValue || newObservation.status !== "observed") return;
+  const old = oldValue as JsonObject, value = newObservation.value as JsonObject;
+  if (old.deckGeneration !== next.deckGeneration) return;
+  if (Number(value.trackGeneration) < Number(old.trackGeneration)) issue(path, "track-generation-regression", "Track generation cannot decrease in a deck incarnation");
+  const oldBinding = old.binding as JsonObject, nextBinding = value.binding as JsonObject;
+  const trackChanged = oldBinding.kind !== nextBinding.kind || canonical(oldBinding.track) !== canonical(nextBinding.track);
+  if (trackChanged && Number(value.trackGeneration) <= Number(old.trackGeneration)) issue(path, "track-generation-required", "Changed loaded track identity requires a new track generation");
+}
+
+function applyCandidateChanges(state: JsonObject, refs: StateReferences, projection: Projection): void {
+  const changed = new Set<string>();
+  for (const [index, raw] of array(state.changes, "$.changes").entries()) {
+    const path = `$.changes[${index}]`, kind = (raw as JsonObject)?.kind;
+    let key: string;
+    if (kind === "replace-deck") {
+      const r = object(raw, path, ["kind", "deck"]), d = object(r.deck, `${path}.deck`, ["deckId", "deckGeneration", "current"]);
+      const deckId = id(d.deckId, `${path}.deck.deckId`), previous = projection.decks.get(deckId);
+      key = `deck:${deckId}`;
+      if (previous) deckTransition(previous, d, path);
+      projection.decks.set(deckId, d);
+    } else if (kind === "remove-deck") {
+      const r = object(raw, path, ["kind", "deckId", "deckGeneration", "evidenceIds"]), deckId = id(r.deckId, `${path}.deckId`);
+      safeInteger(r.deckGeneration, `${path}.deckGeneration`); retainedIds(r.evidenceIds, `${path}.evidenceIds`, refs); key = `deck:${deckId}`;
+      if (projection.decks.get(deckId)?.deckGeneration !== r.deckGeneration) issue(path, "remove-missing-incarnation", "Removal requires the exact existing deck incarnation");
+      projection.decks.delete(deckId);
+    } else if (kind === "replace-reading" || kind === "remove-reading") {
+      const r = object(raw, path, kind === "replace-reading" ? ["kind", "reading"] : ["kind", "target", "evidenceIds"]);
+      const read = kind === "replace-reading" ? object(r.reading, `${path}.reading`, ["target", "deck", "observation"]) : r;
+      const t = target(read.target, `${path}.target`), entryKey = targetKey(t); key = `reading:${entryKey}`;
+      if (kind === "replace-reading") projection.readings.set(entryKey, read);
+      else {
+        retainedIds(r.evidenceIds, `${path}.evidenceIds`, refs);
+        if (canonical(projection.readings.get(entryKey)?.target) !== canonical(t)) issue(path, "remove-missing-incarnation", "Removal requires the exact existing reading incarnation");
+        projection.readings.delete(entryKey);
+      }
+    } else issue(path, "invalid-change", "Unknown state change");
+    if (changed.has(key)) issue(path, "duplicate-change", "A transaction cannot change the same key twice");
+    changed.add(key);
+  }
+}
+
+/** Validates a pure candidate projection; accepted data does not mutate or install state. */
 export function validateObservedStateMessage(input: unknown, references?: StateValidationReferences): ValidationResult<ObservedStateMessage> {
   try {
-    const raw = external(input);
-    if (raw === null || typeof raw !== "object" || Array.isArray(raw)) issue("$", "expected-object", "Expected a state message");
-    const kind = (raw as JsonObject).kind;
-    const fields = kind === "snapshot"
-      ? ["sessionId", "hostInstanceId", "connectionGeneration", "capabilityRevision", "profile", "clockId", "streamId", "streamGeneration", "schemaVersion", "messageId", "sequence", "producedAtMs", "stateRevision", "kind", "snapshotId", "replacement", "decks", "readings"]
-      : kind === "delta"
-        ? ["sessionId", "hostInstanceId", "connectionGeneration", "capabilityRevision", "profile", "clockId", "streamId", "streamGeneration", "schemaVersion", "messageId", "sequence", "producedAtMs", "stateRevision", "kind", "snapshotId", "baseRevision", "previousSequence", "changes"]
-        : issue("$.kind", "invalid-state-kind", "State message must be snapshot or delta");
-    const r = object(raw, "$", fields); context(r, "$"); literal(r.schemaVersion, 1, "$.schemaVersion"); id(r.messageId, "$.messageId"); safeInteger(r.sequence, "$.sequence"); time(r.producedAtMs, "$.producedAtMs"); safeInteger(r.stateRevision, "$.stateRevision"); id(r.snapshotId, "$.snapshotId");
-    if (kind === "snapshot") {
-      literal(r.replacement, "entire-context", "$.replacement"); const deckKeys = new Set<string>(); for (const [index, entry] of array(r.decks, "$.decks").entries()) { const deck = deckObservation(entry, `$.decks[${index}]`, r); const key = `${deck.deckId}:${deck.deckGeneration}`; if (deckKeys.has(key)) issue(`$.decks[${index}]`, "duplicate-deck", "Snapshot decks must be unique"); deckKeys.add(key); }
-      const readingKeys = new Set<string>(); for (const [index, entry] of array(r.readings, "$.readings").entries()) { const record = object(entry, `$.readings[${index}]`, ["target", "deck", "observation"]); const cap = target(record.target, `$.readings[${index}].target`); const key = `${cap.capabilityId}:${JSON.stringify(cap.instance)}`; if (readingKeys.has(key)) issue(`$.readings[${index}]`, "duplicate-reading", "Snapshot readings must be unique"); readingKeys.add(key); reading(entry, `$.readings[${index}]`, r, references); }
-    } else {
-      const base = safeInteger(r.baseRevision, "$.baseRevision"); const previous = safeInteger(r.previousSequence, "$.previousSequence"); if (r.sequence !== previous + 1 || r.stateRevision !== base + 1) issue("$", "invalid-delta-lineage", "Delta requires immediate sequence and revision lineage");
-      const baseline = references?.baseline;
-      if (!baseline) issue("$", "baseline-required", "Delta admission requires an explicit current immutable baseline");
-      if (baseline.snapshotId !== r.snapshotId || baseline.stateRevision !== base || baseline.sequence !== previous
-        || baseline.sessionId !== r.sessionId || baseline.hostInstanceId !== r.hostInstanceId
-        || baseline.connectionGeneration !== r.connectionGeneration || baseline.capabilityRevision !== r.capabilityRevision
-        || baseline.clockId !== r.clockId || baseline.streamId !== r.streamId || baseline.streamGeneration !== r.streamGeneration) {
-        issue("$", "baseline-mismatch", "Delta context or lineage does not match the supplied baseline");
-      }
-      const changed = new Set<string>(); for (const [index, entry] of array(r.changes, "$.changes").entries()) { stateChange(entry, `$.changes[${index}]`, r, references, changed); }
+    const r = envelope(external(input), "$");
+    const referenceData = references === undefined ? undefined : referenceBundle(references);
+    if (r.kind === "delta") {
+      const base = safeInteger(r.baseRevision, "$.baseRevision"), previous = safeInteger(r.previousSequence, "$.previousSequence");
+      if (r.sequence !== previous + 1 || r.stateRevision !== base + 1) issue("$", "invalid-delta-lineage", "Delta requires immediate safe sequence and revision lineage");
+      if (!referenceData || !Object.hasOwn(referenceData, "baseline")) issue("$", "baseline-required", "A delta requires the full current snapshot projection");
     }
+    if (!referenceData) issue("$", "catalog-required", "State admission requires trusted catalog reference data");
+    const referenceFields = ["catalog"];
+    if (Object.hasOwn(referenceData, "baseline")) referenceFields.push("baseline");
+    if (Object.hasOwn(referenceData, "baselineCatalog")) referenceFields.push("baselineCatalog");
+    const referenceObject = object(referenceData, "$references", referenceFields);
+    if (referenceObject.baselineCatalog !== undefined && referenceObject.baseline === undefined) issue("$references", "baseline-required", "A historical catalog requires its complete baseline");
+    const refs = referencesData(freezeCopy(external(referenceObject.catalog)));
+    if (!sameContext(r, refs.catalog, false)) issue("$", "catalog-context-mismatch", "Full message profile and context must match the current catalog");
+    let baseline: JsonObject | undefined;
+    let previousProjection: Projection | undefined;
+    if (referenceObject.baseline !== undefined) {
+      baseline = envelope(freezeCopy(external(referenceObject.baseline)), "$references.baseline");
+      if (baseline.kind !== "snapshot") issue("$references.baseline", "baseline-required", "Baseline must contain the full snapshot projection");
+      if (r.kind === "delta" && (!sameContext(r, baseline) || r.snapshotId !== baseline.snapshotId || r.baseRevision !== baseline.stateRevision || r.previousSequence !== baseline.sequence || Number(r.producedAtMs) < Number(baseline.producedAtMs))) issue("$", "baseline-mismatch", "Delta must exactly match full baseline context and lineage");
+      const suppliedHistorical = referenceObject.baselineCatalog === undefined ? undefined : referencesData(referenceObject.baselineCatalog);
+      const baselineRefs = sameContext(baseline, refs.catalog, false) ? refs : suppliedHistorical ?? refs;
+      if (!sameContext(baseline, baselineRefs.catalog, false)) issue("$references.baseline", "baseline-catalog-required", "Full baseline validation requires its exact catalog context");
+      previousProjection = snapshotProjection(baseline); validateProjection(baseline, baselineRefs, previousProjection);
+      const sameHost = r.sessionId === baseline.sessionId && r.hostInstanceId === baseline.hostInstanceId;
+      if (sameHost && Number(r.connectionGeneration) < Number(baseline.connectionGeneration)) issue("$", "context-generation-regression", "Connection generation cannot regress for the same host");
+      if (sameHost && r.connectionGeneration === baseline.connectionGeneration) {
+        if (Number(r.capabilityRevision) < Number(baseline.capabilityRevision)) issue("$", "context-generation-regression", "Capability revision cannot regress in one connection");
+        if (r.streamId === baseline.streamId && Number(r.streamGeneration) < Number(baseline.streamGeneration)) issue("$", "context-generation-regression", "A stream generation cannot move backward");
+        const oldProfile = baseline.profile as JsonObject, nextProfile = r.profile as JsonObject;
+        if (nextProfile.profileId === oldProfile.profileId && Number(nextProfile.profileRevision) < Number(oldProfile.profileRevision)) issue("$", "context-generation-regression", "Profile revision cannot regress for the same profile");
+      }
+      if (sameStreamEpoch(r, baseline)) {
+        if (r.messageId === baseline.messageId) issue("$", "message-id-conflict", "A new state message cannot reuse the last accepted message ID");
+        if (r.kind === "snapshot" && (r.snapshotId === baseline.snapshotId || Number(r.sequence) <= Number(baseline.sequence) || Number(r.stateRevision) <= Number(baseline.stateRevision) || Number(r.producedAtMs) < Number(baseline.producedAtMs))) issue("$", "snapshot-lineage", "Replacement requires a new snapshot ID and newer sequence/revision");
+      }
+    }
+
+    const projection = r.kind === "snapshot" ? snapshotProjection(r) : previousProjection!;
+    if (r.kind === "delta") applyCandidateChanges(r, refs, projection);
+    if (r.kind === "snapshot" && previousProjection) {
+      projection.observations = previousProjection.observations;
+      for (const [key, deck] of projection.decks) {
+        const previous = previousProjection.decks.get(key);
+        if (previous && baseline?.hostInstanceId === r.hostInstanceId) deckTransition(previous, deck, `$.decks.${key}`);
+      }
+    }
+    validateProjection(r, refs, projection);
     return accepted(r as unknown as ObservedStateMessage);
   } catch (error) { return rejected(error); }
-}
-
-function stateChange(value: unknown, path: string, state: JsonObject, refs: StateValidationReferences | undefined, changed: Set<string>): void {
-  if (value === null || typeof value !== "object" || Array.isArray(value)) issue(path, "expected-object", "Expected state change");
-  const kind = (value as JsonObject).kind;
-  let key: string;
-  if (kind === "replace-deck") { const r = object(value, path, ["kind", "deck"]); const deck = deckObservation(r.deck, `${path}.deck`, state); key = `deck:${deck.deckId}:${deck.deckGeneration}`; }
-  else if (kind === "remove-deck") { const r = object(value, path, ["kind", "deckId", "deckGeneration", "evidenceIds"]); key = `deck:${id(r.deckId, `${path}.deckId`)}:${safeInteger(r.deckGeneration, `${path}.deckGeneration`)}`; nonemptyIds(r.evidenceIds, `${path}.evidenceIds`); }
-  else if (kind === "replace-reading") { const r = object(value, path, ["kind", "reading"]); const read = object(r.reading, `${path}.reading`, ["target", "deck", "observation"]); const cap = target(read.target, `${path}.reading.target`); key = `reading:${cap.capabilityId}:${JSON.stringify(cap.instance)}`; reading(r.reading, `${path}.reading`, state, refs); }
-  else if (kind === "remove-reading") { const r = object(value, path, ["kind", "target", "evidenceIds"]); const cap = target(r.target, `${path}.target`); key = `reading:${cap.capabilityId}:${JSON.stringify(cap.instance)}`; nonemptyIds(r.evidenceIds, `${path}.evidenceIds`); }
-  else issue(`${path}.kind`, "invalid-change", "Unknown state change");
-  if (changed.has(key)) issue(path, "duplicate-change", "A delta cannot change one key twice"); changed.add(key);
 }
 
 function accepted<T>(value: T): ValidationResult<T> { return { ok: true, value: freezeCopy(value) }; }

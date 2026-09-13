@@ -2,6 +2,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+import type { StateValidationReferences } from "../../core/validate.ts";
 import { VALIDATION_LIMITS, validateActionOutcome, validateMomentaryReleaseObligation, validateObservedStateMessage, validateSemanticAction } from "../../core/validate.ts";
 
 function action(): Record<string, unknown> {
@@ -100,49 +101,6 @@ test("rejects unsafe payloads before semantic admission", () => {
   assert.equal(getterRead, false);
 });
 
-test("validates structurally complete empty snapshots without changing any state", () => {
-  const input = snapshot();
-  const result = validateObservedStateMessage(input);
-  assert.equal(result.ok, true);
-  if (result.ok) assert.equal(result.value.kind, "snapshot");
-});
-
-test("requires current catalog resolution for readings and checks its declared value", () => {
-  const observed = {
-    target: { capabilityId: "mixxx.deck.playing", instance: null }, deck: null,
-    observation: {
-      status: "observed", value: { kind: "boolean", value: false },
-      evidence: { observationId: "observation1", hostInstanceId: "host1", connectionGeneration: 1, stateRevision: 1, clockId: "clock1", observedAtMs: 100, receivedAtMs: 150, validUntilMs: 160, source: { kind: "host-read", eventId: "event1" }, attribution: { actor: "unknown" } },
-    },
-  };
-  failure(validateObservedStateMessage(snapshot([observed])), "unresolved-capability-reference");
-  const accepted = validateObservedStateMessage(snapshot([observed]), { resolveCapability: () => ({ value: { kind: "boolean" }, maxAgeMs: 100 }) });
-  assert.equal(accepted.ok, true);
-  const wrong = structuredClone(observed); (wrong.observation as { value: Record<string, unknown> }).value = { kind: "number", value: 0, unit: "normalized" };
-  failure(validateObservedStateMessage(snapshot([wrong]), { resolveCapability: () => ({ value: { kind: "boolean" }, maxAgeMs: 100 }) }), "catalog-value-kind-mismatch");
-});
-
-test("rejects state extras, absent generations, conflicting changes, and invalid delta lineage", () => {
-  const extra = snapshot(); extra.functionName = "anything";
-  failure(validateObservedStateMessage(extra), "unknown-field");
-  const absent = snapshot(); delete absent.connectionGeneration;
-  failure(validateObservedStateMessage(absent), "missing-field");
-  const delta: Record<string, unknown> = { ...snapshot(), kind: "delta", baseRevision: 1, previousSequence: 1, sequence: 4, stateRevision: 2, changes: [] };
-  delete delta.replacement; delete delta.decks; delete delta.readings;
-  failure(validateObservedStateMessage(delta), "invalid-delta-lineage");
-});
-
-test("admits only a delta bound to the caller's immutable baseline", () => {
-  const delta: Record<string, unknown> = { ...snapshot(), kind: "delta", baseRevision: 1, previousSequence: 1, sequence: 2, stateRevision: 2, changes: [] };
-  delete delta.replacement; delete delta.decks; delete delta.readings;
-  const references = {
-    resolveCapability: () => undefined,
-    baseline: { snapshotId: "snapshot1", stateRevision: 1, sequence: 1, sessionId: "session1", hostInstanceId: "host1", connectionGeneration: 1, capabilityRevision: 1, clockId: "clock1", streamId: "stream1", streamGeneration: 1 },
-  };
-  assert.equal(validateObservedStateMessage(delta, references).ok, true);
-  failure(validateObservedStateMessage(delta, { ...references, baseline: { ...references.baseline, sequence: 0 } }), "baseline-mismatch");
-});
-
 test("accepts every F06 outcome status and both release-obligation evidence forms", () => {
   const base = { sessionId: "session1", actionId: "action1", sequence: 1, schemaVersion: 1, eventId: "event1", clockId: "clock1", atMs: 100 };
   const outcomes = [
@@ -169,6 +127,10 @@ test("rejects hidden hooks, symbol keys and broad objects without executing them
   Object.defineProperty(hidden, "toJSON", { value: () => { invoked = true; return action(); } });
   failure(validateSemanticAction(hidden), "non-json");
   assert.equal(invoked, false);
+  const inheritedArrayHook: unknown[] = [];
+  Object.setPrototypeOf(inheritedArrayHook, Object.assign(Object.create(Array.prototype), { toJSON: () => { invoked = true; return []; } }));
+  failure(validateSemanticAction({ ...action(), payload: inheritedArrayHook }), "non-json");
+  assert.equal(invoked, false);
   const symbol = action(); Object.defineProperty(symbol, Symbol("hidden"), { value: 1 });
   failure(validateSemanticAction(symbol), "non-json");
   const broad = Object.fromEntries(Array.from({ length: 65 }, (_, i) => [`field${i}`, 0]));
@@ -187,6 +149,363 @@ test("accepts the exact transport byte boundary and a parameter on a known empty
   empty.operation = { kind: "desired-state", action: "deck.set_parameter", deckId: "deck1", args: { parameter: "volume", normalizedValue: 0 } };
   (empty.authority as { ownership: unknown[] }).ownership = [{ resource: { kind: "deck-parameter", deckId: "deck1", parameter: "volume" }, ownershipGeneration: 1, grantId: "g1" }];
   assert.equal(validateSemanticAction(empty).ok, true);
+});
+
+
+
+// Deliberately mutable untrusted test records permit malformed admission fixtures.
+type TestRecord = Record<string, any>;
+function stateFixture(): { state: TestRecord; refs: TestRecord } {
+  const state = snapshot() as TestRecord;
+  const precondition = { deckId: "deck1", deckGeneration: 1, trackGeneration: 1, binding: { kind: "loaded", track: { libraryId: "library1", trackId: "track1" }, occurrence: null } };
+  const evidence = (observationId: string) => ({ observationId, hostInstanceId: "host1", connectionGeneration: 1, stateRevision: 1, clockId: "clock1", observedAtMs: 100, receivedAtMs: 150, validUntilMs: 300, source: { kind: "host-read", eventId: "event1" }, attribution: { actor: "unknown" } });
+  const instance = { instanceId: "instance1", generation: 1, kind: "deck", parent: null, definitionId: "deck-definition" };
+  const target = { capabilityId: "mixxx.deck.playing", instance };
+  state.decks = [{ deckId: "deck1", deckGeneration: 1, current: { status: "observed", value: precondition, evidence: evidence("deck-observation") } }];
+  state.readings = [{ target, deck: { kind: "known", precondition: structuredClone(precondition) }, observation: { status: "observed", value: { kind: "boolean", value: false }, evidence: evidence("play-observation") } }];
+  const refs = { catalog: {
+    sessionId: state.sessionId, hostInstanceId: state.hostInstanceId, connectionGeneration: 1, capabilityRevision: 1, profile: structuredClone(state.profile), schemaVersion: 1, catalogId: "catalog1",
+    instances: [structuredClone(instance)], retainedEvidenceIds: ["event1", "presence1", "absence1", "remove1"],
+    decks: [{ deckId: "deck1", deckGeneration: 1, availability: { status: "present", evidenceIds: ["presence1"] }, maxAgeMs: 500 }],
+    entries: [{ target: structuredClone(target), read: { kind: "state", value: { kind: "boolean" }, delivery: "poll", maxAgeMs: 500, existence: "explicit-presence-required" }, availability: { status: "present", evidenceIds: ["presence1"] }, applicableDeck: { deckId: "deck1", deckGeneration: 1 } }],
+  } };
+  return { state, refs };
+}
+function stateResult(f: ReturnType<typeof stateFixture>) {
+  return validateObservedStateMessage(f.state, f.refs as StateValidationReferences);
+}
+function deltaFixture() {
+  const f = stateFixture();
+  f.refs.baseline = structuredClone(f.state);
+  f.state = { ...f.state, kind: "delta", messageId: "message2", stateRevision: 2, sequence: 2, baseRevision: 1, previousSequence: 1, producedAtMs: 220, changes: [] };
+  delete f.state.replacement; delete f.state.decks; delete f.state.readings;
+  return f;
+}
+function success(f: ReturnType<typeof stateFixture>) {
+  const result = stateResult(f);
+  assert.equal(result.ok, true, JSON.stringify(result));
+  return result;
+}
+
+test("admits real loaded and empty deck observations with exact binding and presence", () => {
+  const loaded = stateFixture(); success(loaded);
+  const empty = stateFixture(); empty.state.decks[0].current.value.binding = { kind: "empty" };
+  empty.state.readings[0].deck.precondition.binding = { kind: "empty" }; success(empty);
+  const noEntries = stateFixture(); noEntries.state.decks = []; noEntries.state.readings = []; success(noEntries);
+  failure(validateObservedStateMessage(snapshot()), "catalog-required");
+});
+
+test("accepts stale old host/connection/clock evidence without treating foreign times as current", () => {
+  const f = stateFixture();
+  for (const owner of [f.state.decks[0], f.state.readings[0]]) {
+    const key = owner.current ? "current" : "observation", old = owner[key];
+    old.evidence.hostInstanceId = "old-host"; old.evidence.connectionGeneration = 99; old.evidence.clockId = "old-clock";
+    old.evidence.stateRevision = 900; old.evidence.observedAtMs = 9000; old.evidence.receivedAtMs = 9001; old.evidence.validUntilMs = 9100;
+    owner[key] = { status: "stale", lastKnown: { value: old.value, evidence: old.evidence }, reason: "connection-changed" };
+  }
+  success(f);
+  const invalid = stateFixture(); invalid.state.readings[0].observation.evidence.clockId = "old-clock";
+  failure(stateResult(invalid), "context-mismatch");
+});
+
+test("requires exact full current catalog profile, target, instance, parents and definitions", () => {
+  const cases: Array<[string, (f: ReturnType<typeof stateFixture>) => void]> = [
+    ["catalog-context-mismatch", f => { f.state.profile.buildId = "other-build"; }],
+    ["catalog-context-mismatch", f => { f.state.profile.configurationId = "other-config"; }],
+    ["catalog-context-mismatch", f => { f.state.capabilityRevision = 2; }],
+    ["unresolved-capability-reference", f => { f.state.readings[0].target.instance.generation = 2; }],
+    ["unresolved-capability-reference", f => { f.state.readings[0].target.instance.definitionId = "other-definition"; }],
+    ["unresolved-capability-reference", f => { f.state.readings[0].target.instance.parent = { instanceId: "ghost", generation: 1 }; }],
+    ["unresolved-capability-reference", f => { f.state.readings[0].target.capabilityId = "mixxx.unknown"; }],
+    ["invalid-capability-id", f => { f.state.readings[0].target.capabilityId = "mixxx."; }],
+    ["catalog-instance-mismatch", f => { f.refs.catalog.entries[0].target.instance.definitionId = "forged"; }],
+    ["instance-parent-mismatch", f => { f.refs.catalog.instances[0].parent = { instanceId: "ghost", generation: 1 }; }],
+    ["instance-cycle", f => { f.refs.catalog.instances[0].parent = { instanceId: "instance1", generation: 1 }; }],
+    ["duplicate-instance", f => { f.refs.catalog.instances.push({ ...f.refs.catalog.instances[0], generation: 2 }); }],
+    ["catalog-deck-mismatch", f => { f.refs.catalog.entries[0].applicableDeck.deckGeneration = 2; }],
+  ];
+  for (const [code, mutate] of cases) { const f = stateFixture(); mutate(f); failure(stateResult(f), code); }
+});
+
+test("requires target-specific presence and retained evidence; missing never becomes zero", () => {
+  const absent = stateFixture(); absent.refs.catalog.entries[0].availability = { status: "absent", evidenceIds: ["absence1"] };
+  absent.state.readings[0].observation = { status: "missing", reason: "control-absent", presenceEvidenceIds: ["absence1"] }; success(absent);
+  for (const availability of [{ status: "unknown", reason: "not probed" }, { status: "absent", evidenceIds: ["absence1"] }]) {
+    const f = stateFixture(); f.refs.catalog.entries[0].availability = availability; failure(stateResult(f), "presence-required");
+  }
+  const wrong = structuredClone(absent); wrong.state.readings[0].observation.presenceEvidenceIds = ["presence1"]; failure(stateResult(wrong), "absence-required");
+  const missing = stateFixture(); missing.refs.catalog.entries[0].availability.evidenceIds = []; failure(stateResult(missing), "empty-array");
+  const unresolved = stateFixture(); unresolved.state.readings[0].observation.evidence.source.eventId = "missing-event"; failure(stateResult(unresolved), "unresolved-evidence");
+});
+
+test("checks readable kinds, numeric units/ranges/tolerances and enum choices", () => {
+  const numberFixture = () => {
+    const f = stateFixture(); f.refs.catalog.entries[0].read.value = { kind: "number", unit: "normalized", minimum: 0, maximum: 1, step: null, tolerance: 0.01, neutralValue: 0.5, mappingId: "volume-mapping" };
+    f.state.readings[0].observation.value = { kind: "number", unit: "normalized", value: 0.5 }; return f;
+  };
+  success(numberFixture());
+  const cases: Array<[string, (f: ReturnType<typeof stateFixture>) => void]> = [
+    ["catalog-unit-mismatch", f => { f.state.readings[0].observation.value.unit = "beats"; }],
+    ["catalog-range-mismatch", f => { f.state.readings[0].observation.value.value = 1.01; }],
+    ["invalid-value-range", f => { f.refs.catalog.entries[0].read.value.maximum = 2; }],
+    ["invalid-value-range", f => { f.refs.catalog.entries[0].read.value.minimum = 2; }],
+    ["invalid-value-range", f => { f.refs.catalog.entries[0].read.value.tolerance = -1; }],
+    ["invalid-step", f => { f.refs.catalog.entries[0].read.value.step = 0; }],
+    ["invalid-neutral", f => { f.refs.catalog.entries[0].read.value.neutralValue = -1; }],
+    ["invalid-enum", f => { f.refs.catalog.entries[0].read.value.unit = "hz"; }],
+  ];
+  for (const [code, mutate] of cases) { const f = numberFixture(); mutate(f); failure(stateResult(f), code); }
+  const en = stateFixture(); en.refs.catalog.entries[0].read.value = { kind: "enum", values: ["off", "on"] }; en.state.readings[0].observation.value = { kind: "enum", value: "off" }; success(en);
+  en.state.readings[0].observation.value.value = "other"; failure(stateResult(en), "catalog-enum-mismatch");
+  en.refs.catalog.entries[0].read.value.values = ["off", "off"]; failure(stateResult(en), "duplicate");
+  en.refs.catalog.entries[0].read.value.values = []; failure(stateResult(en), "empty-array");
+  const unreadable = stateFixture(); unreadable.refs.catalog.entries[0].read = { kind: "not-readable", reason: "no feedback" }; failure(stateResult(unreadable), "not-readable");
+});
+
+test("rejects deck/precondition mismatches, missing applicability and conflicting snapshot keys", () => {
+  const cases: Array<[string, (f: ReturnType<typeof stateFixture>) => void]> = [
+    ["deck-context-mismatch", f => { f.state.decks[0].current.value.deckId = "deck2"; }],
+    ["catalog-deck-mismatch", f => { f.state.decks[0].deckGeneration = 2; }],
+    ["reading-deck-mismatch", f => { f.state.readings[0].deck = null; }],
+    ["reading-deck-mismatch", f => { f.state.readings[0].deck.precondition.deckGeneration = 2; }],
+    ["reading-binding-mismatch", f => { f.state.readings[0].deck.precondition.trackGeneration = 2; }],
+    ["reading-binding-mismatch", f => { f.state.readings[0].deck.precondition.binding.track.trackId = "track2"; }],
+    ["unknown-deck-observed", f => { f.state.readings[0].deck = { kind: "unknown", deckId: "deck1", deckGeneration: 1 }; }],
+    ["duplicate-deck", f => { f.state.decks.push({ ...f.state.decks[0], deckGeneration: 2 }); }],
+    ["duplicate-reading", f => { f.state.readings.push(structuredClone(f.state.readings[0])); }],
+  ];
+  for (const [code, mutate] of cases) { const f = stateFixture(); mutate(f); failure(stateResult(f), code); }
+});
+
+test("delta validates full immutable baseline and untouched observations without refreshing them", () => {
+  const f = deltaFixture(), before = JSON.stringify(f.refs.baseline);
+  const result = success(f);
+  assert.equal(JSON.stringify(f.refs.baseline), before);
+  if (result.ok) { assert.equal(Object.isFrozen(result.value), true); assert.equal(Object.isFrozen(result.value.profile), true); }
+  f.state.producedAtMs = 300; failure(stateResult(f), "expired-observation");
+  const profile = deltaFixture(); profile.state.profile.skinRevision = "other"; failure(stateResult(profile), "catalog-context-mismatch");
+  const baseline = deltaFixture(); baseline.refs.baseline.profile.skinRevision = "other"; failure(stateResult(baseline), "baseline-mismatch");
+  const sequence = deltaFixture(); sequence.state.sequence = 4; failure(stateResult(sequence), "invalid-delta-lineage");
+  const absent = deltaFixture(); delete absent.refs.baseline; failure(stateResult(absent), "baseline-required");
+  const missingState = deltaFixture(); delete missingState.refs.baseline.readings; failure(stateResult(missingState), "missing-field");
+});
+
+test("atomic track replacement rejects untouched old bindings but accepts complete safe replacement", () => {
+  const f = deltaFixture(), newDeck = structuredClone(f.refs.baseline.decks[0]);
+  newDeck.current.value.trackGeneration = 2; newDeck.current.value.binding.track.trackId = "track2";
+  newDeck.current.evidence.observationId = "deck-observation2"; newDeck.current.evidence.stateRevision = 2;
+  f.state.changes = [{ kind: "replace-deck", deck: newDeck }];
+  failure(stateResult(f), "reading-binding-mismatch");
+  const reading = structuredClone(f.refs.baseline.readings[0]); reading.deck.precondition = structuredClone(newDeck.current.value);
+  reading.observation.evidence.observationId = "play-observation2"; reading.observation.evidence.stateRevision = 2;
+  f.state.changes.push({ kind: "replace-reading", reading }); success(f);
+  const before = JSON.stringify(f.refs.baseline); success(f); assert.equal(JSON.stringify(f.refs.baseline), before);
+  const relabel = structuredClone(f); relabel.state.changes[1].reading.observation.evidence.observationId = "play-observation"; relabel.state.changes[1].reading.observation.evidence.stateRevision = 1; failure(stateResult(relabel), "observation-conflict");
+  const generation = structuredClone(f); generation.state.changes[0].deck.current.value.trackGeneration = 1; failure(stateResult(generation), "track-generation-required");
+});
+
+test("atomic removal requires exact existing entries and removal/invalidation of dependent readings", () => {
+  const f = deltaFixture(); f.state.changes = [{ kind: "remove-deck", deckId: "deck1", deckGeneration: 1, evidenceIds: ["remove1"] }];
+  failure(stateResult(f), "reading-deck-mismatch");
+  f.state.changes.push({ kind: "remove-reading", target: structuredClone(f.refs.baseline.readings[0].target), evidenceIds: ["remove1"] }); success(f);
+  const wrong = structuredClone(f); wrong.state.changes[1].target.instance.generation = 2; failure(stateResult(wrong), "remove-missing-incarnation");
+  const nonexistent = deltaFixture(); nonexistent.state.changes = [{ kind: "remove-deck", deckId: "ghost", deckGeneration: 1, evidenceIds: ["remove1"] }]; failure(stateResult(nonexistent), "remove-missing-incarnation");
+  const duplicate = deltaFixture(); duplicate.state.changes = [{ kind: "replace-deck", deck: structuredClone(duplicate.refs.baseline.decks[0]) }, { kind: "remove-deck", deckId: "deck1", deckGeneration: 1, evidenceIds: ["remove1"] }]; failure(stateResult(duplicate), "duplicate-change");
+  const stale = deltaFixture(); const reading = structuredClone(stale.refs.baseline.readings[0]);
+  reading.observation = { status: "stale", reason: "identity-changed", lastKnown: { value: reading.observation.value, evidence: reading.observation.evidence } };
+  stale.state.changes = [{ kind: "remove-deck", deckId: "deck1", deckGeneration: 1, evidenceIds: ["remove1"] }, { kind: "replace-reading", reading }]; success(stale);
+});
+
+test("replacement snapshots enforce lineage and preserve immutable observation identities", () => {
+  const f = stateFixture(); f.refs.baseline = structuredClone(f.state);
+  f.state.snapshotId = "snapshot2"; f.state.messageId = "message2"; f.state.sequence = 3; f.state.stateRevision = 3; success(f);
+  f.state.readings[0].observation.evidence.validUntilMs = 350; failure(stateResult(f), "observation-conflict");
+  const reused = stateFixture(); reused.refs.baseline = structuredClone(reused.state); reused.state.messageId = "message2"; reused.state.sequence = 2; reused.state.stateRevision = 2; failure(stateResult(reused), "snapshot-lineage");
+  const message = deltaFixture(); message.state.messageId = "message1"; failure(stateResult(message), "message-id-conflict");
+});
+
+
+
+test("unknown, uncertain, independent singleton and resolved parent instances remain admissible", () => {
+  const unknown = stateFixture(); unknown.state.decks[0].current = { status: "unknown", reason: "identity-unresolved" };
+  unknown.state.readings[0].deck = { kind: "unknown", deckId: "deck1", deckGeneration: 1 };
+  unknown.state.readings[0].observation = { status: "unknown", reason: "not-observed" }; success(unknown);
+  unknown.state.readings[0].observation = { status: "uncertain", reason: "binding-ambiguous", evidenceIds: ["event1"] }; success(unknown);
+  const independent = stateFixture(); independent.state.readings[0].target.instance = null; independent.state.readings[0].deck = null;
+  independent.refs.catalog.entries[0].target.instance = null; independent.refs.catalog.entries[0].applicableDeck = null; success(independent);
+  const parent = stateFixture(); const outer = { instanceId: "parent", generation: 2, kind: "effect-unit", definitionId: "rack", parent: null };
+  parent.refs.catalog.instances.push(outer);
+  for (const instance of [parent.state.readings[0].target.instance, parent.refs.catalog.entries[0].target.instance, parent.refs.catalog.instances[0]]) instance.parent = { instanceId: "parent", generation: 2 };
+  success(parent);
+  parent.refs.catalog.instances[1].generation = 3; failure(stateResult(parent), "instance-parent-mismatch");
+});
+
+test("state and trusted reference data reject hidden execution hooks and duplicate JSON keys", () => {
+  const f = stateFixture(); let read = false;
+  Object.defineProperty(f.refs, "baseline", { enumerable: true, get: () => { read = true; return f.state; } });
+  failure(stateResult(f), "non-json"); assert.equal(read, false);
+  const json = JSON.stringify(action());
+  failure(validateSemanticAction(json.replace('"sequence":1', '"sequence":0,"sequence":1')), "duplicate-json-key");
+  failure(validateSemanticAction(json.replace('"sequence":1', '"seq\\u0075ence":0,"sequence":1')), "duplicate-json-key");
+  const data = stateFixture(); data.state.kind = "requested-state"; failure(stateResult(data), "invalid-state-kind");
+  const extra = stateFixture(); extra.state.readings[0].observation.value.script = "arbitrary"; failure(stateResult(extra), "unknown-field");
+});
+
+test("same-context snapshot replacement also checks track generations and unchanged evidence", () => {
+  const f = stateFixture(); f.refs.baseline = structuredClone(f.state);
+  f.state.snapshotId = "snapshot2"; f.state.messageId = "message2"; f.state.sequence = 2; f.state.stateRevision = 2;
+  f.state.decks[0].current.value.binding.track.trackId = "track2";
+  f.state.decks[0].current.evidence.observationId = "deck2";
+  f.state.readings = [];
+  failure(stateResult(f), "track-generation-required");
+  f.state.decks[0].current.value.trackGeneration = 2; success(f);
+  f.state.decks[0].current.value.trackGeneration = 0; failure(stateResult(f), "track-generation-regression");
+});
+
+test("freshness and observation identity checks include profile-change history and delta failures", () => {
+  const f = stateFixture(); f.state.readings[0].observation.evidence.receivedAtMs = 201; failure(stateResult(f), "future-evidence");
+  f.state.readings[0].observation.evidence.receivedAtMs = 150; f.state.readings[0].observation.evidence.validUntilMs = 601; failure(stateResult(f), "catalog-age-mismatch");
+  const historical = stateFixture(); const old = historical.state.readings[0].observation;
+  historical.state.readings[0].observation = { status: "stale", reason: "profile-changed", lastKnown: { value: { kind: "number", unit: "ratio", value: 2 }, evidence: old.evidence } }; success(historical);
+  const failureCase = deltaFixture(); const before = structuredClone(failureCase.refs);
+  failureCase.state.changes = [{ kind: "remove-deck", deckId: "deck1", deckGeneration: 1, evidenceIds: ["remove1"] }]; failure(stateResult(failureCase), "reading-deck-mismatch");
+  assert.deepEqual(failureCase.refs, before); assert.equal(Object.isFrozen(failureCase.refs.baseline), false);
+  const duplicateDefinition = stateFixture(); const entry = structuredClone(duplicateDefinition.refs.catalog.entries[0]); entry.target.instance = null; duplicateDefinition.refs.catalog.entries.push(entry); failure(stateResult(duplicateDefinition), "catalog-definition-conflict");
+});
+
+
+
+test("context-changing snapshots require the old catalog for full baseline validation and fresh current evidence", () => {
+  const f = stateFixture(); f.refs.baseline = structuredClone(f.state); f.refs.baselineCatalog = structuredClone(f.refs.catalog);
+  f.state.profile.skinRevision = "skinrev2"; f.refs.catalog.profile.skinRevision = "skinrev2";
+  f.state.capabilityRevision = 2; f.refs.catalog.capabilityRevision = 2;
+  f.state.snapshotId = "snapshot2"; f.state.messageId = "message2"; f.state.sequence = 2; f.state.stateRevision = 2;
+  failure(stateResult(f), "observation-resurrection");
+  for (const owner of [f.state.decks[0], f.state.readings[0]]) {
+    const key = owner.current ? "current" : "observation", old = owner[key];
+    owner[key] = { status: "stale", reason: "profile-changed", lastKnown: { value: old.value, evidence: old.evidence } };
+  }
+  success(f);
+  const noOldCatalog = structuredClone(f); delete noOldCatalog.refs.baselineCatalog; failure(stateResult(noOldCatalog), "baseline-catalog-required");
+  const resurrect = deltaFixture(); const old = resurrect.refs.baseline.readings[0].observation;
+  resurrect.refs.baseline.readings[0].observation = { status: "stale", reason: "stream-gap", lastKnown: { value: old.value, evidence: old.evidence } };
+  resurrect.state.changes = [{ kind: "replace-reading", reading: { ...resurrect.refs.baseline.readings[0], observation: old } }]; failure(stateResult(resurrect), "observation-resurrection");
+});
+
+test("instance replacement requires a new catalog snapshot and never accepts old target incarnations", () => {
+  const delta = deltaFixture(); const wrong = structuredClone(delta.refs.baseline.readings[0]); wrong.target.instance.generation = 2;
+  delta.state.changes = [{ kind: "replace-reading", reading: wrong }]; failure(stateResult(delta), "unresolved-capability-reference");
+  const next = stateFixture(); next.refs.baseline = structuredClone(next.state); next.refs.baselineCatalog = structuredClone(next.refs.catalog);
+  next.state.capabilityRevision = 2; next.refs.catalog.capabilityRevision = 2;
+  next.state.snapshotId = "snapshot2"; next.state.messageId = "message2"; next.state.sequence = 2; next.state.stateRevision = 2;
+  next.refs.catalog.instances[0].generation = 2; next.refs.catalog.entries[0].target.instance.generation = 2;
+  next.refs.catalog.instances[0].definitionId = "new-definition"; next.refs.catalog.entries[0].target.instance.definitionId = "new-definition";
+  next.state.decks[0].current.evidence.observationId = "new-deck-observation";
+  failure(stateResult(next), "unresolved-capability-reference");
+  next.state.readings[0].target = structuredClone(next.refs.catalog.entries[0].target);
+  next.state.readings[0].observation.evidence.observationId = "new-read-observation"; success(next);
+});
+
+
+
+test("candidate projection must fit admission capacity even when baseline and delta individually fit", () => {
+  const f = deltaFixture(), retained = Array.from({ length: 64 }, (_, i) => `event${String(i).padStart(3, "0")}${"x".repeat(112)}`);
+  f.refs.catalog.retainedEvidenceIds.push(...retained);
+  f.refs.catalog.entries = []; f.refs.catalog.instances = [];
+  f.refs.baseline.readings = []; f.state.changes = [];
+  for (let i = 0; i < 10; i += 1) {
+    const model = stateFixture(), reading = model.state.readings[0], rules = model.refs.catalog.entries[0];
+    reading.target = { capabilityId: `mixxx.control${i}`, instance: null }; reading.deck = null;
+    reading.observation.evidence.observationId = `reading${i}`;
+    reading.observation.evidence.source = { kind: "host-reconciled", eventIds: retained };
+    rules.target = structuredClone(reading.target); rules.applicableDeck = null;
+    f.refs.catalog.entries.push(rules);
+    if (i < 4) f.refs.baseline.readings.push(reading);
+    else f.state.changes.push({ kind: "replace-reading", reading });
+  }
+  assert.ok(new TextEncoder().encode(JSON.stringify(f.refs)).length < VALIDATION_LIMITS.maxTransportBytes);
+  assert.ok(new TextEncoder().encode(JSON.stringify(f.state)).length < VALIDATION_LIMITS.maxTransportBytes);
+  failure(stateResult(f), "payload-too-large");
+});
+
+
+
+test("catalog changes cannot reset sequence counters inside an unchanged stream epoch", () => {
+  const f = stateFixture(); f.refs.baseline = structuredClone(f.state); f.refs.baselineCatalog = structuredClone(f.refs.catalog);
+  f.state.capabilityRevision = 2; f.refs.catalog.capabilityRevision = 2;
+  f.state.snapshotId = "snapshot2"; f.state.messageId = "message2"; f.state.decks = []; f.state.readings = [];
+  failure(stateResult(f), "snapshot-lineage");
+  f.state.sequence = 2; f.state.stateRevision = 2; success(f);
+  const reset = structuredClone(f); reset.state.streamGeneration = 2; reset.state.sequence = 0; reset.state.stateRevision = 0; success(reset);
+  const regression = structuredClone(f); regression.state.streamGeneration = 0; failure(stateResult(regression), "context-generation-regression");
+});
+
+test("stream resets retain explicitly stale evidence without comparing old revision counters", () => {
+  const f = stateFixture(); f.refs.baseline = structuredClone(f.state);
+  f.state.snapshotId = "snapshot2"; f.state.messageId = "message2"; f.state.streamGeneration = 2;
+  f.state.sequence = 0; f.state.stateRevision = 0; f.state.producedAtMs = 220;
+  for (const entry of [f.state.decks[0], f.state.readings[0]]) {
+    const key = "current" in entry ? "current" : "observation", previous = entry[key];
+    entry[key] = { status: "stale", lastKnown: { value: previous.value, evidence: previous.evidence }, reason: "stream-gap" };
+  }
+  success(f);
+  const current = structuredClone(f), remembered = current.state.decks[0].current.lastKnown;
+  current.state.decks[0].current = { status: "observed", ...remembered };
+  failure(stateResult(current), "future-evidence");
+  const altered = structuredClone(f); altered.state.readings[0].observation.lastKnown.evidence.stateRevision = 900;
+  failure(stateResult(altered), "observation-conflict");
+  const futureTime = structuredClone(f); futureTime.state.readings[0].observation.lastKnown.evidence.receivedAtMs = 221;
+  failure(stateResult(futureTime), "future-evidence");
+  const ordinaryStale = structuredClone(f); ordinaryStale.state.decks[0].current.reason = "age-expired";
+  failure(stateResult(ordinaryStale), "future-evidence");
+  const following = structuredClone(f); following.refs.baseline = structuredClone(f.state);
+  following.state = { ...following.state, kind: "delta", messageId: "message3", sequence: 1, stateRevision: 1, producedAtMs: 230, baseRevision: 0, previousSequence: 0, changes: [] };
+  delete following.state.replacement; delete following.state.decks; delete following.state.readings;
+  success(following);
+});
+
+
+
+test("reference components have independent byte/node budgets with a guarded fixed wrapper", () => {
+  const f = deltaFixture(), retained = Array.from({ length: 64 }, (_, i) => `event${String(i).padStart(3, "0")}${"x".repeat(112)}`);
+  f.refs.catalog.retainedEvidenceIds.push(...retained);
+  f.refs.catalog.entries = []; f.refs.catalog.instances = []; f.refs.baseline.readings = [];
+  let additional: TestRecord | undefined;
+  for (let i = 0; i < 8; i += 1) {
+    const model = stateFixture(), reading = model.state.readings[0], rules = model.refs.catalog.entries[0];
+    reading.target = { capabilityId: `mixxx.control${i}`, instance: null }; reading.deck = null;
+    reading.observation.evidence.observationId = `reading${i}`;
+    reading.observation.evidence.source = { kind: "host-reconciled", eventIds: retained };
+    rules.target = structuredClone(reading.target); rules.applicableDeck = null; f.refs.catalog.entries.push(rules);
+    if (i < 7) f.refs.baseline.readings.push(reading); else additional = reading;
+  }
+  const size = (value: unknown) => new TextEncoder().encode(JSON.stringify(value)).length;
+  assert.ok(size(f.refs.baseline) < VALIDATION_LIMITS.maxTransportBytes);
+  assert.ok(size(f.refs.catalog) < VALIDATION_LIMITS.maxTransportBytes);
+  assert.ok(size(f.refs) > VALIDATION_LIMITS.maxTransportBytes);
+  success(f);
+  f.refs.baselineCatalog = structuredClone(f.refs.catalog); success(f);
+  const overflow = structuredClone(f); overflow.refs.baseline.readings.push(additional);
+  assert.ok(size(overflow.refs.baseline) > VALIDATION_LIMITS.maxTransportBytes);
+  failure(stateResult(overflow), "payload-too-large");
+  const wrapper = stateFixture(); let invoked = false;
+  Object.defineProperty(wrapper.refs, "baselineCatalog", { enumerable: true, get: () => { invoked = true; return wrapper.refs.catalog; } });
+  failure(stateResult(wrapper), "non-json"); assert.equal(invoked, false);
+  const symbol = stateFixture(); Object.defineProperty(symbol.refs, Symbol("hidden"), { value: 1 }); failure(stateResult(symbol), "non-json");
+});
+
+
+
+test("reconciled occurrence association preserves track generation but invalidates old reading bindings", () => {
+  const f = deltaFixture(), deck = structuredClone(f.refs.baseline.decks[0]);
+  deck.current.value.binding.occurrence = { setId: "set1", occurrenceId: "occurrence1", generation: 1 };
+  deck.current.evidence.observationId = "associated-deck";
+  deck.current.evidence.source = { kind: "host-reconciled", eventIds: ["event1"] };
+  f.state.changes = [{ kind: "replace-deck", deck }]; failure(stateResult(f), "reading-binding-mismatch");
+  const reading = structuredClone(f.refs.baseline.readings[0]); reading.deck.precondition = structuredClone(deck.current.value);
+  reading.observation.evidence.observationId = "associated-reading";
+  f.state.changes.push({ kind: "replace-reading", reading }); success(f);
+  assert.equal(deck.current.value.trackGeneration, f.refs.baseline.decks[0].current.value.trackGeneration);
 });
 
 // End of autonomously AI-generated test.

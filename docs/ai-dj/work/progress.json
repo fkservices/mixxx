@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T19:34:42.046150+00:00",
+  "updated_at": "2026-09-13T19:40:54.723990+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -120,12 +120,17 @@
       "id": "F08",
       "title": "Create runtime message validators",
       "stage": "00-foundation",
-      "status": "split",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": "2026-09-13T19:10:04.592Z",
+      "evidence": "work/evidence/F08.md",
+      "verified": true,
+      "checks": [
+        "Both required action and state validation children accepted after coordinator review.",
+        "Independent integrated npm test: 39 passed; typecheck and build exited 0.",
+        "Exact identities/presence/full projection, immutable stale history and bounded non-executable input verified with synthetic fixtures.",
+        "Sync extension and actual host reconciliation remain separately required."
+      ],
+      "updated": "2026-09-13T19:40:54.723990+00:00",
       "dynamic": false
     },
     {
@@ -2159,12 +2164,17 @@
       "id": "F08-STATE-VALIDATION",
       "title": "Complete state reference and transaction admission",
       "stage": "setup",
-      "status": "running",
+      "status": "accepted",
       "model": "gpt-6-astra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": "2026-09-13T19:23:06.920Z",
+      "evidence": "work/evidence/F08-STATE-VALIDATION.md",
+      "verified": true,
+      "checks": [
+        "Coordinator reviewed full catalog reference and pure candidate projection semantics, including preserved stale history.",
+        "All 39 integrated tests plus typecheck/build passed after final handoff; 28 cover the validator.",
+        "Legal large references, complete track/deck changes, stream-reset history, duplicate keys and inherited array-hook regressions passed.",
+        "No reducer, live catalog admission, authority grant or host-runtime acceptance claimed."
+      ],
+      "updated": "2026-09-13T19:40:54.723990+00:00",
       "dynamic": true
     },
     {

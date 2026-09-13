@@ -662,10 +662,11 @@
         "mixxx-runtime"
       ],
       "conditions": "Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.",
-      "scope": "Open/close two routes with explicit filter configuration.",
+      "scope": "Own the selected native virtual command-source/feedback-destination pair and close both with explicit filter configuration.",
       "perform": [
-        "Open command output and feedback input; configure SysEx filter deliberately.",
-        "Close partially opened resources on errors and expose transport loss to caller."
+        "Implement the native virtual-endpoint topology in work/contracts/ports.md: Output creates the command source and Input creates the feedback destination, with the pairable logical name AI DJ. Configure SysEx filtering deliberately.",
+        "Close partially opened resources on errors and expose transport loss to caller.",
+        "Coordinate takeover from the private F11 helper under the runtime lease; fail on name collisions and verify Mixxx pairs the replacement endpoints. Do not open the helper feedback destination as an outbound command route."
       ],
       "validate": [
         "Test second-port failure and repeated close without leaked listeners.",

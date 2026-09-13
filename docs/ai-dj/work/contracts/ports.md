@@ -24,6 +24,12 @@ Physical Hercules controller -> Mixxx independent controller input
 - If the OS adds prefixes or Mixxx pairs incorrectly, record exact names and investigate one bounded correction. Do not silently enable a shared IAC feedback loop or modify physical-controller routing.
 - Startup/disconnect remains disarmed. F11 prepares the fixture; M02 and later reliability cards own the production lifecycle, feedback, cancellation and reconnect implementation.
 
+## Observed fixture and lifecycle handoff
+
+[F11 evidence](../evidence/F11.md) now records actual Mixxx 2.5.6 pairing: input index 0 and output index 1, both named `AI DJ`, with one diagnostic command/response and no echo. Those indexes are observations of that enumeration, not stable identities.
+
+The temporary Node helper currently owns both virtual endpoints. The production communicator must take over their creation and lifetime under the runtime lease. Opening an Output connected to the helper's `AI DJ` destination would send into the helper's receive queue, not into Mixxx's command input; it is not the selected command route. M02 must explicitly create the command source and feedback destination, reject duplicate external names, close the old fixture helper through its durable job, and verify host pairing after replacement. Exact-name discovery alone cannot prove routing direction.
+
 ## Evidence boundary
 
 The local graph, project `mixxx-ai-dj`, generation `2026-09-13T16:44:03Z`, returned `PortMidiEnumerator.queryDevices` and `shouldLinkInputToOutput`. Exact snippets were read and relevant coverage reported no recorded issue with matching metadata. The direct caller relationship to `queryDevices` was confirmed in source; unrelated heuristic graph callees were not relied on. The official 2.5.6 tagged source was separately read because the checkout identifies as 2.7-alpha. This is source-backed setup planning, not an executed port or Mixxx test.

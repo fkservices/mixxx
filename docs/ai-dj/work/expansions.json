@@ -176,7 +176,7 @@
         "F03",
         "F07"
       ],
-      "status": "running",
+      "status": "accepted",
       "owns": [
         "ai-dj/core/validate.ts",
         "ai-dj/test/core/validate.test.ts",
@@ -198,7 +198,16 @@
       "interrupt_by": "2026-09-13T19:50:06.920Z",
       "deadline": "2026-09-13T19:53:06.920Z",
       "monitor_cell": "254",
-      "supervisor_monotonic_registered_seconds": 10086.826187958
+      "supervisor_monotonic_registered_seconds": 10086.826187958,
+      "accepted_at": "2026-09-13T19:40:54.723990+00:00",
+      "evidence_sha256": "20ddc78b8b6425f4d7d629d698390a37d46de74dbe76dfeb55b7ed7ba6e44b82",
+      "monitor_status": "terminated_after_all_handoffs",
+      "checks": [
+        "Coordinator reviewed full catalog reference and pure candidate projection semantics, including preserved stale history.",
+        "All 39 integrated tests plus typecheck/build passed after final handoff; 28 cover the validator.",
+        "Legal large references, complete track/deck changes, stream-reset history, duplicate keys and inherited array-hook regressions passed.",
+        "No reducer, live catalog admission, authority grant or host-runtime acceptance claimed."
+      ]
     },
     {
       "parent": "M03",
