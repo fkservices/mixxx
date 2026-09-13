@@ -1,0 +1,170 @@
+{
+  "frames": 6618,
+  "observations": 13192,
+  "decoderErrors": 0,
+  "gaps": 0,
+  "exactNativeOutputMatches": 6618,
+  "exactNativeInputMatches": 4,
+  "commands": [
+    {
+      "atMs": 50264.46337500001,
+      "kind": "command",
+      "action": "cue-press",
+      "deck": 1,
+      "bytes": [
+        144,
+        35,
+        127
+      ]
+    },
+    {
+      "atMs": 58265.191875000004,
+      "kind": "command",
+      "action": "cue-release",
+      "deck": 1,
+      "bytes": [
+        128,
+        35,
+        0
+      ]
+    },
+    {
+      "atMs": 66620.027917,
+      "kind": "command",
+      "action": "cue-press",
+      "deck": 2,
+      "bytes": [
+        145,
+        35,
+        127
+      ]
+    },
+    {
+      "atMs": 74620.71045900001,
+      "kind": "command",
+      "action": "cue-release",
+      "deck": 2,
+      "bytes": [
+        129,
+        35,
+        0
+      ]
+    }
+  ],
+  "decks": [
+    {
+      "deck": 1,
+      "holdMs": 8000.728499999997,
+      "previewEdges": [
+        {
+          "schemaVersion": 1,
+          "generation": 1,
+          "sequence": 6633,
+          "deck": 1,
+          "controlKey": "cue_preview",
+          "clockDomainId": "cue-native",
+          "observedAtMs": 41135.409958,
+          "trigger": "callback",
+          "presence": "present",
+          "value": 1
+        },
+        {
+          "schemaVersion": 1,
+          "generation": 1,
+          "sequence": 7918,
+          "deck": 1,
+          "controlKey": "cue_preview",
+          "clockDomainId": "cue-native",
+          "observedAtMs": 49136.511999999995,
+          "trigger": "callback",
+          "presence": "present",
+          "value": 0
+        }
+      ],
+      "heldPlayAndPreviewSamples": 150,
+      "final": {
+        "cue_default": 0,
+        "cue_gotoandstop": 0,
+        "cue_point": 8748346.153846154,
+        "cue_mode": 0,
+        "cue_preview": 0,
+        "cue_indicator": 1,
+        "play": 0,
+        "play_latched": 0
+      }
+    },
+    {
+      "deck": 2,
+      "holdMs": 8000.68254200001,
+      "previewEdges": [
+        {
+          "schemaVersion": 1,
+          "generation": 1,
+          "sequence": 9249,
+          "deck": 2,
+          "controlKey": "cue_preview",
+          "clockDomainId": "cue-native",
+          "observedAtMs": 57491.439542,
+          "trigger": "callback",
+          "presence": "present",
+          "value": 1
+        },
+        {
+          "schemaVersion": 1,
+          "generation": 1,
+          "sequence": 10533,
+          "deck": 2,
+          "controlKey": "cue_preview",
+          "clockDomainId": "cue-native",
+          "observedAtMs": 65491.215,
+          "trigger": "callback",
+          "presence": "present",
+          "value": 0
+        }
+      ],
+      "heldPlayAndPreviewSamples": 150,
+      "final": {
+        "cue_default": 0,
+        "cue_gotoandstop": 0,
+        "cue_point": 628,
+        "cue_mode": 0,
+        "cue_preview": 0,
+        "cue_indicator": 1,
+        "play": 0,
+        "play_latched": 0
+      }
+    }
+  ],
+  "cleanNativeShutdown": true,
+  "helperExitCode": 0,
+  "unexpectedMIDIInputs": 0,
+  "limits": [
+    "One eight-second raw preview hold per deck in cue mode 0.",
+    "Diagnostic source remains unverified; these records do not establish human actor or AI authority.",
+    "Observation batches may have an incomplete final tail at shutdown; playback/preview zero was observed before shutdown.",
+    "No latency, endurance, physical-controller or musical acceptance."
+  ],
+  "crashAttempt": {
+    "cueCommandsSent": 0,
+    "exception": "EXC_BAD_ACCESS",
+    "signal": "SIGSEGV",
+    "topFrame": "-[QMacAccessibilityElement accessibilitySelectedChildren]",
+    "causeStatus": "Root cause unresolved; stack points to macOS Qt accessibility selection. Retry used native file dialogs."
+  },
+  "evidenceHashes": {
+    "retry.jsonl": "e7719629edff603a16e350abf1a3dc7df70c14bcf120908d61e1a1a3037a72d0",
+    "retry-host.log": "37ce245e327125d91448d94918d0ec43935e7aa35689696f5b3aadca719e8d84",
+    "capture.jsonl": "d41098dc1c4fffd8372f3b4d283c5be3e6e670043107477851072ace74c7c798",
+    "crash-host.log": "fdb5661b4a6053d09856376c037870c93e4b85cd0a87b31959f8a4648812a182",
+    "crash.ips": "b5858cbbf2a7bb0f6f90b994e1dfbd0e8262e2e9ad3c38fe7edd31917fc79df7",
+    "runner.mjs": "77d2ef3a8d2e907558b7a275ef1c416dccdd075156c7f718d84f577c72647f64",
+    "probe.js": "be61420e9c0581d1d805e054575c0f3bc42594f6009acf6e5ae552b585a72463",
+    "active-mapping.js": "cdc51f6c35eedf6f2ca6717b9ed66df6b3255639ab82a3318d54a284bf64d1b7"
+  },
+  "disclosure": "Autonomously AI-generated bounded native cue evidence.",
+  "source_revision": "8f5c4a68254417eb91165a0407c1ebdc731a8c15",
+  "verified_at": "2026-09-13T23:19:58.392860+00:00",
+  "status": "accepted-bounded-cue-regression",
+  "manualCueEvidence": "M13-CUE-TRANSPORT.json",
+  "endDisclosure": "End of autonomously AI-generated evidence."
+}

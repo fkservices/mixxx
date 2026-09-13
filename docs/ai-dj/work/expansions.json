@@ -536,7 +536,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "split",
+      "status": "accepted",
       "perform": [
         "Inspect version-pinned native cue_default, cue_indicator, cue_point and cue_preview behavior and binding; distinguish marker placement, preview activity, transport and indicator.",
         "Specify bounded additional host observations and transport/profile compatibility. Materialize required implementation and native-validation children with exact ownership before accepting this continuation; do not merely document away the gap."
@@ -549,8 +549,14 @@
       "executor": "coordinator",
       "started_at": "2026-09-13T21:20:18.653618+00:00",
       "checks": [
-        "Versioned source and installed skin inspected; observation contract written. Required implementation, transport and native children materialized."
-      ]
+        "Manual cue placement, default press/release and right-click observations verified separately from preview in native mode 0.",
+        "Both decks passed eight-second raw MIDI preview and release; 13,192 observations, zero gaps/errors, exact four input and 6,618 output matches.",
+        "Bounded cue scope accepted. Native accessibility crash retained as a release issue; final integrated five-control review remains."
+      ],
+      "source_revision": "8f5c4a68254417eb91165a0407c1ebdc731a8c15",
+      "accepted_at": "2026-09-13T23:19:58.392860+00:00",
+      "updated_at": "2026-09-13T23:19:58.392860+00:00",
+      "evidence_sha256": "7596ac1960f8ebe6a5a7a2811f70b96097237b5e8e869dc1343be3af79047e44"
     },
     {
       "id": "M13-CUE-OBSERVER",
@@ -678,7 +684,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "accepted",
       "perform": [
         "Capture manual marker placement, default CUE and right-click behavior on the isolated installed profile while AI remains disarmed.",
         "Correlate native screenshots and actual MIDI observations; retain raw cue press/release regression evidence and mode-specific limits."
@@ -688,11 +694,15 @@
         "Verify no stuck preview, no echo, unknown actor preserved, generation cleanup and paused handoff."
       ],
       "evidence": "docs/ai-dj/work/evidence/M13-CUE-NATIVE.md",
-      "updated_at": "2026-09-13T23:15:01.483280+00:00",
+      "updated_at": "2026-09-13T23:19:58.392860+00:00",
       "checks": [
-        "Preliminary native manual marker, CUE press/release and right-click behavior captured in mode 0.",
-        "Raw MIDI preview regression and full review still required before acceptance."
-      ]
+        "Manual cue placement, default press/release and right-click observations verified separately from preview in native mode 0.",
+        "Both decks passed eight-second raw MIDI preview and release; 13,192 observations, zero gaps/errors, exact four input and 6,618 output matches.",
+        "Bounded cue scope accepted. Native accessibility crash retained as a release issue; final integrated five-control review remains."
+      ],
+      "source_revision": "8f5c4a68254417eb91165a0407c1ebdc731a8c15",
+      "accepted_at": "2026-09-13T23:19:58.392860+00:00",
+      "evidence_sha256": "1ec99ff119f8fd4edc213fa0553140d7b44723e583127068e2caa146f4d8aeb2"
     },
     {
       "id": "R05-HOST-ENCODER",
@@ -1244,6 +1254,86 @@
       "source_revision": "47c9d3e49f189d35be36fe1fff6d7dfa335b4f98",
       "accepted_at": "2026-09-13T23:15:01.483280+00:00",
       "evidence_sha256": "27c2f7e4714a9cddf0cf98c98d103ec7c69b7fb9c2bd52bd2dca00cc5def0f62"
+    },
+    {
+      "id": "M13-FINAL-HOST",
+      "title": "Close five-control agreement on the integrated custom host",
+      "parent": "M13",
+      "blocks": [
+        "M13"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "M13-CUE-NATIVE",
+        "M12"
+      ],
+      "owns": [
+        "docs/ai-dj/work/runs/M13-FINAL-HOST.json",
+        "docs/ai-dj/work/evidence/M13-FINAL-HOST.md"
+      ],
+      "locks": [
+        "mixxx-runtime"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Repeat initial five-control mouse agreement and chosen sustained sync operation on the integrated custom host with conventional and cue capture together.",
+        "Compare current native evidence with prior 2.5.6 results; restore paused decks, sync off, volumes and fader."
+      ],
+      "validate": [
+        "Require observed UI/feedback agreement and exactly the intended input commands, with zero echo.",
+        "Accept M13 only after reviewing all required children and current host differences."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/M13-FINAL-HOST.md",
+      "updated_at": "2026-09-13T23:19:58.392860+00:00"
+    },
+    {
+      "id": "L12-NATIVE-ACCESSIBILITY",
+      "title": "Resolve the native macOS accessibility selection crash",
+      "parent": "L12",
+      "blocks": [
+        "L12"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "F11"
+      ],
+      "owns": [
+        "docs/ai-dj/work/evidence/L12-NATIVE-ACCESSIBILITY.md"
+      ],
+      "locks": [
+        "mixxx-runtime"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Reproduce the preserved QMacAccessibilityElement accessibilitySelectedChildren crash under bounded library selection operations.",
+        "Identify the responsible build/dependency or application lifetime issue and materialize exact implementation ownership before changing native source."
+      ],
+      "validate": [
+        "Require a source-backed correction or validated supported-host decision; avoiding accessibility queries alone does not establish a fix.",
+        "Verify repeated library selections and track loading through the normal accessible UI without crash before release acceptance."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/L12-NATIVE-ACCESSIBILITY.md",
+      "updated_at": "2026-09-13T23:19:58.392860+00:00"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

@@ -26,7 +26,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T23:15:01.483280+00:00",
+  "updated_at": "2026-09-13T23:19:58.392860+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2374,14 +2374,16 @@
       "id": "M13-MANUAL-CUE-VISIBILITY",
       "title": "Resolve native CUE telemetry mismatch without changing cue-preview meaning",
       "stage": "setup",
-      "status": "split",
+      "status": "accepted",
       "model": "gpt-6-astra",
-      "evidence": null,
-      "verified": false,
+      "evidence": "work/evidence/M13-MANUAL-CUE-VISIBILITY.md",
+      "verified": true,
       "checks": [
-        "Versioned source and installed skin inspected; observation contract written. Required implementation, transport and native children materialized."
+        "Manual cue placement, default press/release and right-click observations verified separately from preview in native mode 0.",
+        "Both decks passed eight-second raw MIDI preview and release; 13,192 observations, zero gaps/errors, exact four input and 6,618 output matches.",
+        "Bounded cue scope accepted. Native accessibility crash retained as a release issue; final integrated five-control review remains."
       ],
-      "updated": "2026-09-13T21:20:18.653618+00:00",
+      "updated": "2026-09-13T23:19:58.392860+00:00",
       "dynamic": true
     },
     {
@@ -2421,15 +2423,16 @@
       "id": "M13-CUE-NATIVE",
       "title": "Verify manual cue observations end to end in native Mixxx",
       "stage": "setup",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
+      "evidence": "work/evidence/M13-CUE-NATIVE.md",
+      "verified": true,
       "checks": [
-        "Preliminary native manual marker, CUE press/release and right-click behavior captured in mode 0.",
-        "Raw MIDI preview regression and full review still required before acceptance."
+        "Manual cue placement, default press/release and right-click observations verified separately from preview in native mode 0.",
+        "Both decks passed eight-second raw MIDI preview and release; 13,192 observations, zero gaps/errors, exact four input and 6,618 output matches.",
+        "Bounded cue scope accepted. Native accessibility crash retained as a release issue; final integrated five-control review remains."
       ],
-      "updated": "2026-09-13T23:15:01.483280+00:00",
+      "updated": "2026-09-13T23:19:58.392860+00:00",
       "dynamic": true
     },
     {
@@ -2597,6 +2600,30 @@
         "Bounded transport/assembly accepted; raw preview regression, full cue-mode review, controller and musical gates remain."
       ],
       "updated": "2026-09-13T23:15:01.483280+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "M13-FINAL-HOST",
+      "title": "Close five-control agreement on the integrated custom host",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": "2026-09-13T23:19:58.392860+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "L12-NATIVE-ACCESSIBILITY",
+      "title": "Resolve the native macOS accessibility selection crash",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": "2026-09-13T23:19:58.392860+00:00",
       "dynamic": true
     }
   ],
@@ -2785,6 +2812,27 @@
       "caption": "Actual native cue marker at 1:31.12 during the corrected batched run. Capture verified full numeric cue position and press/release edges, with 15,670 observations and zero gaps. This is transport evidence, not musical or controller acceptance.",
       "captured_at": "2026-09-13T23:13:02.918483+00:00",
       "evidence": "work/runs/M13-CUE-TRANSPORT.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-cue-regression-deck1-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Native deck-one raw MIDI preview held: play lit, waveform advanced and meters active. Capture confirms play/preview true during the eight-second hold.",
+      "captured_at": "2026-09-13T23:18:10.768966+00:00",
+      "evidence": "work/runs/M13-CUE-NATIVE.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-cue-regression-deck2-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Native deck-two raw MIDI preview held with the batched observer running. Capture confirms play/preview true during the eight-second hold.",
+      "captured_at": "2026-09-13T23:18:25.829925+00:00",
+      "evidence": "work/runs/M13-CUE-NATIVE.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-cue-regression-released-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Both decks paused after raw MIDI cue release. Capture confirms play and preview zero, exactly four intended commands, and no extra incoming MIDI commands.",
+      "captured_at": "2026-09-13T23:18:45.513705+00:00",
+      "evidence": "work/runs/M13-CUE-NATIVE.json"
     }
   ],
   "transport_checks": [

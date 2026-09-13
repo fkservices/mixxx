@@ -105,6 +105,27 @@
       "caption": "Actual native cue marker at 1:31.12 during the corrected batched run. Capture verified full numeric cue position and press/release edges, with 15,670 observations and zero gaps. This is transport evidence, not musical or controller acceptance.",
       "captured_at": "2026-09-13T23:13:02.918483+00:00",
       "evidence": "work/runs/M13-CUE-TRANSPORT.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-cue-regression-deck1-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Native deck-one raw MIDI preview held: play lit, waveform advanced and meters active. Capture confirms play/preview true during the eight-second hold.",
+      "captured_at": "2026-09-13T23:18:10.768966+00:00",
+      "evidence": "work/runs/M13-CUE-NATIVE.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-cue-regression-deck2-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Native deck-two raw MIDI preview held with the batched observer running. Capture confirms play/preview true during the eight-second hold.",
+      "captured_at": "2026-09-13T23:18:25.829925+00:00",
+      "evidence": "work/runs/M13-CUE-NATIVE.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-cue-regression-released-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Both decks paused after raw MIDI cue release. Capture confirms play and preview zero, exactly four intended commands, and no extra incoming MIDI commands.",
+      "captured_at": "2026-09-13T23:18:45.513705+00:00",
+      "evidence": "work/runs/M13-CUE-NATIVE.json"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."
