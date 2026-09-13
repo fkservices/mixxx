@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T19:40:54.723990+00:00",
+  "updated_at": "2026-09-13T19:59:34.560986+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -241,12 +241,17 @@
       "id": "M02",
       "title": "Implement bidirectional port lifecycle",
       "stage": "01-local-midi",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/M02.md",
+      "verified": true,
+      "checks": [
+        "Coordinator reviewed cleanup, option snapshots and collision handling; all six lifecycle tests and integrated 50-test suite passed.",
+        "Native open/close and SysEx reception verified; same-name duplicate creation rejected while keeper was active.",
+        "Coordinator observed final Mixxx controller enabled and independently read exact B8 77 2A reply to one diagnostic command; screenshot retained.",
+        "Both approved fixture tracks restored paused through native UI after restart; physical control, musical performance and silent-loss recovery remain unverified."
+      ],
+      "updated": "2026-09-13T19:59:34.560986+00:00",
       "dynamic": false
     },
     {
@@ -265,12 +270,16 @@
       "id": "M04",
       "title": "Decode conventional feedback",
       "stage": "01-local-midi",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/M04.md",
+      "verified": true,
+      "checks": [
+        "Coordinator reviewed exact feedback semantics and reran five focused decoder tests; all passed.",
+        "Every frozen profile instance, feedback vector and presence address is cross-checked; both cue release channels are ignored.",
+        "Output retains unknown actor and unproven host observation; no request, outbound command or authoritative state is fabricated."
+      ],
+      "updated": "2026-09-13T19:47:46.436519+00:00",
       "dynamic": false
     },
     {
@@ -2204,12 +2213,16 @@
       "id": "INTEGRATE-F09-SYNC-CONTRACT",
       "title": "Add explicit participant-aware sync action contract",
       "stage": "setup",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-6-astra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/INTEGRATE-F09-SYNC-CONTRACT.md",
+      "verified": true,
+      "checks": [
+        "Coordinator reviewed v2-only sync contract, complete roster, composite ownership and guarded effect bounds; v1 action semantics preserved.",
+        "Coordinator reran integrated typecheck/build and all50 tests successfully after contract handoff.",
+        "Production sync remains unavailable without host topology/telemetry/queue/race/effect proof; validator and profile integrations remain required."
+      ],
+      "updated": "2026-09-13T19:55:05.122730+00:00",
       "dynamic": true
     },
     {
@@ -2345,6 +2358,20 @@
       "caption": "Actual Mixxx AI DJ virtual device with a route-only diagnostic mapping enabled. A fixed MIDI probe returned on the separate feedback channel; performance controls remain to build.",
       "captured_at": "2026-09-13T19:30:50.589Z",
       "evidence": "work/evidence/F11.md"
+    },
+    {
+      "path": "work/screenshots/progress-midi-build-2026-09-13.jpg",
+      "kind": "progress_page",
+      "caption": "Foundation gate accepted; three MIDI tasks in progress. The browser refreshed automatically to show 13 accepted reference cards and four accepted expansion tasks. This is the build journal, not a MIDI performance test.",
+      "captured_at": "2026-09-13T19:46:05.538Z",
+      "evidence": "work/evidence/progress-page.md"
+    },
+    {
+      "path": "work/screenshots/mixxx-midi-lifecycle-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Actual Mixxx controller view after replacing the temporary ports with the TypeScript lifecycle adapter. The enabled diagnostic mapping returned the fixed MIDI reply. Performance controls and physical-controller handover still need implementation and testing.",
+      "captured_at": "2026-09-13T19:55:56.696Z",
+      "evidence": "work/evidence/M02.md"
     }
   ]
 }</script>

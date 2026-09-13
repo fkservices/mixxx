@@ -221,7 +221,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "accepted",
       "reasoning_effort": "high",
       "locks": [
         "core-contract-integration"
@@ -251,7 +251,22 @@
         "Review against accepted F09 released-source findings and preserve all previous action meanings.",
         "Run typecheck/build; do not enable the semantic profile before validator integration."
       ],
-      "evidence": "docs/ai-dj/work/evidence/INTEGRATE-F09-SYNC-CONTRACT.md"
+      "evidence": "docs/ai-dj/work/evidence/INTEGRATE-F09-SYNC-CONTRACT.md",
+      "source_revision": "0eeae4447ca1f6a1f2e3af683ee8061a85888481",
+      "started_at": "2026-09-13T19:44:18.374Z",
+      "interrupt_by": "2026-09-13T20:11:18.374Z",
+      "deadline": "2026-09-13T20:14:18.374Z",
+      "monitor_cell": "309",
+      "supervisor_monotonic_registered_seconds": 11355.235964708,
+      "worker": "/root/f09_midi_contract",
+      "accepted_at": "2026-09-13T19:55:05.122730+00:00",
+      "evidence_sha256": "ab12056bf9c1c797cf822614da7969e43fdc45f5b21c2aaedc2b5e386fbfa289",
+      "checks": [
+        "Coordinator reviewed v2-only sync contract, complete roster, composite ownership and guarded effect bounds; v1 action semantics preserved.",
+        "Coordinator reran integrated typecheck/build and all50 tests successfully after contract handoff.",
+        "Production sync remains unavailable without host topology/telemetry/queue/race/effect proof; validator and profile integrations remain required."
+      ],
+      "monitor_status": "terminated_after_all_handoffs"
     },
     {
       "parent": "M03",

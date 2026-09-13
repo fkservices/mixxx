@@ -346,6 +346,59 @@
         "Captured native audio/controller screenshots and post-load underflow baseline; original music hashes unchanged.",
         "Runtime, musical and latency-distribution acceptance remain later gates; physical controller explicitly deferred."
       ]
+    },
+    "M02": {
+      "status": "accepted",
+      "source_revision": "0eeae4447ca1f6a1f2e3af683ee8061a85888481",
+      "started_at": "2026-09-13T19:44:18.374Z",
+      "interrupt_by": "2026-09-13T20:11:18.374Z",
+      "deadline": "2026-09-13T20:14:18.374Z",
+      "monitor_cell": "309",
+      "supervisor_monotonic_registered_seconds": 11355.235964708,
+      "reasoning_effort": "high",
+      "worker": "/root/f03_scaffold",
+      "model": "gpt-5.6-terra",
+      "owned_paths": [
+        "ai-dj/midi/connection.ts",
+        "ai-dj/test/midi/connection.test.ts",
+        "docs/ai-dj/work/evidence/M02.md"
+      ],
+      "accepted_at": "2026-09-13T19:59:34.560986+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M02.md",
+      "evidence_sha256": "4ebfd324b7ca0f43c79f2584c101169c74cbb7e1a05f42644bde3e1fd890eb6e",
+      "checks": [
+        "Coordinator reviewed cleanup, option snapshots and collision handling; all six lifecycle tests and integrated 50-test suite passed.",
+        "Native open/close and SysEx reception verified; same-name duplicate creation rejected while keeper was active.",
+        "Coordinator observed final Mixxx controller enabled and independently read exact B8 77 2A reply to one diagnostic command; screenshot retained.",
+        "Both approved fixture tracks restored paused through native UI after restart; physical control, musical performance and silent-loss recovery remain unverified."
+      ],
+      "monitor_status": "terminated_after_all_handoffs"
+    },
+    "M04": {
+      "status": "accepted",
+      "source_revision": "0eeae4447ca1f6a1f2e3af683ee8061a85888481",
+      "started_at": "2026-09-13T19:44:18.374Z",
+      "interrupt_by": "2026-09-13T20:11:18.374Z",
+      "deadline": "2026-09-13T20:14:18.374Z",
+      "monitor_cell": "309",
+      "supervisor_monotonic_registered_seconds": 11355.235964708,
+      "reasoning_effort": "high",
+      "worker": "/root/f08_validators",
+      "model": "gpt-5.6-terra",
+      "owned_paths": [
+        "ai-dj/midi/conventional-decode.ts",
+        "ai-dj/test/midi/conventional-decode.test.ts",
+        "docs/ai-dj/work/evidence/M04.md"
+      ],
+      "accepted_at": "2026-09-13T19:47:46.436519+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M04.md",
+      "evidence_sha256": "3259c28c4697247d72051f02c1e9499cb7183a27d4aa997e2a6e6fe8541dfea6",
+      "checks": [
+        "Coordinator reviewed exact feedback semantics and reran five focused decoder tests; all passed.",
+        "Every frozen profile instance, feedback vector and presence address is cross-checked; both cue release channels are ignored.",
+        "Output retains unknown actor and unproven host observation; no request, outbound command or authoritative state is fabricated."
+      ],
+      "monitor_status": "terminated_after_all_handoffs"
     }
   },
   "jobs": {
@@ -380,17 +433,34 @@
       "exit_code": 0
     },
     "f11-runtime": {
-      "status": "running",
+      "status": "stopped_for_handoff",
       "source_revision": "e058660bbf2a1612ab7bd8ba76cf8e1d65ff865b",
       "record": "~/Library/Application Support/Mixxx-AI-DJ/jobs/f11-runtime/job.json",
       "ports_pid": 49495,
       "mixxx_pid": 50241,
       "scope": "Private non-performance diagnostic ports and isolated Mixxx profile",
-      "expected_end": "Explicit shutdown/fixture handoff; ports auto-close after two hours; no automatic restart"
+      "expected_end": "Explicit shutdown/fixture handoff; ports auto-close after two hours; no automatic restart",
+      "handoff": "M02 may replace verified private helper; verify PID/command before stop, record new production port job and preserve isolated host profile.",
+      "ended_at": "2026-09-13T19:51:03.029364+00:00",
+      "result": "M02 worker verified and SIGTERM stopped ports PID49495. Coordinator quit isolated Mixxx PID50241 through native UI and verified exit. M02 owns replacement endpoint creation before host restart."
+    },
+    "m02-runtime": {
+      "status": "running",
+      "source_revision": "0eeae4447ca1f6a1f2e3af683ee8061a85888481",
+      "record": "~/Library/Application Support/Mixxx-AI-DJ/jobs/m02-runtime/job.json",
+      "ports_pid": 73352,
+      "mixxx_pid": 73988,
+      "scope": "Production virtual-port adapter with private fixed diagnostic keeper and isolated Mixxx profile; no performance commands",
+      "expected_end": "Explicit verified handoff/stop or two-hour keeper lifetime from 2026-09-13T19:53:57Z; no auto-relaunch",
+      "checks": [
+        "Independent enumeration sees one AI DJ endpoint per direction.",
+        "Final probe sent 1, feedback B8 77 2A, losses 0.",
+        "Launchd variant unloaded; direct subprocess launch works in this session."
+      ]
     }
   },
   "resource_leases": {
-    "mixxx-runtime": "F11-fixture-job"
+    "mixxx-runtime": "M02-runtime-job"
   },
   "external_requirements": {
     "musical_fixtures": {

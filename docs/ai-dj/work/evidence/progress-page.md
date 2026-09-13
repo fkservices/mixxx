@@ -20,6 +20,10 @@ On 2026-09-13, Chrome loaded `http://127.0.0.1:8768/docs/ai-dj/progress.html` wi
 
 At the F11 milestone, the live browser showed 12 accepted reference cards, three accepted expansion tasks, one active state-validation task and one of seven delivery gates accepted. Four gallery images loaded, with the two actual Mixxx preferences captures displayed first. The native images and their captions were inspected in the browser; source music and unrelated recording titles remain in private fixture evidence outside Git. The test-booth text now follows F11 acceptance instead of stopping at installation status.
 
+At the next MIDI dispatch, the same live browser showed 13 accepted reference cards, four accepted expansion tasks, three active tasks and one accepted delivery gate without a reload. The [MIDI-build capture](../screenshots/progress-midi-build-2026-09-13.jpg) records that overview at 2026-09-13T19:46:05.538Z (1440 × 806 JPEG, 59,179 bytes). M02, M04 and the sync-contract integration each appeared under On the desk now.
+
+After M02/M04 and sync-contract acceptance, the browser displayed 15 accepted reference cards, five accepted expansion tasks, zero active workers and one accepted gate. Six gallery images loaded in the live view, including the new actual Mixxx controller screenshot. The newest image and caption were visually inspected at the narrower in-app browser width; the cards and captions remained readable.
+
 Future screenshots must be registered in `work/screenshots.json` with the actual capture time, kind, caption and evidence context. Allowed kinds distinguish native Mixxx UI, application UI, mockup and progress-page captures. Media files and private library paths stay outside Git; review screenshots for unnecessary private details before adding them.
 
 > End of autonomously AI-generated evidence.

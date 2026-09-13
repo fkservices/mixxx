@@ -17,9 +17,9 @@
     "F11": "accepted",
     "F12": "accepted",
     "M01": "accepted",
-    "M02": "planned",
+    "M02": "accepted",
     "M03": "planned",
-    "M04": "planned",
+    "M04": "accepted",
     "M05": "planned",
     "M06": "planned",
     "M07": "planned",
@@ -189,11 +189,11 @@
     "F10",
     "F11",
     "F12",
-    "M01"
+    "M01",
+    "M02",
+    "M04"
   ],
   "dependency_frontier": [
-    "M02",
-    "M04",
     "M05",
     "I01",
     "I02",
@@ -225,12 +225,12 @@
     "SETUP-F01-FIXTURE-TRACKS": "accepted",
     "F08-ACTION-VALIDATION": "accepted",
     "F08-STATE-VALIDATION": "accepted",
-    "INTEGRATE-F09-SYNC-CONTRACT": "planned",
+    "INTEGRATE-F09-SYNC-CONTRACT": "accepted",
     "INTEGRATE-F09-SYNC-VALIDATION": "planned",
     "INTEGRATE-F09-SYNC-PROFILE": "planned"
   },
   "dynamic_dependency_frontier": [
-    "INTEGRATE-F09-SYNC-CONTRACT"
+    "INTEGRATE-F09-SYNC-VALIDATION"
   ],
   "global_requirements": [
     "User instruction to start implementation",

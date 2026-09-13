@@ -28,6 +28,20 @@
       "caption": "Actual Mixxx AI DJ virtual device with a route-only diagnostic mapping enabled. A fixed MIDI probe returned on the separate feedback channel; performance controls remain to build.",
       "captured_at": "2026-09-13T19:30:50.589Z",
       "evidence": "work/evidence/F11.md"
+    },
+    {
+      "path": "work/screenshots/progress-midi-build-2026-09-13.jpg",
+      "kind": "progress_page",
+      "caption": "Foundation gate accepted; three MIDI tasks in progress. The browser refreshed automatically to show 13 accepted reference cards and four accepted expansion tasks. This is the build journal, not a MIDI performance test.",
+      "captured_at": "2026-09-13T19:46:05.538Z",
+      "evidence": "work/evidence/progress-page.md"
+    },
+    {
+      "path": "work/screenshots/mixxx-midi-lifecycle-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Actual Mixxx controller view after replacing the temporary ports with the TypeScript lifecycle adapter. The enabled diagnostic mapping returned the fixed MIDI reply. Performance controls and physical-controller handover still need implementation and testing.",
+      "captured_at": "2026-09-13T19:55:56.696Z",
+      "evidence": "work/evidence/M02.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

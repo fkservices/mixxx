@@ -36,7 +36,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** M01, F11. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** M01, F11. **Leases:** mixxx-runtime. **Status:** accepted.
 
 **Owns:** `ai-dj/midi/connection.ts`, `ai-dj/test/midi/connection.test.ts`
 
@@ -93,7 +93,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F09, F08. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** F09, F08. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/midi/conventional-decode.ts`, `ai-dj/test/midi/conventional-decode.test.ts`
 

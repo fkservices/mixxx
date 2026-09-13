@@ -84,7 +84,49 @@ export type CapabilityReadSemantics =
 export type ActionSelector =
   | { readonly action: "deck.set_parameter"; readonly parameter: DeckParameter }
   | { readonly action: "mixer.set_parameter"; readonly parameter: MixerParameter }
-  | { readonly action: Exclude<SemanticActionName, "deck.set_parameter" | "mixer.set_parameter"> };
+  | { readonly action: "deck.set_sync_enabled"; readonly schemaVersion: 2 }
+  | { readonly action: Exclude<SemanticActionName, "deck.set_parameter" | "mixer.set_parameter" | "deck.set_sync_enabled"> };
+
+export const SYNC_GUARD_CAPABILITIES = {
+  syncEnabled: "mixxx.deck.sync-enabled",
+  syncMode: "mixxx.deck.sync-mode",
+  playing: "mixxx.deck.playing",
+  audible: "mixxx.deck.audible",
+  passthrough: "mixxx.deck.passthrough",
+  vinylControl: "mixxx.deck.vinyl-control-enabled",
+  quantize: "mixxx.deck.quantize-enabled",
+  syncEligible: "mixxx.deck.sync-eligible",
+  beatGridReady: "mixxx.deck.beatgrid-ready",
+  fileBpm: "mixxx.deck.file-bpm",
+  effectiveBpm: "mixxx.deck.effective-bpm",
+  rateRatio: "mixxx.deck.rate-ratio",
+  beatPhase: "mixxx.deck.beat-phase",
+  leader: "mixxx.sync.leader",
+  internalClockBpm: "mixxx.sync.internal-clock-bpm",
+  pendingSyncChange: "mixxx.sync.pending-change",
+} as const satisfies Readonly<Record<string, CapabilityId>>;
+
+export type SyncLeaderValue = "none" | "internal-clock" |
+  `participant-${1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16}`;
+
+export interface SyncTopologyEvidence extends CapabilityContext {
+  readonly schemaVersion: 1;
+  readonly evidenceId: OpaqueId;
+  readonly topologyRevision: Generation;
+  readonly clockId: OpaqueId;
+  readonly observedAtMs: MonotonicMs;
+  readonly validUntilMs: MonotonicMs;
+  readonly participants: readonly {
+    readonly deckId: OpaqueId;
+    readonly deckGeneration: Generation;
+    readonly instance: CapabilityInstance;
+  }[];
+  readonly closureEvidenceIds: readonly OpaqueId[];
+}
+
+export type SyncGuardAvailability =
+  | { readonly status: "unavailable"; readonly reason: "topology-unverified" | "telemetry-unavailable" | "effect-bound-unverified" | "stale-context" }
+  | { readonly status: "available"; readonly topology: SyncTopologyEvidence };
 
 export type CapabilityWriteSemantics =
   | { readonly kind: "unresolved"; readonly reason: string }

@@ -4,7 +4,7 @@
 
 **Current work: implementation authorized and started.** The active goal is “perform tasks.md as proposed.” [GOALS.md](GOALS.md) remains authoritative. The reference catalog has 171 cards and 17 expansion templates. [Execution state and acceptance evidence](docs/ai-dj/work/state.json) are authoritative; a card's presence is not completion.
 
-**Now: thirteen reference tasks and four expansion tasks accepted.** All foundation cards and M01 are accepted. F08's complete action/state admission passed the 39-test integrated suite. F11 established isolated Mixxx 2.5.6, two loaded fixtures, paired virtual MIDI directions and a diagnostic round trip; real screenshots are in the journal. Next are the production port lifecycle, initial mapping and explicit sync contract integration. The full goal remains active through all control, UI, audio, endurance and listening gates.
+**Now: fifteen reference tasks and five expansion tasks accepted.** All foundation cards, port discovery/lifecycle and conventional feedback decoding are accepted. The integrated suite passes 50 tests. M02 replaced the temporary ports and verified a real Mixxx diagnostic reply; both approved fixtures are restored paused, with native screenshots in the journal. The sync contract now covers the complete configured roster while preserving manual authority. Next are sync validation/profile integration and the initial mapping. Performance, UI, audio, endurance and listening gates remain open.
 
 [Visual progress page](docs/ai-dj/progress.html) stays synchronized with the ledger. Add real screenshots and their evidence context as UI/runtime checks produce them.
 
