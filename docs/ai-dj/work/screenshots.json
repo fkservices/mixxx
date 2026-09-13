@@ -56,6 +56,13 @@
       "caption": "Actual Mixxx loaded the four assembled control/feedback fragments. Native initialization and initial feedback were observed; playback, timing and musical tests remain pending.",
       "captured_at": "2026-09-13T20:24:12.608Z",
       "evidence": "work/evidence/M10.md"
+    },
+    {
+      "path": "work/screenshots/progress-communicator-2026-09-13.jpg",
+      "kind": "progress_page",
+      "caption": "Actual build journal with 22 reference tasks and eight expansion tasks accepted. The separate communicator CLI is in progress; native reconnection and performance tests remain pending.",
+      "captured_at": "2026-09-13T20:36:37.672Z",
+      "evidence": "work/evidence/progress-page.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

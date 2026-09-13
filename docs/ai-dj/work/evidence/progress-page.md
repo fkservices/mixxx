@@ -24,6 +24,8 @@ At the next MIDI dispatch, the same live browser showed 13 accepted reference ca
 
 After M02/M04 and sync-contract acceptance, the browser displayed 15 accepted reference cards, five accepted expansion tasks, zero active workers and one accepted gate. Six gallery images loaded in the live view, including the new actual Mixxx controller screenshot. The newest image and caption were visually inspected at the narrower in-app browser width; the cards and captions remained readable.
 
+At the communicator service milestone, the live browser showed 22 accepted reference cards, eight of nine accepted expansion tasks, one active CLI task and one of seven accepted delivery gates. The [communicator progress capture](../screenshots/progress-communicator-2026-09-13.jpg) was captured at 2026-09-13T20:36:37.672Z. The overview was visually inspected at the current in-app browser width: readable cards, no overlap, and no private track data. Current fixture text explicitly requires verification after the Mixxx restart. This capture proves journal presentation, not MIDI control or playback.
+
 Future screenshots must be registered in `work/screenshots.json` with the actual capture time, kind, caption and evidence context. Allowed kinds distinguish native Mixxx UI, application UI, mockup and progress-page captures. Media files and private library paths stay outside Git; review screenshots for unnecessary private details before adding them.
 
 > End of autonomously AI-generated evidence.

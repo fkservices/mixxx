@@ -91,3 +91,102 @@ export async function createCommunicator(options: CommunicatorOptions) {
     close(){if(closed)return;closed=true;disarm("closed");transport!.close();},
   };
 }
+
+// Local IPC and capture are separate from the MIDI callbacks; browser/client lifetime is irrelevant.
+import { createServer, type Socket } from "node:net";
+import { open, chmod } from "node:fs/promises";
+import { randomUUID } from "node:crypto";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { openNativeVirtualMidiConnection } from "./midi/connection.ts";
+interface CaptureSink { append(line: string): Promise<void>; sync(): Promise<void>; close(): Promise<void> }
+export interface LocalServiceOptions extends CommunicatorOptions {
+  readonly socketPath: string;
+  readonly capturePath: string;
+  readonly openCapture?: () => Promise<CaptureSink>;
+}
+export async function startLocalService(options: LocalServiceOptions) {
+  const sink = options.openCapture ? await options.openCapture() : await (async()=>{
+    const file=await open(options.capturePath,"wx",0o600);
+    return {append:async(line:string)=>{await file.writeFile(line);},sync:()=>file.sync(),close:()=>file.close()};
+  })();
+  let app: Awaited<ReturnType<typeof createCommunicator>>;
+  try {app=await createCommunicator(options);}catch(error){await sink.close();throw error;}
+  let captureError: string|null=null, stopping=false, generation=0;
+  let queue=Promise.resolve();
+  const write=(record:object)=>{
+    const line=JSON.stringify(record)+"\n";
+    queue=queue.then(async()=>{await sink.append(line);await sink.sync();}).catch(error=>{captureError=String(error);app.execute("disarm");throw error;});
+    return queue;
+  };
+  let flushing:Promise<void>|null=null;
+  const flush=():Promise<void>=>{
+    if(flushing)return flushing;
+    const batch=app.drain(4096);
+    if(!batch.events.length&&!batch.gaps.length)return Promise.resolve();
+    flushing=write({kind:"diagnostics",...batch}).finally(()=>{flushing=null;});return flushing;
+  };
+  const clients=new Set<Socket>();
+  let inFlight=0;
+  const serviceStatus=()=>({...app.status(),captureError,scope:"manual-fixture",pid:process.pid});
+  const server=createServer(socket=>{
+    if(stopping||clients.size>=8){socket.destroy();return;}
+    clients.add(socket);socket.setTimeout(2000,()=>socket.destroy());
+    socket.on("error",()=>{});socket.on("close",()=>clients.delete(socket));
+    let data=Buffer.alloc(0),handled=false;
+    socket.on("data",chunk=>{
+      if(handled){socket.destroy();return;}
+      if(data.length+chunk.length>257){socket.end(JSON.stringify({ok:false,reason:"request-too-large"})+"\n");handled=true;return;}
+      data=Buffer.concat([data,typeof chunk === "string" ? Buffer.from(chunk) : chunk]);const newline=data.indexOf(10);if(newline<0)return;
+      handled=true;
+      if(newline!==data.length-1){socket.end(JSON.stringify({ok:false,reason:"one-command-per-client"})+"\n");return;}
+      const command=data.subarray(0,newline).toString("utf8");
+      if(command==="disarm"){generation++;app.execute("disarm");}
+      if(inFlight>=8){socket.end(JSON.stringify({ok:command==="disarm",reason:"service-busy",armed:app.status().armed})+"\n");return;}
+      inFlight++;
+      const epoch=generation;
+      void (async()=>{
+        let response:object;
+        if(command==="status")response=serviceStatus();
+        else if(captureError)response=command==="disarm"?{ok:true,armed:false,captureError}:{ok:false,reason:"capture-failed"};
+        else {
+          await write({kind:"client-command",command,atMs:options.now(),source:"local-cli"});
+          response=stopping||epoch!==generation?{ok:false,reason:"cancelled"}:app.execute(command);
+          await write({kind:"client-result",command,response,atMs:options.now()});
+        }
+        if(!socket.destroyed)socket.end(JSON.stringify(response)+"\n");
+      })().catch(error=>{if(!socket.destroyed)socket.end(JSON.stringify({ok:false,reason:"capture-or-service-failed",detail:String(error)})+"\n");}).finally(()=>{inFlight--;});
+    });
+  });
+  let interval: ReturnType<typeof setInterval>|undefined;
+  let closePromise:Promise<void>|undefined;
+  const close=()=>closePromise??=(async()=>{
+    stopping=true;generation++;app.execute("disarm");if(interval)clearInterval(interval);
+    for(const socket of clients)socket.destroy();
+    await new Promise<void>(r=>server.close(()=>r()));
+    let error:unknown;
+    try {app.close();}catch(e){error=e;}
+    try {while(app.status().capture.queuedEventCount)await flush();await queue;await write({kind:"service-closed",atMs:options.now()});}catch(e){error??=e;}
+    await sink.close();if(error)throw error;
+  })();
+  try {
+    await write({kind:"service-started",schemaVersion:1,scope:"manual-fixture",contextProvenance:"caller-supplied-unverified",context:options.context,clockId:options.clockId,atMs:options.now()});
+    await new Promise<void>((yes,no)=>{server.once("error",no);server.listen(options.socketPath,()=>{server.removeListener("error",no);yes();});});
+    await chmod(options.socketPath,0o600);
+    server.on("error",()=>{app.execute("disarm");});
+    interval=setInterval(()=>{void flush().catch(()=>{});},100);
+  }catch(error){await close().catch(()=>{});throw error;}
+  return {status:serviceStatus,flush,close,socketPath:options.socketPath};
+}
+
+if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
+  const [command,socketPath,capturePath,...extra]=process.argv.slice(2);
+  if(command!=="serve-fixture"||!socketPath||!capturePath||extra.length)throw new Error("Usage: main.ts serve-fixture SOCKET CAPTURE.jsonl");
+  const id=randomUUID();
+  const service=await startLocalService({socketPath,capturePath,clockId:`local-${id}`,now:()=>performance.now(),context:{sessionId:`fixture-${id}`,correlationId:null,host:{hostInstanceId:`unverified-${id}`,connectionGeneration:0,profileId:"mixxx-2.5.6-latenight-conventional-v1",profileRevision:2,capabilityRevision:0,stateRevision:0}},openTransport:openNativeVirtualMidiConnection});
+  console.log(JSON.stringify({ready:true,pid:process.pid,socketPath,capturePath,scope:"manual-fixture",armed:false}));
+  let closing=false;
+  const stop=()=>{if(closing)return;closing=true;void service.close().then(()=>process.exit(0),error=>{console.error(String(error));process.exit(1);});};
+  process.on("SIGTERM",stop);process.on("SIGINT",stop);
+  setTimeout(stop,2*60*60*1000);
+}

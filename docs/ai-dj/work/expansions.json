@@ -450,7 +450,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "running",
       "perform": [
         "Add local bounded IPC service runner and separate CLI client, preserving service lifetime when a client exits.",
         "Add durable capture output and native transport startup with explicit profile/session and no automatic arming."
@@ -459,7 +459,10 @@
         "Verify client close leaves service and transport connected, malformed IPC bounds, capture persistence and clean service shutdown.",
         "Run integrated tests and document exact launch/client commands."
       ],
-      "evidence": "docs/ai-dj/work/evidence/M11-CLI.md"
+      "evidence": "docs/ai-dj/work/evidence/M11-CLI.md",
+      "executor": "coordinator",
+      "source_revision": "9dfdfb9",
+      "started_at": "2026-09-13T20:31:32.313518+00:00"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

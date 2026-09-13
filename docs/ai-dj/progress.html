@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T20:28:30.557961+00:00",
+  "updated_at": "2026-09-13T20:31:32.313518+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2307,12 +2307,12 @@
       "id": "M11-CLI",
       "title": "Expose service through separate local CLI client",
       "stage": "setup",
-      "status": "planned",
+      "status": "running",
       "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
       "checks": [],
-      "updated": null,
+      "updated": "2026-09-13T20:31:32.313518+00:00",
       "dynamic": true
     }
   ],
@@ -2393,8 +2393,8 @@
     "detail": "User explicitly said they will connect later. Exact model identified; physical MIDI/controller evidence remains pending. Continue independent software work without asking again."
   },
   "music": {
-    "status": "two_native_fixtures_loaded",
-    "detail": "Two approved local Music-library tracks are loaded and analyzed in isolated Mixxx. They are diagnostic fixtures; natural transition, audible playback and musical quality are unverified."
+    "status": "reload_verification_pending",
+    "detail": "Two approved local Music-library diagnostic fixtures were previously loaded and analyzed. Mixxx restarted for the communicator port handoff; current deck loading and feedback must be reverified. Audible playback and musical quality remain unverified."
   },
   "screenshots": [
     {
@@ -2452,6 +2452,13 @@
       "caption": "Actual Mixxx loaded the four assembled control/feedback fragments. Native initialization and initial feedback were observed; playback, timing and musical tests remain pending.",
       "captured_at": "2026-09-13T20:24:12.608Z",
       "evidence": "work/evidence/M10.md"
+    },
+    {
+      "path": "work/screenshots/progress-communicator-2026-09-13.jpg",
+      "kind": "progress_page",
+      "caption": "Actual build journal with 22 reference tasks and eight expansion tasks accepted. The separate communicator CLI is in progress; native reconnection and performance tests remain pending.",
+      "captured_at": "2026-09-13T20:36:37.672Z",
+      "evidence": "work/evidence/progress-page.md"
     }
   ]
 }</script>
@@ -2479,7 +2486,7 @@ function render(){
  $('milestones').innerHTML=data.milestones.map((m,i)=>`<div class="milestone ${m.accepted?'done':i===data.milestones.findIndex(x=>!x.accepted)?'active':''}"><span class="label">${escape(m.id)} · ${m.accepted?'Accepted':'Open'}</span><h3>${escape(m.title)}</h3><small>Exit: ${escape(m.requires.join(', '))}</small></div>`).join('');
  $('active').innerHTML=active.length?active.map(taskBlock).join(''):'<p class="muted">No worker is recorded as active. The next eligible tasks await coordinator dispatch.</p>';
  const installed=data.children.find(t=>t.id==='SETUP-F01-MIXXX-2.5.6-ARM')?.verified;
- $('booth').innerHTML=`<article class="work"><h3>Mixxx 2.5.6 · ARM · LateNight</h3><p>${all().some(t=>t.id==='F11'&&t.verified)?'Isolated host verified; two tracks loaded and a diagnostic MIDI round trip observed. Performance-control and playback tests remain.':installed?'Installed and signature verified. Host fixture preparation remains.':'Selected test profile; installation evidence pending.'}</p></article><article class="work"><h3>Local iTunes / Music library</h3><p>${escape(data.music.detail)}</p></article><article class="work"><h3>${escape(data.controller.model??'Physical controller')}</h3><p>${escape(data.controller.status==='operator_will_connect_later'?'Connection deferred. Physical MIDI messages, mapping and B2B handover still need testing.':data.controller.detail)}</p></article>`;
+ $('booth').innerHTML=`<article class="work"><h3>Mixxx 2.5.6 · ARM · LateNight</h3><p>${all().some(t=>t.id==='F11'&&t.verified)?'Baseline evidence includes an isolated host, two loaded tracks and a diagnostic MIDI round trip. See the current fixture status below; performance-control and playback tests remain.':installed?'Installed and signature verified. Host fixture preparation remains.':'Selected test profile; installation evidence pending.'}</p></article><article class="work"><h3>Local iTunes / Music library</h3><p>${escape(data.music.detail)}</p></article><article class="work"><h3>${escape(data.controller.model??'Physical controller')}</h3><p>${escape(data.controller.status==='operator_will_connect_later'?'Connection deferred. Physical MIDI messages, mapping and B2B handover still need testing.':data.controller.detail)}</p></article>`;
  $('recent').innerHTML=all().filter(t=>t.verified).sort((a,b)=>(b.updated??'').localeCompare(a.updated??'')).slice(0,6).map(taskBlock).join('')||'<p class="muted">No acceptance evidence yet.</p>';
  $('gallery-count').textContent=data.screenshots.length+' captured views';
  $('gallery').innerHTML=data.screenshots.length?[...data.screenshots].sort((a,b)=>b.captured_at.localeCompare(a.captured_at)).map(s=>`<figure><a href="${safeLink(s.path)}"><img loading="lazy" src="${safeLink(s.path)}" alt="${escape(s.caption)}"></a><figcaption><span class="pill">${escape(s.kind.replaceAll('_',' '))}</span> ${escape(s.caption)}<br>${escape(s.captured_at)} · <a href="${safeLink(s.evidence)}">Evidence context</a></figcaption></figure>`).join(''):'<div class="empty" style="grid-column:1/-1"><h3>No runtime screenshots yet</h3>Real Mixxx controls, the app timeline and test outcomes will appear here as they are captured. The direction page is a simulated concept, not runtime evidence.</div>';

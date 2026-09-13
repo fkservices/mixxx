@@ -546,7 +546,7 @@
       "result": "M02 worker verified and SIGTERM stopped ports PID49495. Coordinator quit isolated Mixxx PID50241 through native UI and verified exit. M02 owns replacement endpoint creation before host restart."
     },
     "m02-runtime": {
-      "status": "running",
+      "status": "stopped_for_handoff",
       "source_revision": "0eeae4447ca1f6a1f2e3af683ee8061a85888481",
       "record": "~/Library/Application Support/Mixxx-AI-DJ/jobs/m02-runtime/job.json",
       "ports_pid": 73352,
@@ -558,15 +558,24 @@
         "Final probe sent 1, feedback B8 77 2A, losses 0.",
         "Launchd variant unloaded; direct subprocess launch works in this session."
       ]
+    },
+    "m11-runtime": {
+      "status": "running",
+      "pid": 4355,
+      "mixxx_pid": 6235,
+      "handle": "~/Library/Application Support/Mixxx-AI-DJ/jobs/m11-runtime/job.json",
+      "scope": "Disarmed local fixture communicator, private Unix socket and durable capture; no performance commands",
+      "expected_end": "Two hours from 2026-09-13T20:31:07Z or explicit verified shutdown"
     }
   },
   "resource_leases": {
-    "mixxx-runtime": "M02-runtime-job"
+    "mixxx-runtime": "M11-CLI",
+    "app-entry": "M11-CLI"
   },
   "external_requirements": {
     "musical_fixtures": {
-      "status": "two_native_fixtures_loaded",
-      "detail": "Two approved local Music-library tracks are loaded and analyzed in isolated Mixxx. They are diagnostic fixtures; natural transition, audible playback and musical quality are unverified."
+      "status": "reload_verification_pending",
+      "detail": "Two approved local Music-library diagnostic fixtures were previously loaded and analyzed. Mixxx restarted for the communicator port handoff; current deck loading and feedback must be reverified. Audible playback and musical quality remain unverified."
     },
     "physical_controller": {
       "status": "operator_will_connect_later",

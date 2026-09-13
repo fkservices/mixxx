@@ -235,11 +235,9 @@
     "INTEGRATE-F09-SYNC-VALIDATION": "accepted",
     "INTEGRATE-F09-SYNC-PROFILE": "accepted",
     "M11-SERVICE": "accepted",
-    "M11-CLI": "planned"
+    "M11-CLI": "running"
   },
-  "dynamic_dependency_frontier": [
-    "M11-CLI"
-  ],
+  "dynamic_dependency_frontier": [],
   "global_requirements": [
     "User instruction to start implementation",
     "Current integrated revision and scoped context",
