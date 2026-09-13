@@ -589,14 +589,15 @@
       ],
       "evidence": "docs/ai-dj/work/evidence/M13-CUE-OBSERVER.md",
       "executor": "coordinator",
-      "source_revision": "caf01c5b694ef34f65d478a0ce4e3d15510094e6",
+      "source_revision": "a8f76b70c0893ba8ab4ea2d34918cbed86c27e55",
       "started_at": "2026-09-13T21:22:09.109430+00:00",
       "accepted_at": "2026-09-13T21:23:31.044527+00:00",
-      "evidence_sha256": "56bb63f605913eaa414a1076b9fe0ed922445be452a203d2380bad470ef6463c",
+      "evidence_sha256": "cec4f1e290ece628ea02d2f5625321c7537ba4b5785207bc0bbc44c1263d3f65",
       "checks": [
         "Eight synthetic observer tests and 130 integrated tests passed.",
         "Typecheck, build and whitespace passed.",
-        "Bounded read-only collector accepted; MIDI integration and native evidence remain separate required children."
+        "Bounded read-only collector accepted; MIDI integration and native evidence remain separate required children.",
+        "Version-pinned FIFO semantics reviewed; nine observer tests and all 151 integrated tests passed."
       ]
     },
     {

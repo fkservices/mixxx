@@ -42,4 +42,14 @@ executable fixtures. This accepts only `M13-CUE-OBSERVER`'s collector scope.
 Nothing here proves installed Qt execution, actual cue callbacks, MIDI transport,
 native manual cue visibility, latency or musical quality.
 
+## Version-pinned connection review
+
+Follow-up inspection of Mixxx 2.5.6 confirms the ordinary connection preserves
+FIFO delivery; the unbuffered variant skips superseded values. The observer
+retains `makeConnection` and now documents why. A ninth observer test explicitly
+prohibits falling back to the coalescing API when FIFO connections are missing.
+All 151 integrated tests, typecheck and build passed after this review. See
+[native integration findings](../integrations/wire-endpoint.md) for sources and
+the still-open clock and native-runtime requirements.
+
 > End of autonomously AI-generated implementation evidence.
