@@ -4,7 +4,7 @@
 
 **Current work: implementation authorized and started.** The active goal is “perform tasks.md as proposed.” [GOALS.md](GOALS.md) remains authoritative. The reference catalog has 171 cards and 17 expansion templates. [Execution state and acceptance evidence](docs/ai-dj/work/state.json) are authoritative; a card's presence is not completion.
 
-**Now: eighteen reference tasks and seven expansion tasks accepted.** Foundation and M01–M06 are accepted. The package passes 73 tests. The play/volume fragment now implements exact desired-state writes on both decks, rejects unrelated packets and checks connection availability. It is not yet assembled into the live mapping. Next are fader/cue, sync and feedback fragments, then M10 assembly and actual performance tests. Full delivery gates remain open.
+**Now: nineteen reference tasks and seven expansion tasks accepted.** Foundation and M01–M07 are accepted. The package passes 80 tests. Crossfader and raw cue mapping now cover exact center, every cue note velocity and shutdown release failures. Production cue still requires the independent host lease guard. Next are sync and feedback fragments, then M10 assembly and actual performance tests. The running bootstrap has not gained performance fragments yet.
 
 [Visual progress page](docs/ai-dj/progress.html) stays synchronized with the ledger. Add real screenshots and their evidence context as UI/runtime checks produce them.
 

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T20:17:46.460384+00:00",
+  "updated_at": "2026-09-13T20:19:23.192763+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -299,12 +299,16 @@
       "id": "M07",
       "title": "Map crossfader and momentary cue",
       "stage": "01-local-midi",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/M07.md",
+      "verified": true,
+      "checks": [
+        "Exact crossfader parameter curve and both-deck raw cue note edges reviewed against F09.",
+        "80 tests, typecheck and build passed; shutdown releases and partial cleanup failure exercised.",
+        "Raw pending-release bookkeeping is not a production lease; fragment not installed and actual audio/host proof remains."
+      ],
+      "updated": "2026-09-13T20:19:23.192763+00:00",
       "dynamic": false
     },
     {

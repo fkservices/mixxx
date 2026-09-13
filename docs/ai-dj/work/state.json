@@ -440,6 +440,19 @@
         "73 integrated tests, strict typecheck and build passed; all volume bytes and unavailable-route handling tested.",
         "Fragment not yet assembled or installed; real Mixxx/UI/audio/timing remain later checks."
       ]
+    },
+    "M07": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "8705534",
+      "accepted_at": "2026-09-13T20:19:23.192763+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M07.md",
+      "evidence_sha256": "38da6ec7fe323ea797bb4772ccd6f4bdea91c9d15b76c63d8712b004aff17fb5",
+      "checks": [
+        "Exact crossfader parameter curve and both-deck raw cue note edges reviewed against F09.",
+        "80 tests, typecheck and build passed; shutdown releases and partial cleanup failure exercised.",
+        "Raw pending-release bookkeeping is not a production lease; fragment not installed and actual audio/host proof remains."
+      ]
     }
   },
   "jobs": {
