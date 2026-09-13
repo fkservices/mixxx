@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "task": "M13",
+  "status": "incomplete",
+  "recordedAt": "2026-09-13T21:06:40.420762+00:00",
+  "sourceRevision": "088e100",
+  "host": {
+    "version": "2.5.6",
+    "skin": "LateNight",
+    "pid": 23046
+  },
+  "service": {
+    "pid": 4355,
+    "armed": false,
+    "droppedEvents": 0
+  },
+  "mouseFeedback": {
+    "play": "false -> true -> false",
+    "volume": "1 -> 42/127 -> 1",
+    "crossfader": "0.5 -> 0.753968253968254 -> 0.5",
+    "sync": "short click emitted B8 22 7F then returned to B8 22 00; native tempo changed 117 to 102 BPM",
+    "cue": "native cue marker created at displayed 27.02 seconds; B8 23 remained zero"
+  },
+  "capture": {
+    "rawRecorded": 45596,
+    "commandSent": 0,
+    "outgoingRaw": 0
+  },
+  "restored": {
+    "pausedBothDecks": true,
+    "volumeBothDecks": 1,
+    "crossfader": 0.5,
+    "deck1Bpm": 117,
+    "deck1RatePercent": 0,
+    "cueMarkerRetained": true
+  },
+  "privateArtifacts": [
+    {
+      "file": "baseline.json",
+      "sha256": "6283d73fdcc13aaaa760a06b0020800530ed5a00d67ce791aaff42133285faf2"
+    },
+    {
+      "file": "capture-start.json",
+      "sha256": "c669bc83f3480bc6283c76ee708a82d6ee9010863dccb650f466d3783431541f"
+    },
+    {
+      "file": "status.jsonl",
+      "sha256": "30158bf351c3eb6f801f67340a23c8eb5c71b1bff932961c94473d247e9d5059"
+    },
+    {
+      "file": "mouse-play.jpg",
+      "sha256": "26fe6bb441a3c25140f68365f51ad5981fb0951781ec0177d596149057049794"
+    },
+    {
+      "file": "restored-paused.jpg",
+      "sha256": "62712fbf2180764868329aba5e002ac5284f90cd3306b090362018fc1750c56e"
+    },
+    {
+      "file": "mouse-capture.jsonl",
+      "sha256": "4b790df7190d059d00ab3fddc59faed57f1a81f84ec81fabb8d6d3cb0312552e"
+    }
+  ],
+  "remaining": [
+    "Explicit raw MIDI cue press/release host proof",
+    "Sustained sync enable/off host proof",
+    "Manual cue semantic visibility beyond cue_preview",
+    "Zero stuck cue and complete five-control native agreement"
+  ]
+}

@@ -576,7 +576,9 @@
       "source_revision": "93e700e",
       "started_at": "2026-09-13T21:02:01.120249+00:00",
       "checks": [
-        "Checking direct mouse feedback while service remains disarmed; raw cue/sync command proof remains required."
+        "Mouse play, volume and crossfader feedback observed while disarmed; 45,596 feedback packets and zero outgoing commands in frozen capture.",
+        "Short SYNC click emitted on/off and changed tempo; restored to 117 BPM. Native CUE marker creation was not represented by cue_preview feedback.",
+        "Incomplete: raw cue press/release, sustained sync and full manual cue visibility still require verification."
       ]
     }
   },
