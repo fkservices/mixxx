@@ -149,4 +149,18 @@ The helper and host exited, and the repository mapping was restored. Capture,
 probe, runner and filtered native-log hashes are added to the existing partial
 native run record. Reset, capacity and lifecycle evidence remain required.
 
+## Native reassembly capacity
+
+Five different sequences each sent only their first fragment. Native observations
+showed slot counts 1, 2, 3, 4, 4: the fifth produced `reassembly-capacity`, no
+dispatch, and no extra allocation. Stored payload remained 3,092 bytes for four
+773-byte messages. After 600 ms, four timeout diagnostics were observed and a
+fresh two-fragment sequence completed. Node received only the fresh sequence 15,
+with its exact payload. The final parser state retained zero payload bytes.
+
+This verifies the four-slot boundary and recovery at these payload sizes, not
+maximum aggregate memory or a long soak. The helper and host exited and the
+repository mapping was restored. Hashed artifacts are in the capacity section
+of the partial native record. Reset, lifecycle and absolute-expiry cases remain.
+
 > End of autonomously AI-generated investigation.

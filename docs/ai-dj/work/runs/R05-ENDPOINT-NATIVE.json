@@ -3,7 +3,7 @@
   "task": "R05-ENDPOINT-NATIVE",
   "status": "partial",
   "sourceRevision": "abae078",
-  "recordedAt": "2026-09-13T22:22:14.841534+00:00",
+  "recordedAt": "2026-09-13T22:23:15.337902+00:00",
   "hostVersion": "custom Mixxx 2.7.0",
   "nativeClock": "engine.getMonotonicTime",
   "fixture": "Private opcode 9 JSON echo; no production service or performance action handler",
@@ -50,7 +50,7 @@
   },
   "installedMappingSha256": "72f796c0e1a4c30142bad127d58804c93a558c533dcd81d94c25c1389d17e441",
   "limitations": [
-    "Native JSON/checksum and two-fragment idle expiry passed; reset/capacity/lifecycle and absolute expiry remain.",
+    "Native JSON/checksum, idle expiry and four-slot capacity passed; reset/lifecycle and absolute expiry remain.",
     "Opcode 9 payload is a private codec fixture, not a valid production session message.",
     "No setters exist in the probe handler; no performance input sent. This is not an exhaustive hostile-message setter audit."
   ],
@@ -125,5 +125,253 @@
       "host-evidence.log": "99282500231c8d3747a380a54f97bad216fe6b30b3382491f5d680973a3bdbfa"
     },
     "installedMappingSha256": "c625c2584b17a65a2873d0e7ecca0075a68e7fbc828613b57c8d7bdd08a90428"
+  },
+  "capacityProbe": {
+    "sourceRevision": "55fb963",
+    "status": "passed",
+    "inputResults": [
+      {
+        "result": {
+          "dispatched": 0,
+          "rejected": 0,
+          "closed": false,
+          "diagnostics": [],
+          "droppedDiagnostics": 0
+        },
+        "state": {
+          "enabled": true,
+          "clock": {
+            "kind": "monotonic",
+            "id": "native-capacity-probe"
+          },
+          "clockProvenance": "caller-supplied-unverified",
+          "endpoint": {
+            "closed": false,
+            "fault": null,
+            "generation": 1,
+            "parser": {
+              "generation": 1,
+              "closed": false,
+              "failed": false,
+              "partialBytes": 0,
+              "incompleteMessages": 1,
+              "retainedPayloadBytes": 773,
+              "pendingDiagnostics": 0,
+              "droppedDiagnostics": 0
+            }
+          }
+        }
+      },
+      {
+        "result": {
+          "dispatched": 0,
+          "rejected": 0,
+          "closed": false,
+          "diagnostics": [],
+          "droppedDiagnostics": 0
+        },
+        "state": {
+          "enabled": true,
+          "clock": {
+            "kind": "monotonic",
+            "id": "native-capacity-probe"
+          },
+          "clockProvenance": "caller-supplied-unverified",
+          "endpoint": {
+            "closed": false,
+            "fault": null,
+            "generation": 1,
+            "parser": {
+              "generation": 1,
+              "closed": false,
+              "failed": false,
+              "partialBytes": 0,
+              "incompleteMessages": 2,
+              "retainedPayloadBytes": 1546,
+              "pendingDiagnostics": 0,
+              "droppedDiagnostics": 0
+            }
+          }
+        }
+      },
+      {
+        "result": {
+          "dispatched": 0,
+          "rejected": 0,
+          "closed": false,
+          "diagnostics": [],
+          "droppedDiagnostics": 0
+        },
+        "state": {
+          "enabled": true,
+          "clock": {
+            "kind": "monotonic",
+            "id": "native-capacity-probe"
+          },
+          "clockProvenance": "caller-supplied-unverified",
+          "endpoint": {
+            "closed": false,
+            "fault": null,
+            "generation": 1,
+            "parser": {
+              "generation": 1,
+              "closed": false,
+              "failed": false,
+              "partialBytes": 0,
+              "incompleteMessages": 3,
+              "retainedPayloadBytes": 2319,
+              "pendingDiagnostics": 0,
+              "droppedDiagnostics": 0
+            }
+          }
+        }
+      },
+      {
+        "result": {
+          "dispatched": 0,
+          "rejected": 0,
+          "closed": false,
+          "diagnostics": [],
+          "droppedDiagnostics": 0
+        },
+        "state": {
+          "enabled": true,
+          "clock": {
+            "kind": "monotonic",
+            "id": "native-capacity-probe"
+          },
+          "clockProvenance": "caller-supplied-unverified",
+          "endpoint": {
+            "closed": false,
+            "fault": null,
+            "generation": 1,
+            "parser": {
+              "generation": 1,
+              "closed": false,
+              "failed": false,
+              "partialBytes": 0,
+              "incompleteMessages": 4,
+              "retainedPayloadBytes": 3092,
+              "pendingDiagnostics": 0,
+              "droppedDiagnostics": 0
+            }
+          }
+        }
+      },
+      {
+        "result": {
+          "dispatched": 0,
+          "rejected": 0,
+          "closed": false,
+          "diagnostics": [
+            "reassembly-capacity"
+          ],
+          "droppedDiagnostics": 0
+        },
+        "state": {
+          "enabled": true,
+          "clock": {
+            "kind": "monotonic",
+            "id": "native-capacity-probe"
+          },
+          "clockProvenance": "caller-supplied-unverified",
+          "endpoint": {
+            "closed": false,
+            "fault": null,
+            "generation": 1,
+            "parser": {
+              "generation": 1,
+              "closed": false,
+              "failed": false,
+              "partialBytes": 0,
+              "incompleteMessages": 4,
+              "retainedPayloadBytes": 3092,
+              "pendingDiagnostics": 0,
+              "droppedDiagnostics": 0
+            }
+          }
+        }
+      },
+      {
+        "result": {
+          "dispatched": 0,
+          "rejected": 0,
+          "closed": false,
+          "diagnostics": [
+            "message-timeout",
+            "message-timeout",
+            "message-timeout",
+            "message-timeout"
+          ],
+          "droppedDiagnostics": 0
+        },
+        "state": {
+          "enabled": true,
+          "clock": {
+            "kind": "monotonic",
+            "id": "native-capacity-probe"
+          },
+          "clockProvenance": "caller-supplied-unverified",
+          "endpoint": {
+            "closed": false,
+            "fault": null,
+            "generation": 1,
+            "parser": {
+              "generation": 1,
+              "closed": false,
+              "failed": false,
+              "partialBytes": 0,
+              "incompleteMessages": 1,
+              "retainedPayloadBytes": 773,
+              "pendingDiagnostics": 0,
+              "droppedDiagnostics": 0
+            }
+          }
+        }
+      },
+      {
+        "result": {
+          "dispatched": 1,
+          "rejected": 0,
+          "closed": false,
+          "diagnostics": [],
+          "droppedDiagnostics": 0
+        },
+        "state": {
+          "enabled": true,
+          "clock": {
+            "kind": "monotonic",
+            "id": "native-capacity-probe"
+          },
+          "clockProvenance": "caller-supplied-unverified",
+          "endpoint": {
+            "closed": false,
+            "fault": null,
+            "generation": 1,
+            "parser": {
+              "generation": 1,
+              "closed": false,
+              "failed": false,
+              "partialBytes": 0,
+              "incompleteMessages": 0,
+              "retainedPayloadBytes": 0,
+              "pendingDiagnostics": 0,
+              "droppedDiagnostics": 0
+            }
+          }
+        }
+      }
+    ],
+    "freshReplySequence": 15,
+    "helperExitCode": 0,
+    "hostStopped": true,
+    "diagnosticBootstrapRemoved": true,
+    "evidenceHashes": {
+      "runner.mjs": "261293c2afe1c5e164914510f848824dc33e6b93f88fc6e03beb84c295ecd67c",
+      "probe.js": "1cc77b2c6466d800084a62d9e61049f004522e7b26702a332789368cde99fad4",
+      "capture.jsonl": "5e3631251d24cdc09d7150a97c8b938efeda204b095e71b6686edaf7b5685b66",
+      "host-evidence.log": "ef2a59dc11a41bc13dbb95bf98bdceccb7c266de747e65b21f3fc78600e1bfe3"
+    },
+    "installedMappingSha256": "758d379c7708f9d67614b6489a9193f511cf50c414ca8f868961829ecbb260d7"
   }
 }
