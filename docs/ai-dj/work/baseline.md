@@ -36,7 +36,7 @@ The following values are choices for the first runtime fixture. They remain unob
 | Disposable profile path | `/Users/faizkhalid/Library/Application Support/Mixxx-AI-DJ/profiles/mixxx-2.5.6-latenight-f01` | It is outside Git and separate from Mixxx's normal profile. Future launch must pass this exact path with `--settings-path`; the source exposes that option in `src/util/cmdlineargs.cpp`. Never substitute the normal profile. |
 | Initial service runtime | Installed Node `v26.8.1` and npm `11.19.0` | This freezes the first native-binding attempt. F04/F05 must prove compatibility; a different Node version requires an explicit baseline update with its reason and evidence. |
 | Audio output | MacBook Pro Speakers at 48,000 Hz, low operator-approved level | F11 must verify the device is still present and bind the actual Mixxx buffer size before playback. M18 must bind a capture route separately; this output selection is not capture evidence. |
-| MIDI routes | IAC buses named `AI DJ Commands` and `AI DJ Feedback` | Selected names only. F11 owns creation/pairing and must demonstrate distinct directions and no echo path. |
+| MIDI routes | Two native virtual endpoints with shared logical name `AI DJ`, separate command Output and feedback Input | Coordinator correction after F04: see [port topology](contracts/ports.md). Supersedes the initial unverified IAC bus choice. F11 owns actual pairing and echo proof. |
 | Host scope | Same Mac: local TypeScript/Node service, local planner process, Mixxx desktop, and browser UI on loopback | No other DJ host, external AI computer, Raspberry Pi, LAN control endpoint, or QML profile is part of this baseline. |
 
 The future launch shape is:
@@ -87,7 +87,7 @@ These proposed setup children are recorded here for coordinator materialization;
 | --- | --- | --- |
 | `SETUP-F01-MIXXX-2.5.6-ARM` — coordinator-owned durable install/download job | Obtain the official ARM artifact, verify its published SHA-256, install it without opening a normal profile, and read back `CFBundleShortVersionString`/`CFBundleVersion` | F11 |
 | `SETUP-F01-FIXTURE-TRACKS` — operator input, recorded by the coordinator | Approve exactly two local full-length fixture tracks under the contract above; do not copy them into Git | F11 |
-| F11 | Create only the selected disposable profile, select LateNight/PaleMoon and two decks, confirm safe 48 kHz output and actual buffer, create/pair the two IAC routes, load both fixtures, and capture baseline UI/audio/overload facts | All live runtime inventory |
+| F11 | Create only the selected disposable profile, select LateNight/PaleMoon and two decks, confirm safe 48 kHz output and actual buffer, create/pair the two native virtual routes, load both fixtures, and capture baseline UI/audio/overload facts | All live runtime inventory |
 | F04/F05 | Prove the selected Node version can install/import the chosen native MIDI binding, or propose and document a version correction | MIDI implementation |
 | O04/R23 | Identify the exact physical controller model, mapping, ports, and pickup behavior before controller coexistence evidence | Real-controller/B2B acceptance; not F11's controller-free fixture setup |
 | M18 | Bind and calibrate an output-audio capture route suitable for audible timing | Audible timing review |

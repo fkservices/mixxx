@@ -132,10 +132,10 @@
         "Captured install/approval logs and arm64 prebuild hashes match.",
         "Native import and endpoint enumeration remain required by F05."
       ],
-      "monitor_status": "worker_complete_shared_monitor_retained_for_F07"
+      "monitor_status": "terminated_after_both_handoffs"
     },
     "F07": {
-      "status": "running",
+      "status": "accepted",
       "worker": "/root/f07_state",
       "model": "gpt-6-astra",
       "reasoning_effort": "high",
@@ -149,7 +149,40 @@
         "ai-dj/core/capabilities.ts",
         "docs/ai-dj/work/contracts/state.md",
         "docs/ai-dj/work/evidence/F07.md"
-      ]
+      ],
+      "accepted_at": "2026-09-13T19:08:40.297569+00:00",
+      "evidence": "docs/ai-dj/work/evidence/F07.md",
+      "evidence_sha256": "6748ea0b7033a6f96ab1fd92272924d838830ff71f15f3118a8861b827f5b546",
+      "checks": [
+        "Coordinator reviewed complete state/capability source and normative snapshot, presence, freshness, alias and attribution rules.",
+        "Integrated typecheck, build and default scaffold smoke test passed after F07 files.",
+        "Runtime validation, state reconciliation and actual host evidence remain separate required work."
+      ],
+      "monitor_status": "terminated_after_both_handoffs"
+    },
+    "F05": {
+      "status": "accepted",
+      "worker": "/root/f05_native_review",
+      "model": "gpt-5.6-terra",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-13T19:03:26.035Z",
+      "interrupt_by": "2026-09-13T19:30:26.035Z",
+      "deadline": "2026-09-13T19:33:26.035Z",
+      "monitor_cell": "201",
+      "source_revision": "aff2144740fa52955bd30c10618360fb73d433d6",
+      "owned_paths": [
+        "docs/ai-dj/work/native-binding.md",
+        "docs/ai-dj/work/evidence/F05.md"
+      ],
+      "accepted_at": "2026-09-13T19:08:40.297569+00:00",
+      "evidence": "docs/ai-dj/work/evidence/F05.md",
+      "evidence_sha256": "3b3ff6a94ea2bebef2e33971d179f501f15b300337e82877dd9e355a411e3e4c",
+      "checks": [
+        "Coordinator reviewed terminal install identity and native import/enumeration evidence.",
+        "Native import and safe enumeration exited 0; zero current endpoints, both handles destroyed.",
+        "No port opening, MIDI exchange, Mixxx playback or physical-controller support claimed."
+      ],
+      "monitor_status": "terminated_after_handoff"
     }
   },
   "jobs": {

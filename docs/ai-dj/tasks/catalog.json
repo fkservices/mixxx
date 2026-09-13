@@ -505,7 +505,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F01",
-        "F09"
+        "F09",
+        "F05"
       ],
       "owns": [
         "docs/ai-dj/work/runtime-fixture.md"
@@ -517,7 +518,8 @@
       "scope": "One host profile, two tracks, fixed audio settings; no controller mapping implementation.",
       "perform": [
         "Prepare isolated profile with chosen skin; record track identities, tempo and safe output routing.",
-        "Configure two separate virtual MIDI buses and record exact pairing; capture baseline audio-overload counters."
+        "Configure the two directional virtual MIDI endpoints and record exact pairing; capture baseline audio-overload counters.",
+        "Follow work/contracts/ports.md: hold two directional native virtual endpoints with a pairable logical name; record actual host pairing and durable port-process identity."
       ],
       "validate": [
         "Verify commands and feedback have distinct routes without an echo path.",
@@ -1535,7 +1537,7 @@
     },
     {
       "id": "I01",
-      "title": "Inventory deck transport \u2014 first page",
+      "title": "Inventory deck transport — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -1583,7 +1585,7 @@
     },
     {
       "id": "I02",
-      "title": "Inventory mixer \u2014 first page",
+      "title": "Inventory mixer — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -1631,7 +1633,7 @@
     },
     {
       "id": "I03",
-      "title": "Inventory tempo and sync \u2014 first page",
+      "title": "Inventory tempo and sync — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -1679,7 +1681,7 @@
     },
     {
       "id": "I04",
-      "title": "Inventory eq and filter \u2014 first page",
+      "title": "Inventory eq and filter — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -1727,7 +1729,7 @@
     },
     {
       "id": "I05",
-      "title": "Inventory effects \u2014 first page",
+      "title": "Inventory effects — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -1775,7 +1777,7 @@
     },
     {
       "id": "I06",
-      "title": "Inventory cues and loops \u2014 first page",
+      "title": "Inventory cues and loops — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -1823,7 +1825,7 @@
     },
     {
       "id": "I07",
-      "title": "Inventory jog and scratch \u2014 first page",
+      "title": "Inventory jog and scratch — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -1871,7 +1873,7 @@
     },
     {
       "id": "I08",
-      "title": "Inventory samplers and preview \u2014 first page",
+      "title": "Inventory samplers and preview — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -1919,7 +1921,7 @@
     },
     {
       "id": "I09",
-      "title": "Inventory stem decks \u2014 first page",
+      "title": "Inventory stem decks — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -1967,7 +1969,7 @@
     },
     {
       "id": "I10",
-      "title": "Inventory microphone auxiliary and vinyl \u2014 first page",
+      "title": "Inventory microphone auxiliary and vinyl — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -2015,7 +2017,7 @@
     },
     {
       "id": "I11",
-      "title": "Inventory library navigation \u2014 first page",
+      "title": "Inventory library navigation — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -2063,7 +2065,7 @@
     },
     {
       "id": "I12",
-      "title": "Inventory load selected track \u2014 first page",
+      "title": "Inventory load selected track — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -2111,7 +2113,7 @@
     },
     {
       "id": "I13",
-      "title": "Inventory stable track selection and playlists \u2014 first page",
+      "title": "Inventory stable track selection and playlists — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -2159,7 +2161,7 @@
     },
     {
       "id": "I14",
-      "title": "Inventory track metadata \u2014 first page",
+      "title": "Inventory track metadata — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -2207,7 +2209,7 @@
     },
     {
       "id": "I15",
-      "title": "Inventory beat phrase and energy analysis \u2014 first page",
+      "title": "Inventory beat phrase and energy analysis — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -2255,7 +2257,7 @@
     },
     {
       "id": "I16",
-      "title": "Inventory mixxx autodj \u2014 first page",
+      "title": "Inventory mixxx autodj — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -2303,7 +2305,7 @@
     },
     {
       "id": "I17",
-      "title": "Inventory recording \u2014 first page",
+      "title": "Inventory recording — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -2351,7 +2353,7 @@
     },
     {
       "id": "I18",
-      "title": "Inventory broadcasting \u2014 first page",
+      "title": "Inventory broadcasting — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -2399,7 +2401,7 @@
     },
     {
       "id": "I19",
-      "title": "Inventory skin waveform and display \u2014 first page",
+      "title": "Inventory skin waveform and display — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -2447,7 +2449,7 @@
     },
     {
       "id": "I20",
-      "title": "Inventory sampler bank files \u2014 first page",
+      "title": "Inventory sampler bank files — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -2495,7 +2497,7 @@
     },
     {
       "id": "I21",
-      "title": "Inventory library management \u2014 first page",
+      "title": "Inventory library management — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {
@@ -2543,7 +2545,7 @@
     },
     {
       "id": "I22",
-      "title": "Inventory preferences and setup \u2014 first page",
+      "title": "Inventory preferences and setup — first page",
       "stage": "02-inventory",
       "level": "L1",
       "estimate_minutes": {

@@ -16,6 +16,8 @@ On 2026-09-13, Chrome loaded `http://127.0.0.1:8768/docs/ai-dj/progress.html` wi
 - The overview was inspected in a real browser screenshot at 1440 × 806 pixels. Text and cards were legible, with no overlap or clipped overview content.
 - [Overview capture](../screenshots/progress-overview-2026-09-13.jpg) is the progress page itself, captured at 2026-09-13T18:58:59.871Z after F03/F06 acceptance. It is not the DJ application or Mixxx, and proves no MIDI, audio, UI response timing or musical behavior.
 
+- After F05/F07 acceptance, the same browser updated without reload to seven accepted reference tasks, two accepted setup tasks, zero active workers and zero of seven delivery gates. The [foundation capture](../screenshots/progress-foundation-2026-09-13.jpg) records that overview at 2026-09-13T19:08:47.474Z (1440 × 806 JPEG, 59,108 bytes). The overview remains legible; no library filenames or private session data are shown.
+
 Future screenshots must be registered in `work/screenshots.json` with the actual capture time, kind, caption and evidence context. Allowed kinds distinguish native Mixxx UI, application UI, mockup and progress-page captures. Media files and private library paths stay outside Git; review screenshots for unnecessary private details before adding them.
 
 > End of autonomously AI-generated evidence.

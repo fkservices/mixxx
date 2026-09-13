@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T19:03:14.988149+00:00",
+  "updated_at": "2026-09-13T19:08:40.297569+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -95,12 +95,16 @@
       "id": "F05",
       "title": "Verify native binding installation result",
       "stage": "00-foundation",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/F05.md",
+      "verified": true,
+      "checks": [
+        "Coordinator reviewed terminal install identity and native import/enumeration evidence.",
+        "Native import and safe enumeration exited 0; zero current endpoints, both handles destroyed.",
+        "No port opening, MIDI exchange, Mixxx playback or physical-controller support claimed."
+      ],
+      "updated": "2026-09-13T19:08:40.297569+00:00",
       "dynamic": false
     },
     {
@@ -123,12 +127,16 @@
       "id": "F07",
       "title": "Define observed state and capability contracts",
       "stage": "00-foundation",
-      "status": "running",
+      "status": "accepted",
       "model": "gpt-6-astra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": "2026-09-13T18:59:59.949Z",
+      "evidence": "work/evidence/F07.md",
+      "verified": true,
+      "checks": [
+        "Coordinator reviewed complete state/capability source and normative snapshot, presence, freshness, alias and attribution rules.",
+        "Integrated typecheck, build and default scaffold smoke test passed after F07 files.",
+        "Runtime validation, state reconciliation and actual host evidence remain separate required work."
+      ],
+      "updated": "2026-09-13T19:08:40.297569+00:00",
       "dynamic": false
     },
     {
@@ -2220,6 +2228,13 @@
       "kind": "progress_page",
       "caption": "Build journal after scaffold and action-contract acceptance: four reference tasks and two setup tasks accepted. Actual browser capture; not Mixxx or DJ runtime proof.",
       "captured_at": "2026-09-13T18:58:59.871Z",
+      "evidence": "work/evidence/progress-page.md"
+    },
+    {
+      "path": "work/screenshots/progress-foundation-2026-09-13.jpg",
+      "kind": "progress_page",
+      "caption": "Seven foundation tasks and both setup tasks accepted. The live browser updated without reload; all seven delivery gates remain open. This is a build-journal screenshot, not Mixxx playback evidence.",
+      "captured_at": "2026-09-13T19:08:47.474Z",
       "evidence": "work/evidence/progress-page.md"
     }
   ]

@@ -7,6 +7,13 @@
       "caption": "Build journal after scaffold and action-contract acceptance: four reference tasks and two setup tasks accepted. Actual browser capture; not Mixxx or DJ runtime proof.",
       "captured_at": "2026-09-13T18:58:59.871Z",
       "evidence": "work/evidence/progress-page.md"
+    },
+    {
+      "path": "work/screenshots/progress-foundation-2026-09-13.jpg",
+      "kind": "progress_page",
+      "caption": "Seven foundation tasks and both setup tasks accepted. The live browser updated without reload; all seven delivery gates remain open. This is a build-journal screenshot, not Mixxx playback evidence.",
+      "captured_at": "2026-09-13T19:08:47.474Z",
+      "evidence": "work/evidence/progress-page.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

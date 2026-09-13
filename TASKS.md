@@ -4,7 +4,7 @@
 
 **Current work: implementation authorized and started.** The active goal is “perform tasks.md as proposed.” [GOALS.md](GOALS.md) remains authoritative. The reference catalog has 171 cards and 17 expansion templates. [Execution state and acceptance evidence](docs/ai-dj/work/state.json) are authoritative; a card's presence is not completion.
 
-**Now: F01/F02/F03/F06 accepted; F04/F07 are in progress.** Mixxx 2.5.6 ARM is installed and two local Music library fixtures passed full decoding. Both [setup children](docs/ai-dj/work/expansions.json) are accepted; actual isolated Mixxx/MIDI/UI/audio behavior still belongs to F11 and later gates. The full goal remains active through all required runtime, feature, UI, endurance and listening gates.
+**Now: F01–F07 accepted.** The native MIDI binding loads and enumerates safely; the action/state/capability contracts compile. Next are runtime validators, conventional MIDI addresses, inventory rules and evidence tooling. Mixxx 2.5.6 ARM is installed and two local Music library fixtures passed full decoding. Both [setup children](docs/ai-dj/work/expansions.json) are accepted; actual isolated Mixxx/MIDI/UI/audio behavior still belongs to F11 and later gates. The full goal remains active through all required runtime, feature, UI, endurance and listening gates.
 
 [Visual progress page](docs/ai-dj/progress.html) stays synchronized with the ledger. Add real screenshots and their evidence context as UI/runtime checks produce them.
 

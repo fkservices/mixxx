@@ -122,7 +122,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F04. **Leases:** install-job. **Status:** planned.
+**Dependencies:** F04. **Leases:** install-job. **Status:** accepted.
 
 **Owns:** `docs/ai-dj/work/native-binding.md`
 
@@ -178,7 +178,7 @@
 
 **Worker:** L4 / `gpt-6-astra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F06. **Leases:** Exact path reservation. **Status:** running.
+**Dependencies:** F06. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/core/state.ts`, `ai-dj/core/capabilities.ts`, `docs/ai-dj/work/contracts/state.md`
 
@@ -290,7 +290,7 @@
 
 **Worker:** L3 / `gpt-5.6-sol` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F01, F09. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F01, F09, F05. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/runtime-fixture.md`
 
@@ -303,7 +303,8 @@
 **Perform:**
 
 1. Prepare isolated profile with chosen skin; record track identities, tempo and safe output routing.
-2. Configure two separate virtual MIDI buses and record exact pairing; capture baseline audio-overload counters.
+2. Configure the two directional virtual MIDI endpoints and record exact pairing; capture baseline audio-overload counters.
+3. Follow work/contracts/ports.md: hold two directional native virtual endpoints with a pairable logical name; record actual host pairing and durable port-process identity.
 
 **Validate:**
 
