@@ -2,7 +2,7 @@
 
 > Autonomously AI-generated planning document at the user's request.
 
-This is an implementation plan, not authorization to start the runtime. There are **171 static cards and 17 expansion templates** in [catalog.json](tasks/catalog.json). All are planned. [Rendered cards](tasks/README.md) give steps, checks, ownership and dependencies; [traceability](TRACEABILITY.md) covers every discovery decision. Feature, host-operation, analysis, long-job and defect expansion makes the eventual task count variable.
+The active user goal authorizes executing this implementation plan. There are **171 static cards and 17 expansion templates** in [catalog.json](tasks/catalog.json). Their current execution states are recorded in [the ledger](work/state.json). [Rendered cards](tasks/README.md) give steps, checks, ownership and dependencies; [traceability](TRACEABILITY.md) covers every discovery decision. Feature, host-operation, analysis, long-job and defect expansion makes the eventual task count variable.
 
 ## Worker selection
 
@@ -25,7 +25,7 @@ Handoff records actual edits/revision, completed versus remaining steps, exact c
 
 ## Dispatch contract
 
-Use one coordinator and at most three workers concurrently. Each worker receives one concrete card, not an entire milestone. This is a future dispatch policy, not a request to spawn workers in the planning phase.
+Use one coordinator and at most three workers concurrently. Each worker receives one concrete card, not an entire milestone. The user requested execution of TASKS.md as proposed; apply this dispatch policy during implementation.
 
 Before dispatch:
 

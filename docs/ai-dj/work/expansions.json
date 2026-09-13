@@ -1,0 +1,79 @@
+{
+  "disclosure": "Autonomously AI-generated setup expansion manifest. These children gate F11, not F01 documentation acceptance.",
+  "schema_version": 1,
+  "tasks": [
+    {
+      "parent": "F11",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "F01"
+      ],
+      "blocks": [
+        "F11"
+      ],
+      "estimate_minutes": {
+        "read": 3,
+        "execute": 12,
+        "validate": 7,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "id": "SETUP-F01-MIXXX-2.5.6-ARM",
+      "title": "Install and verify isolated Mixxx runtime",
+      "owns": [
+        "docs/ai-dj/work/setup/mixxx-runtime.md"
+      ],
+      "perform": [
+        "Obtain official 2.5.6 ARM artifact and published SHA-256; preserve durable job identity if download exceeds worker budget.",
+        "Verify checksum before mounting/installing. Install only if destination absent; do not launch normal profile."
+      ],
+      "validate": [
+        "Read back installed version and architecture; record source URL/hash and terminal job status.",
+        "Prove no production profile opened and hand off exact isolated launch path to F11."
+      ],
+      "locks": [
+        "host-install"
+      ],
+      "evidence": "docs/ai-dj/work/evidence/SETUP-F01-MIXXX-2.5.6-ARM.md"
+    },
+    {
+      "parent": "F11",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "F01"
+      ],
+      "blocks": [
+        "F11"
+      ],
+      "estimate_minutes": {
+        "read": 3,
+        "execute": 12,
+        "validate": 7,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "id": "SETUP-F01-FIXTURE-TRACKS",
+      "title": "Select two playable Music library fixtures",
+      "owns": [
+        "docs/ai-dj/work/setup/music-fixtures.md"
+      ],
+      "perform": [
+        "Inspect user-authorized iTunes/Music library read-only; select two full-length local playable files.",
+        "Keep actual paths and media private; create a local manifest with metadata/fingerprints and redacted evidence."
+      ],
+      "validate": [
+        "Verify both local files decode and record duration/codec/size/fingerprint.",
+        "Cloud-only or protected entries do not satisfy fixture slots; no private media copied to Git."
+      ],
+      "locks": [],
+      "evidence": "docs/ai-dj/work/evidence/SETUP-F01-FIXTURE-TRACKS.md"
+    }
+  ],
+  "generation_end": "End of autonomously AI-generated manifest."
+}

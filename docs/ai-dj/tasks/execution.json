@@ -1,10 +1,10 @@
 {
-  "disclosure": "Autonomously AI-generated reference execution plan; no workers dispatched and no runtime built.",
+  "disclosure": "Autonomously AI-generated reference execution plan. Actual states derive from the acceptance ledger; batch membership is not runtime evidence.",
   "schema_version": 1,
-  "catalog_sha256": "04541f8ab509cbf02df2d32a00549da02ae3d03861af9535970f3788f2bb874c",
-  "authorization": "planning_only",
+  "catalog_sha256": "235636f10e8c35fd9c0b38ce548dfa11c269f7e5f62d2ced5f8cc428faa7a114",
+  "authorization": "implementation_authorized",
   "current_task_status": {
-    "F01": "planned",
+    "F01": "accepted",
     "F02": "planned",
     "F03": "planned",
     "F04": "planned",
@@ -176,11 +176,21 @@
     "L11": "planned",
     "L12": "planned"
   },
-  "accepted_task_ids": [],
-  "dependency_frontier": [
+  "accepted_task_ids": [
     "F01"
   ],
+  "dependency_frontier": [
+    "F02"
+  ],
   "dispatchable_now": [],
+  "dynamic_task_status": {
+    "SETUP-F01-MIXXX-2.5.6-ARM": "planned",
+    "SETUP-F01-FIXTURE-TRACKS": "planned"
+  },
+  "dynamic_dependency_frontier": [
+    "SETUP-F01-MIXXX-2.5.6-ARM",
+    "SETUP-F01-FIXTURE-TRACKS"
+  ],
   "global_requirements": [
     "User instruction to start implementation",
     "Current integrated revision and scoped context",
@@ -1136,7 +1146,7 @@
         "F12"
       ],
       "acceptance": "Named profile, package checks and typed contracts; no MIDI success claim.",
-      "status": "not_started"
+      "status": "in_progress"
     },
     {
       "id": "G1",

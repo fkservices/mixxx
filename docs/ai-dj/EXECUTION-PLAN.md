@@ -2,7 +2,7 @@
 
 > Autonomously AI-generated execution planning at the user's request.
 
-The next implementation task is **F01**, after a user instruction to start building. [TASKS.md](../../TASKS.md) is the concise board. [execution.json](tasks/execution.json) contains seven checkpoints and 81 validated reference batches for the current 171 cards. It records zero accepted cards and zero dispatched workers. [GOALS.md](../../GOALS.md) continues to control product scope.
+Implementation is now authorized by “perform tasks.md as proposed.” F01 is the initial task. [TASKS.md](../../TASKS.md) is the concise board. [execution.json](tasks/execution.json) contains seven checkpoints and 81 validated reference batches for the current 171 cards. It derives current states from [the acceptance ledger](work/state.json); reference batch order is separate from actual readiness. [GOALS.md](../../GOALS.md) continues to control product scope.
 
 ## What the batches mean
 
@@ -14,7 +14,7 @@ Earlier candidate examples were unsuitable for concurrent dispatch: F11 transiti
 
 ## Readiness and task states
 
-Separate the catalog's intended work from observed execution state. At present every implementation card is `planned`. The dependency frontier is F01, but nothing is dispatchable while this phase remains planning only.
+Separate the catalog's intended work from observed execution state. The execution ledger tracks actual planned/running/waiting/accepted states. A dependency frontier alone is not dispatch permission; reserve resources and check evidence before dispatch.
 
 | State | Meaning and next action |
 | --- | --- |
@@ -27,7 +27,7 @@ Separate the catalog's intended work from observed execution state. At present e
 | Accepted | Reviewer accepts the deliverable on an identified integrated revision; required children are closed |
 | Split | Parent stays incomplete; concrete continuation cards own remaining steps and checks |
 
-These are the intended execution lifecycle, not falsely pre-populated results. When implementation begins, keep an acceptance ledger with task/child IDs, status, source revision, integrated revision, evidence, open conditions and active job/resource ownership. Update catalog/board/validators deliberately to support live states; this phase only publishes the initial plan.
+Use this execution lifecycle with an acceptance ledger with task/child IDs, status, source revision, integrated revision, evidence, open conditions and active job/resource ownership. Update catalog/board/validators together, retaining the original required scope and honest live states.
 
 ## Coordinator decision after each handoff
 

@@ -1,0 +1,47 @@
+{
+  "disclosure": "Autonomously AI-generated execution ledger; only recorded acceptance evidence establishes task completion.",
+  "schema_version": 1,
+  "phase": "implementation",
+  "authorization": "perform tasks.md as proposed",
+  "goal_status": "active",
+  "tasks": {
+    "F01": {
+      "status": "accepted",
+      "worker": "/root/f01_baseline",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-13T18:40:15.808Z",
+      "interrupt_by": "2026-09-13T19:07:15.808Z",
+      "deadline": "2026-09-13T19:10:15.808Z",
+      "monitor_cell": "146",
+      "source_revision": "4067eb8e1990f5d6fec991f6d4b2a9b191a51abe",
+      "owned_paths": [
+        "docs/ai-dj/work/baseline.md",
+        "docs/ai-dj/work/evidence/F01.md"
+      ],
+      "accepted_at": "2026-09-13T18:47:31.986229+00:00",
+      "evidence": "docs/ai-dj/work/evidence/F01.md",
+      "evidence_sha256": "f09d329d585513189e332f997a99c941a60fd5594c5680530287748892728cd1",
+      "checks": [
+        "Coordinator read complete baseline and evidence; selected and observed facts separated.",
+        "F11 install and musical-fixture prerequisites materialized in work/expansions.json.",
+        "No runtime, MIDI, music quality or controller result claimed."
+      ],
+      "monitor_status": "terminated_after_handoff"
+    }
+  },
+  "jobs": {},
+  "resource_leases": {},
+  "external_requirements": {
+    "musical_fixtures": {
+      "status": "source_authorized",
+      "detail": "User authorized local iTunes/Music library. Music Library.musiclibrary and Media.localized exist; playable fixture files remain to be verified. Do not commit private music or full library paths."
+    },
+    "physical_controller": {
+      "status": "model_identified",
+      "model": "Hercules DJControl Mix Ultra",
+      "detail": "User supplied exact model. Actual connection, MIDI ports, mapping and coexistence behavior remain unverified."
+    }
+  },
+  "generation_end": "End of autonomously AI-generated execution ledger."
+}

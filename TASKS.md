@@ -2,15 +2,15 @@
 
 > Autonomously AI-generated task planning at the user's request.
 
-**Current work: task planning complete; implementation not started.** The 60 discovery decisions are settled for this plan. [GOALS.md](GOALS.md) remains authoritative. There are 171 planned cards and 17 expansion templates; zero implementation cards are accepted or dispatched.
+**Current work: implementation authorized and started.** The active goal is “perform tasks.md as proposed.” [GOALS.md](GOALS.md) remains authoritative. The reference catalog has 171 cards and 17 expansion templates. [Execution state and acceptance evidence](docs/ai-dj/work/state.json) are authoritative; a card's presence is not completion.
 
-**Start point when building is authorized: F01 — freeze the local test profile.** It has no task dependencies. Other cards become eligible after their prerequisites are accepted. This board does not start workers or configure Mixxx.
+**Now: F01 — local baseline, accepted.** F02 is next, then F03/F06 can proceed independently under the worker rules. Two [setup children](docs/ai-dj/work/expansions.json) gate the actual Mixxx fixture. The full goal remains active through all required runtime, feature, UI, endurance and listening gates.
 
 ## Execution order
 
 | Checkpoint | Outcome | Exit cards | Status |
 | --- | --- | --- | --- |
-| G0 | Local baseline, package and action/state contracts | F01, F02, F03, F07, F09, F10, F12 | Not started |
+| G0 | Local baseline, package and action/state contracts | F01, F02, F03, F07, F09, F10, F12 | In progress |
 | G1 | Five real MIDI controls, feedback, timing and initial inventory | M20 | Not started |
 | G2 | Reliable executor, three modes and real-controller B2B | R24, R26 | Not started |
 | G3 | Native playlist selection, saved sets and deterministic mixing | P18, D07 | Not started |

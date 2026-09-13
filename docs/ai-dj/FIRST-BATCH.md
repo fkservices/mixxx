@@ -2,7 +2,7 @@
 
 > Autonomously AI-generated dispatch planning at the user's request.
 
-These are the first four assignments, covering B001–B003. They are prepared for future implementation; **none is dispatched now**. Each inherits [GOALS](../../GOALS.md), [worker rules](WORKER-TASKS.md) and [execution gates](EXECUTION-PLAN.md). The next eligible card is F01 after implementation is authorized. Do not launch all four at once.
+These are the first four assignments, covering B001–B003. Implementation is now authorized. See [the live ledger](work/state.json) for which assignments are running or accepted. Each inherits [GOALS](../../GOALS.md), [worker rules](WORKER-TASKS.md) and [execution gates](EXECUTION-PLAN.md). F01 starts the sequence. Do not launch all four at once.
 
 ## F01 — freeze the local test profile
 

@@ -1,6 +1,6 @@
 # Bounded implementation cards
 
-> Autonomously AI-generated planning cards. All tasks are planned, not performed.
+> Autonomously AI-generated planning cards. Task specifications; actual progress is tracked in the acceptance ledger.
 
 [Dispatch and time limits](../WORKER-TASKS.md) apply to every card. Canonical source: [catalog.json](catalog.json).
 

@@ -8,14 +8,16 @@ check = argparse.ArgumentParser()
 check.add_argument('--check', action='store_true')
 args = check.parse_args()
 data = json.loads((base / 'catalog.json').read_text())
+ledger_path=base.parent/'work/state.json'
+ledger=json.loads(ledger_path.read_text()) if ledger_path.exists() else {'tasks':{}}
 outputs = {}
-index = ['# Bounded implementation cards', '', '> Autonomously AI-generated planning cards. All tasks are planned, not performed.', '', '[Dispatch and time limits](../WORKER-TASKS.md) apply to every card. Canonical source: [catalog.json](catalog.json).', '', '| Stage | Cards |', '| --- | --- |']
+index = ['# Bounded implementation cards', '', '> Autonomously AI-generated planning cards. Task specifications; actual progress is tracked in the acceptance ledger.', '', '[Dispatch and time limits](../WORKER-TASKS.md) apply to every card. Canonical source: [catalog.json](catalog.json).', '', '| Stage | Cards |', '| --- | --- |']
 for stage in sorted({t['stage'] for t in data['tasks']}):
     tasks = [t for t in data['tasks'] if t['stage'] == stage]
     index.append(f'| [{stage}]({stage}.md) | {len(tasks)} |')
-    lines = [f'# {stage}', '', '> Autonomously AI-generated planning cards. No implementation claimed.', '', '[Worker rules](../WORKER-TASKS.md) · [Catalog](README.md)', '']
+    lines = [f'# {stage}', '', '> Autonomously AI-generated planning cards. Task specifications with recorded execution status; completion requires acceptance evidence.', '', '[Worker rules](../WORKER-TASKS.md) · [Catalog](README.md)', '']
     for t in tasks:
-        lines += [f"## {t['id']}: {t['title']}", '', f"**Worker:** {t['level']} / `{t['model']}` / {t['reasoning_effort']}. **Budget:** 25 minutes; maximum 30 including handoff.", '', f"**Dependencies:** {', '.join(t['depends_on']) or 'None'}. **Leases:** {', '.join(t['locks']) or 'Exact path reservation'}. **Status:** planned.", '', f"**Owns:** {', '.join('`'+p+'`' for p in t['owns'])}", '', '**Scope:** '+t['scope'], '', '**Prerequisites:** '+t['conditions'], '', '**Evidence gates:** '+(' '.join(t.get('entry_requirements', [])) or 'Accepted dependency evidence and dispatch checks.'), '', '**Perform:**', '']
+        lines += [f"## {t['id']}: {t['title']}", '', f"**Worker:** {t['level']} / `{t['model']}` / {t['reasoning_effort']}. **Budget:** 25 minutes; maximum 30 including handoff.", '', f"**Dependencies:** {', '.join(t['depends_on']) or 'None'}. **Leases:** {', '.join(t['locks']) or 'Exact path reservation'}. **Status:** {ledger['tasks'].get(t['id'],{}).get('status','planned')}.", '', f"**Owns:** {', '.join('`'+p+'`' for p in t['owns'])}", '', '**Scope:** '+t['scope'], '', '**Prerequisites:** '+t['conditions'], '', '**Evidence gates:** '+(' '.join(t.get('entry_requirements', [])) or 'Accepted dependency evidence and dispatch checks.'), '', '**Perform:**', '']
         lines += [f'{i}. {v}' for i,v in enumerate(t['perform'],1)]
         lines += ['', '**Validate:**', ''] + [f'{i}. {v}' for i,v in enumerate(t['validate'],1)]
         lines += ['', f"**Evidence:** `{t['evidence']}`. {t['split_rule']}", '', '**Completion:** '+t['dynamic_completion'], '']

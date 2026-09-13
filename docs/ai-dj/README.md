@@ -4,7 +4,7 @@
 
 We are building a DJ player/controller that sends and receives MIDI to perform a DJ set. Mixxx is the first host it controls and the visible reference application. The AI DJ is a separate product, with its own decision making, execution, and observed state.
 
-**Current scope: fork, source research, and planning only.** The product is a desktop app running alongside the DJ host through virtual MIDI. All initial development and testing will run locally on one computer. This build focuses exclusively on Mixxx, playlist-to-set performance and the desktop app. Other hosts and Raspberry Pi deployment are outside the current build.
+**Current phase: executing TASKS.md under the active user goal.** The product is a desktop app running alongside the DJ host through virtual MIDI. All initial development and testing will run locally on one computer. This build focuses exclusively on Mixxx, playlist-to-set performance and the desktop app. Other hosts and Raspberry Pi deployment are outside the current build.
 
 **Accepted stack:** TypeScript/Node.js communicator, native RtMidi access (`@julusian/midi` as the initial candidate), JavaScript Mixxx mapping, and an isolated AI planner process. The first implementation milestone measures bidirectional MIDI latency and jitter. Responsive control is the target; hard real-time timing is not guaranteed. Details are in the [implementation stack](PLAN.md#accepted-implementation-stack).
 
@@ -40,7 +40,7 @@ The user supplies a Mixxx playlist; AI may arrange the order while preserving ev
 - Source baseline: `3e5f59002cdd02040f3b7aeef938ea9af2def001` on upstream `main`.
 - This baseline identifies itself as **2.7.0-alpha**. The official download page lists **2.5.6** as stable on 2026-09-13. Compatibility must be explicit.
 - Local checkout has shallow history. Fetch additional history or release refs when implementation requires them.
-- No AI runtime, MIDI mapping, host extension, application dependency setup, or audio/UI test was implemented in this planning pass.
+- The original planning pass implemented no runtime. See [the live ledger](work/state.json) for subsequent implementation and acceptance evidence.
 
 See [planning validation](VALIDATION.md) for the current checks. No application runtime is implemented or tested by this documentation pass.
 

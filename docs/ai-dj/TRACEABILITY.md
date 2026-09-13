@@ -77,6 +77,6 @@ All 60 discovery decisions and six cross-cutting goals map to concrete task card
 
 Inventory closure I23 includes known implementation gaps; full feature closure C02 does not accept unresolved required gaps. Native operation tests depend on completed OP children. Model/analysis choices depend on official API review and actual local tests. Human listening acceptance L11 requires a human response during implementation; the assistant cannot pre-answer that evidence.
 
-Scope is still planning only. No card, synthetic fixture, checked box or rendered HTML interaction proves real Mixxx control.
+Runtime implementation is now authorized; the catalog remains a specification and the live ledger records actual evidence. No card, synthetic fixture, checked box or rendered HTML interaction proves real Mixxx control.
 
 > End of autonomously AI-generated planning traceability.

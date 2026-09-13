@@ -1,8 +1,10 @@
 # Reference execution batches
 
-> Autonomously AI-generated task planning. No workers have been dispatched.
+> Autonomously AI-generated task planning. Actual worker states are tracked in the live ledger.
 
 [Start here](../../../TASKS.md) · [Execution rules](../EXECUTION-PLAN.md) · [Worker cards](README.md)
+
+[Live acceptance ledger](../work/state.json) records actual progress.
 
 These batches are validated against dependencies, exact owned paths and exclusive resources for the current 171-card catalog. They assume prior batches eventually pass all evidence gates. They are not a timed schedule and do not bypass dynamic children, long jobs or human listening. Regenerate after catalog changes; recompute actual readiness after every handoff.
 

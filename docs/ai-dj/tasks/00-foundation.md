@@ -1,6 +1,6 @@
 # 00-foundation
 
-> Autonomously AI-generated planning cards. No implementation claimed.
+> Autonomously AI-generated planning cards. Task specifications with recorded execution status; completion requires acceptance evidence.
 
 [Worker rules](../WORKER-TASKS.md) · [Catalog](README.md)
 
@@ -8,7 +8,7 @@
 
 **Worker:** L3 / `gpt-5.6-sol` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** None. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** None. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `docs/ai-dj/work/baseline.md`
 
@@ -68,7 +68,7 @@
 
 **Dependencies:** F02. **Leases:** package-manifest. **Status:** planned.
 
-**Owns:** `ai-dj/package.json`, `ai-dj/tsconfig.json`, `ai-dj/.gitignore`, `ai-dj/test/smoke.test.ts`
+**Owns:** `ai-dj/package.json`, `ai-dj/tsconfig.json`, `ai-dj/.gitignore`, `ai-dj/test/smoke.test.ts`, `ai-dj/package-lock.json`, `ai-dj/.node-version`
 
 **Scope:** Only compiler/test scripts and one empty-package smoke; no application modules or native install.
 
