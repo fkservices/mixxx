@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T23:41:32.354694+00:00",
+  "updated_at": "2026-09-13T23:46:15.078674+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -457,12 +457,16 @@
       "id": "M17",
       "title": "Capture native UI response timing",
       "stage": "01-local-midi",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/M17.md",
+      "verified": true,
+      "checks": [
+        "Twenty actual native fader changes and MIDI feedback verified; sixty timestamped frames retained.",
+        "Nineteen upper bounds below 150 ms; one ambiguous 191.96 ms bound requires M19-UI-CAPTURE.",
+        "Clock calibration and pixel classifier verified; helper exited 0, volume restored and host stopped."
+      ],
+      "updated": "2026-09-13T23:46:15.078674+00:00",
       "dynamic": false
     },
     {
@@ -2609,6 +2613,18 @@
       "checks": [],
       "updated": "2026-09-13T23:19:58.392860+00:00",
       "dynamic": true
+    },
+    {
+      "id": "M19-UI-CAPTURE",
+      "title": "Resolve native UI timing capture uncertainty",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": "2026-09-13T23:46:15.078674+00:00",
+      "dynamic": true
     }
   ],
   "milestones": [
@@ -2880,6 +2896,20 @@
       "caption": "After the loaded run, native preferences still show Core Audio at 48 kHz with the same 21.3 ms buffer. Zero underflows were reported by the native diagnostics.",
       "captured_at": "2026-09-13T23:41:32.355644+00:00",
       "evidence": "work/runs/M16.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-ui-timing-00-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Native volume down: actual fader pixels match returned MIDI state; conservative visible-by bound 102.49 ms.",
+      "captured_at": "2026-09-13T23:46:15.078674+00:00",
+      "evidence": "work/runs/M17.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-ui-timing-09-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Native volume up in trial 9: matching pixels and MIDI feedback, but a 191.96 ms capture bound leaves the 150 ms target unresolved.",
+      "captured_at": "2026-09-13T23:46:15.078674+00:00",
+      "evidence": "work/runs/M17.json"
     }
   ],
   "transport_checks": [
@@ -2994,6 +3024,152 @@
         "p95": 0.5293750000128057,
         "p99": 0.9561249999969732,
         "max": 3.438625000009779
+      }
+    ]
+  },
+  "ui_timing": {
+    "observed": 20,
+    "bounded": 19,
+    "rows": [
+      {
+        "trial": 0,
+        "target": 0,
+        "upper": 102.48816699907184,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-00-2026-09-13.jpg"
+      },
+      {
+        "trial": 1,
+        "target": 127,
+        "upper": 91.20412599667907,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-01-2026-09-13.jpg"
+      },
+      {
+        "trial": 2,
+        "target": 0,
+        "upper": 82.31666699796915,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-02-2026-09-13.jpg"
+      },
+      {
+        "trial": 3,
+        "target": 127,
+        "upper": 93.23954199627042,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-03-2026-09-13.jpg"
+      },
+      {
+        "trial": 4,
+        "target": 0,
+        "upper": 70.82116699591279,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-04-2026-09-13.jpg"
+      },
+      {
+        "trial": 5,
+        "target": 127,
+        "upper": 95.68137499690056,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-05-2026-09-13.jpg"
+      },
+      {
+        "trial": 6,
+        "target": 0,
+        "upper": 87.66620899736881,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-06-2026-09-13.jpg"
+      },
+      {
+        "trial": 7,
+        "target": 127,
+        "upper": 89.18187499791384,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-07-2026-09-13.jpg"
+      },
+      {
+        "trial": 8,
+        "target": 0,
+        "upper": 76.09570899605751,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-08-2026-09-13.jpg"
+      },
+      {
+        "trial": 9,
+        "target": 127,
+        "upper": 191.96174999698997,
+        "within": false,
+        "screenshot": "work/screenshots/mixxx-ui-timing-09-2026-09-13.jpg"
+      },
+      {
+        "trial": 10,
+        "target": 0,
+        "upper": 86.19900000095367,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-10-2026-09-13.jpg"
+      },
+      {
+        "trial": 11,
+        "target": 127,
+        "upper": 95.77687499672174,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-11-2026-09-13.jpg"
+      },
+      {
+        "trial": 12,
+        "target": 0,
+        "upper": 79.81545799970627,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-12-2026-09-13.jpg"
+      },
+      {
+        "trial": 13,
+        "target": 127,
+        "upper": 89.76199999824166,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-13-2026-09-13.jpg"
+      },
+      {
+        "trial": 14,
+        "target": 0,
+        "upper": 78.71049999818206,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-14-2026-09-13.jpg"
+      },
+      {
+        "trial": 15,
+        "target": 127,
+        "upper": 86.74500000104308,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-15-2026-09-13.jpg"
+      },
+      {
+        "trial": 16,
+        "target": 0,
+        "upper": 73.78233299776912,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-16-2026-09-13.jpg"
+      },
+      {
+        "trial": 17,
+        "target": 127,
+        "upper": 70.17916699871421,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-17-2026-09-13.jpg"
+      },
+      {
+        "trial": 18,
+        "target": 0,
+        "upper": 85.91608300060034,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-18-2026-09-13.jpg"
+      },
+      {
+        "trial": 19,
+        "target": 127,
+        "upper": 79.28229199722409,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-19-2026-09-13.jpg"
       }
     ]
   }

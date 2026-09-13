@@ -58,6 +58,9 @@ for task_id, label in [('M15', 'Idle'), ('M16', 'CPU load')]:
             timings.append(dict(label=label, **summary))
 payload['timing'] = dict(status=' '.join(t['label'] + ': ' + t['status'] for t in timings),
     rows=[dict(r, label=t['label'] + ' · ' + r['label']) for t in timings for r in t['rows']]) if timings else None
+ui_path = docs/'work/runs/M17.json'
+ui_run = json.loads(ui_path.read_text()) if ui_path.exists() else None
+payload['ui_timing'] = dict(observed=ui_run['measurement']['observed'], bounded=ui_run['measurement']['boundedWithin150Ms'], rows=[dict(trial=r['trial'], target=r['target'], upper=r['visibleDelayUpperMs'], within=r['upperWithin150Ms'], screenshot=r['publicScreenshot']) for r in ui_run['measurement']['results']]) if ui_run else None
 data = json.dumps(payload, ensure_ascii=False, indent=2)
 template = (docs/'progress.template.html').read_text()
 html = template.replace('__PROGRESS_DATA__', data.replace('<', '\\u003c'))

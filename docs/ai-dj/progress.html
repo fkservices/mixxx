@@ -18,6 +18,7 @@
 <section class="two"><div class="panel"><h2>On the desk now</h2><div id="active"></div></div><div class="panel"><h2>The test booth</h2><div id="booth"></div><div class="notice">A passed software check does not prove audible timing, controller coexistence or an enjoyable mix. Those gates stay open until observed.</div></div></section>
 <section class="panel" id="transport-panel" hidden><h2>When the reply must stop</h2><p class="muted">Native Mixxx tests interrupt a 128-frame diagnostic reply. The small filled bars show frames sent before the stop; the rest were discarded.</p><div class="table-wrap"><table><thead><tr><th scope="col">Intervention</th><th scope="col">Frames sent before stop</th><th scope="col">Fresh message afterward</th><th scope="col">Queued output stopped</th></tr></thead><tbody id="transport-checks"></tbody></table></div><p class="muted" style="font-size:12px;margin-top:14px">One run per case. Shutdown invokes the mapping lifecycle in the native app; physical disconnect, crash recovery and musical timing remain separate. <a href="work/runs/R05-REPLY-LIFECYCLE.json">Read measured evidence ↗</a></p></section>
 <section class="panel" id="timing-panel" hidden><h2>How quickly does Mixxx answer?</h2><p id="timing-status" class="muted"></p><div class="table-wrap"><table><thead><tr><th scope="col">Measurement</th><th scope="col">Samples</th><th scope="col">Median</th><th scope="col">95th percentile</th><th scope="col">99th percentile</th><th scope="col">Maximum</th></tr></thead><tbody id="timing-values"></tbody></table></div><p class="muted" style="font-size:12px;margin-top:14px">Times are milliseconds. Full loopback round trips and Mixxx state feedback are separate measurements. Feedback value matching is not a causal acknowledgement. Empty, paused decks; no audio or UI latency claim. <a href="work/runs/M15.json">Idle measurement ↗</a> · <a href="work/runs/M16.json">CPU-load measurement ↗</a></p></section>
+<section class="panel" id="ui-timing-panel" hidden><h2>When the native fader becomes visible</h2><p id="ui-timing-status" class="muted"></p><div id="ui-timing-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px"></div><p class="muted" style="font-size:12px;margin-top:16px">Each bar is a conservative visible-by upper bound, not exact repaint latency. Scale: 0–200 ms; the marker is the 150 ms target. Amber means the capture cannot resolve the target, not a proven slow UI update. <a href="work/runs/M17.json">Frames and clock calibration ↗</a></p></section>
 <section><div class="work-heading"><h2>Evidence, as it happens</h2><span id="gallery-count" class="pill"></span></div><div id="gallery" class="gallery"></div></section>
 <section class="panel"><h2>Recently accepted</h2><div id="recent"></div></section>
 <section><h2>Every task, in view</h2><div class="controls"><label class="visually-hidden" for="search">Search tasks</label><input id="search" type="search" placeholder="Find MIDI, playlists, B2B, history…"><label class="visually-hidden" for="filter">Task status</label><select id="filter"><option value="all">All statuses</option><option value="running">In progress</option><option value="accepted">Accepted</option><option value="planned">Planned</option><option value="waiting">Waiting</option></select><label class="visually-hidden" for="scope">Task scope</label><select id="scope"><option value="all">All work</option><option value="static">Reference cards</option><option value="dynamic">Added tasks</option></select></div><div class="table-wrap"><table><thead><tr><th scope="col">ID</th><th scope="col">Work</th><th scope="col">Status</th><th scope="col">Evidence</th></tr></thead><tbody id="tasks"></tbody></table></div><p id="table-count" class="table-count" aria-live="polite"></p></section>
@@ -27,7 +28,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T23:41:32.354694+00:00",
+  "updated_at": "2026-09-13T23:46:15.078674+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -482,12 +483,16 @@
       "id": "M17",
       "title": "Capture native UI response timing",
       "stage": "01-local-midi",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/M17.md",
+      "verified": true,
+      "checks": [
+        "Twenty actual native fader changes and MIDI feedback verified; sixty timestamped frames retained.",
+        "Nineteen upper bounds below 150 ms; one ambiguous 191.96 ms bound requires M19-UI-CAPTURE.",
+        "Clock calibration and pixel classifier verified; helper exited 0, volume restored and host stopped."
+      ],
+      "updated": "2026-09-13T23:46:15.078674+00:00",
       "dynamic": false
     },
     {
@@ -2634,6 +2639,18 @@
       "checks": [],
       "updated": "2026-09-13T23:19:58.392860+00:00",
       "dynamic": true
+    },
+    {
+      "id": "M19-UI-CAPTURE",
+      "title": "Resolve native UI timing capture uncertainty",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": "2026-09-13T23:46:15.078674+00:00",
+      "dynamic": true
     }
   ],
   "milestones": [
@@ -2905,6 +2922,20 @@
       "caption": "After the loaded run, native preferences still show Core Audio at 48 kHz with the same 21.3 ms buffer. Zero underflows were reported by the native diagnostics.",
       "captured_at": "2026-09-13T23:41:32.355644+00:00",
       "evidence": "work/runs/M16.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-ui-timing-00-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Native volume down: actual fader pixels match returned MIDI state; conservative visible-by bound 102.49 ms.",
+      "captured_at": "2026-09-13T23:46:15.078674+00:00",
+      "evidence": "work/runs/M17.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-ui-timing-09-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Native volume up in trial 9: matching pixels and MIDI feedback, but a 191.96 ms capture bound leaves the 150 ms target unresolved.",
+      "captured_at": "2026-09-13T23:46:15.078674+00:00",
+      "evidence": "work/runs/M17.json"
     }
   ],
   "transport_checks": [
@@ -3021,6 +3052,152 @@
         "max": 3.438625000009779
       }
     ]
+  },
+  "ui_timing": {
+    "observed": 20,
+    "bounded": 19,
+    "rows": [
+      {
+        "trial": 0,
+        "target": 0,
+        "upper": 102.48816699907184,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-00-2026-09-13.jpg"
+      },
+      {
+        "trial": 1,
+        "target": 127,
+        "upper": 91.20412599667907,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-01-2026-09-13.jpg"
+      },
+      {
+        "trial": 2,
+        "target": 0,
+        "upper": 82.31666699796915,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-02-2026-09-13.jpg"
+      },
+      {
+        "trial": 3,
+        "target": 127,
+        "upper": 93.23954199627042,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-03-2026-09-13.jpg"
+      },
+      {
+        "trial": 4,
+        "target": 0,
+        "upper": 70.82116699591279,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-04-2026-09-13.jpg"
+      },
+      {
+        "trial": 5,
+        "target": 127,
+        "upper": 95.68137499690056,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-05-2026-09-13.jpg"
+      },
+      {
+        "trial": 6,
+        "target": 0,
+        "upper": 87.66620899736881,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-06-2026-09-13.jpg"
+      },
+      {
+        "trial": 7,
+        "target": 127,
+        "upper": 89.18187499791384,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-07-2026-09-13.jpg"
+      },
+      {
+        "trial": 8,
+        "target": 0,
+        "upper": 76.09570899605751,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-08-2026-09-13.jpg"
+      },
+      {
+        "trial": 9,
+        "target": 127,
+        "upper": 191.96174999698997,
+        "within": false,
+        "screenshot": "work/screenshots/mixxx-ui-timing-09-2026-09-13.jpg"
+      },
+      {
+        "trial": 10,
+        "target": 0,
+        "upper": 86.19900000095367,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-10-2026-09-13.jpg"
+      },
+      {
+        "trial": 11,
+        "target": 127,
+        "upper": 95.77687499672174,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-11-2026-09-13.jpg"
+      },
+      {
+        "trial": 12,
+        "target": 0,
+        "upper": 79.81545799970627,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-12-2026-09-13.jpg"
+      },
+      {
+        "trial": 13,
+        "target": 127,
+        "upper": 89.76199999824166,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-13-2026-09-13.jpg"
+      },
+      {
+        "trial": 14,
+        "target": 0,
+        "upper": 78.71049999818206,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-14-2026-09-13.jpg"
+      },
+      {
+        "trial": 15,
+        "target": 127,
+        "upper": 86.74500000104308,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-15-2026-09-13.jpg"
+      },
+      {
+        "trial": 16,
+        "target": 0,
+        "upper": 73.78233299776912,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-16-2026-09-13.jpg"
+      },
+      {
+        "trial": 17,
+        "target": 127,
+        "upper": 70.17916699871421,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-17-2026-09-13.jpg"
+      },
+      {
+        "trial": 18,
+        "target": 0,
+        "upper": 85.91608300060034,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-18-2026-09-13.jpg"
+      },
+      {
+        "trial": 19,
+        "target": 127,
+        "upper": 79.28229199722409,
+        "within": true,
+        "screenshot": "work/screenshots/mixxx-ui-timing-19-2026-09-13.jpg"
+      }
+    ]
   }
 }</script>
 <script>
@@ -3057,6 +3234,8 @@ function render(){
  const timing=data.timing;
  $('timing-panel').hidden=!timing;
  if(timing){$('timing-status').textContent=timing.status; $('timing-values').innerHTML=timing.rows.map(r=>`<tr><td>${escape(r.label)}</td><td>${escape(r.count)}</td>${['p50','p95','p99','max'].map(k=>`<td>${Number.isFinite(r[k])?r[k].toFixed(2):'—'}</td>`).join('')}</tr>`).join('');}
+ const ui=data.ui_timing; $('ui-timing-panel').hidden=!ui;
+ if(ui){$('ui-timing-status').textContent=`${ui.observed} changes observed; ${ui.bounded} bounded within 150 ms. ${ui.observed-ui.bounded} unresolved. Finer capture remains required before the combined timing gate passes.`; $('ui-timing-grid').innerHTML=ui.rows.map(r=>`<article style="border:1px solid var(--line);padding:12px;border-radius:8px"><div class="label">Change ${r.trial+1} · Volume ${r.target===0?'↓':'↑'}</div><strong style="color:var(${r.within?'--lime':'--orange'})">≤ ${r.upper.toFixed(2)} ms</strong><div class="bar" style="position:relative"><span style="width:${Math.min(100,r.upper/2)}%;background:var(${r.within?'--lime':'--orange'})"></span><i style="position:absolute;left:75%;top:0;height:100%;border-left:2px solid white"></i></div><a class="evidence" href="${safeLink(r.screenshot)}">View native frame ↗</a></article>`).join('');}
  renderTable();
 }
 async function refresh(){

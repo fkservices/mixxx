@@ -1,0 +1,1195 @@
+{
+  "generation": "Autonomously AI-generated native UI timing measurement.",
+  "task": "M17",
+  "source_revision": "e75d16179dcd4840d1fe971f2dd36e4a9ea4d27a",
+  "recorded_at": "2026-09-13T23:46:15.078674+00:00",
+  "status": "measurement accepted; one 150 ms target comparison unresolved",
+  "method": {
+    "host": "Same isolated AI DJ Mixxx native build, native-clock profile and LateNight skin; empty paused decks.",
+    "stimulus": "Twenty alternating MIDI CC deck-one volume endpoints, 0 and 127; three native screenshots per change.",
+    "pixelClassifier": "Read-only RGB classification in x=530..559,y=230..333. At least 25 orange pixels per row (R>65,R>1.6G,R>2B), at most four-row spread. Center 236..240 means 127; 324..328 means zero. All 60 frames classified.",
+    "clock": "MIDI helper uses hrtime milliseconds; CUA uses perf_hooks performance milliseconds. Ten request/response clock probes before and after capture; offset envelope spans both intersections with 1 ms margin each side. No wall-clock subtraction.",
+    "frameTime": "Screenshot exposure timestamp unavailable: conservatively use the entire API invocation interval. Assumes fresh screenshot content originated within the call; this does not measure physical display scanout.",
+    "bounds": "Upper = first matching frame call completion, translated with maximum clock offset, minus actual MIDI send. Lower uses previous old-state frame call start when available, otherwise zero.",
+    "format": "Native screenshot API returned JPEG bytes despite private .png filenames; public copies use .jpg without transcoding.",
+    "analysis": "Pillow 12.3.0 in private analysis venv; no application dependency change.",
+    "coldCaptureMs": 462.78875
+  },
+  "measurement": {
+    "clockCalibration": [
+      {
+        "section": "before",
+        "lowerMs": 23647478.115625,
+        "upperMs": 23647479.373666998
+      },
+      {
+        "section": "after",
+        "lowerMs": 23647478.199375,
+        "upperMs": 23647478.842708
+      }
+    ],
+    "appliedOffsetEnvelopeMs": [
+      23647477.115625,
+      23647480.373666998
+    ],
+    "additionalMarginMs": 1,
+    "results": [
+      {
+        "trial": 0,
+        "target": 0,
+        "sentAtHelperMs": 25694759.033125,
+        "feedbackDelayMs": 1.250958003103733,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 102.48816699907184,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-00-frame-0.png",
+        "frames": [
+          {
+            "trial": 0,
+            "value": 0,
+            "token": "volume-0",
+            "frameIndex": 0,
+            "filename": "trial-00-frame-0.png",
+            "triggerBeforeMs": 2047278.390541,
+            "triggerAfterMs": 2047278.815083,
+            "beforeMs": 2047278.815708,
+            "afterMs": 2047381.147625,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "9d6c26c01ed0eb103faadfb97927b7aff815326dc3239c056db86d97e445a218"
+          },
+          {
+            "trial": 0,
+            "value": 0,
+            "token": "volume-0",
+            "frameIndex": 1,
+            "filename": "trial-00-frame-1.png",
+            "triggerBeforeMs": 2047278.390541,
+            "triggerAfterMs": 2047278.815083,
+            "beforeMs": 2047381.488333,
+            "afterMs": 2047464.446916,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "dc1ec7b82bd39b41aea01bf926e03c4ecc22f589d1f246925af9ca67c172352f"
+          },
+          {
+            "trial": 0,
+            "value": 0,
+            "token": "volume-0",
+            "frameIndex": 2,
+            "filename": "trial-00-frame-2.png",
+            "triggerBeforeMs": 2047278.390541,
+            "triggerAfterMs": 2047278.815083,
+            "beforeMs": 2047464.784333,
+            "afterMs": 2047540.440875,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "dd63208312507cfe8e82f41326f7c426768adebc6df98d0f63f67964f24b3258"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-00-2026-09-13.jpg"
+      },
+      {
+        "trial": 1,
+        "target": 127,
+        "sentAtHelperMs": 25695020.461041,
+        "feedbackDelayMs": 1.5678340010344982,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 91.20412599667907,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-01-frame-0.png",
+        "frames": [
+          {
+            "trial": 1,
+            "value": 127,
+            "token": "volume-1",
+            "frameIndex": 0,
+            "filename": "trial-01-frame-0.png",
+            "triggerBeforeMs": 2047541.103625,
+            "triggerAfterMs": 2047541.237291,
+            "beforeMs": 2047541.237833,
+            "afterMs": 2047631.2915,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "ae6568d1033374f287e3fefcc3a8be09c86a8ed4e628700f7280bf4ac290242b"
+          },
+          {
+            "trial": 1,
+            "value": 127,
+            "token": "volume-1",
+            "frameIndex": 1,
+            "filename": "trial-01-frame-1.png",
+            "triggerBeforeMs": 2047541.103625,
+            "triggerAfterMs": 2047541.237291,
+            "beforeMs": 2047631.655708,
+            "afterMs": 2047707.792291,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "bf8f928a4e993c70449c4125e3856ff90fc0960c0561f8e18213a1b00556c668"
+          },
+          {
+            "trial": 1,
+            "value": 127,
+            "token": "volume-1",
+            "frameIndex": 2,
+            "filename": "trial-01-frame-2.png",
+            "triggerBeforeMs": 2047541.103625,
+            "triggerAfterMs": 2047541.237291,
+            "beforeMs": 2047708.158125,
+            "afterMs": 2047785.988458,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "c80e0a4d2564886f335f2ba62982060d74be5aed3e10cfd4c390fd7bca527dd0"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-01-2026-09-13.jpg"
+      },
+      {
+        "trial": 2,
+        "target": 0,
+        "sentAtHelperMs": 25695266.983,
+        "feedbackDelayMs": 1.2310409992933273,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 82.31666699796915,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-02-frame-0.png",
+        "frames": [
+          {
+            "trial": 2,
+            "value": 0,
+            "token": "volume-2",
+            "frameIndex": 0,
+            "filename": "trial-02-frame-0.png",
+            "triggerBeforeMs": 2047786.552166,
+            "triggerAfterMs": 2047786.689375,
+            "beforeMs": 2047786.689625,
+            "afterMs": 2047868.926,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "db71af44ad6d6fd347b13f98d0ee5d64bb7c55212b2234229f96d861decf252e"
+          },
+          {
+            "trial": 2,
+            "value": 0,
+            "token": "volume-2",
+            "frameIndex": 1,
+            "filename": "trial-02-frame-1.png",
+            "triggerBeforeMs": 2047786.552166,
+            "triggerAfterMs": 2047786.689375,
+            "beforeMs": 2047869.21775,
+            "afterMs": 2047947.297166,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "a6ed6ae98f0fa32fec0222ad134ac49b4b3f7990b26d647210d6fde1a0b50a9b"
+          },
+          {
+            "trial": 2,
+            "value": 0,
+            "token": "volume-2",
+            "frameIndex": 2,
+            "filename": "trial-02-frame-2.png",
+            "triggerBeforeMs": 2047786.552166,
+            "triggerAfterMs": 2047786.689375,
+            "beforeMs": 2047947.628875,
+            "afterMs": 2048022.979791,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "898e5b343b0a89a892e1981c209ca315588b956bc258eefbf5a0f88b45e5c2ab"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-02-2026-09-13.jpg"
+      },
+      {
+        "trial": 3,
+        "target": 127,
+        "sentAtHelperMs": 25695502.313,
+        "feedbackDelayMs": 4.367165997624397,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 93.23954199627042,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-03-frame-0.png",
+        "frames": [
+          {
+            "trial": 3,
+            "value": 127,
+            "token": "volume-3",
+            "frameIndex": 0,
+            "filename": "trial-03-frame-0.png",
+            "triggerBeforeMs": 2048023.601541,
+            "triggerAfterMs": 2048023.806625,
+            "beforeMs": 2048023.806958,
+            "afterMs": 2048115.178875,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "4a2e7ef8d7a0f40cfda86c5df91594520ac317d38b0ef0aa5c2059bf2541ae4e"
+          },
+          {
+            "trial": 3,
+            "value": 127,
+            "token": "volume-3",
+            "frameIndex": 1,
+            "filename": "trial-03-frame-1.png",
+            "triggerBeforeMs": 2048023.601541,
+            "triggerAfterMs": 2048023.806625,
+            "beforeMs": 2048115.557458,
+            "afterMs": 2048186.681583,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "eb055026645e4ad24fb8b428633652fabbfea268c987d1c49bb64c4f8044617c"
+          },
+          {
+            "trial": 3,
+            "value": 127,
+            "token": "volume-3",
+            "frameIndex": 2,
+            "filename": "trial-03-frame-2.png",
+            "triggerBeforeMs": 2048023.601541,
+            "triggerAfterMs": 2048023.806625,
+            "beforeMs": 2048187.02475,
+            "afterMs": 2048262.296083,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "df24728cd157824b7924de8741f4b04733d376760fb3ec3805b6d0849f655ad9"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-03-2026-09-13.jpg"
+      },
+      {
+        "trial": 4,
+        "target": 0,
+        "sentAtHelperMs": 25695743.100666,
+        "feedbackDelayMs": 0.6262499988079071,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 70.82116699591279,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-04-frame-0.png",
+        "frames": [
+          {
+            "trial": 4,
+            "value": 0,
+            "token": "volume-4",
+            "frameIndex": 0,
+            "filename": "trial-04-frame-0.png",
+            "triggerBeforeMs": 2048263.015,
+            "triggerAfterMs": 2048263.198583,
+            "beforeMs": 2048263.19875,
+            "afterMs": 2048333.548166,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "af9c14881f3120ee60e361f8fbbe4b01ee32b37e811ba76335bb3d03292014cc"
+          },
+          {
+            "trial": 4,
+            "value": 0,
+            "token": "volume-4",
+            "frameIndex": 1,
+            "filename": "trial-04-frame-1.png",
+            "triggerBeforeMs": 2048263.015,
+            "triggerAfterMs": 2048263.198583,
+            "beforeMs": 2048333.963416,
+            "afterMs": 2048440.313333,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "c9cf1e560824a17a0c35361707e1bfa84f769d56c9ffc164eb7638b3eeda285b"
+          },
+          {
+            "trial": 4,
+            "value": 0,
+            "token": "volume-4",
+            "frameIndex": 2,
+            "filename": "trial-04-frame-2.png",
+            "triggerBeforeMs": 2048263.015,
+            "triggerAfterMs": 2048263.198583,
+            "beforeMs": 2048440.608083,
+            "afterMs": 2048512.019541,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "8b63d7d0438f961d6f71a141790dfa3942092683be4d478d815dacee22149cd9"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-04-2026-09-13.jpg"
+      },
+      {
+        "trial": 5,
+        "target": 127,
+        "sentAtHelperMs": 25695992.639125,
+        "feedbackDelayMs": 1.202665999531746,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 95.68137499690056,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-05-frame-0.png",
+        "frames": [
+          {
+            "trial": 5,
+            "value": 127,
+            "token": "volume-5",
+            "frameIndex": 0,
+            "filename": "trial-05-frame-0.png",
+            "triggerBeforeMs": 2048512.627583,
+            "triggerAfterMs": 2048512.776625,
+            "beforeMs": 2048512.777,
+            "afterMs": 2048607.946833,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "0ea7095ccc12286559c5e3cb3c9c664d7a9968470bd3163fc0571da2bb7d0de8"
+          },
+          {
+            "trial": 5,
+            "value": 127,
+            "token": "volume-5",
+            "frameIndex": 1,
+            "filename": "trial-05-frame-1.png",
+            "triggerBeforeMs": 2048512.627583,
+            "triggerAfterMs": 2048512.776625,
+            "beforeMs": 2048608.311833,
+            "afterMs": 2048695.139166,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "86bb21226d573803cf59ec1295780bd1818b5c45300e5f3c110a1144c8633ab6"
+          },
+          {
+            "trial": 5,
+            "value": 127,
+            "token": "volume-5",
+            "frameIndex": 2,
+            "filename": "trial-05-frame-2.png",
+            "triggerBeforeMs": 2048512.627583,
+            "triggerAfterMs": 2048512.776625,
+            "beforeMs": 2048695.43675,
+            "afterMs": 2048795.520208,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "93d6ee5dc1ff0f4e34a03a34801fd26506299b2f46cbc5d02cc65e0df9c564af"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-05-2026-09-13.jpg"
+      },
+      {
+        "trial": 6,
+        "target": 0,
+        "sentAtHelperMs": 25696275.661541,
+        "feedbackDelayMs": 1.1032919995486736,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 87.66620899736881,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-06-frame-0.png",
+        "frames": [
+          {
+            "trial": 6,
+            "value": 0,
+            "token": "volume-6",
+            "frameIndex": 0,
+            "filename": "trial-06-frame-0.png",
+            "triggerBeforeMs": 2048796.0225,
+            "triggerAfterMs": 2048796.165583,
+            "beforeMs": 2048796.165875,
+            "afterMs": 2048882.954083,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "b89e3f972aecc1794c24db2a7f4d2e12f9d3bb1d559504100c0ef275768fa20d"
+          },
+          {
+            "trial": 6,
+            "value": 0,
+            "token": "volume-6",
+            "frameIndex": 1,
+            "filename": "trial-06-frame-1.png",
+            "triggerBeforeMs": 2048796.0225,
+            "triggerAfterMs": 2048796.165583,
+            "beforeMs": 2048883.283,
+            "afterMs": 2048973.048958,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "eae0f762454f377c7890d69515bdf7cb8e683c270da7b516b82cb79d2cf4e435"
+          },
+          {
+            "trial": 6,
+            "value": 0,
+            "token": "volume-6",
+            "frameIndex": 2,
+            "filename": "trial-06-frame-2.png",
+            "triggerBeforeMs": 2048796.0225,
+            "triggerAfterMs": 2048796.165583,
+            "beforeMs": 2048973.37875,
+            "afterMs": 2049061.222333,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "ab3c251816d99728e13591f97565fc98b34553270a8dd438449b2a445899d0c6"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-06-2026-09-13.jpg"
+      },
+      {
+        "trial": 7,
+        "target": 127,
+        "sentAtHelperMs": 25696540.932708,
+        "feedbackDelayMs": 0.6206669993698597,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 89.18187499791384,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-07-frame-0.png",
+        "frames": [
+          {
+            "trial": 7,
+            "value": 127,
+            "token": "volume-7",
+            "frameIndex": 0,
+            "filename": "trial-07-frame-0.png",
+            "triggerBeforeMs": 2049061.889333,
+            "triggerAfterMs": 2049062.053125,
+            "beforeMs": 2049062.053333,
+            "afterMs": 2049149.740916,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "390e2ae66d647d5c6bc2610421643d3769544233291742f2c6e78a2b8430d8ef"
+          },
+          {
+            "trial": 7,
+            "value": 127,
+            "token": "volume-7",
+            "frameIndex": 1,
+            "filename": "trial-07-frame-1.png",
+            "triggerBeforeMs": 2049061.889333,
+            "triggerAfterMs": 2049062.053125,
+            "beforeMs": 2049150.04975,
+            "afterMs": 2049224.530458,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "be340d71ddf8e67084711767b31fb75afc761382186846306c010400abd2f85b"
+          },
+          {
+            "trial": 7,
+            "value": 127,
+            "token": "volume-7",
+            "frameIndex": 2,
+            "filename": "trial-07-frame-2.png",
+            "triggerBeforeMs": 2049061.889333,
+            "triggerAfterMs": 2049062.053125,
+            "beforeMs": 2049224.785125,
+            "afterMs": 2049293.961,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "d60d72b11e2eb31c699003619686b623099a03977d6360d949ea92704f5d2a02"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-07-2026-09-13.jpg"
+      },
+      {
+        "trial": 8,
+        "target": 0,
+        "sentAtHelperMs": 25696774.452458,
+        "feedbackDelayMs": 1.3567499965429306,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 76.09570899605751,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-08-frame-0.png",
+        "frames": [
+          {
+            "trial": 8,
+            "value": 0,
+            "token": "volume-8",
+            "frameIndex": 0,
+            "filename": "trial-08-frame-0.png",
+            "triggerBeforeMs": 2049294.655083,
+            "triggerAfterMs": 2049294.817708,
+            "beforeMs": 2049294.817916,
+            "afterMs": 2049370.1745,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "ced6ce47bc285e9294049536d68ba56b4683024d71a1a5438b0a021079bcd92d"
+          },
+          {
+            "trial": 8,
+            "value": 0,
+            "token": "volume-8",
+            "frameIndex": 1,
+            "filename": "trial-08-frame-1.png",
+            "triggerBeforeMs": 2049294.655083,
+            "triggerAfterMs": 2049294.817708,
+            "beforeMs": 2049370.530041,
+            "afterMs": 2049444.433916,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "ba4b5800d652ed8476eead74691a514c5bdc7a99286d3ab02f618556d9ece6a8"
+          },
+          {
+            "trial": 8,
+            "value": 0,
+            "token": "volume-8",
+            "frameIndex": 2,
+            "filename": "trial-08-frame-2.png",
+            "triggerBeforeMs": 2049294.655083,
+            "triggerAfterMs": 2049294.817708,
+            "beforeMs": 2049444.905875,
+            "afterMs": 2049524.679625,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "13a9d3e7449e694d1a99d679507b8f6cd7894d288cce1b0b02dd39ced5741551"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-08-2026-09-13.jpg"
+      },
+      {
+        "trial": 9,
+        "target": 127,
+        "sentAtHelperMs": 25697006.02425,
+        "feedbackDelayMs": 3.2007079981267452,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 191.96174999698997,
+        "upperWithin150Ms": false,
+        "firstChangedFrame": "trial-09-frame-1.png",
+        "frames": [
+          {
+            "trial": 9,
+            "value": 127,
+            "token": "volume-9",
+            "frameIndex": 0,
+            "filename": "trial-09-frame-0.png",
+            "triggerBeforeMs": 2049525.318,
+            "triggerAfterMs": 2049525.488375,
+            "beforeMs": 2049525.488666,
+            "afterMs": 2049642.955833,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "2c74a048714f81f4ca4c23dac191311d0b2041db6577bef721a2149ec63e9850"
+          },
+          {
+            "trial": 9,
+            "value": 127,
+            "token": "volume-9",
+            "frameIndex": 1,
+            "filename": "trial-09-frame-1.png",
+            "triggerBeforeMs": 2049525.318,
+            "triggerAfterMs": 2049525.488375,
+            "beforeMs": 2049643.29125,
+            "afterMs": 2049717.612333,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "78833ffeb0eec576c0e343fa42475002378d779fa0ae7e5101adffa370f30f4d"
+          },
+          {
+            "trial": 9,
+            "value": 127,
+            "token": "volume-9",
+            "frameIndex": 2,
+            "filename": "trial-09-frame-2.png",
+            "triggerBeforeMs": 2049525.318,
+            "triggerAfterMs": 2049525.488375,
+            "beforeMs": 2049717.931125,
+            "afterMs": 2049848.171,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "9344a51ab6b90cf561c81c0bc80ac68ba627afe06c7a1c8dfc95543c2ed04f8c"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-09-2026-09-13.jpg"
+      },
+      {
+        "trial": 10,
+        "target": 0,
+        "sentAtHelperMs": 25697329.467125,
+        "feedbackDelayMs": 1.28795799985528,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 86.19900000095367,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-10-frame-0.png",
+        "frames": [
+          {
+            "trial": 10,
+            "value": 0,
+            "token": "volume-10",
+            "frameIndex": 0,
+            "filename": "trial-10-frame-0.png",
+            "triggerBeforeMs": 2049848.783875,
+            "triggerAfterMs": 2049848.968291,
+            "beforeMs": 2049848.968416,
+            "afterMs": 2049935.292458,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "a70af4dba050ea401a597801abe07d0b87e755507b775aeb0e973692645960f8"
+          },
+          {
+            "trial": 10,
+            "value": 0,
+            "token": "volume-10",
+            "frameIndex": 1,
+            "filename": "trial-10-frame-1.png",
+            "triggerBeforeMs": 2049848.783875,
+            "triggerAfterMs": 2049848.968291,
+            "beforeMs": 2049935.708375,
+            "afterMs": 2050051.695416,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "4d7d4acdead9a0e4bf837e3e88d19d867f8354556235de82f05992a1d085dd12"
+          },
+          {
+            "trial": 10,
+            "value": 0,
+            "token": "volume-10",
+            "frameIndex": 2,
+            "filename": "trial-10-frame-2.png",
+            "triggerBeforeMs": 2049848.783875,
+            "triggerAfterMs": 2049848.968291,
+            "beforeMs": 2050052.030375,
+            "afterMs": 2050136.379,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "415bed375a5057a237e46faaa5e1fa974e8fa57ca368f0bdd64fe74bafc30999"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-10-2026-09-13.jpg"
+      },
+      {
+        "trial": 11,
+        "target": 127,
+        "sentAtHelperMs": 25697617.4125,
+        "feedbackDelayMs": 1.373540997505188,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 95.77687499672174,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-11-frame-0.png",
+        "frames": [
+          {
+            "trial": 11,
+            "value": 127,
+            "token": "volume-11",
+            "frameIndex": 0,
+            "filename": "trial-11-frame-0.png",
+            "triggerBeforeMs": 2050137.164916,
+            "triggerAfterMs": 2050137.310666,
+            "beforeMs": 2050137.310875,
+            "afterMs": 2050232.815708,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "f6b3f0e7c731ee93a19283a907454e4077f13b03d4d3b1957749c2bfebb3bb5a"
+          },
+          {
+            "trial": 11,
+            "value": 127,
+            "token": "volume-11",
+            "frameIndex": 1,
+            "filename": "trial-11-frame-1.png",
+            "triggerBeforeMs": 2050137.164916,
+            "triggerAfterMs": 2050137.310666,
+            "beforeMs": 2050233.203833,
+            "afterMs": 2050306.440708,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "86f2a6a7759c9cfbdf28f5c2e32b899e0d4293272194fa134cb710c10acaab7b"
+          },
+          {
+            "trial": 11,
+            "value": 127,
+            "token": "volume-11",
+            "frameIndex": 2,
+            "filename": "trial-11-frame-2.png",
+            "triggerBeforeMs": 2050137.164916,
+            "triggerAfterMs": 2050137.310666,
+            "beforeMs": 2050306.731291,
+            "afterMs": 2050462.151708,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "e5adccd8cc75882c565dbebaaf327d4d3d7002ba6618e22d15d16f38fa234a18"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-11-2026-09-13.jpg"
+      },
+      {
+        "trial": 12,
+        "target": 0,
+        "sentAtHelperMs": 25697957.609125,
+        "feedbackDelayMs": 1.7474160008132458,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 79.81545799970627,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-12-frame-0.png",
+        "frames": [
+          {
+            "trial": 12,
+            "value": 0,
+            "token": "volume-12",
+            "frameIndex": 0,
+            "filename": "trial-12-frame-0.png",
+            "triggerBeforeMs": 2050477.265166,
+            "triggerAfterMs": 2050478.314708,
+            "beforeMs": 2050478.31575,
+            "afterMs": 2050557.050916,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "87197fbc5ebefbfe39161457e0959bb21458d2fcfd7709a76e381611ee283700"
+          },
+          {
+            "trial": 12,
+            "value": 0,
+            "token": "volume-12",
+            "frameIndex": 1,
+            "filename": "trial-12-frame-1.png",
+            "triggerBeforeMs": 2050477.265166,
+            "triggerAfterMs": 2050478.314708,
+            "beforeMs": 2050557.328458,
+            "afterMs": 2050639.928125,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "2834c6d4f7ebb9e9f575addda0da7dd0cc69ef499ffc778ffef9db7e1d95b58e"
+          },
+          {
+            "trial": 12,
+            "value": 0,
+            "token": "volume-12",
+            "frameIndex": 2,
+            "filename": "trial-12-frame-2.png",
+            "triggerBeforeMs": 2050477.265166,
+            "triggerAfterMs": 2050478.314708,
+            "beforeMs": 2050640.305541,
+            "afterMs": 2050725.817041,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "eb0bf9ccd7efa455ad6ea8275f48f271c6589fa1b909e50eff6fa130cb67f632"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-12-2026-09-13.jpg"
+      },
+      {
+        "trial": 13,
+        "target": 127,
+        "sentAtHelperMs": 25698206.3035,
+        "feedbackDelayMs": 2.598999999463558,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 89.76199999824166,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-13-frame-0.png",
+        "frames": [
+          {
+            "trial": 13,
+            "value": 127,
+            "token": "volume-13",
+            "frameIndex": 0,
+            "filename": "trial-13-frame-0.png",
+            "triggerBeforeMs": 2050726.543458,
+            "triggerAfterMs": 2050726.755791,
+            "beforeMs": 2050726.756208,
+            "afterMs": 2050815.691833,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "26ca987fe89977e6fb54c48b51fac7edecbc9691e42713c24d691e0269106b98"
+          },
+          {
+            "trial": 13,
+            "value": 127,
+            "token": "volume-13",
+            "frameIndex": 1,
+            "filename": "trial-13-frame-1.png",
+            "triggerBeforeMs": 2050726.543458,
+            "triggerAfterMs": 2050726.755791,
+            "beforeMs": 2050816.038333,
+            "afterMs": 2050886.817958,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "5023c00e06552a020d134b5216828dba70fe0198c098eaae99cb932f4d622269"
+          },
+          {
+            "trial": 13,
+            "value": 127,
+            "token": "volume-13",
+            "frameIndex": 2,
+            "filename": "trial-13-frame-2.png",
+            "triggerBeforeMs": 2050726.543458,
+            "triggerAfterMs": 2050726.755791,
+            "beforeMs": 2050887.365875,
+            "afterMs": 2050976.308541,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "f6ae2793632887645f0214e37f343eb3bb6b568df887cc3661b72ab7ce864b7b"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-13-2026-09-13.jpg"
+      },
+      {
+        "trial": 14,
+        "target": 0,
+        "sentAtHelperMs": 25698456.174333,
+        "feedbackDelayMs": 1.4898330010473728,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 78.71049999818206,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-14-frame-0.png",
+        "frames": [
+          {
+            "trial": 14,
+            "value": 0,
+            "token": "volume-14",
+            "frameIndex": 0,
+            "filename": "trial-14-frame-0.png",
+            "triggerBeforeMs": 2050977.177666,
+            "triggerAfterMs": 2050977.325833,
+            "beforeMs": 2050977.325958,
+            "afterMs": 2051054.511166,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "3afad30b2bf40691ac61ff8e32f4c38db37cad011eded9586bbf97852e6d21c5"
+          },
+          {
+            "trial": 14,
+            "value": 0,
+            "token": "volume-14",
+            "frameIndex": 1,
+            "filename": "trial-14-frame-1.png",
+            "triggerBeforeMs": 2050977.177666,
+            "triggerAfterMs": 2050977.325833,
+            "beforeMs": 2051054.834666,
+            "afterMs": 2051190.400166,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "d0cd0daa58fdc9b60ff8a554569f12301daf60e4df285d6e5d6b40240bbf5d4e"
+          },
+          {
+            "trial": 14,
+            "value": 0,
+            "token": "volume-14",
+            "frameIndex": 2,
+            "filename": "trial-14-frame-2.png",
+            "triggerBeforeMs": 2050977.177666,
+            "triggerAfterMs": 2050977.325833,
+            "beforeMs": 2051190.726583,
+            "afterMs": 2051274.406,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "422a43fc6710a8446e3068e870cd0afca2178cd271398e621a620982c6d8f871"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-14-2026-09-13.jpg"
+      },
+      {
+        "trial": 15,
+        "target": 127,
+        "sentAtHelperMs": 25698754.264,
+        "feedbackDelayMs": 0.5646660029888153,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 86.74500000104308,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-15-frame-0.png",
+        "frames": [
+          {
+            "trial": 15,
+            "value": 127,
+            "token": "volume-15",
+            "frameIndex": 0,
+            "filename": "trial-15-frame-0.png",
+            "triggerBeforeMs": 2051275.034416,
+            "triggerAfterMs": 2051275.152666,
+            "beforeMs": 2051275.152875,
+            "afterMs": 2051360.635333,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "a2cd31c22b1af4e90c13a20ed664adf051da7ca06a3d3374f889171b967a519a"
+          },
+          {
+            "trial": 15,
+            "value": 127,
+            "token": "volume-15",
+            "frameIndex": 1,
+            "filename": "trial-15-frame-1.png",
+            "triggerBeforeMs": 2051275.034416,
+            "triggerAfterMs": 2051275.152666,
+            "beforeMs": 2051361.053291,
+            "afterMs": 2051443.909291,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "980435f0c0d5a8673e057770b9a8aedc8b801fc509f222dc7b2a4b958feac1ff"
+          },
+          {
+            "trial": 15,
+            "value": 127,
+            "token": "volume-15",
+            "frameIndex": 2,
+            "filename": "trial-15-frame-2.png",
+            "triggerBeforeMs": 2051275.034416,
+            "triggerAfterMs": 2051275.152666,
+            "beforeMs": 2051444.354041,
+            "afterMs": 2051524.750875,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "3a559de9eee31e4e0f3aeb1b360f4edbcb69cb1505e56e71e864da4f9a1cb927"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-15-2026-09-13.jpg"
+      },
+      {
+        "trial": 16,
+        "target": 0,
+        "sentAtHelperMs": 25699004.592,
+        "feedbackDelayMs": 4.162124998867512,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 73.78233299776912,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-16-frame-0.png",
+        "frames": [
+          {
+            "trial": 16,
+            "value": 0,
+            "token": "volume-16",
+            "frameIndex": 0,
+            "filename": "trial-16-frame-0.png",
+            "triggerBeforeMs": 2051525.305708,
+            "triggerAfterMs": 2051525.491458,
+            "beforeMs": 2051525.491833,
+            "afterMs": 2051598.000666,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "87451cd75271172921f7afe86fb0289e77b9e69bc7dd26035c6f771da030573d"
+          },
+          {
+            "trial": 16,
+            "value": 0,
+            "token": "volume-16",
+            "frameIndex": 1,
+            "filename": "trial-16-frame-1.png",
+            "triggerBeforeMs": 2051525.305708,
+            "triggerAfterMs": 2051525.491458,
+            "beforeMs": 2051598.320583,
+            "afterMs": 2051678.097875,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "af1cb5b1d660ac25fa63fc4de3b536c8a62501e04eefd58867a09ed405bbccc7"
+          },
+          {
+            "trial": 16,
+            "value": 0,
+            "token": "volume-16",
+            "frameIndex": 2,
+            "filename": "trial-16-frame-2.png",
+            "triggerBeforeMs": 2051525.305708,
+            "triggerAfterMs": 2051525.491458,
+            "beforeMs": 2051678.571375,
+            "afterMs": 2051757.712125,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "62dea411b5b57c95a756dccad251c1d3a69f9d15ef850664167e5090fd0f5486"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-16-2026-09-13.jpg"
+      },
+      {
+        "trial": 17,
+        "target": 127,
+        "sentAtHelperMs": 25699238.222083,
+        "feedbackDelayMs": 1.7480420023202896,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 70.17916699871421,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-17-frame-0.png",
+        "frames": [
+          {
+            "trial": 17,
+            "value": 127,
+            "token": "volume-17",
+            "frameIndex": 0,
+            "filename": "trial-17-frame-0.png",
+            "triggerBeforeMs": 2051758.333833,
+            "triggerAfterMs": 2051758.47825,
+            "beforeMs": 2051758.478583,
+            "afterMs": 2051828.027583,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "d72888c830bf43ec6dac6b7397e0ae535d43af4bec02705f06dcebdac0049727"
+          },
+          {
+            "trial": 17,
+            "value": 127,
+            "token": "volume-17",
+            "frameIndex": 1,
+            "filename": "trial-17-frame-1.png",
+            "triggerBeforeMs": 2051758.333833,
+            "triggerAfterMs": 2051758.47825,
+            "beforeMs": 2051828.342958,
+            "afterMs": 2051905.967958,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "97f4777e9e9d3e087221f9de7f1a6b021ade5ac234cbe37545ae18583296b0f3"
+          },
+          {
+            "trial": 17,
+            "value": 127,
+            "token": "volume-17",
+            "frameIndex": 2,
+            "filename": "trial-17-frame-2.png",
+            "triggerBeforeMs": 2051758.333833,
+            "triggerAfterMs": 2051758.47825,
+            "beforeMs": 2051906.307583,
+            "afterMs": 2051977.481375,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "4b14d3a99ba416441a329604a92426731aac52ec1b35a2ba22b58ec8c746d3c1"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-17-2026-09-13.jpg"
+      },
+      {
+        "trial": 18,
+        "target": 0,
+        "sentAtHelperMs": 25699456.95325,
+        "feedbackDelayMs": 1.374583002179861,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 85.91608300060034,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-18-frame-0.png",
+        "frames": [
+          {
+            "trial": 18,
+            "value": 0,
+            "token": "volume-18",
+            "frameIndex": 0,
+            "filename": "trial-18-frame-0.png",
+            "triggerBeforeMs": 2051978.096583,
+            "triggerAfterMs": 2051978.443958,
+            "beforeMs": 2051978.444333,
+            "afterMs": 2052062.495666,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "151514a4089cb0c426c2c7e9bdec979fab7863dd60977fec2135a1fb5a745fb5"
+          },
+          {
+            "trial": 18,
+            "value": 0,
+            "token": "volume-18",
+            "frameIndex": 1,
+            "filename": "trial-18-frame-1.png",
+            "triggerBeforeMs": 2051978.096583,
+            "triggerAfterMs": 2051978.443958,
+            "beforeMs": 2052062.807375,
+            "afterMs": 2052144.745458,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "13cd8cd4b87ac09efd2c35f16b9afdcdac8593dc474df2b135aec162787bc865"
+          },
+          {
+            "trial": 18,
+            "value": 0,
+            "token": "volume-18",
+            "frameIndex": 2,
+            "filename": "trial-18-frame-2.png",
+            "triggerBeforeMs": 2051978.096583,
+            "triggerAfterMs": 2051978.443958,
+            "beforeMs": 2052145.041208,
+            "afterMs": 2052225.433041,
+            "detectedValue": 0,
+            "orangeRowCenter": 326.0,
+            "sha256": "153f72b722e0edb756753f254a28528914966cb9e4b90f2ef8aae71c6a3c7194"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-18-2026-09-13.jpg"
+      },
+      {
+        "trial": 19,
+        "target": 127,
+        "sentAtHelperMs": 25699708.084125,
+        "feedbackDelayMs": 1.0199999995529652,
+        "visibleDelayLowerMs": 0,
+        "visibleDelayUpperMs": 79.28229199722409,
+        "upperWithin150Ms": true,
+        "firstChangedFrame": "trial-19-frame-0.png",
+        "frames": [
+          {
+            "trial": 19,
+            "value": 127,
+            "token": "volume-19",
+            "frameIndex": 0,
+            "filename": "trial-19-frame-0.png",
+            "triggerBeforeMs": 2052228.192541,
+            "triggerAfterMs": 2052228.393625,
+            "beforeMs": 2052228.393875,
+            "afterMs": 2052306.99275,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "147154bb0d45a64bdc622072d49ddb73f3765b9ae216a746bedfa9e64593a06d"
+          },
+          {
+            "trial": 19,
+            "value": 127,
+            "token": "volume-19",
+            "frameIndex": 1,
+            "filename": "trial-19-frame-1.png",
+            "triggerBeforeMs": 2052228.192541,
+            "triggerAfterMs": 2052228.393625,
+            "beforeMs": 2052307.285833,
+            "afterMs": 2052408.03825,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "8db055a941d4d12545ba3fb957494ca92f25bf7f9dcd4fd811bda355a4c2d815"
+          },
+          {
+            "trial": 19,
+            "value": 127,
+            "token": "volume-19",
+            "frameIndex": 2,
+            "filename": "trial-19-frame-2.png",
+            "triggerBeforeMs": 2052228.192541,
+            "triggerAfterMs": 2052228.393625,
+            "beforeMs": 2052408.375333,
+            "afterMs": 2052481.468875,
+            "detectedValue": 127,
+            "orangeRowCenter": 238.0,
+            "sha256": "88f4420bfe23bc4404ff3f0c04703ee1d5112a448157c73a52b496c2da5080f5"
+          }
+        ],
+        "publicScreenshot": "work/screenshots/mixxx-ui-timing-19-2026-09-13.jpg"
+      }
+    ],
+    "observed": 20,
+    "boundedWithin150Ms": 19,
+    "captureDurationRangeMs": [
+      69.17587499995716,
+      155.42041700007394
+    ],
+    "maxVisibleUpperMs": 191.96174999698997,
+    "minVisibleUpperMs": 70.17916699871421
+  },
+  "limits": [
+    "Nineteen conservative upper bounds satisfy 150 ms; trial 9 remains ambiguous at 191.96 ms.",
+    "The upper bounds are not exact repaint latency or actual deadline misses.",
+    "One skin, one volume control, twenty changes; no full feature or audio claim.",
+    "M19-UI-CAPTURE must resolve the measurement uncertainty before the combined timing gate passes."
+  ],
+  "cleanup": {
+    "helperExitCode": 0,
+    "twentyChangesSent": true,
+    "volumeRestored127": true,
+    "hostStopped": true,
+    "baseMappingRestored": true
+  },
+  "private_artifacts": {
+    "runner.mjs": {
+      "sha256": "43c6258e6d0b3b42859cc04b73a6d6c5b50b1a248a8f70491b4b2bfd74006012",
+      "bytes": 2722
+    },
+    "verify.py": {
+      "sha256": "38ba2988cbc46f64fa3270122094bf1e0b57044768235aa1be87dc498ca42025",
+      "bytes": 3130
+    },
+    "capture.jsonl": {
+      "sha256": "a677adaa659f8f247e017df7ac85b34aaba68c41063e39cbe68753222ba12f5e",
+      "bytes": 8829349
+    },
+    "host.log": {
+      "sha256": "b79f06a99ad5ebe9ecfa0dff8c60f2139bd5e21926f126a3685c06d74c05e1df",
+      "bytes": 14762958
+    },
+    "frames.json": {
+      "sha256": "95bf61882485c6268f155cb7789c5e62e86c6dd34386eda30a61f082f7b96d9c",
+      "bytes": 16020
+    },
+    "clock-pairs.json": {
+      "sha256": "fcbed4d5742d2d71497ba8c1371eb0cc39eb0635a952a807ca135dd366502973",
+      "bytes": 2557
+    },
+    "capture-calibration.json": {
+      "sha256": "fa75e6715409f03f6b9518e68c0c7094d81334c2c682719598ec77ca60ae8bb7",
+      "bytes": 620
+    },
+    "verification.json": {
+      "sha256": "f282e3f5f30b0c4c62c03472e6d3c6bd5c2a307c2a31b8291658308ac475aad4",
+      "bytes": 36347
+    }
+  },
+  "generation_end": "End of autonomously AI-generated native measurement."
+}

@@ -673,6 +673,19 @@
       "accepted_at": "2026-09-13T23:41:32.354694+00:00",
       "evidence": "docs/ai-dj/work/evidence/M16.md",
       "evidence_sha256": "63b94f4a149893dd3d9eb44fcd793dc57e27b673d69d3169b22fce357b4fbce1"
+    },
+    "M17": {
+      "status": "accepted",
+      "source_revision": "e75d161",
+      "started_at": "2026-09-13T23:42:34.648090+00:00",
+      "checks": [
+        "Twenty actual native fader changes and MIDI feedback verified; sixty timestamped frames retained.",
+        "Nineteen upper bounds below 150 ms; one ambiguous 191.96 ms bound requires M19-UI-CAPTURE.",
+        "Clock calibration and pixel classifier verified; helper exited 0, volume restored and host stopped."
+      ],
+      "accepted_at": "2026-09-13T23:46:15.078674+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M17.md",
+      "evidence_sha256": "26dd80aa668b170d37b33ce6161a9d7161f7eb813b4c73197106c3916128773f"
     }
   },
   "jobs": {

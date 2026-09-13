@@ -189,6 +189,20 @@
       "caption": "After the loaded run, native preferences still show Core Audio at 48 kHz with the same 21.3 ms buffer. Zero underflows were reported by the native diagnostics.",
       "captured_at": "2026-09-13T23:41:32.355644+00:00",
       "evidence": "work/runs/M16.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-ui-timing-00-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Native volume down: actual fader pixels match returned MIDI state; conservative visible-by bound 102.49 ms.",
+      "captured_at": "2026-09-13T23:46:15.078674+00:00",
+      "evidence": "work/runs/M17.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-ui-timing-09-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Native volume up in trial 9: matching pixels and MIDI feedback, but a 191.96 ms capture bound leaves the 150 ms target unresolved.",
+      "captured_at": "2026-09-13T23:46:15.078674+00:00",
+      "evidence": "work/runs/M17.json"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

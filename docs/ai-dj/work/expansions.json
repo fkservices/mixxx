@@ -1342,6 +1342,46 @@
       ],
       "evidence": "docs/ai-dj/work/evidence/L12-NATIVE-ACCESSIBILITY.md",
       "updated_at": "2026-09-13T23:19:58.392860+00:00"
+    },
+    {
+      "id": "M19-UI-CAPTURE",
+      "title": "Resolve native UI timing capture uncertainty",
+      "parent": "M19",
+      "blocks": [
+        "M19"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "M17"
+      ],
+      "owns": [
+        "docs/ai-dj/work/evidence/M19-UI-CAPTURE.md",
+        "docs/ai-dj/work/runs/M19-UI-CAPTURE.json"
+      ],
+      "locks": [
+        "mixxx-runtime"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Establish a finer, timestamped native-window capture method with explicit exposure/clock uncertainty; materialize exact source ownership before native code changes if required.",
+        "Repeat a predeclared twenty-change sequence and retain every result; preserve M17 including its ambiguous trial instead of replacing or cherry-picking samples."
+      ],
+      "validate": [
+        "Require all twenty visible update bounds to be usable against the 150 ms target, or record actual failures requiring a correction.",
+        "Distinguish screenshot/API latency, native repaint and physical display scanout; report capture gaps and clock calibration."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/M19-UI-CAPTURE.md",
+      "updated_at": "2026-09-13T23:46:15.078674+00:00"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

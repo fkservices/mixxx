@@ -32,7 +32,7 @@
     "M14": "accepted",
     "M15": "accepted",
     "M16": "accepted",
-    "M17": "planned",
+    "M17": "accepted",
     "M18": "planned",
     "M19": "planned",
     "M20": "planned",
@@ -205,6 +205,7 @@
     "M14",
     "M15",
     "M16",
+    "M17",
     "R01",
     "R02",
     "R03",
@@ -214,7 +215,6 @@
     "R20"
   ],
   "dependency_frontier": [
-    "M17",
     "M18",
     "I01",
     "I02",
@@ -268,10 +268,12 @@
     "R05-NATIVE-SEND-TIMER": "accepted",
     "M13-CUE-INTEGRATE": "accepted",
     "M13-FINAL-HOST": "accepted",
-    "L12-NATIVE-ACCESSIBILITY": "planned"
+    "L12-NATIVE-ACCESSIBILITY": "planned",
+    "M19-UI-CAPTURE": "planned"
   },
   "dynamic_dependency_frontier": [
-    "L12-NATIVE-ACCESSIBILITY"
+    "L12-NATIVE-ACCESSIBILITY",
+    "M19-UI-CAPTURE"
   ],
   "global_requirements": [
     "User instruction to start implementation",
