@@ -28,14 +28,62 @@
         "No runtime, MIDI, music quality or controller result claimed."
       ],
       "monitor_status": "terminated_after_handoff"
+    },
+    "F02": {
+      "status": "accepted",
+      "worker": "/root/f02_layout",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-13T18:48:11.320Z",
+      "interrupt_by": "2026-09-13T19:15:11.320Z",
+      "deadline": "2026-09-13T19:18:11.320Z",
+      "monitor_cell": "161",
+      "source_revision": "c9aefb3",
+      "owned_paths": [
+        "docs/ai-dj/work/layout.md",
+        "docs/ai-dj/work/evidence/F02.md"
+      ],
+      "accepted_at": "2026-09-13T18:51:57.961868+00:00",
+      "evidence": "docs/ai-dj/work/evidence/F02.md",
+      "evidence_sha256": "aa52f564686697c3bbad6833c10a3ea8f8765b5bb7d9758b9ba7492a3016c5ce",
+      "checks": [
+        "Coordinator reviewed module, callback, ownership and exact command contract.",
+        "Registry candidates confirmed by worker; installation proof reserved to F03/F04/F05.",
+        "Documentation validators and Markdown lint passed."
+      ],
+      "monitor_status": "terminated_after_handoff"
     }
   },
-  "jobs": {},
+  "jobs": {
+    "install-mixxx-2.5.6-arm": {
+      "status": "failed",
+      "exec_session_id": 53108,
+      "command": "python3 /tmp/ai-dj-install-runtime.py",
+      "cwd": "/Users/faizkhalid/Documents/ChatGPT/DJ_app",
+      "source_revision": "c9aefb3",
+      "profile": "No launch; F11 owns isolated profile",
+      "log": "~/Library/Application Support/Mixxx-AI-DJ/jobs/install-mixxx-2.5.6-arm/job.log",
+      "result": "~/Library/Application Support/Mixxx-AI-DJ/jobs/install-mixxx-2.5.6-arm/result.json",
+      "expected_end": "Download bounded to 600 seconds; inspect same job, never restart on observation timeout",
+      "reason": "Read-only attach canceled at license prompt; checksum verified; no mount left."
+    },
+    "install-mixxx-2.5.6-arm-resume-mount": {
+      "status": "succeeded",
+      "exec_session_id": 43699,
+      "command": "python3 /tmp/ai-dj-install-runtime-resume.py",
+      "source_revision": "c9aefb3",
+      "previous_job": "install-mixxx-2.5.6-arm",
+      "log": "~/Library/Application Support/Mixxx-AI-DJ/jobs/install-mixxx-2.5.6-arm/resume.log",
+      "result": "~/Library/Application Support/Mixxx-AI-DJ/jobs/install-mixxx-2.5.6-arm/resume-result.json",
+      "recipe": "Reuse and rehash downloaded artifact; respond to standard open-source license display; mount read-only, install absent destination, unmount and verify. No relaunch of download.",
+      "ended_at": "2026-09-13T18:50:25.392144+00:00"
+    }
+  },
   "resource_leases": {},
   "external_requirements": {
     "musical_fixtures": {
-      "status": "source_authorized",
-      "detail": "User authorized local iTunes/Music library. Music Library.musiclibrary and Media.localized exist; playable fixture files remain to be verified. Do not commit private music or full library paths."
+      "status": "two_local_fixtures_verified",
+      "detail": "Two full-length local MP3 tracks in authorized Music library passed complete decoding; private manifest outside Git. Mixxx playback and musical analysis remain pending."
     },
     "physical_controller": {
       "status": "model_identified",

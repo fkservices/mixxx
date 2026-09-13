@@ -38,7 +38,7 @@
 
 **Worker:** L3 / `gpt-5.6-sol` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F01. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** F01. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `docs/ai-dj/work/layout.md`
 

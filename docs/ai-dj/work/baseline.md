@@ -42,10 +42,10 @@ The following values are choices for the first runtime fixture. They remain unob
 The future launch shape is:
 
 ```text
-/Applications/Mixxx.app/Contents/MacOS/mixxx --settings-path "/Users/faizkhalid/Library/Application Support/Mixxx-AI-DJ/profiles/mixxx-2.5.6-latenight-f01"
+/Applications/Mixxx.app/Contents/MacOS/Mixxx --settings-path "/Users/faizkhalid/Library/Application Support/Mixxx-AI-DJ/profiles/mixxx-2.5.6-latenight-f01"
 ```
 
-This command was not run in F01.
+This command was not run in F01. Its executable casing was corrected after the [installation read-back](setup/mixxx-runtime.md). The [fixture record](setup/music-fixtures.md) and [controller note](setup/controller.md) capture later user inputs and setup results.
 
 ## Fixture track contract
 

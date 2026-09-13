@@ -20,7 +20,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "accepted",
       "id": "SETUP-F01-MIXXX-2.5.6-ARM",
       "title": "Install and verify isolated Mixxx runtime",
       "owns": [
@@ -37,7 +37,17 @@
       "locks": [
         "host-install"
       ],
-      "evidence": "docs/ai-dj/work/evidence/SETUP-F01-MIXXX-2.5.6-ARM.md"
+      "evidence": "docs/ai-dj/work/evidence/SETUP-F01-MIXXX-2.5.6-ARM.md",
+      "executor": "coordinator",
+      "source_revision": "c9aefb3",
+      "job_id": "install-mixxx-2.5.6-arm-resume-mount",
+      "accepted_at": "2026-09-13T18:50:58.607993+00:00",
+      "evidence_sha256": "cc82256d18812965ca9e14a9ec2d415831cadd05c13601d63460bc7ea6145bf3",
+      "checks": [
+        "Published SHA-256 equals downloaded image hash.",
+        "Installed version/architecture/signature verified.",
+        "Read-only image unmounted and normal profile remains absent; no launch."
+      ]
     },
     {
       "parent": "F11",
@@ -57,7 +67,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "accepted",
       "id": "SETUP-F01-FIXTURE-TRACKS",
       "title": "Select two playable Music library fixtures",
       "owns": [
@@ -72,7 +82,16 @@
         "Cloud-only or protected entries do not satisfy fixture slots; no private media copied to Git."
       ],
       "locks": [],
-      "evidence": "docs/ai-dj/work/evidence/SETUP-F01-FIXTURE-TRACKS.md"
+      "evidence": "docs/ai-dj/work/evidence/SETUP-F01-FIXTURE-TRACKS.md",
+      "executor": "coordinator",
+      "source_revision": "c9aefb3",
+      "accepted_at": "2026-09-13T18:49:22.363218+00:00",
+      "evidence_sha256": "d96bfdb34b34654cadf56acc42352f8b6f32b80537a42a6cbb1f01c5032fa00f",
+      "checks": [
+        "Both full-file audio decodes exited 0 with no error output.",
+        "Metadata, fingerprints and private manifest verified.",
+        "No media or private source paths added to Git."
+      ]
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

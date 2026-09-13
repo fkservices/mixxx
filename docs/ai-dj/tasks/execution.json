@@ -5,7 +5,7 @@
   "authorization": "implementation_authorized",
   "current_task_status": {
     "F01": "accepted",
-    "F02": "planned",
+    "F02": "accepted",
     "F03": "planned",
     "F04": "planned",
     "F05": "planned",
@@ -177,20 +177,19 @@
     "L12": "planned"
   },
   "accepted_task_ids": [
-    "F01"
+    "F01",
+    "F02"
   ],
   "dependency_frontier": [
-    "F02"
+    "F03",
+    "F06"
   ],
   "dispatchable_now": [],
   "dynamic_task_status": {
-    "SETUP-F01-MIXXX-2.5.6-ARM": "planned",
-    "SETUP-F01-FIXTURE-TRACKS": "planned"
+    "SETUP-F01-MIXXX-2.5.6-ARM": "accepted",
+    "SETUP-F01-FIXTURE-TRACKS": "accepted"
   },
-  "dynamic_dependency_frontier": [
-    "SETUP-F01-MIXXX-2.5.6-ARM",
-    "SETUP-F01-FIXTURE-TRACKS"
-  ],
+  "dynamic_dependency_frontier": [],
   "global_requirements": [
     "User instruction to start implementation",
     "Current integrated revision and scoped context",
