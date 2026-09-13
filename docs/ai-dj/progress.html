@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T21:20:18.653618+00:00",
+  "updated_at": "2026-09-13T21:23:31.044527+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2376,12 +2376,16 @@
       "id": "M13-CUE-OBSERVER",
       "title": "Implement fixed read-only native cue observer",
       "stage": "setup",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/M13-CUE-OBSERVER.md",
+      "verified": true,
+      "checks": [
+        "Eight synthetic observer tests and 130 integrated tests passed.",
+        "Typecheck, build and whitespace passed.",
+        "Bounded read-only collector accepted; MIDI integration and native evidence remain separate required children."
+      ],
+      "updated": "2026-09-13T21:23:31.044527+00:00",
       "dynamic": true
     },
     {

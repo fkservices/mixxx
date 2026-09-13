@@ -247,13 +247,11 @@
     "M11-CLI": "accepted",
     "R08-PAGED-VALIDATION": "planned",
     "M13-MANUAL-CUE-VISIBILITY": "split",
-    "M13-CUE-OBSERVER": "planned",
+    "M13-CUE-OBSERVER": "accepted",
     "M13-CUE-TRANSPORT": "planned",
     "M13-CUE-NATIVE": "planned"
   },
-  "dynamic_dependency_frontier": [
-    "M13-CUE-OBSERVER"
-  ],
+  "dynamic_dependency_frontier": [],
   "global_requirements": [
     "User instruction to start implementation",
     "Current integrated revision and scoped context",
