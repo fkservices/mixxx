@@ -2,12 +2,12 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { resolve } from "node:path";
-export const FRAGMENT_ORDER = ["play-volume", "fader-cue", "sync", "conventional-feedback"] as const;
+export const FRAGMENT_ORDER = ["play-volume", "fader-cue", "sync", "conventional-feedback", "wire-encode", "wire-decode", "wire"] as const;
 const BEGIN = "// AI-DJ-FRAGMENTS-BEGIN";
 const END = "// AI-DJ-FRAGMENTS-END";
 
 export function renderMapping(bootstrap: string, fragments: readonly string[]): string {
-  if (fragments.length !== FRAGMENT_ORDER.length || fragments.some(x => !x.trim())) throw new Error("Exactly four nonempty fragments are required");
+  if (fragments.length !== FRAGMENT_ORDER.length || fragments.some(x => !x.trim())) throw new Error(`Exactly ${FRAGMENT_ORDER.length} nonempty fragments are required`);
   if (bootstrap.split(BEGIN).length !== 2 || bootstrap.split(END).length !== 2) throw new Error("Expected unique assembly markers");
   const start = bootstrap.indexOf(BEGIN) + BEGIN.length;
   const end = bootstrap.indexOf(END);
@@ -27,5 +27,5 @@ export async function buildMapping(check = false): Promise<void> {
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   if (process.argv.slice(2).some(arg => arg !== "--check")) throw new Error("Usage: build-mapping.ts [--check]");
   await buildMapping(process.argv.includes("--check"));
-  console.log(process.argv.includes("--check") ? "Mapping bundle matches all four source fragments" : "Assembled four mapping fragments");
+  console.log(process.argv.includes("--check") ? "Mapping bundle matches all source fragments" : `Assembled ${FRAGMENT_ORDER.length} mapping fragments`);
 }

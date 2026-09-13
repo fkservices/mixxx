@@ -1,13 +1,16 @@
 // Autonomously AI-generated assembly integration tests.
 import assert from "node:assert/strict";
 import test from "node:test";
-import { buildMapping, renderMapping } from "../../tools/build-mapping.ts";
+import { buildMapping, renderMapping, FRAGMENT_ORDER } from "../../tools/build-mapping.ts";
 import { createHostHarness } from "./harness.ts";
+import { encodeSysex } from "../../midi/sysex-encode.ts";
+import { createSysexParser } from "../../midi/sysex-decode.ts";
+import { readFileSync } from "node:fs";
 
 test("checked-in bundle is reproducible and assembly preserves bootstrap boundaries",async()=>{
   await buildMapping(true);
   const base="prefix\n// AI-DJ-FRAGMENTS-BEGIN\nold\n// AI-DJ-FRAGMENTS-END\nsuffix\n";
-  const parts=["a","b","c","d"];
+  const parts=FRAGMENT_ORDER.map(name=>`source-${name}`);
   const output=renderMapping(base,parts);
   assert.equal(renderMapping(output,parts),output);
   assert.ok(output.startsWith("prefix\n"));assert.ok(output.endsWith("suffix\n"));
@@ -27,4 +30,48 @@ test("assembled mapping initializes all modules and routes each family to host a
   h.packets.length=0;assert.equal(h.mapping.shutdown(),true);assert.equal(h.connections.size,0);assert.equal(h.timers.size,0);
   assert.equal(h.packets.length,0);assert.equal(h.writes.at(-1)?.key,"cue_preview");assert.equal(h.writes.at(-1)?.value,0);
   h.mapping.init("AI DJ",false);assert.equal(h.connections.size,18);assert.equal(h.timers.size,1);h.mapping.shutdown();
+});
+
+test("assembled SysEx route requires explicit configuration and survives alongside conventional controls",()=>{
+  const h=createHostHarness([],true);
+  assert.equal(h.evaluate("AIDJ.wireStatus().enabled"),false);
+  h.evaluate(`var wirePackets=[];midi.sendSysexMsg=(data,length)=>{if(data.length!==length)throw Error('length');wirePackets.push(data);};
+    AIDJ.configureWire({clockKind:'diagnostic-wall',clockDomainId:'fixture-clock',now:()=>100,allowDiagnostic:true,onFault:()=>{},
+      handlers:[{opcode:113,validate:p=>typeof p==='string'&&p.length<=512,handle:(p,h)=>AIDJ.sendWire({opcode:113,session:h.session,sequence:h.sequence,payload:p})}]});`);
+  h.mapping.init("AI DJ",false);
+  assert.equal(h.timers.size,2);assert.equal(h.evaluate("AIDJ.wireStatus().enabled"),true);
+  const frame=encodeSysex({direction:0,opcode:113,session:"1".repeat(32),sequence:1,payload:"é🎧"},true)[0]!;
+  const result=h.evaluate(`AIDJ.incomingData(new Uint8Array(${JSON.stringify(Array.from(frame))}),${frame.length})`);
+  assert.equal(result.dispatched,1);assert.equal(h.writes.length,0);
+  const packets=JSON.parse(h.evaluate("JSON.stringify(wirePackets)")) as number[][];
+  const parser=createSysexParser({direction:1,generation:1,now:()=>0,allowDiagnostic:true,automaticExpiry:false});
+  assert.equal(parser.push(Uint8Array.from(packets[0]!),1).messages[0]?.payload,"é🎧");parser.close();
+  h.mapping.input(0,0x21,64,0xb0,"[Channel1]");assert.equal(h.writes.at(-1)?.key,"volume");
+  assert.throws(()=>h.evaluate("AIDJ.configureWire({})"),/before initialization/);
+  h.evaluate("var retiredIncoming=AIDJ.incomingData;");h.mapping.shutdown();
+  assert.equal(h.timers.size,0);assert.equal(h.evaluate("AIDJ.wireStatus().enabled"),false);
+  h.mapping.init("AI DJ",false);assert.equal(h.timers.size,1);assert.equal(h.evaluate("AIDJ.wireStatus().enabled"),false);
+  h.evaluate(`retiredIncoming(new Uint8Array(${JSON.stringify(Array.from(frame))}),${frame.length})`);
+  assert.equal(h.evaluate("wirePackets.length"),1);h.mapping.shutdown();
+});
+
+test("diagnostic wall-clock mode cannot register or send semantic messages",()=>{
+  const h=createHostHarness([],true);
+  h.evaluate("var options={clockKind:'diagnostic-wall',clockDomainId:'fixture-clock',now:()=>100,allowDiagnostic:true,onFault:()=>{},handlers:[]}");
+  assert.throws(()=>h.evaluate("AIDJ.configureWire({...options,handlers:[{opcode:7,validate:()=>true,handle:()=>{}}]})"),/semantic handlers/);
+  assert.throws(()=>h.evaluate("AIDJ.configureWire({...options,allowDiagnostic:false})"),/diagnostic-only/);
+  h.evaluate("AIDJ.configureWire(options)");h.mapping.init("AI DJ",false);
+  h.evaluate("AIDJ.wireStatus().clock.kind='monotonic'");
+  assert.equal(h.evaluate("AIDJ.wireStatus().clock.kind"),"diagnostic-wall");
+  assert.throws(()=>h.evaluate("AIDJ.sendWire({opcode:9})"),/semantic messages/);
+  h.mapping.shutdown();assert.equal(h.timers.size,0);
+});
+
+test("XML adds one scripted SysEx route without changing conventional registrations",()=>{
+  const xml=readFileSync(new URL("../../../res/controllers/AI-DJ.midi.xml",import.meta.url),"utf8");
+  const controls=[...xml.matchAll(/<control>([\s\S]*?)<\/control>/g)].map(m=>m[1]!);
+  const sysex=controls.filter(c=>c.includes("<status>0xF0</status>"));
+  assert.equal(sysex.length,1);assert.match(sysex[0]!,/<key>AIDJ.incomingData<\/key>/);
+  assert.match(sysex[0]!,/<script-binding\/>/);
+  assert.equal(controls.filter(c=>c.includes("<key>AIDJ.input</key>")).length,11);
 });
