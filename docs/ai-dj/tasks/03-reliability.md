@@ -64,7 +64,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** R01, F03. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** R01, F03. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/midi/sysex-encode.ts`, `ai-dj/test/midi/sysex-encode.test.ts`
 

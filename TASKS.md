@@ -4,7 +4,7 @@
 
 **Current work: implementation authorized and started.** The active goal is “perform tasks.md as proposed.” [GOALS.md](GOALS.md) remains authoritative. The reference catalog has 171 cards and 17 expansion templates. [Execution state and acceptance evidence](docs/ai-dj/work/state.json) are authoritative; a card's presence is not completion.
 
-**Now: twenty-four reference tasks and nine expansion tasks accepted.** M11 provides the separate CLI and disarmed communicator; R01 freezes bounded extended SysEx framing with checked numeric and Unicode examples. The package passes 101 tests. Next: lifecycle/snapshot semantics and codec implementation, while restoring native Mixxx feedback for M12/M13. Actual performance, timing, AI/B2B and later delivery gates remain open.
+**Now: twenty-five reference tasks and nine expansion tasks accepted.** R03 implements the bounded SysEx encoder and matches the frozen numeric/Unicode frames. The package passes 105 tests, typecheck and build. Next: lifecycle/snapshot semantics and incoming parsing, while restoring native Mixxx feedback for M12/M13. Actual performance, timing, AI/B2B and later delivery gates remain open.
 
 [Visual progress page](docs/ai-dj/progress.html) stays synchronized with the ledger. Add real screenshots and their evidence context as UI/runtime checks produce them.
 

@@ -517,6 +517,19 @@
       "accepted_at": "2026-09-13T20:42:49.246252+00:00",
       "evidence": "docs/ai-dj/work/evidence/R01.md",
       "evidence_sha256": "fe78b9fc9bad3613098b49260cc9e6759478385bb8635a9a7a138aabe09cb603"
+    },
+    "R03": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "52a746b",
+      "started_at": "2026-09-13T20:44:02.883441+00:00",
+      "checks": [
+        "Pure encoder matches frozen numeric and Unicode vectors; bounded JSON, fragmentation and wide-counter checks pass.",
+        "105 integrated tests, typecheck and build passed; no live sends or host dispatch claimed."
+      ],
+      "accepted_at": "2026-09-13T20:45:17.842725+00:00",
+      "evidence": "docs/ai-dj/work/evidence/R03.md",
+      "evidence_sha256": "14b529b042969330f762418679546f00ee0c3c431dd2a44a7cca5b80f24bdb67"
     }
   },
   "jobs": {
