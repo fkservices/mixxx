@@ -530,6 +530,19 @@
       "accepted_at": "2026-09-13T20:45:17.842725+00:00",
       "evidence": "docs/ai-dj/work/evidence/R03.md",
       "evidence_sha256": "14b529b042969330f762418679546f00ee0c3c431dd2a44a7cca5b80f24bdb67"
+    },
+    "R02": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "8abda83",
+      "started_at": "2026-09-13T20:45:40.533036+00:00",
+      "checks": [
+        "Negotiation, atomic snapshot/delta ordering, outcome separation, epochs and heartbeat/non-replay semantics reviewed.",
+        "Required races walked; aggregate validation continuation recorded. Host/runtime implementation remains unverified."
+      ],
+      "accepted_at": "2026-09-13T20:48:23.105731+00:00",
+      "evidence": "docs/ai-dj/work/evidence/R02.md",
+      "evidence_sha256": "5682752e83b3703378087603466f89e086b7f889a54997dc40e3e943e673c438"
     }
   },
   "jobs": {

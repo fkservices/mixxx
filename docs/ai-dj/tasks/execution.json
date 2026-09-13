@@ -60,7 +60,7 @@
     "I22": "planned",
     "I23": "planned",
     "R01": "accepted",
-    "R02": "planned",
+    "R02": "accepted",
     "R03": "accepted",
     "R04": "planned",
     "R05": "planned",
@@ -201,6 +201,7 @@
     "M10",
     "M11",
     "R01",
+    "R02",
     "R03"
   ],
   "dependency_frontier": [
@@ -228,8 +229,8 @@
     "I20",
     "I21",
     "I22",
-    "R02",
-    "R04"
+    "R04",
+    "R15"
   ],
   "dispatchable_now": [],
   "dynamic_task_status": {
@@ -241,7 +242,8 @@
     "INTEGRATE-F09-SYNC-VALIDATION": "accepted",
     "INTEGRATE-F09-SYNC-PROFILE": "accepted",
     "M11-SERVICE": "accepted",
-    "M11-CLI": "accepted"
+    "M11-CLI": "accepted",
+    "R08-PAGED-VALIDATION": "planned"
   },
   "dynamic_dependency_frontier": [],
   "global_requirements": [

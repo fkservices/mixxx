@@ -469,6 +469,45 @@
       ],
       "accepted_at": "2026-09-13T20:40:09.439513+00:00",
       "evidence_sha256": "711d89b91c417a18d8fc613837e3b91f823112c54b46a3fb63aced86802f560e"
+    },
+    {
+      "id": "R08-PAGED-VALIDATION",
+      "title": "Validate aggregate paged state before atomic publication",
+      "parent": "R08",
+      "blocks": [
+        "R08"
+      ],
+      "template": "SPLIT",
+      "level": "L4",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "R02",
+        "R07",
+        "F08"
+      ],
+      "owns": [
+        "ai-dj/core/validate-paged-state.ts",
+        "ai-dj/test/core/validate-paged-state.test.ts"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Implement bounded transaction admission using R07 closed page schemas, retained exact page bytes and R02 aggregate limits.",
+        "Validate all F07 cross-page identities, aliases, instances, presence and resulting projection invariants before publication; split further if needed."
+      ],
+      "validate": [
+        "Reject individually valid pages with cross-page duplicate/conflicting identities, missing references, changed context or wrong digest.",
+        "Test aggregate byte/node/page/record bounds, late/conflicting pages and timeout; no partial authoritative state."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/R08-PAGED-VALIDATION.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

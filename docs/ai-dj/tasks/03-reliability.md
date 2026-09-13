@@ -36,7 +36,7 @@
 
 **Worker:** L4 / `gpt-6-astra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** R01, F07. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** R01, F07. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `docs/ai-dj/work/contracts/lifecycle.md`
 
