@@ -254,7 +254,8 @@
     "R05-HOST-DECODER": "accepted",
     "R05-ENDPOINT-INTEGRATE": "in_review",
     "R05-ENDPOINT-NATIVE": "planned",
-    "R05-NATIVE-CLOCK": "in_review"
+    "R05-NATIVE-CLOCK": "accepted",
+    "R12-SUSPEND-RESUME": "planned"
   },
   "dynamic_dependency_frontier": [],
   "global_requirements": [

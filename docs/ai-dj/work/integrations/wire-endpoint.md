@@ -28,21 +28,21 @@ fixture makes the coalescing API throw if used and verifies that a missing FIFO
 API produces unavailable records rather than a fallback. No native short-edge
 delivery test has passed yet.
 
-## Clock requirement still open
+## Clock requirement resolved for the custom host
 
-The inspected legacy engine interface exposes timer scheduling but does not
-provide a monotonic-time getter among its declared invokable methods. This does
-not establish absence from every global/native surface. The next native probe
-must verify the available clock surface before activating production handlers.
-Do not label Date.now as monotonic, derive time by counting timer callbacks, or
-claim R02's clock requirements have passed from a VM-injected clock. If the
-installed host lacks the needed clock, retain a required native-extension task;
-diagnostic-only framing tests cannot substitute for that production requirement.
+The stock 2.5.6 diagnostic used Date.now only for explicitly labeled diagnostic
+framing. The custom 2.7 host now exposes a source-backed steady-clock API, verified
+by native Qt tests and actual mapping invocation. Numeric and Unicode payloads
+also made a native MIDI round trip with that clock. See the accepted
+[native clock evidence](../evidence/R05-NATIVE-CLOCK.md). Caller-provided clock
+labels alone remain untrusted; deployment must identify the verified custom host.
+Sleep/resume invalidation is required by R12-SUSPEND-RESUME and is not satisfied
+by the clock helper or these diagnostics.
 
 ## Next integration work
 
 The assembly and initial native golden probes are implemented below. Investigate
-a usable production clock, then complete native JSON, malformed-input, expiry,
+the remaining activation integration checks, then complete native JSON, malformed-input, expiry,
 reset and lifecycle fixtures over actual MIDI before accepting the endpoint.
 
 ## Implemented assembly and activation boundary
@@ -61,7 +61,7 @@ declaring a clock kind is not proof that its source has been verified.
 A separately labeled diagnostic-wall mode requires diagnostic opt-in, accepts
 only diagnostic handler opcodes and refuses semantic output. It can support
 bounded framing investigations without pretending Date.now satisfies production
-clock requirements. Production clock verification remains open. No wall clock
+clock requirements. Native clock verification passed for the custom 2.7 host. No wall clock
 or performance handler is automatically installed by this change.
 
 Three new integration tests exercise the actual assembled bundle: opt-in

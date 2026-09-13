@@ -826,9 +826,10 @@
       "started_at": "2026-09-13T21:44:13.483268+00:00",
       "checks": [
         "Reproducible seven-fragment assembly, XML SysEx hook and explicit one-initialization configuration implemented.",
-        "Five assembly tests and all 154 integrated tests, typecheck/build and both generation checks passed.",
-        "Native bundle initialized; numeric/text golden MIDI round trips passed with conventional feedback. performance is undefined; diagnostic Date.now does not satisfy production clock. Integration remains in review."
-      ]
+        "Current integrated suite: 161 tests passed, typecheck/build and both generation checks passed.",
+        "Custom 2.7 native clock and numeric/text MIDI round trips passed; final integration review and broader native cases remain."
+      ],
+      "updated_at": "2026-09-13T22:18:45.572876+00:00"
     },
     {
       "id": "R05-ENDPOINT-NATIVE",
@@ -901,9 +902,9 @@
       "locks": [
         "native-clock-source"
       ],
-      "status": "in_review",
+      "status": "accepted",
       "executor": "coordinator",
-      "source_revision": "2c5c19d",
+      "source_revision": "b27c934",
       "started_at": "2026-09-13T21:45:51.364274+00:00",
       "perform": [
         "Expose a read-only process-relative steady-clock millisecond value to legacy scripts; no timer-count or wall-clock fallback.",
@@ -915,12 +916,55 @@
       ],
       "evidence": "docs/ai-dj/work/evidence/R05-NATIVE-CLOCK.md",
       "checks": [
-        "Actual custom Mixxx mapping called native clock and returned numeric/Unicode MIDI diagnostics unchanged; sleep/resume policy remains unverified.",
+        "Native clock API accepted from source, Qt regression and actual mapping/MIDI evidence; required resume continuation recorded under R12.",
         "Native build completed successfully; custom Mixxx 2.7.0 bundle and test binary hashes recorded.",
         "Three native clock tests passed, including actual Qt/JavaScript invocation and shared-origin progression.",
         "All 43 native controller-script regression tests passed; application mapping clock probe passed; resume policy remains unverified."
       ],
-      "updated_at": "2026-09-13T22:17:17.498347+00:00"
+      "updated_at": "2026-09-13T22:18:26.547636+00:00",
+      "accepted_at": "2026-09-13T22:18:26.547636+00:00",
+      "evidence_sha256": "4ff5656d4b3762077bf4b508fce7ef2c828b8270af8f8bba7290728a2710647b"
+    },
+    {
+      "id": "R12-SUSPEND-RESUME",
+      "parent": "R12",
+      "blocks": [
+        "R12"
+      ],
+      "template": "SPLIT",
+      "title": "Invalidate live sessions across desktop suspend and resume",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "R11",
+        "R05-NATIVE-CLOCK"
+      ],
+      "owns": [
+        "ai-dj/execution/suspend-resume.ts",
+        "ai-dj/test/integration/suspend-resume.test.ts",
+        "docs/ai-dj/work/runs/R12-SUSPEND-RESUME.json"
+      ],
+      "locks": [
+        "mixxx-runtime"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Implement native desktop suspend/resume notification integration and invalidate host/service session and clock context before resumed performance dispatch. Split any necessary host notification bridge into an owned child before editing it.",
+        "Discard queued actions and curves, retire old leases, preserve unresolved outcomes, and require fresh handshake/snapshot plus explicit rearm. Do not infer elapsed sleep from callback counts or silently rely on steady_clock suspend accounting."
+      ],
+      "validate": [
+        "Exercise actual suspend/resume or the documented OS notification mechanism end to end with native host evidence; injected callbacks alone are insufficient for final acceptance.",
+        "Prove no stale action burst or old-session write after resume; preserve playing-audio policy and release obligations. Missing notification support must keep readiness unavailable."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/R12-SUSPEND-RESUME.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

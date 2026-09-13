@@ -1,6 +1,6 @@
 # Native script clock bridge
 
-> Autonomously AI-generated implementation notes. Native acceptance is pending.
+> Autonomously AI-generated implementation notes. Native clock API accepted; session safety remains separate required work.
 
 The installed stock Mixxx 2.5.6 probe found `performance` undefined. The inspected
 legacy interface declares no monotonic getter. Its version-pinned
@@ -60,7 +60,8 @@ successful native verification.
 The [partial run record](../runs/R05-NATIVE-CLOCK.json) records the compiled helper
 fixture hashes and terminal configure/build/clock-test/regression results.
 No build or test process remains running. The custom-application mapping clock
-probe passed; the native-clock task remains in review for resume handling.
+probe passed; the native-clock API is accepted. Required resume handling is tracked by
+R12-SUSPEND-RESUME and blocks reliability acceptance.
 
 ## Native application launch
 

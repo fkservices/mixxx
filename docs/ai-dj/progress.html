@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T22:17:17.498347+00:00",
+  "updated_at": "2026-09-13T22:18:45.572876+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2467,10 +2467,10 @@
       "verified": false,
       "checks": [
         "Reproducible seven-fragment assembly, XML SysEx hook and explicit one-initialization configuration implemented.",
-        "Five assembly tests and all 154 integrated tests, typecheck/build and both generation checks passed.",
-        "Native bundle initialized; numeric/text golden MIDI round trips passed with conventional feedback. performance is undefined; diagnostic Date.now does not satisfy production clock. Integration remains in review."
+        "Current integrated suite: 161 tests passed, typecheck/build and both generation checks passed.",
+        "Custom 2.7 native clock and numeric/text MIDI round trips passed; final integration review and broader native cases remain."
       ],
-      "updated": "2026-09-13T21:44:13.483268+00:00",
+      "updated": "2026-09-13T22:18:45.572876+00:00",
       "dynamic": true
     },
     {
@@ -2489,17 +2489,29 @@
       "id": "R05-NATIVE-CLOCK",
       "title": "Expose and verify a native monotonic script clock",
       "stage": "setup",
-      "status": "in_review",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
+      "evidence": "work/evidence/R05-NATIVE-CLOCK.md",
+      "verified": true,
       "checks": [
-        "Actual custom Mixxx mapping called native clock and returned numeric/Unicode MIDI diagnostics unchanged; sleep/resume policy remains unverified.",
+        "Native clock API accepted from source, Qt regression and actual mapping/MIDI evidence; required resume continuation recorded under R12.",
         "Native build completed successfully; custom Mixxx 2.7.0 bundle and test binary hashes recorded.",
         "Three native clock tests passed, including actual Qt/JavaScript invocation and shared-origin progression.",
         "All 43 native controller-script regression tests passed; application mapping clock probe passed; resume policy remains unverified."
       ],
-      "updated": "2026-09-13T22:17:17.498347+00:00",
+      "updated": "2026-09-13T22:18:26.547636+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "R12-SUSPEND-RESUME",
+      "title": "Invalidate live sessions across desktop suspend and resume",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
       "dynamic": true
     }
   ],
