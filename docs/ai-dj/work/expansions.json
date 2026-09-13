@@ -825,11 +825,11 @@
       "source_revision": "7149cf9",
       "started_at": "2026-09-13T21:44:13.483268+00:00",
       "checks": [
-        "Fixed native reset routing; actual pre-reset reply and post-reset rejection passed. Seven-frame burst shortfall remains open.",
+        "Burst loss located in PortMidi input overflow: both seven-frame sends lost final frame; required input-loss and bounded-transmitter tasks added.",
         "164 tests, typecheck/build and mapping generation check passed.",
         "Native JSON/checksum, idle expiry and four-slot capacity/recovery passed; reset/lifecycle evidence remains."
       ],
-      "updated_at": "2026-09-13T22:26:29.801074+00:00"
+      "updated_at": "2026-09-13T22:27:41.963935+00:00"
     },
     {
       "id": "R05-ENDPOINT-NATIVE",
@@ -965,6 +965,85 @@
         "Prove no stale action burst or old-session write after resume; preserve playing-audio policy and release obligations. Missing notification support must keep readiness unavailable."
       ],
       "evidence": "docs/ai-dj/work/evidence/R12-SUSPEND-RESUME.md"
+    },
+    {
+      "id": "R05-NATIVE-INPUT-LOSS",
+      "parent": "R05",
+      "blocks": [
+        "R05"
+      ],
+      "template": "SPLIT",
+      "title": "Propagate native MIDI input loss to endpoint retirement",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "R02"
+      ],
+      "owns": [
+        "src/controllers/midi/portmidicontroller.cpp",
+        "src/test/portmidicontroller_test.cpp",
+        "docs/ai-dj/work/integrations/native-input-loss.md"
+      ],
+      "locks": [
+        "mixxx-runtime"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Clear partial native SysEx state after receive overflow and expose an explicit input-loss signal to interested mappings; distinguish input loss from a physical MIDI reset.",
+        "Retire the AI DJ endpoint on the signal through the integration owner; preserve other controller compatibility. Do not merely log and continue with trusted state."
+      ],
+      "validate": [
+        "Add native tests for overflow during partial input and verify no stale assembly or dispatch after loss.",
+        "Rebuild the custom application and reproduce actual overflow with bounded sender evidence; require observable endpoint retirement and clean recovery boundaries."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/R05-NATIVE-INPUT-LOSS.md"
+    },
+    {
+      "id": "R05-FRAGMENT-SENDER",
+      "parent": "R05",
+      "blocks": [
+        "R05"
+      ],
+      "template": "SPLIT",
+      "title": "Implement bounded deadline-aware MIDI fragment transmission",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "R03",
+        "R04"
+      ],
+      "owns": [
+        "ai-dj/midi/fragment-sender.ts",
+        "ai-dj/test/midi/fragment-sender.test.ts",
+        "docs/ai-dj/work/integrations/fragment-sender.md"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Bound queued bytes and frames, serialize the sole sender, and budget fragment bursts against the verified transport receive capacity. Keep expiry and cancellation ahead of bulk traffic.",
+        "Retire pending sends on transport/session loss; do not automatically retry uncertain delivery. Integrate with later R10 scheduling without duplicate port owners."
+      ],
+      "validate": [
+        "Verify maximum legal messages, cancellation, shutdown and overload without unbounded queueing or expired bursts.",
+        "Verify native multi-fragment transfers including the failing seven-frame case and maximum supported payload, with exact frame/byte correlation and no PortMidi overflow. Pacing alone is not proof of loss recovery."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/R05-FRAGMENT-SENDER.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

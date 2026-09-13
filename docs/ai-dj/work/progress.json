@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T22:26:29.801074+00:00",
+  "updated_at": "2026-09-13T22:27:41.963935+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2443,11 +2443,11 @@
       "evidence": null,
       "verified": false,
       "checks": [
-        "Fixed native reset routing; actual pre-reset reply and post-reset rejection passed. Seven-frame burst shortfall remains open.",
+        "Burst loss located in PortMidi input overflow: both seven-frame sends lost final frame; required input-loss and bounded-transmitter tasks added.",
         "164 tests, typecheck/build and mapping generation check passed.",
         "Native JSON/checksum, idle expiry and four-slot capacity/recovery passed; reset/lifecycle evidence remains."
       ],
-      "updated": "2026-09-13T22:26:29.801074+00:00",
+      "updated": "2026-09-13T22:27:41.963935+00:00",
       "dynamic": true
     },
     {
@@ -2482,6 +2482,30 @@
     {
       "id": "R12-SUSPEND-RESUME",
       "title": "Invalidate live sessions across desktop suspend and resume",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": true
+    },
+    {
+      "id": "R05-NATIVE-INPUT-LOSS",
+      "title": "Propagate native MIDI input loss to endpoint retirement",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": true
+    },
+    {
+      "id": "R05-FRAGMENT-SENDER",
+      "title": "Implement bounded deadline-aware MIDI fragment transmission",
       "stage": "setup",
       "status": "planned",
       "model": "gpt-5.6-sol",

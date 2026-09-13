@@ -199,4 +199,21 @@ loss and lifecycle checks remain. All 164 software tests, typecheck/build and
 mapping generation check passed. Both native processes exited and the diagnostic
 bootstrap was removed. Exact mapping and private evidence hashes are recorded.
 
+## Burst loss localized to native input overflow
+
+The archived full native log contains PortMidi buffer-overflow warnings for both
+failed bursts and a subsequent interrupted-SysEx warning. Byte-for-byte comparison
+of Node send captures with native incoming frame logs shows frame indexes 0–5
+arrived and index 6 was missing in each burst. Each burst contains 4,439 wire bytes,
+or 1,110 packed four-byte PortMidi events; the host opens a 1,024-event input queue.
+This capacity mismatch is consistent with the explicit native overflow errors.
+The input error branch currently logs and returns without notifying the endpoint.
+
+Required continuations R05-NATIVE-INPUT-LOSS and R05-FRAGMENT-SENDER now block R05.
+They cover explicit loss propagation/partial-state cleanup and bounded transmission
+with deadlines, cancellation and native maximum-message checks. A bigger buffer
+or successful paced fixture alone cannot establish safe recovery after lost input.
+The full log stays private; its hash and frame-correlation report are preserved in
+the run record. No new runtime was started for this read-only diagnosis.
+
 > End of autonomously AI-generated investigation.

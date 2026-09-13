@@ -3,7 +3,7 @@
   "task": "R05-ENDPOINT-NATIVE",
   "status": "partial",
   "sourceRevision": "abae078",
-  "recordedAt": "2026-09-13T22:26:29.801074+00:00",
+  "recordedAt": "2026-09-13T22:27:41.963935+00:00",
   "hostVersion": "custom Mixxx 2.7.0",
   "nativeClock": "engine.getMonotonicTime",
   "fixture": "Private opcode 9 JSON echo; no production service or performance action handler",
@@ -416,5 +416,44 @@
       "AI-DJ-scripts.js": "1235b13c8c937aff789e3e89091fb89d061ec4e088ffaecf3bc8037bbb410a8c",
       "AI-DJ.midi.xml": "4523f3cddd4c72f2847d623ff3db7ab8b19e324457df0c4a527e323f8b243bad"
     }
+  },
+  "burstDiagnosis": {
+    "status": "located-native-input-overflow",
+    "sourceRevision": "577e39d",
+    "correlation": [
+      {
+        "burst": "fresh",
+        "sentFrames": 7,
+        "nativeFrames": 6,
+        "missingFrameIndexes": [
+          6
+        ],
+        "wireBytes": 4439,
+        "packedPmEvents": 1110
+      },
+      {
+        "burst": "post-reset",
+        "sentFrames": 7,
+        "nativeFrames": 6,
+        "missingFrameIndexes": [
+          6
+        ],
+        "wireBytes": 4439,
+        "packedPmEvents": 1110
+      }
+    ],
+    "configuredPmEvents": 1024,
+    "nativeWarnings": [
+      "PortMidi: Buffer overflow",
+      "Buggy MIDI device: SysEx interrupted!"
+    ],
+    "evidenceHashes": {
+      "full-host.log": "cd9175984acbf3f81eb90e0a6ea22cb9482b3d4f7d30b60a4abe56a60201f203",
+      "burst-correlation.json": "2ec60f09169c2fea8f2fce4f3a094b6f2922a97e472ee6e8304306d1ce8451bd"
+    },
+    "requiredTasks": [
+      "R05-NATIVE-INPUT-LOSS",
+      "R05-FRAGMENT-SENDER"
+    ]
   }
 }
