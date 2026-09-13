@@ -4,7 +4,7 @@
 
 **Current work: implementation authorized and started.** The active goal is “perform tasks.md as proposed.” [GOALS.md](GOALS.md) remains authoritative. The reference catalog has 171 cards and 17 expansion templates. [Execution state and acceptance evidence](docs/ai-dj/work/state.json) are authoritative; a card's presence is not completion.
 
-**Now: fifteen reference tasks and six expansion tasks accepted.** All foundation cards, port discovery/lifecycle and conventional feedback decoding are accepted. The integrated suite passes 57 tests. Sync validation now checks the complete declared roster, exact grants and guard consistency while preserving all legacy validation tests. Next are sync profile integration and the initial mapping. Production sync still requires trusted host telemetry and effect guards; performance, UI, audio, endurance and listening gates remain open.
+**Now: fifteen reference tasks and seven expansion tasks accepted.** Foundation, MIDI port lifecycle, feedback decoding, sync contracts/validation and profile integration are accepted. The package passes 57 tests. The profile now explicitly binds sync action schema 2 while keeping all wire routes and scaling unchanged. Next are M03 command encoding and M05 mapping initialization. Production sync and cue still require verified host guards; performance, UI, audio, endurance and listening gates remain open.
 
 [Visual progress page](docs/ai-dj/progress.html) stays synchronized with the ledger. Add real screenshots and their evidence context as UI/runtime checks produce them.
 

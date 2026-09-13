@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T20:07:27.776973+00:00",
+  "updated_at": "2026-09-13T20:08:58.744361+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2222,12 +2222,16 @@
       "id": "INTEGRATE-F09-SYNC-PROFILE",
       "title": "Bind the reviewed sync action to the conventional profile",
       "stage": "setup",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/INTEGRATE-F09-SYNC-PROFILE.md",
+      "verified": true,
+      "checks": [
+        "Exact metadata diff reviewed: sync action schema 2, legacy schema 1; frozen wire profile unchanged.",
+        "All F09 shape/address/scaling/vector checks and 57 package tests passed; typecheck and build passed.",
+        "Sync and cue remain extension-needed pending independent verified host guards."
+      ],
+      "updated": "2026-09-13T20:08:58.744361+00:00",
       "dynamic": true
     }
   ],

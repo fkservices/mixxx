@@ -194,6 +194,7 @@
     "M04"
   ],
   "dependency_frontier": [
+    "M03",
     "M05",
     "I01",
     "I02",
@@ -227,11 +228,9 @@
     "F08-STATE-VALIDATION": "accepted",
     "INTEGRATE-F09-SYNC-CONTRACT": "accepted",
     "INTEGRATE-F09-SYNC-VALIDATION": "accepted",
-    "INTEGRATE-F09-SYNC-PROFILE": "planned"
+    "INTEGRATE-F09-SYNC-PROFILE": "accepted"
   },
-  "dynamic_dependency_frontier": [
-    "INTEGRATE-F09-SYNC-PROFILE"
-  ],
+  "dynamic_dependency_frontier": [],
   "global_requirements": [
     "User instruction to start implementation",
     "Current integrated revision and scoped context",
