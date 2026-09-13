@@ -41,10 +41,9 @@ diagnostic-only framing tests cannot substitute for that production requirement.
 
 ## Next integration work
 
-Add the codec/wrapper sources to deterministic assembly, bind the scripted SysEx
-entry, preserve lifecycle cleanup and keep diagnostic opt-in explicit. Verify
-the clock and installed JavaScript capabilities in the isolated host, then run
-the existing golden frames and malformed-input fixtures over actual MIDI.
+The assembly and initial native golden probes are implemented below. Investigate
+a usable production clock, then complete native JSON, malformed-input, expiry,
+reset and lifecycle fixtures over actual MIDI before accepting the endpoint.
 
 ## Implemented assembly and activation boundary
 
@@ -70,6 +69,38 @@ round-trip through Node decoding, conventional coexistence, timer cleanup,
 retired closures, disabled reload, diagnostic clock restrictions and the XML
 route. Five assembly tests and all 154 integrated tests passed. Typecheck, build,
 host-parser regeneration and mapping regeneration checks passed. These are VM
-fixtures; the updated bundle has not yet been installed or tested in native Mixxx.
+fixtures. The additional native evidence below establishes a narrower runtime result.
+
+## Native diagnostic probe
+
+The seven-fragment bundle initialized in the installed Mixxx 2.5.6 host. The
+native probe found ArrayBuffer, DataView, Map, Set and Number.isSafeInteger.
+`performance` was undefined, so `performance.now` was unavailable. This does not
+prove that every possible native clock surface is absent. Production clock
+verification remains required by this integration task.
+
+A private bootstrap explicitly activated diagnostic-wall mode with Date.now and
+only opcode 112/113 handlers. The Node virtual-port runner sent two fixed frames.
+Native Mixxx decoded them, invoked the diagnostic handlers and encoded replies;
+the Node parser received `-1.5` and `é🎧` with identical session and sequence IDs.
+The terminal capture confirms two SysEx replies, conventional feedback alongside
+them and zero reported transport losses. No performance command was sent.
+
+This proves numeric and Unicode text framing through actual native input/output.
+It does not establish native JSON, malformed-input, expiry, reset, capacity,
+production timing, authority or musical correctness. The native task remains
+planned behind the incomplete integration; this probe is integration evidence.
+
+The initial runner lacked interactive stdin; it was stopped with verified exit
+before a replacement with a PTY was launched. Both host processes and both runner
+processes exited. The current repository bundle was restored to the isolated
+profile without the private activation bootstrap, and the host remains stopped.
+Reopen virtual ports before launching the next host fixture. Approved music
+files remain available but no current loaded-deck state is claimed.
+
+The [native run record](../runs/R05-ENDPOINT-INTEGRATE.json) contains source,
+installed and private capture hashes, payload results, limits and cleanup state.
+The progress gallery includes the real enabled-mapping screenshot. Its visual
+state alone is not packet or timing evidence.
 
 > End of autonomously AI-generated investigation.

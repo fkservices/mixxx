@@ -696,15 +696,20 @@
       "mixxx_pid": 40819,
       "result": "docs/ai-dj/work/runs/M13.json",
       "scope": "Native held preview and automatic release on both approved fixture decks"
+    },
+    "r05-native-probe": {
+      "status": "stopped",
+      "record": "docs/ai-dj/work/runs/R05-ENDPOINT-INTEGRATE.json",
+      "host_pid": 63863,
+      "runner_pid": 63811,
+      "result": "Two real diagnostic golden round trips; both processes exited; repository bundle restored without activation."
     }
   },
-  "resource_leases": {
-    "mixxx-runtime": "M13"
-  },
+  "resource_leases": {},
   "external_requirements": {
     "musical_fixtures": {
-      "status": "two_native_fixtures_loaded",
-      "detail": "Approved fixtures loaded and paused in isolated host PID40819. Both cue preview readings false on last sample; fixture runner exited cleanly. Communicator remains stopped."
+      "status": "available_host_stopped",
+      "detail": "Approved local fixtures remain available. Isolated host stopped after R05 diagnostic tests; reload fixtures on the next performance test. No current loaded-deck state is claimed."
     },
     "physical_controller": {
       "status": "operator_will_connect_later",

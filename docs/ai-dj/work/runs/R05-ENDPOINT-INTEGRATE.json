@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "task": "R05-ENDPOINT-INTEGRATE",
+  "status": "partial-native-evidence",
+  "recordedAt": "2026-09-13T21:44:13.483268+00:00",
+  "sourceRevision": "fc1fb15",
+  "host": {
+    "version": "2.5.6",
+    "pid": 63863,
+    "profile": "isolated mixxx-2.5.6-latenight-f01"
+  },
+  "clock": {
+    "performance": "undefined",
+    "performanceNow": "unavailable",
+    "testClock": "Date.now",
+    "kind": "diagnostic-wall",
+    "productionVerified": false
+  },
+  "capabilities": {
+    "ArrayBuffer": "function",
+    "DataView": "function",
+    "Map": "function",
+    "Set": "function",
+    "Number.isSafeInteger": "function"
+  },
+  "roundTrips": [
+    {
+      "opcode": 112,
+      "sequence": 1,
+      "session": "0123456789abcdef0123456789abcdef",
+      "payload": -1.5
+    },
+    {
+      "opcode": 113,
+      "sequence": 2,
+      "session": "0123456789abcdef0123456789abcdef",
+      "payload": "é🎧"
+    }
+  ],
+  "outgoingFrames": 2,
+  "feedbackMessages": 5546,
+  "receivedSysexFrames": 2,
+  "transportLosses": 0,
+  "noPerformanceCommands": true,
+  "installedHashes": {
+    "AI-DJ-scripts.js": {
+      "repository": "ff7d3aa97988971488db9433372c991f44bf72adfd8f66bea1e2855fb1994468",
+      "installed": "690642ee91e1aa1c5fade5329ed2794daa884a6437e65f6a8da2bb59371ee5e7",
+      "backup": "ffb60047f262bc3bbdf240410fe439a0fc93b8b148f26aa2d470ffa928a57b4b"
+    },
+    "AI-DJ.midi.xml": {
+      "repository": "d8ae98b5615031a5e0a411b9760ebabb1b73264e9db695d6b6485ec5dc77096d",
+      "installed": "d8ae98b5615031a5e0a411b9760ebabb1b73264e9db695d6b6485ec5dc77096d",
+      "backup": "cb7c630e5f1ade7594af3a3e837c9ae22e094eab6db90c2e50615de0385cd5bf"
+    }
+  },
+  "privateEvidenceDirectory": "~/Library/Application Support/Mixxx-AI-DJ/jobs/r05-native-probe",
+  "privateEvidenceHashes": {
+    "probe.js": "1192b116259e02e67d07c125c0c4ebdeaff005775ce63f49e5f45a3fe08f6929",
+    "runner.mjs": "d70003579b2d4054e63a2fae96caa28186b2c93691c58b554806014888e726a2",
+    "capture.jsonl": "9508487e6b695068ef425bfb69ca2c8919f56dede1351c2611fa35fded6936df",
+    "capture-interactive.jsonl": "a8db2490c314c1bf98609afddf8c1c8fc29236bb5307d54407d9415605dcc7ba",
+    "mixxx.log": "9188742396fc57dd2de32761576f37485588c93f0785eebce3eb99102c283226",
+    "job.json": "e57ed4e92a44ca18502bf0af5a94098cf347ce812af0450ff65b42c5fbe79e15"
+  },
+  "limitations": [
+    "Numeric and text golden round trips only; no native JSON, malformed, expiry, reset or saturation acceptance.",
+    "Native performance clock is unavailable; other possible native clock surfaces remain to investigate.",
+    "No authority, timing, audio or physical controller acceptance.",
+    "Initial runner started without interactive stdin; stopped with verified exit before replacement.",
+    "Diagnostic bootstrap changes installed script hash; production bundle has no automatic diagnostic activation."
+  ],
+  "handoff": {
+    "hostStopped": true,
+    "runnerStopped": true,
+    "repositoryBundleRestored": true,
+    "diagnosticBootstrapRemoved": true
+  }
+}
