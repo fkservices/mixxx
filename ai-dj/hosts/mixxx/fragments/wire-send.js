@@ -63,7 +63,7 @@ function createFragmentSender(options) {
         if (options.automatic === false || closed || timer || queue.length === 0)
             return;
         try {
-            timer = engine.beginTimer(FRAGMENT_SEND_LIMITS.intervalMs, () => { timer = undefined; pump(); }, true);
+            timer = engine.beginMidiSendTimer(() => { timer = undefined; pump(); });
             if (!Number.isSafeInteger(timer) || timer <= 0)
                 throw Error("Native timer unavailable");
         }

@@ -546,6 +546,27 @@ int ControllerScriptInterfaceLegacy::beginTimer(
     return timerId;
 }
 
+// Autonomously AI-generated opt-in MIDI pacing timer; legacy timers keep their 20 ms floor.
+int ControllerScriptInterfaceLegacy::beginMidiSendTimer(QJSValue callback) {
+    if (!callback.isCallable()) {
+        m_pScriptEngineLegacy->throwJSError(
+                QStringLiteral("engine.beginMidiSendTimer requires a function"));
+        return 0;
+    }
+    const int timerId = startTimer(5, Qt::PreciseTimer);
+    if (timerId == 0) {
+        m_pScriptEngineLegacy->logOrThrowError(
+                QStringLiteral("MIDI send timer could not be created"));
+        return 0;
+    }
+    TimerInfo info;
+    info.callback = callback;
+    info.oneShot = true;
+    m_timers[timerId] = info;
+    return timerId;
+}
+// End of autonomously AI-generated MIDI pacing timer.
+
 void ControllerScriptInterfaceLegacy::stopTimer(int timerId) {
     if (!m_timers.contains(timerId)) {
         m_pScriptEngineLegacy->logOrThrowError(QStringLiteral(

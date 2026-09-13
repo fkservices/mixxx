@@ -11,7 +11,7 @@ function harness(handler="{opcode:7,validate:(p)=>Object.keys(p).length===1&&p.v
   const timers=new Map<number,()=>void>();let next=0;
   const packets:number[][]=[];const faults:string[]=[];let sendsBeforeFailure=Infinity;
   const context=createContext({AIDJ:{},time:0,data:[] as number[],writes:[],faults,
-    engine:{beginTimer:(_ms:number,cb:()=>void,once=false)=>{const id=++next;timers.set(id,()=>{if(once)timers.delete(id);cb();});return id;},stopTimer:(id:number)=>timers.delete(id)},
+    engine:{beginMidiSendTimer:(cb:()=>void)=>{const id=++next;timers.set(id,()=>{timers.delete(id);cb();});return id;},beginTimer:(_ms:number,cb:()=>void,once=false)=>{const id=++next;timers.set(id,()=>{if(once)timers.delete(id);cb();});return id;},stopTimer:(id:number)=>timers.delete(id)},
     midi:{sendSysexMsg:(data:number[],length:number)=>{assert.equal(data.length,length);if(packets.length>=sendsBeforeFailure)throw Error("send failure");packets.push(Array.from(data));}}});
   runInContext(source,context);
   runInContext(`var options={generation:1,now:()=>time,allowDiagnostic:${diagnostic},onFault:r=>faults.push(r),handlers:[${handler}]};var endpoint=AIDJ.createWireEndpoint(options);`,context);

@@ -34,4 +34,20 @@ Integration tests cover cancellation, reset, overflow notification, shutdown and
 stale callbacks. All 176 tests, typecheck and build passed. Native maximum reply
 verification remains pending; VM output alone does not establish Qt throughput.
 
+The native run at 6a40312 invalidated the assumed timer cadence: legacy timers
+clamp to 20 ms, and the maximum reply expired at 37/128 frames. The seven-frame
+reply arrived exactly. The failure is preserved in the native run record.
+The adapter now requires `engine.beginMidiSendTimer`, an opt-in fixed five-ms
+one-shot API; native rebuild and replay are tracked by R05-NATIVE-SEND-TIMER.
+Earlier VM success is not native maximum-transfer acceptance.
+
+The rebuilt app subsequently delivered both complete replies with an explicit
+5,000 ms admission deadline: 135 frames matched in each direction, maximum
+reply span 808.31 ms, no overflow or clamp warnings. The 900 ms partial-send
+limit remains unchanged. With the default admission deadline, the same new
+timer expired at 124/128 frames; queue deadlines must budget encoding costs.
+[Native run history](../runs/R05-HOST-FRAGMENT-SENDER.json) preserves all three
+outcomes. Native cancellation/fault/shutdown during a queued reply still needs
+verification before this task is accepted.
+
 > End of autonomously AI-generated implementation notes.

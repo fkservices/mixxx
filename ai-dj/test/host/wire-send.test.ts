@@ -7,7 +7,7 @@ import {createSysexParser} from "../../midi/sysex-decode.ts";
 function host(){
  let time=0,id=0,failTimer=false,failCleanup=false;
  const timers=new Map<number,()=>void>(),packets:number[][]=[];
- const context=vm.createContext({AIDJ:{},engine:{beginTimer:(ms:number,callback:()=>void,once:boolean)=>{assert.equal(ms,5);assert.equal(once,true);if(failTimer)throw Error('timer');timers.set(++id,callback);return id;},stopTimer:(key:number)=>{if(failCleanup)throw Error('cleanup');timers.delete(key);}},now:()=>time,send:(bytes:number[])=>{packets.push([...bytes]);}});
+ const context=vm.createContext({AIDJ:{},engine:{beginMidiSendTimer:(callback:()=>void)=>{if(failTimer)throw Error('timer');timers.set(++id,callback);return id;},stopTimer:(key:number)=>{if(failCleanup)throw Error('cleanup');timers.delete(key);}},now:()=>time,send:(bytes:number[])=>{packets.push([...bytes]);}});
  for(const name of ['wire-encode','wire-send'])vm.runInContext(readFileSync(new URL(`../../hosts/mixxx/fragments/${name}.js`,import.meta.url),'utf8'),context);
  const evaluate=(s:string)=>vm.runInContext(s,context);
  evaluate("var sender=AIDJ.createWireSender({generation:1,now:now,send:send,allowDiagnostic:true});");
@@ -27,5 +27,10 @@ test("native timer creation and cleanup failures retire bounded state",()=>{
 });
 test("host timer stall expires partial reply rather than catching up",()=>{
  const h=host();enqueue(h);h.tick();h.set(300);h.tick();assert.equal(h.packets.length,1);assert.equal(h.evaluate('sender.drainResults()[0].reason'),'expired');assert.equal(h.timers.size,0);
+});
+test("host without explicit native pacing API retires instead of using legacy timers",()=>{
+ const h=host();h.evaluate("delete engine.beginMidiSendTimer;engine.beginTimer=()=>{throw Error('legacy fallback forbidden')}");enqueue(h);
+ assert.equal(h.evaluate('sender.status().closed'),true);assert.equal(h.evaluate('sender.status().fault'),'timer');
+ assert.equal(h.evaluate('sender.status().retainedBytes'),0);assert.equal(h.packets.length,0);assert.equal(h.timers.size,0);
 });
 // End of autonomously AI-generated host sender regressions.

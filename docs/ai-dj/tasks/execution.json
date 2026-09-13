@@ -258,7 +258,8 @@
     "R12-SUSPEND-RESUME": "planned",
     "R05-NATIVE-INPUT-LOSS": "accepted",
     "R05-FRAGMENT-SENDER": "in_review",
-    "R05-HOST-FRAGMENT-SENDER": "in_review"
+    "R05-HOST-FRAGMENT-SENDER": "in_review",
+    "R05-NATIVE-SEND-TIMER": "in_review"
   },
   "dynamic_dependency_frontier": [],
   "global_requirements": [

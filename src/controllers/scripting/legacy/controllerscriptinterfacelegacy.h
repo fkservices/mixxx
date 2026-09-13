@@ -85,6 +85,9 @@ class ControllerScriptInterfaceLegacy : public QObject {
     // DEPRECATED: Use console.log instead.
     Q_INVOKABLE void log(const QString& message);
     Q_INVOKABLE int beginTimer(int interval, QJSValue scriptCode, bool oneShot = false);
+    // Autonomously AI-generated opt-in MIDI pacing API; one shot, fixed 5 ms.
+    Q_INVOKABLE int beginMidiSendTimer(QJSValue callback);
+    // End of autonomously AI-generated MIDI pacing API.
     Q_INVOKABLE void stopTimer(int timerId);
     Q_INVOKABLE void scratchEnable(int deck,
             int intervalsPerRev,

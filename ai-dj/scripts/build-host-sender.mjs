@@ -11,10 +11,10 @@ replace('ReturnType<typeof setTimeout>','number');
 replace('if(timer)clearTimeout(timer);','if(timer){try{engine.stopTimer(timer);}catch{fault="timer-cleanup";}}');
 replace('const frames=encodeSysex(message,diagnostic),','const frames=AIDJ.encodeWire(message,diagnostic).map(f=>Uint8Array.from(f)),');
 replace('timer=setTimeout(()=>{timer=undefined;pump();},FRAGMENT_SEND_LIMITS.intervalMs);timer.unref();',`try {
-      timer=engine.beginTimer(FRAGMENT_SEND_LIMITS.intervalMs,()=>{timer=undefined;pump();},true);
+      timer=engine.beginMidiSendTimer(()=>{timer=undefined;pump();});
       if(!Number.isSafeInteger(timer)||timer<=0)throw Error("Native timer unavailable");
     } catch { fault="timer";retire("fault"); }`);
-const helpers=`declare const engine:{beginTimer(ms:number,callback:()=>void,once:boolean):number;stopTimer(id:number):void};
+const helpers=`declare const engine:{beginMidiSendTimer(callback:()=>void):number;stopTimer(id:number):void};
 declare const AIDJ:{encodeWire(message:SysexMessage,diagnostic:boolean):number[][]};
 interface SysexMessage {direction:0|1;opcode:number;session:string;sequence:number;payload:unknown;}
 function isAsyncFunction(fn:Function):boolean {return Object.prototype.toString.call(fn)==="[object AsyncFunction]";}

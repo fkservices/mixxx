@@ -1,0 +1,141 @@
+{
+  "generation": "Autonomously AI-generated native test record.",
+  "task": "R05-HOST-FRAGMENT-SENDER",
+  "status": "partial",
+  "sourceRevision": "6a40312",
+  "recordedAt": "2026-09-13T22:48:14.261988+00:00",
+  "replyReceipts": [
+    {
+      "sequence": 70,
+      "length": 3500,
+      "allX": true
+    }
+  ],
+  "hostResults": [
+    [
+      {
+        "id": "reply:1",
+        "reason": "sent",
+        "attempted": 7,
+        "sent": 7,
+        "delivery": "unconfirmed"
+      }
+    ],
+    [
+      {
+        "id": "reply:2",
+        "reason": "expired",
+        "attempted": 37,
+        "sent": 37,
+        "delivery": "unconfirmed"
+      }
+    ]
+  ],
+  "timerClampWarnings": 45,
+  "overflowWarnings": 0,
+  "helperExitCode": 0,
+  "evidenceHashes": {
+    "capture.jsonl": "e672177ab568f4b774de3daeb049ff8850d5a1150d64796d5ee07901754d9993",
+    "host-evidence.log": "19b682d3e4d7d6be5349d05756c3a45fa221c6381b884672c7c5b72996cee84b",
+    "runner.mjs": "976327cb6271f50228be01488c3037c2c56494613eb9695ca45134ec6f3ee3a6",
+    "full-host.log": "a19112e3d4ec80ce35b2aea0f25cb33e0346cd27fd493f984d3de99491edf36a",
+    "probe.js": "ff2f74296117a2bd13f18341f2a3f53467c9fc3faab315d8dcece8e95e54f599"
+  },
+  "finding": "Legacy engine.beginTimer clamps requests below 20 ms. One frame per callback cannot deliver 128 fragments within the 900 ms admission deadline. Dedicated native pacing API required; no weakened receiver expiry.",
+  "limitations": [
+    "Explicit 5,000 ms admission deadline used for successful maximum reply; default 900 ms admission deadline expired, while the 900 ms partial-send limit was unchanged.",
+    "Single diagnostic run; native mid-reply cancellation/input-loss/shutdown replay, percentile latency, soak and musical acceptance remain outstanding."
+  ],
+  "generation_end": "End of autonomously AI-generated native test record.",
+  "preciseTimerDefaultDeadlineRun": {
+    "status": "expired",
+    "replyResults": [
+      [
+        {
+          "id": "reply:1",
+          "reason": "sent",
+          "attempted": 7,
+          "sent": 7,
+          "delivery": "unconfirmed"
+        }
+      ],
+      [
+        {
+          "id": "reply:2",
+          "reason": "expired",
+          "attempted": 124,
+          "sent": 124,
+          "delivery": "unconfirmed"
+        }
+      ]
+    ],
+    "evidenceHashes": {
+      "capture.jsonl": "d34b8dd2278d958a07aeb435d9a45c9973a90686e9c3c9efd308e948ff1ac192",
+      "runner.mjs": "976327cb6271f50228be01488c3037c2c56494613eb9695ca45134ec6f3ee3a6",
+      "full-host.log": "491985223908b479f1a3e72100b577488522d7a6d9b5222ccabf774613527fa9",
+      "probe.js": "ff2f74296117a2bd13f18341f2a3f53467c9fc3faab315d8dcece8e95e54f599"
+    },
+    "finding": "Fixed five-ms API with default 900 ms admission deadline expired at 124/128 frames; encoding and queue residence consume admission time."
+  },
+  "explicitDeadlineRun": {
+    "status": "passed",
+    "baseRevision": "6a40312",
+    "sourceState": "working tree with native pacing API; hashes below",
+    "deadlineMsFromCall": 5000,
+    "unchangedPartialSendAssemblyLimitMs": 900,
+    "replyReceipts": [
+      {
+        "sequence": 70,
+        "length": 3500,
+        "allX": true
+      },
+      {
+        "sequence": 71,
+        "length": 65536,
+        "allX": true
+      }
+    ],
+    "exactOutgoingFrameMatches": 135,
+    "exactIncomingFrameMatches": 135,
+    "maximumReplySpanMs": 808.3088750000024,
+    "timerClampWarnings": 0,
+    "overflowWarnings": 0,
+    "localResults": [
+      [
+        {
+          "id": "reply:1",
+          "reason": "sent",
+          "attempted": 7,
+          "sent": 7,
+          "delivery": "unconfirmed"
+        }
+      ],
+      [
+        {
+          "id": "reply:2",
+          "reason": "sent",
+          "attempted": 128,
+          "sent": 128,
+          "delivery": "unconfirmed"
+        }
+      ]
+    ],
+    "helperExitCode": 0,
+    "hostStopped": true,
+    "diagnosticBootstrapRemoved": true,
+    "evidenceHashes": {
+      "capture.jsonl": "942b51d954261ce190e25418773ee73233a2a06eff8b6d8d56522ad9c1596a5f",
+      "host-evidence.log": "d159fd4fd0d6446e73e13a5b16d08d9920c94df315c254c86367f7d8ea1c9920",
+      "runner.mjs": "976327cb6271f50228be01488c3037c2c56494613eb9695ca45134ec6f3ee3a6",
+      "full-host.log": "0a9e9c50ecba5b9a91956cc0c5fd84faeb6d67e392c7adc5287758af5a04497f",
+      "probe.js": "c1e769f5452cd8589d61aca6c3405c45d1ad44fa845ec851c1efe8d265b9388f"
+    },
+    "sourceHashes": {
+      "src/controllers/scripting/legacy/controllerscriptinterfacelegacy.cpp": "df9e6dee7d1288052de32d9849eec85e39e021653da639e35bc204af9f89b9fb",
+      "src/controllers/scripting/legacy/controllerscriptinterfacelegacy.h": "04830498007a2d1d64a07a976a8fa1960df75f4fc481fd59ea32f0564711eac4",
+      "res/controllers/AI-DJ-scripts.js": "f606e790f1ef30f48dcffe8295934044ecff2930460c7ba02ea2e970043bb27f",
+      "ai-dj/scripts/build-host-sender.mjs": "f1a4c0c70eb5b3dbf6998fcb402caae5a41b1be872e1929c2b7226f47c592d3f"
+    }
+  },
+  "initialRunStatus": "failed-maximum-reply"
+}

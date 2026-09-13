@@ -3,6 +3,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <QAbstractEventDispatcher>
 #include <QByteArrayView>
 #include <QMetaEnum>
 #include <QScopedPointer>
@@ -12,6 +13,7 @@
 #include <QtDebug>
 #include <bit>
 #include <cmath>
+#include <limits>
 #include <memory>
 
 #include "control/controlobject.h"
@@ -226,8 +228,12 @@ class ControllerScriptEngineLegacyTimerTest : public ControllerScriptEngineLegac
         ControllerScriptEngineLegacyTest::SetUp();
         m_pCo = std::make_unique<ControlPotmeter>(ConfigKey("[Test]", "co"), -10.0, 10.0);
         m_pCo->setParameter(0.0);
+        // Autonomously AI-generated fixture correction: Qt timer IDs are opaque positive ints.
         m_pCoTimerId = std::make_unique<ControlPotmeter>(
-                ConfigKey("[Test]", "coTimerId"), -10.0, 50.0);
+                ConfigKey("[Test]", "coTimerId"),
+                -10.0,
+                static_cast<double>(std::numeric_limits<int>::max()) + 10.0);
+        // End of autonomously AI-generated fixture correction.
         m_pCoTimerId->setParameter(0.0);
         EXPECT_TRUE(evaluateAndAssert("engine.setValue('[Test]', 'co', 0.0);"));
         EXPECT_DOUBLE_EQ(0.0, m_pCo->get());
@@ -1669,3 +1675,49 @@ TEST_F(ControllerScriptEngineLegacyTimerTest, beginTimer_repeatedTimerThisFuncti
 
     EXPECT_DOUBLE_EQ(20, m_pCoTimerId->get());
 }
+
+// Autonomously AI-generated MIDI pacing API regressions; timing percentiles need native probes.
+TEST_F(ControllerScriptEngineLegacyTimerTest, midiSendTimerUsesPreciseFiveMillisecondOneShot) {
+    ASSERT_TRUE(evaluateAndAssert(R"(
+        var midiSendCount = 0;
+        var midiSendId = engine.beginMidiSendTimer(function() { midiSendCount++; });
+    )"));
+    auto* interface = evaluate("engine").toQObject();
+    ASSERT_NE(interface, nullptr);
+    auto* dispatcher = QAbstractEventDispatcher::instance(interface->thread());
+    ASSERT_NE(dispatcher, nullptr);
+    const auto registered = dispatcher->registeredTimers(interface);
+    const int id = evaluate("midiSendId").toInt();
+    ASSERT_GT(id, 0);
+    bool found = false;
+    for (const auto& timer : registered) {
+        if (timer.timerId == id) {
+            EXPECT_EQ(timer.interval, 5);
+            EXPECT_EQ(timer.timerType, Qt::PreciseTimer);
+            found = true;
+        }
+    }
+    ASSERT_TRUE(found);
+    QTest::qWait(30);
+    EXPECT_EQ(evaluate("midiSendCount").toInt(), 1);
+    QTest::qWait(30);
+    EXPECT_EQ(evaluate("midiSendCount").toInt(), 1);
+    for (const auto& timer : dispatcher->registeredTimers(interface)) {
+        EXPECT_NE(timer.timerId, id);
+    }
+}
+
+TEST_F(ControllerScriptEngineLegacyTimerTest, midiSendTimerCancellationAndInvalidCallback) {
+    ASSERT_TRUE(evaluateAndAssert(R"(
+        var midiSendCount = 0;
+        var midiSendId = engine.beginMidiSendTimer(function() { midiSendCount++; });
+        engine.stopTimer(midiSendId);
+    )"));
+    QTest::qWait(30);
+    EXPECT_EQ(evaluate("midiSendCount").toInt(), 0);
+    EXPECT_TRUE(evaluate("engine.beginMidiSendTimer('midiSendCount++')").isError());
+    EXPECT_TRUE(evaluate("engine.beginMidiSendTimer(null)").isError());
+    QTest::qWait(30);
+    EXPECT_EQ(evaluate("midiSendCount").toInt(), 0);
+}
+// End of autonomously AI-generated MIDI pacing API regressions.

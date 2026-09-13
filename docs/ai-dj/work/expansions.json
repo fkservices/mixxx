@@ -827,9 +827,10 @@
       "checks": [
         "Eight-fragment mapping queues native replies; cancellation/reset/input-loss/shutdown stop pending frames and stale callbacks.",
         "176 tests, typecheck and build passed; native maximum queued reply proof pending.",
-        "Native JSON/checksum, idle expiry and four-slot capacity/recovery passed; reset/lifecycle evidence remains."
+        "Native JSON/checksum, idle expiry and four-slot capacity/recovery passed; reset/lifecycle evidence remains.",
+        "Native maximum queued reply passed with opt-in timer and explicit admission deadline; default deadline limitation and native lifecycle replay remain documented."
       ],
-      "updated_at": "2026-09-13T22:39:35.431169+00:00"
+      "updated_at": "2026-09-13T22:48:14.261988+00:00"
     },
     {
       "id": "R05-ENDPOINT-NATIVE",
@@ -1079,7 +1080,8 @@
       "reasoning_effort": "high",
       "depends_on": [
         "R05-HOST-ENCODER",
-        "R05-NATIVE-CLOCK"
+        "R05-NATIVE-CLOCK",
+        "R05-NATIVE-SEND-TIMER"
       ],
       "owns": [
         "ai-dj/hosts/mixxx/fragments/wire-send.js",
@@ -1109,10 +1111,57 @@
       "source_revision": "4baf1f6",
       "started_at": "2026-09-13T22:37:54.767314+00:00",
       "checks": [
-        "Eight-fragment mapping queues native replies; cancellation/reset/input-loss/shutdown stop pending frames and stale callbacks.",
-        "176 tests, typecheck and build passed; native maximum queued reply proof pending."
+        "Native full replies passed with explicit 5,000 ms admission deadline: 135 exact frames each direction, maximum reply span 808.31 ms, no overflow.",
+        "Default 900 ms admission deadline still expires at maximum payload; native cancellation/fault/shutdown replay pending. 177 software tests pass."
       ],
-      "updated_at": "2026-09-13T22:39:35.431169+00:00"
+      "updated_at": "2026-09-13T22:48:14.261988+00:00"
+    },
+    {
+      "id": "R05-NATIVE-SEND-TIMER",
+      "parent": "R05",
+      "blocks": [
+        "R05"
+      ],
+      "template": "SPLIT",
+      "title": "Provide and verify native five-millisecond MIDI send timer",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "R05-NATIVE-CLOCK"
+      ],
+      "owns": [
+        "src/controllers/scripting/legacy/controllerscriptinterfacelegacy.cpp",
+        "src/controllers/scripting/legacy/controllerscriptinterfacelegacy.h",
+        "src/test/controllerscriptenginelegacy_test.cpp",
+        "docs/ai-dj/work/integrations/native-send-timer.md"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 3,
+        "execute": 10,
+        "validate": 9,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "in_review",
+      "perform": [
+        "Provide opt-in fixed five-millisecond precise one-shot timer for bounded MIDI send scheduling; keep legacy timer semantics unchanged.",
+        "Use existing native timer cancellation/destruction lifecycle. Host sender must fail closed when the extension is absent; do not silently use clamped timers or weaken receiver expiry."
+      ],
+      "validate": [
+        "Verify native timer interval/type, one-shot execution, cancellation, invalid callback rejection and existing script timer regressions.",
+        "Rebuild isolated app and verify exact maximum reply over native MIDI with bounded sender deadline. No timing percentile or musical acceptance from a diagnostic transfer."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/R05-NATIVE-SEND-TIMER.md",
+      "executor": "coordinator",
+      "source_revision": "6a40312",
+      "started_at": "2026-09-13T22:44:10.940153+00:00",
+      "checks": [
+        "Native build/install passed; both new API tests passed. Fixed opaque timer-ID fixture; all ten native timer tests now pass.",
+        "177 software tests and typecheck/build pass. Native full 65,536-byte reply arrived in 808.31 ms with explicit admission deadline; receiver bounds unchanged."
+      ],
+      "updated_at": "2026-09-13T22:48:14.261988+00:00"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

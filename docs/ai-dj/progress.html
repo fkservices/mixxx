@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T22:39:35.431169+00:00",
+  "updated_at": "2026-09-13T22:48:14.261988+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2468,9 +2468,10 @@
       "checks": [
         "Eight-fragment mapping queues native replies; cancellation/reset/input-loss/shutdown stop pending frames and stale callbacks.",
         "176 tests, typecheck and build passed; native maximum queued reply proof pending.",
-        "Native JSON/checksum, idle expiry and four-slot capacity/recovery passed; reset/lifecycle evidence remains."
+        "Native JSON/checksum, idle expiry and four-slot capacity/recovery passed; reset/lifecycle evidence remains.",
+        "Native maximum queued reply passed with opt-in timer and explicit admission deadline; default deadline limitation and native lifecycle replay remain documented."
       ],
-      "updated": "2026-09-13T22:39:35.431169+00:00",
+      "updated": "2026-09-13T22:48:14.261988+00:00",
       "dynamic": true
     },
     {
@@ -2553,10 +2554,25 @@
       "evidence": null,
       "verified": false,
       "checks": [
-        "Eight-fragment mapping queues native replies; cancellation/reset/input-loss/shutdown stop pending frames and stale callbacks.",
-        "176 tests, typecheck and build passed; native maximum queued reply proof pending."
+        "Native full replies passed with explicit 5,000 ms admission deadline: 135 exact frames each direction, maximum reply span 808.31 ms, no overflow.",
+        "Default 900 ms admission deadline still expires at maximum payload; native cancellation/fault/shutdown replay pending. 177 software tests pass."
       ],
-      "updated": "2026-09-13T22:39:35.431169+00:00",
+      "updated": "2026-09-13T22:48:14.261988+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "R05-NATIVE-SEND-TIMER",
+      "title": "Provide and verify native five-millisecond MIDI send timer",
+      "stage": "setup",
+      "status": "in_review",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [
+        "Native build/install passed; both new API tests passed. Fixed opaque timer-ID fixture; all ten native timer tests now pass.",
+        "177 software tests and typecheck/build pass. Native full 65,536-byte reply arrived in 808.31 ms with explicit admission deadline; receiver bounds unchanged."
+      ],
+      "updated": "2026-09-13T22:48:14.261988+00:00",
       "dynamic": true
     }
   ],

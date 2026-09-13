@@ -1,0 +1,37 @@
+{
+  "generation": "Autonomously AI-generated native timer validation record.",
+  "task": "R05-NATIVE-SEND-TIMER",
+  "status": "in_review",
+  "baseRevision": "6a40312",
+  "recordedAt": "2026-09-13T22:48:14.261988+00:00",
+  "buildExitCode": 0,
+  "initialNativeTests": {
+    "tests": 65,
+    "passed": 61,
+    "failed": 4,
+    "newTimerTestsPassed": 2,
+    "failure": "Four existing timer callback tests stored opaque Qt timer IDs in a control capped at 50. Assertions expected 60 but observed clamped 50."
+  },
+  "fixtureCorrection": "Control range now accommodates positive int timer IDs plus the existing ten-unit callback marker. Production legacy timer implementation unchanged.",
+  "correctedTimerSuite": {
+    "tests": 10,
+    "passed": 10,
+    "exitCode": 0
+  },
+  "softwareTests": 177,
+  "typecheck": "passed",
+  "build": "passed",
+  "nativeReplyEvidence": "docs/ai-dj/work/runs/R05-HOST-FRAGMENT-SENDER.json",
+  "evidenceHashes": {
+    "midi-send-timer-build.log": "6f08c9517a237fefa6fb9000949e84d12ffddc961277e963f73cf6ce7dab312d",
+    "midi-send-timer-tests.json": "44db9cd51c0d6fb785366a2fa53d1a316e02fda577521b456afd27839d6d4b67",
+    "midi-send-timer-test-fix-build.log": "e732ce8fa39862d613ffce925f1eb6ebb965c486573a100ca3c8facfb255524c",
+    "midi-send-timer-fixture-tests.json": "bc1726d3cd4e5a5fd092f3bc90449dd9e9bebdff443e902cbc9eb781e46b3188",
+    "midi-send-timer-install.log": "b1d66996fa37e97e9d1557a7f55764850e5f9c991e255194e1937fed7a20d0e7",
+    "midi-send-timer-sign.log": "cd9f6f825a190098f9c1e08703d6ce328296b26a1beb261f1ea29791b36435ec"
+  },
+  "limitations": [
+    "A requested five-ms precise timer is not a hard realtime guarantee. No percentile latency or production performance acceptance."
+  ],
+  "generation_end": "End of autonomously AI-generated native timer validation record."
+}
