@@ -2481,12 +2481,14 @@
       "id": "R05-NATIVE-CLOCK",
       "title": "Expose and verify a native monotonic script clock",
       "stage": "setup",
-      "status": "running",
+      "status": "waiting_for_job",
       "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
       "checks": [
-        "Installed 2.5.6 performance global unavailable; inspected legacy interface has no clock getter. Native fork extension required before production clock acceptance."
+        "Native clock helper compiled with Apple clang 17 and passed 100000 nondecreasing samples and elapsed progression.",
+        "Qt invocation and interface replacement tests added but not yet executed; custom host and resume policy unverified.",
+        "Pinned dependency checksum verified; CMake configure/generate exited 0. Native test/application build started as session 24903, PID76087."
       ],
       "updated": "2026-09-13T21:45:51.364274+00:00",
       "dynamic": true

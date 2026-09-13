@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "task": "R05-NATIVE-CLOCK",
+  "status": "partial",
+  "sourceRevision": "2c5c19d",
+  "recordedAt": "2026-09-13T21:48:54.458691+00:00",
+  "nativeClockHeaderSha256": "7554e3ca565a4fd886c12bbb4978ff1d1a6b32392efa03f072d8ce13dadd9d43",
+  "compiler": "Apple clang 17.0.0, arm64-apple-darwin27.0.0",
+  "flags": [
+    "-std=c++20",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Isrc"
+  ],
+  "standaloneHeaderSmoke": {
+    "exitCode": 0,
+    "result": "PASS actual header: 100000 nondecreasing samples; elapsed 26.5147 ms",
+    "privateEvidence": "~/Library/Application Support/Mixxx-AI-DJ/native-build/clock-2c5c19d",
+    "sha256": {
+      "dj-native-clock-smoke.cpp": "0a9f6008b5af8d9d93a11cb9ee12eeb970c4e728d9ff8c08ac231e2724e7b1f1",
+      "dj-native-clock-smoke": "bb4954933c7ad64012c68a494f136c0169f1f883ffdc5e7e016942cdaa404c5d",
+      "clock-smoke.log": "1a3b88921b2a6ed7ee737f25d17a02e5877268c249a46698ead3a29f83fd5aa7"
+    }
+  },
+  "nativeQtInvocationTests": "not yet run",
+  "installedHostApi": "not installed",
+  "buildDependencySha256": "4dec26e22803decbf0ce664ef53c12e6d846df7222bb48d3a47999878e9ba02c",
+  "buildDependencyVerification": "CMake download hash matched repository pin",
+  "configureJob": {
+    "execSessionId": 97597,
+    "pid": 72377,
+    "record": "~/Library/Application Support/Mixxx-AI-DJ/native-build/clock-2c5c19d/job.json",
+    "status": "succeeded",
+    "exitCode": 0
+  },
+  "limitations": [
+    "Header fixture proves helper only, not native Qt exposure or runtime host behavior.",
+    "Stock 2.5.6 binary unchanged; custom 2.7 fork build needs separate profile/version evidence.",
+    "Sleep/resume session invalidation and cross-process clock mapping remain required."
+  ],
+  "buildJob": {
+    "status": "running",
+    "execSessionId": 24903,
+    "pid": 76087,
+    "record": "~/Library/Application Support/Mixxx-AI-DJ/native-build/clock-2c5c19d/build-job.json"
+  }
+}

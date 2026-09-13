@@ -44,9 +44,16 @@ Qt invocation, mapping use and runtime clock-domain checks remain required.
 CMake 4.4.3 and Ninja 1.13.2 were installed successfully. The source-selected
 native ARM release dependency archive responds with HTTP 200 and a size of
 1,282,214,190 bytes. The repository pins its SHA256 in `tools/macos_buildenv.sh`;
-configuration must verify that hash before using the downloaded dependencies.
+the configure job downloaded the archive and confirmed the pinned SHA256.
+Extraction, CMake configuration and generation completed successfully.
+The native test/application build is now running with four compiler jobs in the
+private build directory; no installed application was modified.
 The machine has Apple command-line compiler tools, but no selected full Xcode.
 Any concrete configure/compiler failure must be recorded rather than treated as
 successful native verification.
+
+The [partial run record](../runs/R05-NATIVE-CLOCK.json) records the compiled helper
+fixture hashes and the tracked native configure job. A live job is not build
+success; inspect its terminal result before advancing.
 
 > End of autonomously AI-generated implementation notes.

@@ -703,6 +703,30 @@
       "host_pid": 63863,
       "runner_pid": 63811,
       "result": "Two real diagnostic golden round trips; both processes exited; repository bundle restored without activation."
+    },
+    "native-clock-configure": {
+      "status": "succeeded",
+      "exec_session_id": 97597,
+      "runner_pid": 72375,
+      "process_pid": 72377,
+      "source_revision": "2c5c19d",
+      "record": "~/Library/Application Support/Mixxx-AI-DJ/native-build/clock-2c5c19d/job.json",
+      "log": "~/Library/Application Support/Mixxx-AI-DJ/native-build/clock-2c5c19d/configure.log",
+      "scope": "Isolated native fork configure with pinned ARM dependencies; no installed app changes",
+      "expected_end": "Configure timeout 1800 seconds; poll same session and inspect process before retry.",
+      "exit_code": 0,
+      "result": "Dependency SHA256 verified; CMake configure and generate succeeded."
+    },
+    "native-clock-build": {
+      "status": "running",
+      "exec_session_id": 24903,
+      "runner_pid": 76085,
+      "process_pid": 76087,
+      "source_revision": "2c5c19d",
+      "record": "~/Library/Application Support/Mixxx-AI-DJ/native-build/clock-2c5c19d/build-job.json",
+      "log": "~/Library/Application Support/Mixxx-AI-DJ/native-build/clock-2c5c19d/build.log",
+      "scope": "Build mixxx-test and separate Mixxx application with four compiler jobs; no installed app changes",
+      "expected_end": "3600 second bounded build; poll existing exec session or verified process before retry."
     }
   },
   "resource_leases": {},

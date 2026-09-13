@@ -894,14 +894,15 @@
         "src/controllers/scripting/legacy/controllerscriptinterfacelegacy.h",
         "src/controllers/scripting/legacy/controllerscriptinterfacelegacy.cpp",
         "src/test/controllerscriptenginelegacy_test.cpp",
-        "docs/ai-dj/work/integrations/native-clock.md"
+        "docs/ai-dj/work/integrations/native-clock.md",
+        "docs/ai-dj/work/runs/R05-NATIVE-CLOCK.json"
       ],
       "locks": [
         "native-clock-source"
       ],
-      "status": "running",
+      "status": "waiting_for_job",
       "executor": "coordinator",
-      "source_revision": "2ef757e",
+      "source_revision": "2c5c19d",
       "started_at": "2026-09-13T21:45:51.364274+00:00",
       "perform": [
         "Expose a read-only process-relative steady-clock millisecond value to legacy scripts; no timer-count or wall-clock fallback.",
@@ -913,7 +914,9 @@
       ],
       "evidence": "docs/ai-dj/work/evidence/R05-NATIVE-CLOCK.md",
       "checks": [
-        "Installed 2.5.6 performance global unavailable; inspected legacy interface has no clock getter. Native fork extension required before production clock acceptance."
+        "Native clock helper compiled with Apple clang 17 and passed 100000 nondecreasing samples and elapsed progression.",
+        "Qt invocation and interface replacement tests added but not yet executed; custom host and resume policy unverified.",
+        "Pinned dependency checksum verified; CMake configure/generate exited 0. Native test/application build started as session 24903, PID76087."
       ]
     }
   ],
