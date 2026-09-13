@@ -75,3 +75,39 @@ test("XML adds one scripted SysEx route without changing conventional registrati
   assert.match(sysex[0]!,/<script-binding\/>/);
   assert.equal(controls.filter(c=>c.includes("<key>AIDJ.input</key>")).length,11);
 });
+
+// Autonomously AI-generated activation failure and clock retirement regression.
+test("failed wire activation rolls back conventional resources and consumes configuration",()=>{
+  const h=createHostHarness([],true);
+  h.evaluate(`AIDJ.configureWire({clockKind:'monotonic',clockDomainId:'fixture',now:()=>0,onFault:()=>{},
+    handlers:[{opcode:7,validate:()=>true,handle:()=>{}},{opcode:7,validate:()=>true,handle:()=>{}}]});`);
+  assert.throws(()=>h.mapping.init("AI DJ",false),/duplicate handler/);
+  assert.equal(h.connections.size,0);assert.equal(h.timers.size,0);
+  assert.equal(h.writes.length,0);assert.equal(h.evaluate("AIDJ.wireStatus().enabled"),false);
+  h.mapping.init("AI DJ",false);
+  assert.equal(h.connections.size,18);assert.equal(h.timers.size,1);
+  assert.equal(h.evaluate("AIDJ.wireStatus().enabled"),false);
+  assert.equal(h.mapping.shutdown(),true);
+  assert.equal(h.connections.size,0);assert.equal(h.timers.size,0);
+});
+
+test("clock regression retires assembled wire input before any handler can run",()=>{
+  const h=createHostHarness([],true);
+  h.evaluate(`var clock=10, handled=0, faults=[];
+    AIDJ.configureWire({clockKind:'monotonic',clockDomainId:'fixture',now:()=>clock,
+      allowDiagnostic:true,onFault:r=>faults.push(r),
+      handlers:[{opcode:113,validate:()=>true,handle:()=>handled++}]});`);
+  h.mapping.init("AI DJ",false);
+  const frame=encodeSysex({direction:0,opcode:113,session:"1".repeat(32),sequence:1,payload:"probe"},true)[0]!;
+  h.evaluate("AIDJ.incomingData(new Uint8Array([]),0)");
+  h.evaluate("clock=9");
+  h.evaluate(`AIDJ.incomingData(new Uint8Array(${JSON.stringify(Array.from(frame))}),${frame.length})`);
+  assert.equal(h.evaluate("handled"),0);assert.equal(h.writes.length,0);
+  assert.equal(h.evaluate("AIDJ.wireStatus().enabled"),false);
+  assert.equal(h.evaluate("faults.length"),1);
+  h.evaluate("clock=11");
+  h.evaluate(`AIDJ.incomingData(new Uint8Array(${JSON.stringify(Array.from(frame))}),${frame.length})`);
+  assert.equal(h.evaluate("handled"),0);assert.equal(h.evaluate("faults.length"),1);
+  assert.equal(h.mapping.shutdown(),true);assert.equal(h.timers.size,0);assert.equal(h.connections.size,0);
+});
+// End of autonomously AI-generated activation regressions.

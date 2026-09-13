@@ -103,4 +103,18 @@ installed and private capture hashes, payload results, limits and cleanup state.
 The progress gallery includes the real enabled-mapping screenshot. Its visual
 state alone is not packet or timing evidence.
 
+## Additional assembly review
+
+Two assembled-bundle regressions now cover failed endpoint activation and clock
+regression. Duplicate registration makes initialization fail after conventional
+modules start; the test verifies zero remaining connections/timers, no setter
+writes, and no implicit endpoint restoration on the next initialization. A clock
+sample followed by a backward step retires dispatch before its handler runs;
+a later valid timestamp cannot revive it. Shutdown clears the remaining resources.
+
+The clock test initially omitted the first sample and therefore did not establish
+a regression; correcting that fixture made the intended scenario meaningful.
+All 163 software tests, typecheck and build passed. These remain VM evidence;
+native malformed-message, JSON and lifecycle cases are still required.
+
 > End of autonomously AI-generated investigation.
