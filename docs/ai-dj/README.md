@@ -4,15 +4,27 @@
 
 We are building a DJ player/controller that sends and receives MIDI to perform a DJ set. Mixxx is the first host it controls and the visible reference application. The AI DJ is a separate product, with its own decision making, execution, and observed state.
 
-**Current scope: fork, source research, and planning only.** The product is a desktop app running alongside the DJ host through virtual MIDI. All initial development and testing will run locally on one computer. Raspberry Pi deployment is optional and does not block desktop delivery.
+**Current scope: fork, source research, and planning only.** The product is a desktop app running alongside the DJ host through virtual MIDI. All initial development and testing will run locally on one computer. This build focuses exclusively on Mixxx, playlist-to-set performance and the desktop app. Other hosts and Raspberry Pi deployment are outside the current build.
 
 **Accepted stack:** TypeScript/Node.js communicator, native RtMidi access (`@julusian/midi` as the initial candidate), JavaScript Mixxx mapping, and an isolated AI planner process. The first implementation milestone measures bidirectional MIDI latency and jitter. Responsive control is the target; hard real-time timing is not guaranteed. Details are in the [implementation stack](PLAN.md#accepted-implementation-stack).
 
+The user supplies a Mixxx playlist; AI may arrange the order while preserving every entry. Track selection, editable/saved set lists, and enjoyable full-set performance belong to this build. Three modes govern control: **AI Only**, **B2B**, and **Playlist Only**. A real MIDI controller works alongside the AI; global disarm always wins.
+
 ## Documents
 
-- [Interactive direction page](direction.html): visual pitch, simulated transition, manual takeover, and local-to-Pi deployment diagram. Self-contained HTML; no real audio or MIDI connection.
+- [Current goal](../../GOALS.md): authoritative scope and planning completion criteria.
+- [All 60 discovery decisions](DISCOVERY.md): user answers and delegated defaults, with provenance.
+- [Delegated defaults](DEFAULTS.md): editable starting policies and numeric targets.
+- [Worker tasks](WORKER-TASKS.md): bounded assignments, dependencies, ownership and evidence.
+- [Traceability](TRACEABILITY.md): requirement-to-task coverage.
+- [Session recording and history](SESSION-UI.md): semantic MIDI events and track-layer timeline.
+- [Planning validation](VALIDATION.md): documentation checks and remaining runtime evidence.
+
+- [Interactive direction page](direction.html): visual pitch, simulated B2B handover, semantic session layers, and desktop architecture. Self-contained HTML; no real audio or MIDI connection.
 - [Architecture and milestones](PLAN.md): product boundaries, local setup, MIDI protocol, execution, and acceptance criteria.
-- [Desktop deployment and host compatibility](HOST-STRATEGY.md): why an external AI device is optional, and what we must verify for Mixxx, Serato, and Traktor.
+- [Desktop build scope](HOST-STRATEGY.md): Mixxx-only product boundary.
+- [Playlist-to-set workflow](PLAYLIST-SETS.md): native playlist selection, AI ordering, set management and musical-quality gates.
+- [Modes and B2B handover](HUMAN-CONTROL.md): AI Only, B2B, Playlist Only, physical-controller coexistence and disarm.
 - [Feature coverage and gaps](CONTROL-COVERAGE.md): how to reach the full-feature goal without assuming every UI action is already MIDI accessible.
 - [Research evidence](RESEARCH.md): pinned source references, documentation, version differences, and limits of this investigation.
 
@@ -26,7 +38,7 @@ We are building a DJ player/controller that sends and receives MIDI to perform a
 - Local checkout has shallow history. Fetch additional history or release refs when implementation requires them.
 - No AI runtime, MIDI mapping, host extension, application dependency setup, or audio/UI test was implemented in this planning pass.
 
-Document validation passed: the repository-pinned Markdown linter (0.23.2), local file-link checks, whitespace checks, code-fence checks, and required AI disclosures. No application tests were run for these documentation-only additions.
+See [planning validation](VALIDATION.md) for the current checks. No application runtime is implemented or tested by this documentation pass.
 
 The user explicitly authorized committing and pushing these planning documents to the fork on `codex/ai-dj-plan`. No upstream issue or pull request was created.
 

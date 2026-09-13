@@ -1,0 +1,1002 @@
+{
+  "disclosure": "Autonomously AI-generated planning traceability. Evidence paths are future required artifacts, not current test results.",
+  "requirements": [
+    {
+      "requirement": "R1-Q01",
+      "task_ids": [
+        "L06",
+        "L11"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/L06.md",
+        "docs/ai-dj/work/evidence/L11.md"
+      ],
+      "source": "user",
+      "summary": "Where do you primarily expect to use the AI DJ?"
+    },
+    {
+      "requirement": "R1-Q02",
+      "task_ids": [
+        "A06",
+        "A16",
+        "A14"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A06.md",
+        "docs/ai-dj/work/evidence/A16.md",
+        "docs/ai-dj/work/evidence/A14.md"
+      ],
+      "source": "user",
+      "summary": "What kind of music will a typical playlist contain?"
+    },
+    {
+      "requirement": "R1-Q03",
+      "task_ids": [
+        "P06",
+        "L09"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P06.md",
+        "docs/ai-dj/work/evidence/L09.md"
+      ],
+      "source": "user",
+      "summary": "How many songs should a typical playlist contain?"
+    },
+    {
+      "requirement": "R1-Q04",
+      "task_ids": [
+        "P19",
+        "L09",
+        "L10"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P19.md",
+        "docs/ai-dj/work/evidence/L09.md",
+        "docs/ai-dj/work/evidence/L10.md"
+      ],
+      "source": "user",
+      "summary": "How long will a typical performed set last?"
+    },
+    {
+      "requirement": "R1-Q05",
+      "task_ids": [
+        "P19",
+        "D04"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P19.md",
+        "docs/ai-dj/work/evidence/D04.md"
+      ],
+      "source": "user",
+      "summary": "When you say the AI should play every song, how much of each song should it play?"
+    },
+    {
+      "requirement": "R1-Q06",
+      "task_ids": [
+        "A15",
+        "U09"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A15.md",
+        "docs/ai-dj/work/evidence/U09.md"
+      ],
+      "source": "user",
+      "summary": "What mixing style should the AI use by default?"
+    },
+    {
+      "requirement": "R1-Q07",
+      "task_ids": [
+        "A15",
+        "M19"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A15.md",
+        "docs/ai-dj/work/evidence/M19.md"
+      ],
+      "source": "user",
+      "summary": "How much should the AI alter a song’s tempo to make a transition work?"
+    },
+    {
+      "requirement": "R1-Q08",
+      "task_ids": [
+        "A15",
+        "U09"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A15.md",
+        "docs/ai-dj/work/evidence/U09.md"
+      ],
+      "source": "user",
+      "summary": "How should the AI choose the energy flow of a set?"
+    },
+    {
+      "requirement": "R1-Q09",
+      "task_ids": [
+        "U09",
+        "R16"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/U09.md",
+        "docs/ai-dj/work/evidence/R16.md"
+      ],
+      "source": "user",
+      "summary": "After choosing a playlist in AI Only mode, what should happen before music starts?"
+    },
+    {
+      "requirement": "R1-Q10",
+      "task_ids": [
+        "P10",
+        "A10"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P10.md",
+        "docs/ai-dj/work/evidence/A10.md"
+      ],
+      "source": "standing_preference:SP-01",
+      "summary": "How should opening and closing tracks be chosen?"
+    },
+    {
+      "requirement": "R1-Q11",
+      "task_ids": [
+        "P10",
+        "A10"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P10.md",
+        "docs/ai-dj/work/evidence/A10.md"
+      ],
+      "source": "standing_preference:SP-01",
+      "summary": "Once a set starts, how freely may AI reorder the remaining songs?"
+    },
+    {
+      "requirement": "R1-Q12",
+      "task_ids": [
+        "P19",
+        "U09",
+        "P23"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P19.md",
+        "docs/ai-dj/work/evidence/U09.md",
+        "docs/ai-dj/work/evidence/P23.md"
+      ],
+      "source": "user",
+      "summary": "If a requested set duration is too short to include every song properly, what should happen?"
+    },
+    {
+      "requirement": "R1-Q13",
+      "task_ids": [
+        "A17",
+        "D04"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A17.md",
+        "docs/ai-dj/work/evidence/D04.md"
+      ],
+      "source": "user",
+      "summary": "If the same track appears twice in the supplied playlist, how should we handle it?"
+    },
+    {
+      "requirement": "R1-Q14",
+      "task_ids": [
+        "P08",
+        "P12",
+        "D05"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P08.md",
+        "docs/ai-dj/work/evidence/P12.md",
+        "docs/ai-dj/work/evidence/D05.md"
+      ],
+      "source": "user",
+      "summary": "If some playlist tracks are missing or cannot be played, what should happen before starting?"
+    },
+    {
+      "requirement": "R1-Q15",
+      "task_ids": [
+        "P21",
+        "A10"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P21.md",
+        "docs/ai-dj/work/evidence/A10.md"
+      ],
+      "source": "user",
+      "summary": "May the AI introduce songs that were not in the supplied playlist?"
+    },
+    {
+      "requirement": "R1-Q16",
+      "task_ids": [
+        "P20",
+        "U09"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P20.md",
+        "docs/ai-dj/work/evidence/U09.md"
+      ],
+      "source": "user",
+      "summary": "If you edit the original playlist in Mixxx while our set is running, how should the app respond?"
+    },
+    {
+      "requirement": "R1-Q17",
+      "task_ids": [
+        "P22",
+        "P16"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P22.md",
+        "docs/ai-dj/work/evidence/P16.md"
+      ],
+      "source": "user",
+      "summary": "Where should an arranged set be saved?"
+    },
+    {
+      "requirement": "R1-Q18",
+      "task_ids": [
+        "A03",
+        "A04",
+        "P23"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A03.md",
+        "docs/ai-dj/work/evidence/A04.md",
+        "docs/ai-dj/work/evidence/P23.md"
+      ],
+      "source": "user",
+      "summary": "How should track preparation work before a set?"
+    },
+    {
+      "requirement": "R1-Q19",
+      "task_ids": [
+        "A17",
+        "A18",
+        "U10"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A17.md",
+        "docs/ai-dj/work/evidence/A18.md",
+        "docs/ai-dj/work/evidence/U10.md"
+      ],
+      "source": "user",
+      "summary": "How should the AI learn your musical preferences over time?"
+    },
+    {
+      "requirement": "R1-Q20",
+      "task_ids": [
+        "A14",
+        "L11"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A14.md",
+        "docs/ai-dj/work/evidence/L11.md"
+      ],
+      "source": "user",
+      "summary": "Which musical outcome matters most when judging the first build?"
+    },
+    {
+      "requirement": "R2-Q01",
+      "task_ids": [
+        "R26",
+        "U12"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R26.md",
+        "docs/ai-dj/work/evidence/U12.md"
+      ],
+      "source": "user",
+      "summary": "Which physical MIDI controller will we use for the first real B2B test?"
+    },
+    {
+      "requirement": "R2-Q02",
+      "task_ids": [
+        "R15",
+        "L01"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R15.md",
+        "docs/ai-dj/work/evidence/L01.md"
+      ],
+      "source": "user",
+      "summary": "Which performance mode should be selected when the app opens, with performance automation still disarmed?"
+    },
+    {
+      "requirement": "R2-Q03",
+      "task_ids": [
+        "R17",
+        "R18",
+        "R19",
+        "R23"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R17.md",
+        "docs/ai-dj/work/evidence/R18.md",
+        "docs/ai-dj/work/evidence/R19.md",
+        "docs/ai-dj/work/evidence/R23.md"
+      ],
+      "source": "user",
+      "summary": "In B2B, what default quiet period should follow the last gesture before AI becomes eligible to retake a released control? The setting remains user-configurable."
+    },
+    {
+      "requirement": "R2-Q04",
+      "task_ids": [
+        "R19",
+        "R23"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R19.md",
+        "docs/ai-dj/work/evidence/R23.md"
+      ],
+      "source": "user",
+      "summary": "In AI Only, when should AI restore its plan after an ordinary manual knob adjustment?"
+    },
+    {
+      "requirement": "R2-Q05",
+      "task_ids": [
+        "R16",
+        "R26",
+        "U04"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R16.md",
+        "docs/ai-dj/work/evidence/R26.md",
+        "docs/ai-dj/work/evidence/U04.md"
+      ],
+      "source": "user",
+      "summary": "Where should quick Disarm AI controls be available?"
+    },
+    {
+      "requirement": "R2-Q06",
+      "task_ids": [
+        "R15",
+        "R16",
+        "U04"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R15.md",
+        "docs/ai-dj/work/evidence/R16.md",
+        "docs/ai-dj/work/evidence/U04.md"
+      ],
+      "source": "user",
+      "summary": "When switching between AI Only and B2B during playback, should AI continue under the new mode or wait for another resume action?"
+    },
+    {
+      "requirement": "R2-Q07",
+      "task_ids": [
+        "R15",
+        "R16",
+        "U04"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R15.md",
+        "docs/ai-dj/work/evidence/R16.md",
+        "docs/ai-dj/work/evidence/U04.md"
+      ],
+      "source": "user",
+      "summary": "When returning from Playlist Only to AI Only or B2B while music is playing, how should AI performance begin?"
+    },
+    {
+      "requirement": "R2-Q08",
+      "task_ids": [
+        "P17",
+        "D02"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P17.md",
+        "docs/ai-dj/work/evidence/D02.md"
+      ],
+      "source": "user",
+      "summary": "In B2B, if you manually load a different song in place of the AI queued song, what should happen to the original queued song?"
+    },
+    {
+      "requirement": "R2-Q09",
+      "task_ids": [
+        "R25",
+        "U04"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R25.md",
+        "docs/ai-dj/work/evidence/U04.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "In B2B, if you press Pause or Stop on a deck, how should the AI respond?"
+    },
+    {
+      "requirement": "R2-Q10",
+      "task_ids": [
+        "P17",
+        "D04"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P17.md",
+        "docs/ai-dj/work/evidence/D04.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "What happens to the unplayed song displaced by a manual replacement?"
+    },
+    {
+      "requirement": "R2-Q11",
+      "task_ids": [
+        "R18",
+        "R25",
+        "U04"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R18.md",
+        "docs/ai-dj/work/evidence/R25.md",
+        "docs/ai-dj/work/evidence/U04.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "How long can I reserve controls for myself in B2B?"
+    },
+    {
+      "requirement": "R2-Q12",
+      "task_ids": [
+        "O02",
+        "O04",
+        "R18"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/O02.md",
+        "docs/ai-dj/work/evidence/O04.md",
+        "docs/ai-dj/work/evidence/R18.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "How should AI infer interaction on a controller without touch sensors?"
+    },
+    {
+      "requirement": "R2-Q13",
+      "task_ids": [
+        "R26",
+        "U12"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R26.md",
+        "docs/ai-dj/work/evidence/U12.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "How should physical knobs catch up after AI changes their software values?"
+    },
+    {
+      "requirement": "R2-Q14",
+      "task_ids": [
+        "P23",
+        "P24"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P23.md",
+        "docs/ai-dj/work/evidence/P24.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "May AI create or change cue points?"
+    },
+    {
+      "requirement": "R2-Q15",
+      "task_ids": [
+        "R13",
+        "R19",
+        "C01"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R13.md",
+        "docs/ai-dj/work/evidence/R19.md",
+        "docs/ai-dj/work/evidence/C01.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "How should B2B handle manual jogging, scratching, seeking and loops?"
+    },
+    {
+      "requirement": "R2-Q16",
+      "task_ids": [
+        "P21",
+        "P17"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P21.md",
+        "docs/ai-dj/work/evidence/P17.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "May I manually introduce a song outside a playlist-restricted set?"
+    },
+    {
+      "requirement": "R2-Q17",
+      "task_ids": [
+        "R14",
+        "R19"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R14.md",
+        "docs/ai-dj/work/evidence/R19.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "What should AI Only do after a manual track load?"
+    },
+    {
+      "requirement": "R2-Q18",
+      "task_ids": [
+        "A09",
+        "A11",
+        "D02"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A09.md",
+        "docs/ai-dj/work/evidence/A11.md",
+        "docs/ai-dj/work/evidence/D02.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "What should happen when AI planning is late or fails?"
+    },
+    {
+      "requirement": "R2-Q19",
+      "task_ids": [
+        "R12",
+        "R22",
+        "R26"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R12.md",
+        "docs/ai-dj/work/evidence/R22.md",
+        "docs/ai-dj/work/evidence/R26.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "What should happen if MIDI feedback or the host connection is lost?"
+    },
+    {
+      "requirement": "R2-Q20",
+      "task_ids": [
+        "R15",
+        "R26",
+        "U12"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R15.md",
+        "docs/ai-dj/work/evidence/R26.md",
+        "docs/ai-dj/work/evidence/U12.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "What should the initial mode and controller setup be?"
+    },
+    {
+      "requirement": "R3-Q01",
+      "task_ids": [
+        "U05",
+        "U06",
+        "U08"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/U05.md",
+        "docs/ai-dj/work/evidence/U06.md",
+        "docs/ai-dj/work/evidence/U08.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "What should the main live session screen emphasize?"
+    },
+    {
+      "requirement": "R3-Q02",
+      "task_ids": [
+        "O07",
+        "O11",
+        "U11"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/O07.md",
+        "docs/ai-dj/work/evidence/O11.md",
+        "docs/ai-dj/work/evidence/U11.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "When should MIDI session recording run?"
+    },
+    {
+      "requirement": "R3-Q03",
+      "task_ids": [
+        "O13",
+        "C01",
+        "U11"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/O13.md",
+        "docs/ai-dj/work/evidence/C01.md",
+        "docs/ai-dj/work/evidence/U11.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "Should sessions record audio as well as MIDI data?"
+    },
+    {
+      "requirement": "R3-Q04",
+      "task_ids": [
+        "O12",
+        "U11"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/O12.md",
+        "docs/ai-dj/work/evidence/U11.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "How should track waveforms appear?"
+    },
+    {
+      "requirement": "R3-Q05",
+      "task_ids": [
+        "O07",
+        "O08",
+        "O10",
+        "L10"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/O07.md",
+        "docs/ai-dj/work/evidence/O08.md",
+        "docs/ai-dj/work/evidence/O10.md",
+        "docs/ai-dj/work/evidence/L10.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "How should long sessions be stored and rendered?"
+    },
+    {
+      "requirement": "R3-Q06",
+      "task_ids": [
+        "P06",
+        "L09",
+        "L10"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P06.md",
+        "docs/ai-dj/work/evidence/L09.md",
+        "docs/ai-dj/work/evidence/L10.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "What initial session size should we validate?"
+    },
+    {
+      "requirement": "R3-Q07",
+      "task_ids": [
+        "O14",
+        "U11"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/O14.md",
+        "docs/ai-dj/work/evidence/U11.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "How should history retention work?"
+    },
+    {
+      "requirement": "R3-Q08",
+      "task_ids": [
+        "O15",
+        "U11"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/O15.md",
+        "docs/ai-dj/work/evidence/U11.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "How should sharing and export handle local files?"
+    },
+    {
+      "requirement": "R3-Q09",
+      "task_ids": [
+        "A18",
+        "U10"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A18.md",
+        "docs/ai-dj/work/evidence/U10.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "How can I correct what AI learns?"
+    },
+    {
+      "requirement": "R3-Q10",
+      "task_ids": [
+        "A17",
+        "A18"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A17.md",
+        "docs/ai-dj/work/evidence/A18.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "How far back should repetition and preference learning look?"
+    },
+    {
+      "requirement": "R3-Q11",
+      "task_ids": [
+        "A16",
+        "A04",
+        "A14"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A16.md",
+        "docs/ai-dj/work/evidence/A04.md",
+        "docs/ai-dj/work/evidence/A14.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "What should matching lyrics mean musically?"
+    },
+    {
+      "requirement": "R3-Q12",
+      "task_ids": [
+        "A16",
+        "A04"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A16.md",
+        "docs/ai-dj/work/evidence/A04.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "Where should lyrical information come from initially?"
+    },
+    {
+      "requirement": "R3-Q13",
+      "task_ids": [
+        "A15",
+        "U09"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A15.md",
+        "docs/ai-dj/work/evidence/U09.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "What initial tempo-change limits should AI use?"
+    },
+    {
+      "requirement": "R3-Q14",
+      "task_ids": [
+        "P20",
+        "P21",
+        "P22",
+        "U09"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P20.md",
+        "docs/ai-dj/work/evidence/P21.md",
+        "docs/ai-dj/work/evidence/P22.md",
+        "docs/ai-dj/work/evidence/U09.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "Which defaults should apply to a newly created set?"
+    },
+    {
+      "requirement": "R3-Q15",
+      "task_ids": [
+        "P19",
+        "A15",
+        "P23",
+        "U09"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P19.md",
+        "docs/ai-dj/work/evidence/A15.md",
+        "docs/ai-dj/work/evidence/P23.md",
+        "docs/ai-dj/work/evidence/U09.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "How much musical planning can I override?"
+    },
+    {
+      "requirement": "R3-Q16",
+      "task_ids": [
+        "L01",
+        "L02",
+        "L03",
+        "L05"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/L01.md",
+        "docs/ai-dj/work/evidence/L02.md",
+        "docs/ai-dj/work/evidence/L03.md",
+        "docs/ai-dj/work/evidence/L05.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "How should the local desktop app launch?"
+    },
+    {
+      "requirement": "R3-Q17",
+      "task_ids": [
+        "M19",
+        "R23",
+        "A12",
+        "L10"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/M19.md",
+        "docs/ai-dj/work/evidence/R23.md",
+        "docs/ai-dj/work/evidence/A12.md",
+        "docs/ai-dj/work/evidence/L10.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "What responsiveness targets should we test first?"
+    },
+    {
+      "requirement": "R3-Q18",
+      "task_ids": [
+        "A13",
+        "A14",
+        "L11"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/A13.md",
+        "docs/ai-dj/work/evidence/A14.md",
+        "docs/ai-dj/work/evidence/L11.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "What should validate musical quality?"
+    },
+    {
+      "requirement": "R3-Q19",
+      "task_ids": [
+        "R10",
+        "O07",
+        "O14",
+        "L10"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/R10.md",
+        "docs/ai-dj/work/evidence/O07.md",
+        "docs/ai-dj/work/evidence/O14.md",
+        "docs/ai-dj/work/evidence/L10.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "What happens when analysis, recording or UI is overloaded?"
+    },
+    {
+      "requirement": "R3-Q20",
+      "task_ids": [
+        "L12"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/L12.md"
+      ],
+      "source": "assistant_delegated",
+      "summary": "What should count as completion of this phase?"
+    },
+    {
+      "requirement": "FULL-MIXXX",
+      "task_ids": [
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "I06",
+        "I07",
+        "I08",
+        "I09",
+        "I10",
+        "I11",
+        "I12",
+        "I13",
+        "I14",
+        "I15",
+        "I16",
+        "I17",
+        "I18",
+        "I19",
+        "I20",
+        "I21",
+        "I22",
+        "I23",
+        "C01",
+        "C02"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/I01.md",
+        "docs/ai-dj/work/evidence/I02.md",
+        "docs/ai-dj/work/evidence/I03.md",
+        "docs/ai-dj/work/evidence/I04.md",
+        "docs/ai-dj/work/evidence/I05.md",
+        "docs/ai-dj/work/evidence/I06.md",
+        "docs/ai-dj/work/evidence/I07.md",
+        "docs/ai-dj/work/evidence/I08.md",
+        "docs/ai-dj/work/evidence/I09.md",
+        "docs/ai-dj/work/evidence/I10.md",
+        "docs/ai-dj/work/evidence/I11.md",
+        "docs/ai-dj/work/evidence/I12.md",
+        "docs/ai-dj/work/evidence/I13.md",
+        "docs/ai-dj/work/evidence/I14.md",
+        "docs/ai-dj/work/evidence/I15.md",
+        "docs/ai-dj/work/evidence/I16.md",
+        "docs/ai-dj/work/evidence/I17.md",
+        "docs/ai-dj/work/evidence/I18.md",
+        "docs/ai-dj/work/evidence/I19.md",
+        "docs/ai-dj/work/evidence/I20.md",
+        "docs/ai-dj/work/evidence/I21.md",
+        "docs/ai-dj/work/evidence/I22.md",
+        "docs/ai-dj/work/evidence/I23.md",
+        "docs/ai-dj/work/evidence/C01.md",
+        "docs/ai-dj/work/evidence/C02.md"
+      ],
+      "source": "goal",
+      "summary": "All 22 families and four separate evidence dimensions; dynamic expansion required."
+    },
+    {
+      "requirement": "RAW-CAPTURE",
+      "task_ids": [
+        "O02",
+        "O04",
+        "O06",
+        "O11"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/O02.md",
+        "docs/ai-dj/work/evidence/O04.md",
+        "docs/ai-dj/work/evidence/O06.md",
+        "docs/ai-dj/work/evidence/O11.md"
+      ],
+      "source": "goal",
+      "summary": "Physical unmapped/unchanged input and honest source attribution."
+    },
+    {
+      "requirement": "NATIVE-PLAYLIST",
+      "task_ids": [
+        "P02",
+        "P03",
+        "P05",
+        "P13",
+        "P14",
+        "P16",
+        "P18"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/P02.md",
+        "docs/ai-dj/work/evidence/P03.md",
+        "docs/ai-dj/work/evidence/P05.md",
+        "docs/ai-dj/work/evidence/P13.md",
+        "docs/ai-dj/work/evidence/P14.md",
+        "docs/ai-dj/work/evidence/P16.md",
+        "docs/ai-dj/work/evidence/P18.md"
+      ],
+      "source": "goal",
+      "summary": "Native ordered read, stable identity/load and save/readback; host children required."
+    },
+    {
+      "requirement": "HISTORY-NO-MIDI",
+      "task_ids": [
+        "O09",
+        "U07",
+        "U08",
+        "L02"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/O09.md",
+        "docs/ai-dj/work/evidence/U07.md",
+        "docs/ai-dj/work/evidence/U08.md",
+        "docs/ai-dj/work/evidence/L02.md"
+      ],
+      "source": "goal",
+      "summary": "Historical import/scrubbing/playback cannot arm or send MIDI."
+    },
+    {
+      "requirement": "WORKER-CAP",
+      "task_ids": [
+        "F02",
+        "L12"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/F02.md",
+        "docs/ai-dj/work/evidence/L12.md"
+      ],
+      "source": "goal",
+      "summary": "Every assignment including child templates obeys supervised <=30-minute boundary."
+    },
+    {
+      "requirement": "CONTINUOUS-SOAK",
+      "task_ids": [
+        "L06",
+        "L07",
+        "L08",
+        "L09",
+        "L10"
+      ],
+      "validation_ids": [
+        "docs/ai-dj/work/evidence/L06.md",
+        "docs/ai-dj/work/evidence/L07.md",
+        "docs/ai-dj/work/evidence/L08.md",
+        "docs/ai-dj/work/evidence/L09.md",
+        "docs/ai-dj/work/evidence/L10.md"
+      ],
+      "source": "goal",
+      "summary": "Durable jobs and bounded observers; uninterrupted audio cannot be replaced by short fragments."
+    }
+  ],
+  "generation_end": "End of autonomously AI-generated planning traceability."
+}

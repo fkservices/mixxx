@@ -1,0 +1,949 @@
+{
+  "disclosure": "Autonomously AI-generated questionnaire record. Explicit user answers and assistant defaults under user delegation are distinguished by answer_source.",
+  "schema_version": 1,
+  "rounds": [
+    {
+      "round": 1,
+      "topic": "Playlist workflow and musical behavior",
+      "status": "answered",
+      "questions": [
+        {
+          "id": "R1-Q01",
+          "question": "Where do you primarily expect to use the AI DJ?",
+          "options": [
+            "Both private listening and live DJ sessions",
+            "Private listening and parties at home",
+            "Live gigs with an audience"
+          ],
+          "answer": "Both private listening and live DJ sessions",
+          "status": "answered"
+        },
+        {
+          "id": "R1-Q02",
+          "question": "What kind of music will a typical playlist contain?",
+          "options": [
+            "Related genres with some tempo variation",
+            "Mostly one genre and similar tempos",
+            "A wide mix of genres, eras and tempos"
+          ],
+          "answer": "Could be any, as open format is a thing, use BPM and harmonic matching also playing matching lyrics",
+          "status": "answered",
+          "interpretation": "Support open-format playlists across genres, tempos and eras. Use BPM, harmonic compatibility and lyrical/vocal matching in selection and transitions. Exact lyrical matching behavior and data source remain to be clarified."
+        },
+        {
+          "id": "R1-Q03",
+          "question": "How many songs should a typical playlist contain?",
+          "options": [
+            "15–50 songs",
+            "5–15 songs",
+            "50–150 songs",
+            "More than 150 songs"
+          ],
+          "answer": "10 or more",
+          "status": "answered",
+          "interpretation": "Typical playlists contain at least 10 songs. No upper size limit has been specified; this does not exclude smaller playlists or establish unlimited capacity."
+        },
+        {
+          "id": "R1-Q04",
+          "question": "How long will a typical performed set last?",
+          "options": [
+            "1–3 hours",
+            "Under 1 hour",
+            "3–6 hours",
+            "More than 6 hours"
+          ],
+          "answer": "10 mins to more like multiple hours",
+          "status": "answered",
+          "interpretation": "Support short sets of approximately 10 minutes and sessions lasting multiple hours. No precise maximum duration is specified. How short set durations interact with playing all playlist entries remains to be clarified.",
+          "later_resolution": "R1-Q12 and delegated R3-Q06 resolve feasibility policy and initial duration envelope."
+        },
+        {
+          "id": "R1-Q05",
+          "question": "When you say the AI should play every song, how much of each song should it play?",
+          "options": [
+            "Most of the song, with intro/outro overlap",
+            "The entire song, allowing overlap",
+            "Shorter DJ edits are fine if each song gets a meaningful section"
+          ],
+          "answer": "Auto selection of the right parts, also a time limit selection wiht an option to enter a range, so AI pickable or user definable both",
+          "status": "answered",
+          "interpretation": "AI selects musically appropriate portions of tracks. Set duration supports automatic AI selection, a user-defined time limit, or a user-defined duration range. Fit section and transition choices to these constraints while accounting for every playlist entry; handling infeasible combinations remains for R1-Q12.",
+          "presented_options": [
+            "Most of the song, overlapping intros and outros",
+            "The entire song, allowing overlap",
+            "Shorter sections are fine, as long as each song gets a meaningful moment",
+            "Let me choose per set—full songs or a shorter DJ mix"
+          ]
+        },
+        {
+          "id": "R1-Q06",
+          "question": "What mixing style should the AI use by default?",
+          "options": [
+            "Clean, subtle transitions with restrained effects",
+            "A balance of smooth mixing and creative performance",
+            "Active performance with loops, cuts and effects"
+          ],
+          "answer": "d",
+          "status": "answered",
+          "selected_option": "AI chooses based on the music, with an option for me to select a style",
+          "interpretation": "Choose mixing style automatically from the music by default; provide a user-selectable style override.",
+          "presented_options": [
+            "Clean, subtle transitions with restrained effects",
+            "A balance of smooth mixing and creative performance",
+            "Active performance with loops, cuts and effects",
+            "AI chooses based on the music, with an option for me to select a style"
+          ]
+        },
+        {
+          "id": "R1-Q07",
+          "question": "How much should the AI alter a song’s tempo to make a transition work?",
+          "options": [
+            "Keep changes restrained and use another transition when needed",
+            "Allow moderate changes when the result sounds natural",
+            "Allow noticeable changes for a more creative mix"
+          ],
+          "answer": "normally up to moderate mostly small, but user defineable also",
+          "status": "answered",
+          "interpretation": "Prefer small tempo changes; normally allow up to moderate changes when useful. Expose user-configurable tempo limits. Numerical default thresholds are not yet specified.",
+          "presented_options": [
+            "Small changes; choose another transition when needed",
+            "Moderate changes, provided the song still sounds natural",
+            "Noticeable changes are fine for creative mixing",
+            "AI decides within tempo limits I can configure"
+          ]
+        },
+        {
+          "id": "R1-Q08",
+          "question": "How should the AI choose the energy flow of a set?",
+          "options": [
+            "Let me choose a style such as build-up, steady or chill",
+            "Infer the flow from the playlist automatically",
+            "Let me specify an energy curve across the set"
+          ],
+          "answer": "D custom custom curves can be awesome",
+          "status": "answered",
+          "selected_option": "Automatic by default, with both presets and a custom curve available",
+          "interpretation": "Plan set energy automatically by default. Provide selectable energy presets and a user-editable custom energy curve as part of the set-planning UI.",
+          "presented_options": [
+            "Infer the flow automatically from the playlist",
+            "Let me choose a preset, such as build-up, steady or chill",
+            "Let me draw or specify an energy curve",
+            "Automatic by default, with both presets and a custom curve available"
+          ]
+        },
+        {
+          "id": "R1-Q09",
+          "question": "After choosing a playlist in AI Only mode, what should happen before music starts?",
+          "options": [
+            "Show the proposed set, then wait for me to press Start",
+            "Prepare and start automatically, with the plan visible",
+            "Let me choose between review-first and automatic start"
+          ],
+          "answer": "c",
+          "status": "answered",
+          "selected_option": "Let me choose between review-first and automatic start",
+          "interpretation": "Offer selectable review-first and automatic-start workflows in AI Only mode. Automatic start applies to an explicitly initiated set workflow; it does not override latched disarm or authorize startup/reconnect replay.",
+          "presented_options": [
+            "Show the proposed set and wait for me to press Start",
+            "Prepare and start automatically, with the plan visible",
+            "Let me choose between review-first and automatic start"
+          ]
+        },
+        {
+          "id": "R1-Q10",
+          "question": "How should opening and closing tracks be chosen?",
+          "options": [
+            "AI chooses unless I pin an opener or closer",
+            "I always choose both",
+            "AI always chooses"
+          ],
+          "answer": "If the question has an asnwer that is both AI choseable and user defined alwasy pick that",
+          "status": "answered",
+          "selected_option": "AI chooses unless I pin an opener or closer",
+          "answer_source": "standing_preference:SP-01",
+          "interpretation": "AI chooses opening and closing tracks by default; user can pin either or both."
+        },
+        {
+          "id": "R1-Q11",
+          "question": "Once a set starts, how freely may AI reorder the remaining songs?",
+          "options": [
+            "Adapt the remaining order while respecting my pins",
+            "Keep the approved order unless I request a change",
+            "Adapt later songs but keep the next few committed"
+          ],
+          "answer": "If the question has an asnwer that is both AI choseable and user defined alwasy pick that",
+          "status": "answered",
+          "selected_option": "Adapt the remaining order while respecting my pins",
+          "answer_source": "standing_preference:SP-01",
+          "interpretation": "AI may adapt the remaining order during the set while respecting user pins and constraints; active-transition changes remain subject to mode/ownership rules."
+        },
+        {
+          "id": "R1-Q12",
+          "question": "If a requested set duration is too short to include every song properly, what should happen?",
+          "options": [
+            "Extend the duration to include every song",
+            "Ask whether to use shorter song sections",
+            "Ask me which songs to remove"
+          ],
+          "answer": "D, Also utlize the cue points that controllers and softwares already use and are defined with midi",
+          "status": "answered",
+          "selected_option": "Flag the conflict and let me choose before starting",
+          "interpretation": "When the time constraint cannot fit meaningful participation by every playlist entry, show the conflict and obtain the user choice before starting. Additional requirement: use existing Mixxx cue/hotcue markers and MIDI controller mappings in planning and execution.",
+          "presented_options": [
+            "Include every song; extend the duration",
+            "Keep the time limit; ask me which songs to remove",
+            "Keep the time limit; AI selects a subset and shows the omissions",
+            "Flag the conflict and let me choose before starting"
+          ]
+        },
+        {
+          "id": "R1-Q13",
+          "question": "If the same track appears twice in the supplied playlist, how should we handle it?",
+          "options": [
+            "Keep both occurrences as intentional",
+            "Flag repeats before starting and let me confirm them",
+            "Ask me whether to keep each repeat when planning"
+          ],
+          "answer": "Soft flag duplicates, try to play the part that was not played before",
+          "status": "answered",
+          "interpretation": "Keep repeated playlist occurrences and show a non-blocking duplicate notice. Prefer musically suitable sections not previously played, using playback-section history; this is best effort rather than an absolute ban on repeated sections. Whether history should extend beyond the current session remains to be clarified.",
+          "presented_options": [
+            "Keep every occurrence as intentional",
+            "Flag duplicates before starting and let me decide",
+            "Remove duplicates automatically"
+          ],
+          "later_resolution": "Delegated R3-Q10 resolves recent-history influence."
+        },
+        {
+          "id": "R1-Q14",
+          "question": "If some playlist tracks are missing or cannot be played, what should happen before starting?",
+          "options": [
+            "Show the issues and let me explicitly resolve or skip them",
+            "Block starting until every track is available",
+            "Offer a clearly labeled partial set for me to approve"
+          ],
+          "answer": "C, and then move to the next song too",
+          "status": "answered",
+          "selected_option": "Skip unavailable tracks automatically and clearly list what was skipped",
+          "interpretation": "Automatically skip missing/unreadable/unplayable entries and advance to the next playable song. Apply to preflight and confirmed load failures during the set. Preserve skipped occurrence and reason in history; do not mark it played or silently delete it from the source playlist. If no playable entries remain, end/report the condition rather than retrying indefinitely.",
+          "presented_options": [
+            "Show the issues and let me resolve them or approve skips",
+            "Block starting until every track is available",
+            "Skip unavailable tracks automatically and clearly list what was skipped"
+          ]
+        },
+        {
+          "id": "R1-Q15",
+          "question": "May the AI introduce songs that were not in the supplied playlist?",
+          "options": [
+            "Only when I explicitly add or request them",
+            "It may suggest additions, but needs my approval",
+            "Never; use only the supplied playlist"
+          ],
+          "answer": "C; or both. Like an option to mixx the list only or go free",
+          "status": "answered",
+          "selected_option": "User-selectable music pool: supplied playlist only or free Mixxx-library selection",
+          "interpretation": "Provide a per-set music-pool setting: restrict AI selection to the supplied playlist, or allow free selection/additions from the local Mixxx library. Keep this independent of AI Only, B2B and Playlist Only performance modes. Original occurrence accounting and selected duration policy still apply. Default music-pool choice is not specified.",
+          "presented_options": [
+            "None—use only the supplied playlist",
+            "It may suggest additional tracks, but needs my approval",
+            "It may freely select additional tracks from my Mixxx library"
+          ],
+          "answer_history": [
+            {
+              "answer": "C",
+              "selected_option": "It may freely select additional tracks from my Mixxx library",
+              "superseded_by": "User clarified that playlist-only and free-library selection must both be selectable."
+            }
+          ],
+          "later_resolution": "Delegated R3-Q14 supplies the default music pool."
+        },
+        {
+          "id": "R1-Q16",
+          "question": "If you edit the original playlist in Mixxx while our set is running, how should the app respond?",
+          "options": [
+            "Show the changes and ask whether to update the remaining set",
+            "Keep the starting snapshot until I manually refresh",
+            "Automatically update unplayed entries while preserving the active transition"
+          ],
+          "answer": "Option for either C or A",
+          "status": "answered",
+          "selected_option": "Configurable: automatic remaining-set updates or starting snapshot with manual refresh",
+          "interpretation": "Provide a playlist-sync setting. Live sync automatically applies original Mixxx playlist edits to the remaining set while preserving the active transition; snapshot mode keeps the starting playlist until the user manually refreshes. Record source/plan revisions and edits in session history. Default setting is not specified.",
+          "presented_options": [
+            "Automatically update the remaining set, preserving the active transition",
+            "Show the changes and ask whether to apply them",
+            "Keep the starting playlist until I manually refresh it"
+          ],
+          "later_resolution": "Delegated R3-Q14 supplies the default source sync setting."
+        },
+        {
+          "id": "R1-Q17",
+          "question": "Where should an arranged set be saved?",
+          "options": [
+            "In our app, with an option to save a new Mixxx playlist",
+            "Automatically as a new Mixxx playlist and in our app",
+            "Only in our app unless I explicitly export it"
+          ],
+          "answer": "Options for all 3",
+          "status": "answered",
+          "selected_option": "All three save behaviors are user-selectable",
+          "interpretation": "Always support saving the arranged set in the app. Provide selectable behaviors: optionally save a new Mixxx playlist on request; automatically save a new Mixxx playlist as well; or keep the set in the app with manual file export. Preserve the original playlist. Default save behavior is not specified.",
+          "presented_options": [
+            "In our app, with an option to save a new Mixxx playlist",
+            "Automatically in our app and as a new Mixxx playlist",
+            "In our app only, with manual file export available"
+          ],
+          "later_resolution": "Delegated R3-Q14 supplies the default save setting."
+        },
+        {
+          "id": "R1-Q18",
+          "question": "How should track preparation work before a set?",
+          "options": [
+            "Prepare the whole playlist before performance starts",
+            "Prepare the first few tracks, then process ahead in the background",
+            "Use existing analysis immediately and prepare only missing information"
+          ],
+          "answer": "option to override as well; for 18 d",
+          "status": "answered",
+          "selected_option": "Combine B and C, with an optional prepare everything first setting",
+          "interpretation": "Reuse existing valid analysis and prepare the first few tracks, then analyze missing information ahead during playback. Offer a prepare-everything-first setting and user overrides. The exact scope of overrides beyond preparation strategy (such as forced reanalysis or manual feature edits) remains to be specified.",
+          "presented_options": [
+            "Prepare the entire playlist before playback starts",
+            "Prepare the first few tracks, then analyze ahead while playing",
+            "Reuse existing analysis and process only missing information",
+            "Combine B and C, with an optional prepare everything first setting"
+          ],
+          "later_resolution": "Delegated R2-Q14 and R3-Q15 resolve cue preservation and override controls."
+        },
+        {
+          "id": "R1-Q19",
+          "question": "How should the AI learn your musical preferences over time?",
+          "options": [
+            "Save my explicit ratings and preferences locally",
+            "Also learn from my set edits and manual interventions",
+            "Keep each session independent unless I save a preset"
+          ],
+          "answer": "b",
+          "status": "answered",
+          "selected_option": "Also learn from my set edits and manual mixing interventions",
+          "interpretation": "Learn preferences over time from explicit ratings and saved settings plus set-list edits and manual mixing interventions. Keep learning local and retain context/provenance; a single temporary gesture should not automatically become a permanent global rule. Learning controls and correction/reset behavior remain for later discovery.",
+          "presented_options": [
+            "Learn only from my explicit ratings and saved preferences",
+            "Also learn from my set edits and manual mixing interventions",
+            "Keep sessions independent unless I save a preset"
+          ],
+          "later_resolution": "Delegated R3-Q09 resolves preference review/reset."
+        },
+        {
+          "id": "R1-Q20",
+          "question": "Which musical outcome matters most when judging the first build?",
+          "options": [
+            "Consistently smooth, natural transitions",
+            "A compelling overall journey through the playlist",
+            "Creative transitions that feel like a skilled DJ",
+            "A balanced result across all three"
+          ],
+          "answer": "All it should fun to listen to and be natural, experimental but not sounding bad like of temp of of harmonics",
+          "status": "answered",
+          "selected_option": "A balanced result across all three",
+          "interpretation": "Balance smooth natural transitions, an enjoyable full-set journey and creative experimentation. The result should be fun to hear without unintended tempo/beat mismatch or harmonic clashes. Use listening review and technical timing/compatibility checks; creativity is not permission for poor execution.",
+          "presented_options": [
+            "Consistently smooth, natural transitions",
+            "A compelling journey through the whole set",
+            "Creative transitions that feel like a skilled DJ",
+            "A balanced result across all three"
+          ]
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "topic": "Modes, physical controllers and B2B handover",
+      "status": "resolved",
+      "questions": [
+        {
+          "id": "R2-Q01",
+          "question": "Which physical MIDI controller will we use for the first real B2B test?",
+          "options": [
+            "I already own one—I will give the brand and model",
+            "I own several—I will list them and choose a primary one",
+            "I do not have one yet; start with mouse/keyboard testing and validate hardware later"
+          ],
+          "answer": "I have basic one liek hercules, reloop buddy",
+          "status": "answered",
+          "interpretation": "User has a basic MIDI controller and mentions Hercules and Reloop Buddy. Reloop Buddy is a named candidate; exact Hercules model, complete device inventory and primary test controller remain unconfirmed. No Mixxx compatibility is yet verified."
+        },
+        {
+          "id": "R2-Q02",
+          "question": "Which performance mode should be selected when the app opens, with performance automation still disarmed?",
+          "options": [
+            "AI Only",
+            "B2B",
+            "Playlist Only",
+            "Remember my last selected mode"
+          ],
+          "answer": "d",
+          "status": "answered",
+          "selected_option": "Remember my last selected mode",
+          "interpretation": "Persist the last selected performance mode across app launches. Do not persist armed state or replay old actions. First-launch mode was not specified in this answer; delegated R2-Q20 later selects B2B disarmed."
+        },
+        {
+          "id": "R2-Q03",
+          "question": "In B2B, what default quiet period should follow the last gesture before AI becomes eligible to retake a released control? The setting remains user-configurable.",
+          "options": [
+            "About 1 second",
+            "About 3 seconds",
+            "About 5 seconds"
+          ],
+          "answer": "3 default sound ok; but like if the user turns down the bass or affect the AI should not take it over during that transition only next transition Ai should re control that item in B2B",
+          "status": "answered",
+          "selected_option": "3 seconds, plus a hold for the rest of the current transition",
+          "interpretation": "Default configurable quiet period is 3 seconds. In B2B a manual adjustment owns that item for the rest of the current transition. AI cannot reclaim merely because the timer expires; reclaim is allowed at a later transition start only after input/touch release, quiet expiry and fresh reconciliation. If still touched or not quiet at that start, retain the hold. Start any new action from the actual user value."
+        },
+        {
+          "id": "R2-Q04",
+          "question": "In AI Only, when should AI restore its plan after an ordinary manual knob adjustment?",
+          "options": [
+            "Promptly, using a smooth adjustment",
+            "At the next suitable beat or bar",
+            "At the next transition"
+          ],
+          "answer": "a",
+          "status": "answered",
+          "selected_option": "Promptly, using a smooth adjustment",
+          "interpretation": "In armed AI Only mode, respond promptly to ordinary manual knob adjustments with smooth, bounded recovery to the valid AI plan. No B2B hold or wait for the next transition. Global disarm, fresh-state checks and other execution guards still apply."
+        },
+        {
+          "id": "R2-Q05",
+          "question": "Where should quick Disarm AI controls be available?",
+          "options": [
+            "On-screen button only",
+            "On-screen button and keyboard shortcut",
+            "On-screen button, keyboard shortcut and assignable MIDI-controller button"
+          ],
+          "answer": "c",
+          "status": "answered",
+          "selected_option": "On-screen button, keyboard shortcut and assignable MIDI-controller button",
+          "interpretation": "Provide a persistent on-screen Disarm AI button, a keyboard shortcut and an assignable physical MIDI-controller button. All reach deterministic disarm handling without waiting for the planner, apply in every mode, and leave current music playing. Record their input source and outcome in session history."
+        },
+        {
+          "id": "R2-Q06",
+          "question": "When switching between AI Only and B2B during playback, should AI continue under the new mode or wait for another resume action?",
+          "options": [
+            "Continue under the new mode after cancelling stale actions and reconciling state",
+            "Disarm and wait for me to press Resume AI",
+            "Ask me whether to continue each time"
+          ],
+          "answer": "a",
+          "status": "answered",
+          "selected_option": "Continue under the new mode after cancelling stale actions and reconciling state",
+          "interpretation": "When already armed, switching between AI Only and B2B continues automatically under the new mode after old-mode action cancellation and current-state reconciliation. Preserve explicit disarm: a mode switch cannot arm a disarmed service. Playlist Only still disables AI performance output; its return-to-performance behavior remains to be specified.",
+          "later_resolution": "R2-Q07 resolves the return from Playlist Only."
+        },
+        {
+          "id": "R2-Q07",
+          "question": "When returning from Playlist Only to AI Only or B2B while music is playing, how should AI performance begin?",
+          "options": [
+            "Require me to press Start or Resume AI",
+            "Treat selecting the performance mode as permission to begin after checking current state",
+            "Ask whether to begin each time"
+          ],
+          "answer": "b",
+          "status": "answered",
+          "selected_option": "Treat selecting the performance mode as permission to begin after checking current state",
+          "interpretation": "Switching from Playlist Only to AI Only or B2B is an explicit request to begin AI performance after stale-action cancellation and current-state reconciliation; no extra Start/Resume is needed for the mode transition itself. Distinguish mode-based suspension from an explicit Disarm AI latch, which remains until deliberately resumed. Never replay historical or old-mode commands."
+        },
+        {
+          "id": "R2-Q08",
+          "question": "In B2B, if you manually load a different song in place of the AI queued song, what should happen to the original queued song?",
+          "options": [
+            "Keep it available to play later in the set",
+            "Skip it for this set and record the replacement",
+            "Ask me whether to keep it or skip it"
+          ],
+          "answer": "Ai should respect the new song, and adjust based on it",
+          "status": "answered",
+          "interpretation": "In B2B, accept the human-selected replacement track as the new musical direction. Cancel affected actions for the previous track, confirm the newly loaded identity and current state, and adapt the transition and remaining set around it while respecting human control holds. Do not restore the AI's old track choice or mark the displaced occurrence played. The answer does not specify whether the displaced occurrence should be requeued or skipped; keep its outcome unresolved rather than silently deciding.",
+          "later_resolution": "Delegated R2-Q10 retains displaced occurrences unless explicitly skipped."
+        },
+        {
+          "id": "R2-Q09",
+          "question": "In B2B, if you press Pause or Stop on a deck, how should the AI respond?",
+          "options": [
+            "Keep that deck paused until I resume it; AI can continue on the other deck",
+            "Suspend AI performance on all decks until I resume AI",
+            "Allow AI to restart that deck at the next suitable transition"
+          ],
+          "answer": "Keep that deck paused until I resume it; AI can continue on the other deck",
+          "status": "answered",
+          "selected_option": "Keep that deck paused until I resume it; AI can continue on the other deck",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Treat manual Pause/Stop as a latched transport hold on that deck. Cancel dependent transition actions; do not automatically play, cue-trigger or replace its track. Other independent work can continue. Human playback or explicit release of that deck hold permits fresh reconciliation; the ordinary 3-second timer cannot clear it."
+        },
+        {
+          "id": "R2-Q10",
+          "question": "What happens to the unplayed song displaced by a manual replacement?",
+          "options": [
+            "Keep it in the remaining set unless I explicitly skip it",
+            "Automatically skip it",
+            "Ask after every replacement"
+          ],
+          "answer": "Keep it in the remaining set unless I explicitly skip it",
+          "selected_option": "Keep it in the remaining set unless I explicitly skip it",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Preserve the displaced occurrence in the remaining set, reorder around the human choice and record the replacement. Never reload it immediately over the chosen song. If it already played partly, preserve its actual spans and interrupted status; completion follows meaningful-playback rules. An explicit user skip resolves it without falsely marking it played."
+        },
+        {
+          "id": "R2-Q11",
+          "question": "How long can I reserve controls for myself in B2B?",
+          "options": [
+            "Automatic transition holds plus optional control or deck pins until I release them",
+            "Only automatic holds",
+            "Disarm the whole AI for every manual hold"
+          ],
+          "answer": "Automatic transition holds plus optional control or deck pins until I release them",
+          "selected_option": "Automatic transition holds plus optional control or deck pins until I release them",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Provide per-control and per-deck manual pins in addition to routine transition holds. Pins remain until explicitly released; global Disarm remains separate. Releasing a pin permits reconciliation and the next eligible transition, not an abrupt value reset."
+        },
+        {
+          "id": "R2-Q12",
+          "question": "How should AI infer interaction on a controller without touch sensors?",
+          "options": [
+            "Use MIDI activity and observed changes, showing inferred inactivity",
+            "Require touch-capable hardware",
+            "Disable B2B on ordinary controllers"
+          ],
+          "answer": "Use MIDI activity and observed changes, showing inferred inactivity",
+          "selected_option": "Use MIDI activity and observed changes, showing inferred inactivity",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Use raw intent where available, including repeated identical values; otherwise use observed changes with uncertain origin. Show inferred inactivity rather than claiming physical touch detection. Apply the confirmed 3-second quiet and later-transition rules; uncertain manual divergence yields conservatively."
+        },
+        {
+          "id": "R2-Q13",
+          "question": "How should physical knobs catch up after AI changes their software values?",
+          "options": [
+            "Preserve Mixxx mapping and soft takeover where supported",
+            "Force immediate jumps to hardware positions",
+            "Rewrite every controller mapping"
+          ],
+          "answer": "Preserve Mixxx mapping and soft takeover where supported",
+          "selected_option": "Preserve Mixxx mapping and soft takeover where supported",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Preserve existing mapping behavior and verify pickup for each fixture. Offer supported soft takeover configuration with a clear mismatch indicator. Do not assume every controller supports pickup or motor feedback; do not reroute hardware through the AI service."
+        },
+        {
+          "id": "R2-Q14",
+          "question": "May AI create or change cue points?",
+          "options": [
+            "Use existing cues and keep AI suggestions separate unless I save them",
+            "Freely overwrite user cues",
+            "Never propose new cues"
+          ],
+          "answer": "Use existing cues and keep AI suggestions separate unless I save them",
+          "selected_option": "Use existing cues and keep AI suggestions separate unless I save them",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Read user cue/hotcue/intro-outro data and preserve it. Store AI entry/exit suggestions in the app; explicit Save cues can write supported markers through a verified host operation with conflict handling. Triggering a hotcue is distinct from editing its stored position."
+        },
+        {
+          "id": "R2-Q15",
+          "question": "How should B2B handle manual jogging, scratching, seeking and loops?",
+          "options": [
+            "Yield affected transport and replan around the resulting position",
+            "Let AI immediately restore its old playhead",
+            "Suspend every deck for every gesture"
+          ],
+          "answer": "Yield affected transport and replan around the resulting position",
+          "selected_option": "Yield affected transport and replan around the resulting position",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Cancel stale track/position actions, yield the affected transport and dependent transition steps, and use fresh beat/playhead/loop state afterward. Touch release and later-transition eligibility still apply; no snapback to the abandoned position. Independent work may continue."
+        },
+        {
+          "id": "R2-Q16",
+          "question": "May I manually introduce a song outside a playlist-restricted set?",
+          "options": [
+            "Yes; respect it and record it as a manual addition",
+            "Reject it",
+            "Switch the entire set to free selection automatically"
+          ],
+          "answer": "Yes; respect it and record it as a manual addition",
+          "selected_option": "Yes; respect it and record it as a manual addition",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Music-pool restrictions constrain AI selection. A human load is respected in B2B and recorded with manual provenance, without silently enabling free AI selection or deleting original required occurrences. Recheck duration and pins after the change."
+        },
+        {
+          "id": "R2-Q17",
+          "question": "What should AI Only do after a manual track load?",
+          "options": [
+            "Reconcile and recover a valid plan without abruptly replacing audible music",
+            "Always reload its old choice immediately",
+            "Switch automatically to B2B"
+          ],
+          "answer": "Reconcile and recover a valid plan without abruptly replacing audible music",
+          "selected_option": "Reconcile and recover a valid plan without abruptly replacing audible music",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "AI remains authoritative in AI Only, but stale commands and active-deck replacement guards still apply. Observe the new identity/state, then choose a bounded recovery from the actual musical situation. Ordinary knobs recover promptly; manual loads never authorize blindly replaying old loads."
+        },
+        {
+          "id": "R2-Q18",
+          "question": "What should happen when AI planning is late or fails?",
+          "options": [
+            "Use a validated deterministic fallback when current state permits",
+            "Always stop mixing immediately",
+            "Replay the previous plan"
+          ],
+          "answer": "Use a validated deterministic fallback when current state permits",
+          "selected_option": "Use a validated deterministic fallback when current state permits",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "A planner timeout can fall back to constrained ordering and a conservative prepared transition if state, analysis, capabilities and authority are fresh. Clearly label fallback. Otherwise preserve current audio, stop starting new transitions and show action needed. Never invent a late plan or blindly loop/replay actions."
+        },
+        {
+          "id": "R2-Q19",
+          "question": "What should happen if MIDI feedback or the host connection is lost?",
+          "options": [
+            "Disarm performance and require fresh state plus deliberate resume",
+            "Reconnect and replay queued actions",
+            "Continue sending from the last known state"
+          ],
+          "answer": "Disarm performance and require fresh state plus deliberate resume",
+          "selected_option": "Disarm performance and require fresh state plus deliberate resume",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Loss of trustworthy host feedback disarms new performance output. Cancel queues, release AI-owned momentary controls through a verified watchdog path, and preserve current playback where possible. Reconnection requires negotiation, fresh snapshots and deliberate rearm. A physical-controller disconnect alone yields/cancels uncertain affected B2B work and alerts; do not automatically grab its held controls."
+        },
+        {
+          "id": "R2-Q20",
+          "question": "What should the initial mode and controller setup be?",
+          "options": [
+            "B2B disarmed; guided selection of the actual controller",
+            "AI Only armed on launch",
+            "Assume a fixed Hercules model"
+          ],
+          "answer": "B2B disarmed; guided selection of the actual controller",
+          "selected_option": "B2B disarmed; guided selection of the actual controller",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "First launch selects B2B disarmed; later launches remember the selected mode but remain disarmed. Use Reloop Buddy as a candidate, not a verified device. Setup must identify the actual attached model, mapping and ports; the unspecified Hercules model remains an evidence prerequisite, not a question blocking this plan."
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "topic": "Session UI/history, operational limits and acceptance",
+      "status": "resolved",
+      "questions": [
+        {
+          "id": "R3-Q01",
+          "question": "What should the main live session screen emphasize?",
+          "options": [
+            "Layered tracks, AI intention, actual actions and human ownership",
+            "Raw MIDI bytes first",
+            "Only the next song"
+          ],
+          "answer": "Layered tracks, AI intention, actual actions and human ownership",
+          "selected_option": "Layered tracks, AI intention, actual actions and human ownership",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Show deck/track lanes, overlap, playhead, section boundaries, parameter curves and concise AI reasons. Label planned, sent, observed and uncertain states separately. Keep mode and Disarm visible. Raw bytes and causal/device details are available in an inspector."
+        },
+        {
+          "id": "R3-Q02",
+          "question": "When should MIDI session recording run?",
+          "options": [
+            "Automatically for each session, with visible status and pause controls",
+            "Only when manually started",
+            "Record AI messages only"
+          ],
+          "answer": "Automatically for each session, with visible status and pause controls",
+          "selected_option": "Automatically for each session, with visible status and pause controls",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Record raw AI output, physical input, host feedback, semantic events, intentions and outcomes by default whenever the app session is active. Continue across mode changes and disarm. Pausing capture creates an explicit gap; resume begins with a fresh snapshot. Include unknown/unmapped events, never mislabel them as AI or human."
+        },
+        {
+          "id": "R3-Q03",
+          "question": "Should sessions record audio as well as MIDI data?",
+          "options": [
+            "Data by default; optional explicit master-output recording",
+            "Always record audio and microphone",
+            "Never attach audio"
+          ],
+          "answer": "Data by default; optional explicit master-output recording",
+          "selected_option": "Data by default; optional explicit master-output recording",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Master-output audio capture is opt-in and separate from MIDI history. No microphone capture or broadcasting by default. The UI can attach an existing local recording and disclose alignment uncertainty. Record/broadcast capability exists in the coverage target but requires explicit operator intent."
+        },
+        {
+          "id": "R3-Q04",
+          "question": "How should track waveforms appear?",
+          "options": [
+            "Use prepared local waveforms when available, with clear placeholders",
+            "Invent a waveform from MIDI",
+            "Block the session until all waveforms finish"
+          ],
+          "answer": "Use prepared local waveforms when available, with clear placeholders",
+          "selected_option": "Use prepared local waveforms when available, with clear placeholders",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Generate or read verified local waveform assets outside MIDI handling; cache by file fingerprint. Show a timeline with duration/position while unavailable. Never present decorative or synthesized bars as measured audio. Audio playback in history, if enabled, remains isolated from performance MIDI."
+        },
+        {
+          "id": "R3-Q05",
+          "question": "How should long sessions be stored and rendered?",
+          "options": [
+            "Chunked journal and snapshots with bounded UI queries",
+            "Keep every event in browser memory",
+            "Discard raw data after drawing it"
+          ],
+          "answer": "Chunked journal and snapshots with bounded UI queries",
+          "selected_option": "Chunked journal and snapshots with bounded UI queries",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Use recoverable journal chunks and indexed snapshots; stream versioned JSON export. Propose 16 MiB chunks, snapshots at most 5 seconds apart, 1,000-event query pages and a separately bounded recorder queue. These are tunable design budgets, to be validated under dense jog/14-bit traffic. Raw capture is retained; only visual curves are downsampled."
+        },
+        {
+          "id": "R3-Q06",
+          "question": "What initial session size should we validate?",
+          "options": [
+            "Up to 6 hours and 250 playlist occurrences, with visible larger-set limits",
+            "Only 10-minute sets",
+            "Claim unlimited sessions"
+          ],
+          "answer": "Up to 6 hours and 250 playlist occurrences, with visible larger-set limits",
+          "selected_option": "Up to 6 hours and 250 playlist occurrences, with visible larger-set limits",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Initial acceptance envelope: 1 to 250 occurrences, roughly 10 minutes through 6 hours, including duplicates and open-format material. These are proposed test targets, not measured capacity or permanent product limits. Larger inputs must receive a visible capacity/preparation assessment without silent truncation. Full-feature inventory is not limited to two decks just because the first proof is."
+        },
+        {
+          "id": "R3-Q07",
+          "question": "How should history retention work?",
+          "options": [
+            "Keep until deleted; optional configurable automatic cleanup",
+            "Automatically delete after each session",
+            "Upload it all to a cloud service"
+          ],
+          "answer": "Keep until deleted; optional configurable automatic cleanup",
+          "selected_option": "Keep until deleted; optional configurable automatic cleanup",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Keep local history until deletion by default. Offer opt-in age/size cleanup, pinned sessions excluded. Show usage and low-disk warnings; propose warning at 5 GiB free and stop optional audio before data becomes endangered. Disk-full must preserve MIDI responsiveness and mark capture gaps, never silently erase sessions."
+        },
+        {
+          "id": "R3-Q08",
+          "question": "How should sharing and export handle local files?",
+          "options": [
+            "Versioned JSON with optional assets and a redacted sharing export",
+            "Always embed every audio file",
+            "Include absolute local paths in every shared file"
+          ],
+          "answer": "Versioned JSON with optional assets and a redacted sharing export",
+          "selected_option": "Versioned JSON with optional assets and a redacted sharing export",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Default local export includes event/schema/profile versions and stable track/occurrence references. Sharing mode removes unnecessary absolute paths and device identifiers; audio/waveform assets are opt-in with explicit relative references. Import validates sizes, versions and path traversal, remains read-only, and never sends MIDI."
+        },
+        {
+          "id": "R3-Q09",
+          "question": "How can I correct what AI learns?",
+          "options": [
+            "Ratings, notes, explainable preferences and reset controls",
+            "Let learning run invisibly",
+            "Require rating every transition"
+          ],
+          "answer": "Ratings, notes, explainable preferences and reset controls",
+          "selected_option": "Ratings, notes, explainable preferences and reset controls",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Support optional timestamped notes and transition/set ratings, inspectable learned preferences with evidence, edit/delete/reset and a disable-learning switch. Never treat every B2B gesture as a permanent preference. Learning is local and contextual; user-specified settings and pins win."
+        },
+        {
+          "id": "R3-Q10",
+          "question": "How far back should repetition and preference learning look?",
+          "options": [
+            "Current session strongly; optional recent history with controls",
+            "Current session only forever",
+            "Use all history equally"
+          ],
+          "answer": "Current session strongly; optional recent history with controls",
+          "selected_option": "Current session strongly; optional recent history with controls",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Default repetition checks prioritize the current session, with recent local history (30 days, configurable/off) as a soft signal. Prefer unplayed sections where musically useful; do not ban repeated material. Display/reset evidence and keep event archives separate from the preference model."
+        },
+        {
+          "id": "R3-Q11",
+          "question": "What should matching lyrics mean musically?",
+          "options": [
+            "Matching hooks or phrases first; themes as a weaker optional signal",
+            "Always overlap vocals with similar words",
+            "Ignore lyrics"
+          ],
+          "answer": "Matching hooks or phrases first; themes as a weaker optional signal",
+          "selected_option": "Matching hooks or phrases first; themes as a weaker optional signal",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Use confident repeated hooks, words or phrases for potential handoffs; themes and language are weaker optional selection signals. Respect phrase timing, BPM, harmony and vocal density. Never force a lyrical match that creates clashes; allow user emphasis, language and disable controls."
+        },
+        {
+          "id": "R3-Q12",
+          "question": "Where should lyrical information come from initially?",
+          "options": [
+            "Local metadata and supplied timed lyrics, with optional local transcription",
+            "Require an online lyrics service",
+            "Treat MIDI as the lyric source"
+          ],
+          "answer": "Local metadata and supplied timed lyrics, with optional local transcription",
+          "selected_option": "Local metadata and supplied timed lyrics, with optional local transcription",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Use available local tags/sidecar timed lyrics and optional local transcription in a separate analysis process. Preserve source, confidence and timing; no mandatory cloud service or automatic online lyric collection. Missing lyrics reduces that score, never makes a track unplayable. Select/benchmark actual tools during implementation, not by invented capability."
+        },
+        {
+          "id": "R3-Q13",
+          "question": "What initial tempo-change limits should AI use?",
+          "options": [
+            "Prefer within 3 percent, normally cap at 6 percent, user configurable",
+            "Allow unrestricted changes",
+            "Never change tempo"
+          ],
+          "answer": "Prefer within 3 percent, normally cap at 6 percent, user configurable",
+          "selected_option": "Prefer within 3 percent, normally cap at 6 percent, user configurable",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Propose absolute tempo offsets within 3% as preferred and 6% as the normal cap, configurable per set/track and distinguishable from half/double-time analysis. Use a different transition when limits conflict; evaluate pitch/key-lock effects by listening. Numeric values are assistant defaults, not user-specified musical laws."
+        },
+        {
+          "id": "R3-Q14",
+          "question": "Which defaults should apply to a newly created set?",
+          "options": [
+            "Playlist pool, source snapshot, review first, local autosave",
+            "Free library, live sync and automatic playback",
+            "Ask every setting before every set"
+          ],
+          "answer": "Playlist pool, source snapshot, review first, local autosave",
+          "selected_option": "Playlist pool, source snapshot, review first, local autosave",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Default to supplied-playlist pool, source snapshot until refresh, review-first start and local autosave with optional new Mixxx playlist. Retain all requested alternatives: free library selection, live source sync, automatic start for an explicitly initiated set, automatic dual save or local-only/manual export. Keep these independent of performance mode."
+        },
+        {
+          "id": "R3-Q15",
+          "question": "How much musical planning can I override?",
+          "options": [
+            "AI choices plus editable style, energy, duration, pins and section constraints",
+            "Only choose songs",
+            "Require hand-editing every transition"
+          ],
+          "answer": "AI choices plus editable style, energy, duration, pins and section constraints",
+          "selected_option": "AI choices plus editable style, energy, duration, pins and section constraints",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Expose AI-selected defaults and user editing for style, energy presets/custom curve, opener/closer and next-track pins, duration/range, tempo limits, section/cue boundaries and transition intensity. Changes validate feasibility and invalidate only affected future plans. Preserve active transitions and flag impossible duration/all-song combinations."
+        },
+        {
+          "id": "R3-Q16",
+          "question": "How should the local desktop app launch?",
+          "options": [
+            "A Mac launcher starts the local service and opens its browser UI",
+            "Require a cloud website",
+            "Run the MIDI communicator inside a browser tab"
+          ],
+          "answer": "A Mac launcher starts the local service and opens its browser UI",
+          "selected_option": "A Mac launcher starts the local service and opens its browser UI",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Deliver a local Mac launcher and TypeScript/HTML browser UI with a separate persistent Node service. Closing the tab does not kill performance. Bind to loopback, validate origin/session credentials and avoid exposing control APIs on the LAN. Desktop packaging must be tested on a clean local setup; an Electron wrapper is not required for this build."
+        },
+        {
+          "id": "R3-Q17",
+          "question": "What responsiveness targets should we test first?",
+          "options": [
+            "Measured budgets for controls, takeover and UI under load",
+            "Assume MIDI is instant",
+            "Promise sample-accurate JavaScript timers"
+          ],
+          "answer": "Measured budgets for controls, takeover and UI under load",
+          "selected_option": "Measured budgets for controls, takeover and UI under load",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Propose command-send to host-observation p95 <=30 ms and p99 <=75 ms; recognized human-input to AI cancellation p95 <=20 ms, p99 <=50 ms; observed state to app UI p95 <=100 ms. Report native Mixxx UI and audible onset separately, plus clock uncertainty, worst case and misses. No hard-real-time guarantee. Freeze a musically relevant host-quantized scheduling gate and measured onset budget in F01/M19 before claiming beat-critical support; failing budgets trigger focused optimization/native-scheduler work."
+        },
+        {
+          "id": "R3-Q18",
+          "question": "What should validate musical quality?",
+          "options": [
+            "Technical checks plus human listening against a baseline",
+            "Only successful MIDI sends",
+            "Let AI grade itself"
+          ],
+          "answer": "Technical checks plus human listening against a baseline",
+          "selected_option": "Technical checks plus human listening against a baseline",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Use repeatable Mixxx AutoDJ baseline and level-matched blind excerpts where feasible, covering open format, tempo/key differences, duplicate sections and manual interventions. Propose human ratings >=4/5 for naturalness and enjoyment on representative accepted sets, with no severe unintentional clashes, gaps or clipping. Keep subjective results and technical failures visible; human feedback is required before a runtime release."
+        },
+        {
+          "id": "R3-Q19",
+          "question": "What happens when analysis, recording or UI is overloaded?",
+          "options": [
+            "Protect MIDI/audio, reduce optional work and show degradation",
+            "Queue unlimited work",
+            "Hide gaps to keep the display smooth"
+          ],
+          "answer": "Protect MIDI/audio, reduce optional work and show degradation",
+          "selected_option": "Protect MIDI/audio, reduce optional work and show degradation",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Prioritize cancellation/releases and host state over telemetry, analysis, export and rendering. Bounded queues, process isolation and backpressure apply. Pause optional analysis/audio capture and downsample visual rendering before losing control responsiveness. Record gaps honestly; stale essential feedback disarms. Never drop already captured raw events silently while reporting lossless history."
+        },
+        {
+          "id": "R3-Q20",
+          "question": "What should count as completion of this phase?",
+          "options": [
+            "Complete reviewed planning docs and bounded tasks, committed to our fork",
+            "Claim the DJ is already working",
+            "Begin runtime implementation now"
+          ],
+          "answer": "Complete reviewed planning docs and bounded tasks, committed to our fork",
+          "selected_option": "Complete reviewed planning docs and bounded tasks, committed to our fork",
+          "status": "answered",
+          "answer_source": "assistant_delegated",
+          "interpretation": "Complete discovery with explicitly delegated defaults, aligned goals/specs, an updated HTML direction page, bounded worker cards and traceability/validation, then commit/push planning artifacts to the existing fork. Runtime implementation starts only on a later user instruction. Unverified device/tool/performance facts remain future evidence requirements, not silently answered facts."
+        }
+      ]
+    }
+  ],
+  "generation_end": "End of autonomously AI-generated questionnaire record.",
+  "interaction_format": "Discovery completed under user delegation; no further questionnaire answers required for this planning phase.",
+  "standing_preferences": [
+    {
+      "id": "SP-01",
+      "answer": "If the question has an asnwer that is both AI choseable and user defined alwasy pick that",
+      "interpretation": "When a question explicitly offers both automatic AI choice and user configuration/override, select that option without asking again. Continue asking distinct tradeoffs that are not resolved by this preference."
+    }
+  ],
+  "additional_requirements": [
+    {
+      "id": "AR-01",
+      "source_question": "R1-Q12",
+      "user_text": "Also utlize the cue points that controllers and softwares already use and are defined with midi",
+      "requirement": "Use existing Mixxx cue points, hotcues and applicable intro/outro markers as planning inputs and trigger supported operations via MIDI mappings. Preserve existing user markers; MIDI trigger availability and access to stored marker positions/labels require separate verification."
+    }
+  ],
+  "delegation": {
+    "instruction": "answer all the other questions your self",
+    "meaning": "Assistant resolves remaining product choices as editable defaults; not individually user-confirmed answers. Existing explicit user answers take priority. No runtime implementation authorized."
+  }
+}

@@ -6,9 +6,9 @@ Date: 2026-09-13. Status: planning; TypeScript/Node.js direction accepted by the
 
 ## 1. Product and scope
 
-Build a desktop AI DJ player/controller that performs by sending MIDI commands and receiving MIDI feedback. Mixxx supplies the initial decks, audio engine, library, effects, and visible controls. The controller and DJ host run on the same local computer, connected through virtual MIDI. This is a complete product direction; a Raspberry Pi is an optional later deployment, not a required destination.
+Build a desktop AI DJ player/controller that performs by sending MIDI commands and receiving MIDI feedback. Mixxx supplies the initial decks, audio engine, library, effects, and visible controls. The controller and DJ host run on the same local computer, connected through virtual MIDI. This build targets Mixxx and the desktop app only. Raspberry Pi and other DJ hosts are outside the current build.
 
-See [desktop deployment and host compatibility](HOST-STRATEGY.md) for the same-computer design and the separate investigations required for Serato, Traktor, or another host.
+The central workflow is: select a Mixxx playlist, let the AI arrange all its entries into an enjoyable set, review or edit the set list, then perform it through visible Mixxx controls. Track selection and set-list management are required in this build. The user explicitly chose AI-arranged order. Required modes are AI Only (AI performance authority), B2B (human priority through the current transition, then conditional return), and Playlist Only (AI arrangement, human mixing). See [playlist-to-set behavior](PLAYLIST-SETS.md) and [playing B2B with the AI](HUMAN-CONTROL.md).
 
 The user must see the actual Mixxx controls and playback state change. An activity display that merely says a MIDI command was sent does not satisfy this requirement.
 
@@ -17,10 +17,11 @@ The full-feature target is retained. We must inventory performance controls, lib
 Initial assumptions:
 
 - Two decks, local audio files, one selected Mixxx skin, and virtual MIDI on macOS.
-- A local control interface may be a CLI first; a browser dashboard can bind to loopback later.
+- A local TypeScript/HTML desktop interface is required for playlist selection, set planning, live progress and disarm. A CLI is only an early diagnostic tool; a Mac launcher starts the separate local service and opens the UI on loopback.
 - No cloud service is required for the deterministic prototype. AI model/provider selection is deferred until measured requirements exist. Local hosting does not imply a model has been chosen or benchmarked.
 - Mixxx plays and mixes audio. MIDI transports control and feedback; it does not carry the music.
-- Other DJ applications require their own capability assessment and adapter. Mixxx's custom protocol is not automatically compatible with Serato or any other host.
+- A physical MIDI controller may operate Mixxx at the same time as the AI. In B2B, human gestures temporarily own the affected controls with debounced, state-aware return to AI. AI Only overrides ordinary manual adjustments; Playlist Only disables AI performance commands. Global disarm stays latched in every mode.
+- Current implementation tasks exclude other DJ hosts, Pi deployment and custom hardware.
 
 ## 2. Boundaries and data flow
 
@@ -45,7 +46,8 @@ The diagram describes the logical flow, not a synchronous C++ call chain. Mixxx 
 
 | Component | Responsibility |
 | --- | --- |
-| Planner | Choose a next track and a bounded transition plan from available state and analysis. No direct MIDI access. |
+| Planner | Arrange every playlist occurrence, choose upcoming tracks and bounded transitions, and adapt the remaining set to human changes. No direct MIDI access. |
+| Set-list manager | Preserve playlist occurrences, planned order, pins, edits, playback history, unresolved entries and durable resume state. |
 | Executor | Enforce preconditions, deck ownership, timing, deadlines, cancellation, and confirmed outcomes. |
 | Host adapter | Convert semantic actions such as `deck.set_playing` into a versioned host profile. |
 | MIDI transport | Open local input/output ports, encode messages, enforce priority and bandwidth limits, and reconnect. |
@@ -54,7 +56,7 @@ The diagram describes the logical flow, not a synchronous C++ call chain. Mixxx 
 | Optional Mixxx extension | Expose specific missing library/settings operations through existing host services, reachable through MIDI. Add only after demonstrating a gap. |
 | Analysis/catalog | Hold local track identity, prepared musical features, and selection metadata. Do not write Mixxx's live database directly. |
 
-Suggested eventual layout is a separate AI DJ project with `core`, `execution`, `midi`, `hosts/mixxx`, and `local-ui` modules. The Mixxx fork holds its mapping and narrowly required host changes. No runtime folders are created in this planning pass.
+Planned layout is an independent `ai-dj/` TypeScript package in this fork, with `core`, `execution`, `midi`, `hosts/mixxx`, `catalog`, `sets`, `analysis`, `planner`, and `local-ui` modules. It runs as a separate desktop service/process; the fork holds the mapping and narrowly required host changes. No runtime folders are created in this planning pass.
 
 ### Accepted implementation stack
 
@@ -62,16 +64,16 @@ Build the communicator in **TypeScript running on Node.js**, with native MIDI ac
 
 | Layer | Technology | Responsibility |
 | --- | --- | --- |
-| Local operator interface | TypeScript and HTML; CLI first if useful | Controls, state monitoring, and manual takeover; browser UI communicates with the local service. |
+| Local operator interface | TypeScript and HTML; required desktop interface | Controls, state monitoring, and manual takeover; browser UI communicates with the local service. |
 | Communicator and executor | TypeScript on Node.js | MIDI encoding/decoding, bounded command queues, state reconciliation, deadlines, and cancellation. |
 | MIDI port access | Native RtMidi binding; `@julusian/midi` is the initial candidate | Virtual and physical MIDI input/output through OS MIDI facilities. |
 | Mixxx controller mapping | JavaScript in Mixxx | Translate MIDI into shared controls and send observed state back. |
 | AI planner and expensive analysis | Separate local process; model/runtime still to be selected | Produce structured plans without running inference or blocking analysis on the MIDI event loop. |
 | Audio and host synchronization | Existing Mixxx engine | Audio processing and supported sync/quantized actions. |
 
-Keep the communicator independent of the browser tab. Use asynchronous local IPC with bounded messages between it and the planner, and a loopback connection for a future browser interface. Planner failure or slow inference must not prevent MIDI feedback, releases, cancellation, or operator takeover. Process isolation reduces contention in the communicator's event loop; it does not eliminate OS scheduling or shared-CPU contention.
+Keep the communicator independent of the browser tab. Use asynchronous local IPC with bounded messages between it and the planner, and a loopback connection for the required browser interface. Planner failure or slow inference must not prevent MIDI feedback, releases, cancellation, or operator takeover. Process isolation reduces contention in the communicator's event loop; it does not eliminate OS scheduling or shared-CPU contention.
 
-Evaluate `@julusian/midi` in the first spike, pin a compatible Node/package combination, and verify native installation, port routing, disconnect behavior, and SysEx reception. Its documentation describes macOS and Linux virtual ports and notes that SysEx is ignored by default; explicitly configure the input filter for our protocol. Linux ARM/Pi native-build compatibility remains a later gate. Keep the binding behind a transport interface so it can be replaced without rewriting the planner or host contracts. See [the binding documentation](https://github.com/julusian/node-midi).
+Evaluate `@julusian/midi` in the first spike, pin a compatible Node/package combination, and verify native installation, port routing, disconnect behavior, and SysEx reception. Its documentation describes macOS and Linux virtual ports and notes that SysEx is ignored by default; explicitly configure the input filter for our protocol. Only the current desktop OS is a build gate; ARM/Pi compatibility is outside scope. Keep the binding behind a transport interface so it can be replaced without rewriting the planner or host contracts. See [the binding documentation](https://github.com/julusian/node-midi).
 
 ### Why use the shared control system?
 
@@ -120,7 +122,7 @@ Define an application-specific, versioned SysEx protocol for capabilities, snaps
 - `SET` / `TRIGGER`: numeric capability ID, value or action arguments, sequence ID, deadline, expected track generation, and ownership generation.
 - `ACCEPTED` / `RESULT` / `ERROR`: distinguish a parsed request from an observed postcondition. Include resulting value or explicit uncertainty.
 - `HEARTBEAT`, `CANCEL`, `DISARM`: controller lifecycle independent of transport connection.
-- Future `CATALOG_PAGE`, `LOAD_TRACK_ID`, and bounded `TRACK_METADATA`: enable stable song selection where the host adapter can support it.
+- Required for this build: paginated playlist/catalog reads, ordered playlist occurrence snapshots, `LOAD_TRACK_ID`, bounded `TRACK_METADATA`, and save-new-playlist operations. These need narrow host services exposed through MIDI where existing controls are insufficient.
 
 Before implementing the codec, freeze the wire layout: manufacturer/development identifier, protocol bytes, session/sequence widths, opcodes, payload lengths, numeric encoding, checksum, and error codes. Use 7-bit-safe packing inside SysEx, bounded frame sizes and reassembly deadlines. Strings need length-limited UTF-8 packing. Reject malformed or unknown commands; never evaluate received script text or accept arbitrary internal function names.
 
@@ -142,9 +144,9 @@ Build a deterministic DJ first. A transition is a state machine:
 
 `observe → select → prepare idle deck → confirm loaded identity → cue/sync → start → blend → confirm completion → release deck`
 
-Every step has a precondition, an observed success condition, a deadline, and a cancellation path. Track load invalidates the old deck generation and any queued actions aimed at it. The initial demo can use two preloaded tracks; autonomous selection waits for a stable identity/load solution.
+Every step has a precondition, an observed success condition, a deadline, and a cancellation path. Track load invalidates the old deck generation and any queued actions aimed at it. The initial MIDI proof can use two preloaded tracks; the delivered build requires native Mixxx playlist selection and stable identity/load confirmation for every scheduled entry.
 
-A later planner may choose tracks using tempo, musical key, energy, phrasing, and set history. These are inputs to a policy, not all data that MIDI automatically supplies. Prepared local analysis can supply missing musical features. Acoustic listening, waveform transfer, and stem analysis need separate audio/data paths if added; MIDI meters are not audio.
+The AI planner in this build arranges the playlist using tempo, musical key, energy, phrasing, confidence, human constraints and set history. These are inputs to a policy, not all data that MIDI automatically supplies. Prepared local analysis can supply missing musical features. Acoustic listening, waveform transfer, and stem analysis need separate audio/data paths if added; MIDI meters are not audio.
 
 The model returns structured musical intent, for example a target deck, track ID, transition type, length in beats, and bounded parameter curves. Validate that output against capabilities and limits. Never ask a language model to emit each time-critical CC or to run inside the audio callback.
 
@@ -160,10 +162,13 @@ Use monotonic deadlines and bounded queues; cancel expired actions rather than e
 
 ### Human control
 
-Automation starts disarmed. A local disarm action cancels future AI actions without stopping the playing deck. On feedback loss or model failure, preserve current playback and stop initiating new transitions.
+Automation starts disarmed. A local disarm action cancels future AI actions without stopping the playing deck. On essential feedback loss, disarm new performance output while preserving playback where possible. A late or failed planner may use a previously validated deterministic fallback only with fresh state, valid capabilities and current authority; otherwise stop initiating new transitions and show the reason.
 
-If observed values diverge from an owned automation curve, yield the affected controls and refresh state. Feedback alone cannot reliably identify the source of a change, so do not label every difference as a known human action. Provide an explicit operator takeover control; keep physical-controller soft takeover behavior intact. Resuming automation is deliberate and uses a fresh snapshot.
+The physical MIDI controller remains connected directly to Mixxx. In B2B, observed manual changes yield the affected AI control immediately; related transition steps are invalidated when needed. Bass adjustment, for example, suspends AI bass writes without stopping independent work. A configurable quiet period (initially 3 seconds) resets on each relevant gesture. Hold the affected item for the rest of the current transition, even after quiet expiry. At a later transition start, require release and quiet expiry, reconcile fresh state and replan from the user's current value; never snap back to an abandoned target. Honor explicit touch/release when available, and report value-only inference honestly. Preserve hardware soft takeover behavior.
 
+In B2B, a human-loaded replacement song becomes the new musical direction. Cancel actions for the previous track, confirm the new track identity and observed state, and adapt the affected transition and remaining set while preserving human control holds. Do not restore the old AI song choice or falsely complete its playlist occurrence. Record the replacement and keep the displaced occurrence available later unless the user explicitly skips it; preserve partial playback spans. Manual Pause/Stop creates a latched deck transport hold, unaffected by the quiet timer.
+
+The user can pin individual controls or press a global Disarm AI button. These explicit holds, transport loss and restart require deliberate resumption. Routine B2B gestures can return to AI only at a later transition start after release, debounce and reconciliation; a beat/bar boundary within the current transition is insufficient. In AI Only, ordinary manual changes trigger bounded recovery to the valid AI plan; they do not create B2B holds. Playlist Only permits planning/read operations and explicit playlist saves but emits no live performance commands. Mode changes invalidate queued work using a mode epoch and refresh state. Already-armed AI Only/B2B switches continue under the new mode without another resume action; explicit disarm remains latched. Selecting AI Only or B2B from Playlist Only is sufficient to begin after reconciliation, unless explicit disarm is latched. See [B2B ownership and acceptance scenarios](HUMAN-CONTROL.md).
 Use separate policies for active-deck loading, stopping the audible deck, master gain, and recording/broadcasting. Defaults should support a stable set: bounded gains, no surprise deck replacement, and recording/broadcast actions only when armed for them. Mixxx AutoDJ and this executor must not independently control the same transition.
 
 ## 6. UI visibility and feature completeness
@@ -181,27 +186,25 @@ See [feature coverage](CONTROL-COVERAGE.md). The complete inventory is a deliver
 | 0 — Planning | Fork, inspect source/docs, define boundaries and gaps. | These documents; no runtime claims. |
 | 1 — Local MIDI proof | TypeScript/Node.js sender/receiver, candidate RtMidi binding, JavaScript Mixxx mapping, two local ports, initial capability inventory, and timing measurements. | Play, volume, crossfader, cue, and sync affect Mixxx; feedback follows service and mouse actions; no echo loop; measured latency/jitter under idle and loaded conditions. |
 | 2 — Reliable executor | Sessions, snapshots, action/result tracking, track generations, cancellation, takeover. | No stuck cue on disconnect; rejected/unchanged actions reconcile correctly; stale state blocks loading; restart causes no replay. |
-| 3 — Deterministic DJ set | Two-deck transition policy and stable track selection/load adapter. | Repeated local transitions with recorded MIDI/state traces, visible controls, confirmed track identity, and reviewed audio. |
-| 4 — AI planning | Local model/runtime evaluation, track analysis, structured plan generation. | Invalid/late model output is rejected; model failure does not interrupt playback; musical quality judged on recorded sets. |
+| 3 — Playlist and deterministic set | Native Mixxx playlist import, occurrence identities, set persistence/editing and stable load adapter; deterministic transition templates. | Every playlist entry accounted for; repeated transitions with correct track IDs, visible controls and reviewed audio; native playlist and saved-set round trips. |
+| 4 — AI playlist performance | Local model/runtime evaluation, prepared analysis, AI order and transition choices, required desktop set-list UI and B2B handover. | Whole playlist performed; invalid/late output rejected; user edits/gestures respected; listener comparison against an AutoDJ baseline. |
 | 5 — Full Mixxx coverage | Complete audited feature inventory; extend missing operations and feedback. | Every inventoried feature has send/receive/UI evidence or an explicitly unresolved gap; no silent scope reduction. |
-| 6 — Optional Raspberry Pi branch | If justified after desktop validation, move the same controller to Linux ARM and substitute physical transport. This does not block desktop delivery. | Local parity suite plus cable removal, power/reboot recovery, CPU/thermal/memory and latency measurements. |
+| 6 — Desktop release | Local setup/launch, saved sets, human-controller coexistence and full-playlist endurance/quality review. | Reproducible desktop startup; full-playlist accounting, at least 30 minutes continuous audio, B2B scenarios, persisted state and release evidence. |
 
-Prototype acceptance targets, to be tuned from measurements: p95 command-to-observed-state under 100 ms for simple controls; visible update within 150 ms; takeover cancellation within 100 ms while connected; disarm within 1 second of lost heartbeat. These are proposed budgets, not measured performance or musical timing guarantees. Run a 30-minute two-deck local set with no additional audio-overload events attributable to the controller, plus manual listening for glitches and transitions.
+Proposed acceptance budgets are defined in [delegated defaults](DEFAULTS.md#r3-q17-what-responsiveness-targets-should-we-test-first): command send to host observation p95 ≤30 ms / p99 ≤75 ms; recognized human input to AI cancellation p95 ≤20 ms / p99 ≤50 ms; observed state to app display p95 ≤100 ms. Measure native Mixxx UI, scheduling error and audible onset separately. These are planning targets, not timing guarantees. F01/M19 must freeze the host-quantized beat-critical gate with clock uncertainty before claiming musical timing support. At least one uninterrupted 30-minute set and a full 6-hour endurance run use the persistent-job workflow. Verify all required playlist occurrences and distinguish 10-minute experience tests from endurance evidence.
 
 The first milestone must record the chosen Node version, MIDI binding, host version, routing, and machine configuration. Measure MIDI loopback round-trip latency separately from command-to-confirmed-host-state latency, UI updates, and audible timing. Capture p50/p95/p99, worst observed delay, missed deadlines, and deviation from scheduled dispatch intervals. Use one monotonic clock where possible; do not label round-trip measurements as one-way latency. Compare idle conditions with a controlled CPU/analysis workload in a separate process, then repeat with the selected model when available. Verify UI closure and a stalled planner do not stop the communicator. The initial timing spike determines whether the Node executor meets the prototype budgets or needs a narrowly scoped scheduler extension.
 
 Validation should include protocol parser tests, malformed/duplicate/out-of-order frames, control scaling boundaries, snapshot races, unavailable features, hotcue press/release, track load failure, human changes during curves, focus changes, and reconnect. Each UI gate needs a real Mixxx run. Logs should include monotonic timestamps and correlation IDs but avoid unnecessary local file paths and library metadata.
 
-## 8. Optional Raspberry Pi path
+The [worker catalog](WORKER-TASKS.md) decomposes these milestones; [traceability](TRACEABILITY.md) maps discovery decisions to implementation and evidence. [DEFAULTS.md](DEFAULTS.md) completes the remaining product choices under explicit user delegation.
 
-The desktop product does not require a Pi, external network host, or custom hardware purchase. Consider another computer only for a measured resource constraint or an explicit appliance requirement. Keep OS-specific MIDI port management behind the transport interface now. A physical MIDI device would not automatically increase a host's available commands or feedback.
+## 8. Desktop build boundary
 
-Later options are USB MIDI gadget mode on a validated board/port/kernel, or a conventional MIDI interface. Linux documents a bidirectional MIDI gadget function. Raspberry Pi documents OTG-capable ports, but its networking gadget setup is not automatically a MIDI configuration. Validate MIDI enumeration, routing, power, and reconnect on the actual target. See [hardware sources](RESEARCH.md#external-documentation).
-
-If this optional branch is pursued, a Pi running only the controller is the first portability target. A standalone enclosure running both Mixxx and the AI additionally needs audio-interface routing, display strategy, scheduling, storage, thermal, and inference benchmarks. Treat that as another system configuration. Do not assume the same Pi can handle local inference, stem processing, and low-latency audio simultaneously.
+Finish the Mixxx desktop product, including native playlist selection, AI order, set editing, reliable full-set performance and physical-controller B2B use. Neither another host nor external AI hardware is in this build. Keep the transport and host code separated for maintainability, without adding speculative adapters or Pi deployment tasks. Prior compatibility/hardware research is background only.
 
 ## 9. Decisions deferred until implementation
 
-Choose the precise stable-versus-alpha runtime baseline; compatible Node version and MIDI binding version after the timing spike; local AI model and inference runtime; track catalog/identity extension; and operator UI framework. TypeScript/Node.js for the communicator and JavaScript for the Mixxx mapping are accepted decisions. Preserve the separate controller, MIDI boundary, visible Mixxx behavior, and all-local initial setup in each remaining decision.
+Choose the precise stable-versus-alpha runtime baseline; compatible Node version and MIDI binding version after the timing spike; local AI model and inference runtime; narrow playlist/catalog/identity extension; and focused UI rendering/build libraries. The delivery form is a local Mac launcher plus persistent Node service and browser UI. These are implementation choices, not grounds to defer required playlist or UI features. TypeScript/Node.js for the communicator and JavaScript for the Mixxx mapping are accepted decisions. Preserve the separate controller, MIDI boundary, visible Mixxx behavior, and all-local initial setup in each remaining decision.
 
 > End of autonomously AI-generated planning document.
