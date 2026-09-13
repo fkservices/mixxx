@@ -52,14 +52,31 @@ the configure job downloaded the archive and confirmed the pinned SHA256.
 Extraction, CMake configuration and generation completed successfully.
 The native test/application build completed with four compiler jobs in the
 private build directory; no installed application was modified. The separate
-Mixxx.app bundle reports version 2.7.0 and has not been launched yet.
+custom bundle reports version 2.7.0 and now launches with an isolated profile.
 The machine has Apple command-line compiler tools, but no selected full Xcode.
 Any concrete configure/compiler failure must be recorded rather than treated as
 successful native verification.
 
 The [partial run record](../runs/R05-NATIVE-CLOCK.json) records the compiled helper
 fixture hashes and terminal configure/build/clock-test/regression results.
-No build or test process remains running. The next required step is an isolated
-custom-application mapping probe; the native-clock task remains in review.
+No build or test process remains running. The custom-application mapping clock
+probe remains pending; the native-clock task remains in review.
+
+## Native application launch
+
+The initial private bundle installation failed resolving a bundled dependency.
+Quoting the configured path lists in `BundleInstall.cmake.in` preserved paths
+containing spaces; the repeated install completed with exit code zero. The raw
+build bundle lacked installed resources. Startup samples were kept privately;
+these observations alone do not establish every startup failure cause.
+
+The staged application now runs as **AI DJ Mixxx**, with development bundle ID
+`com.fkservices.mixxxaidj.dev`, its own container/profile and unchanged official
+sandbox entitlements. The installed stock application was not modified.
+A real preferences screenshot records 48 kHz and a 21.3 ms buffer; the earlier
+stock fixture used 5.33 ms, so timing results must not be transferred between them.
+The diagnostic helper observed no feedback before being stopped. Native mapping
+clock invocation, production deadline behavior and resume invalidation remain
+unverified. Launch and settings screenshots do not prove those behaviors.
 
 > End of autonomously AI-generated implementation notes.
