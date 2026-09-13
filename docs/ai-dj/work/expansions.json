@@ -791,7 +791,8 @@
       "depends_on": [
         "R05-HOST-ENCODER",
         "R05-HOST-DECODER",
-        "M10"
+        "M10",
+        "R05-NATIVE-CLOCK"
       ],
       "owns": [
         "ai-dj/tools/build-mapping.ts",
@@ -866,6 +867,54 @@
         "Verify invalid data cannot invoke a setter, conventional controls remain intact, clock limitations are named and runtime handoff is explicit."
       ],
       "evidence": "docs/ai-dj/work/evidence/R05-ENDPOINT-NATIVE.md"
+    },
+    {
+      "parent": "R05",
+      "blocks": [
+        "R05"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "id": "R05-NATIVE-CLOCK",
+      "title": "Expose and verify a native monotonic script clock",
+      "depends_on": [
+        "R02"
+      ],
+      "owns": [
+        "src/controllers/scripting/controllermonotonicclock.h",
+        "src/controllers/scripting/legacy/controllerscriptinterfacelegacy.h",
+        "src/controllers/scripting/legacy/controllerscriptinterfacelegacy.cpp",
+        "src/test/controllerscriptenginelegacy_test.cpp",
+        "docs/ai-dj/work/integrations/native-clock.md"
+      ],
+      "locks": [
+        "native-clock-source"
+      ],
+      "status": "running",
+      "executor": "coordinator",
+      "source_revision": "2ef757e",
+      "started_at": "2026-09-13T21:45:51.364274+00:00",
+      "perform": [
+        "Expose a read-only process-relative steady-clock millisecond value to legacy scripts; no timer-count or wall-clock fallback.",
+        "Verify nondecreasing values, progression while script timers are idle, shared origin across script-interface reload and explicit process/clock-domain limitations."
+      ],
+      "validate": [
+        "Compile the actual C++ source and run script-engine invocation tests in a native build.",
+        "Record installed custom host hash and native API probe before using the clock for production deadlines; sleep/resume invalidation remains required."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/R05-NATIVE-CLOCK.md",
+      "checks": [
+        "Installed 2.5.6 performance global unavailable; inspected legacy interface has no clock getter. Native fork extension required before production clock acceptance."
+      ]
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

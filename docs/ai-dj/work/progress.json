@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T21:44:13.483268+00:00",
+  "updated_at": "2026-09-13T21:45:51.364274+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2452,6 +2452,20 @@
       "verified": false,
       "checks": [],
       "updated": null,
+      "dynamic": true
+    },
+    {
+      "id": "R05-NATIVE-CLOCK",
+      "title": "Expose and verify a native monotonic script clock",
+      "stage": "setup",
+      "status": "running",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [
+        "Installed 2.5.6 performance global unavailable; inspected legacy interface has no clock getter. Native fork extension required before production clock acceptance."
+      ],
+      "updated": "2026-09-13T21:45:51.364274+00:00",
       "dynamic": true
     }
   ],

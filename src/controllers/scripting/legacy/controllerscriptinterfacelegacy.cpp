@@ -6,6 +6,7 @@
 #include "control/controlobject.h"
 #include "control/controlobjectscript.h"
 #include "control/controlpotmeter.h"
+#include "controllers/scripting/controllermonotonicclock.h"
 #include "controllers/scripting/legacy/controllerscriptenginelegacy.h"
 #include "controllers/scripting/legacy/scriptconnectionjsproxy.h"
 #include "mixer/playermanager.h"
@@ -53,6 +54,12 @@ ControllerScriptInterfaceLegacy::ControllerScriptInterfaceLegacy(
         m_softStartActive[i] = false;
     }
 }
+
+// Autonomously AI-generated read-only bridge; no playback or authority side effect.
+double ControllerScriptInterfaceLegacy::getMonotonicTime() const {
+    return mixxx::ControllerMonotonicClock::nowMilliseconds();
+}
+// End of autonomously AI-generated read-only bridge.
 
 ControllerScriptInterfaceLegacy::~ControllerScriptInterfaceLegacy() {
     // Stop all timers

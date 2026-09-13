@@ -56,6 +56,9 @@ class ControllerScriptInterfaceLegacy : public QObject {
     virtual ~ControllerScriptInterfaceLegacy();
 
     Q_INVOKABLE QJSValue getSetting(const QString& name);
+    // Autonomously AI-generated AI DJ extension: process-relative steady milliseconds.
+    Q_INVOKABLE double getMonotonicTime() const;
+    // End of autonomously AI-generated AI DJ extension.
     Q_INVOKABLE QObject* getPlayer(const QString& group);
     Q_INVOKABLE double getValue(const QString& group, const QString& name);
     Q_INVOKABLE void setValue(const QString& group, const QString& name, double newValue);

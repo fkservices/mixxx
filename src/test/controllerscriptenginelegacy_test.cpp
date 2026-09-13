@@ -11,6 +11,7 @@
 #include <QThread>
 #include <QtDebug>
 #include <bit>
+#include <cmath>
 #include <memory>
 
 #include "control/controlobject.h"
@@ -232,6 +233,42 @@ class ControllerScriptEngineLegacyTimerTest : public ControllerScriptEngineLegac
         EXPECT_DOUBLE_EQ(0.0, m_pCo->get());
     }
 };
+// Autonomously AI-generated native clock invocation regression.
+TEST_F(ControllerScriptEngineLegacyTest, monotonicClockProgressesWithoutScriptTimers) {
+    const auto first = evaluate("engine.getMonotonicTime()");
+    ASSERT_FALSE(first.isError());
+    ASSERT_TRUE(first.isNumber());
+    ASSERT_TRUE(std::isfinite(first.toNumber()));
+    ASSERT_GE(first.toNumber(), 0.0);
+
+    // Block this thread: counting JS timer callbacks cannot satisfy this check.
+    QTest::qSleep(20);
+    const auto second = evaluate("engine.getMonotonicTime()");
+    ASSERT_FALSE(second.isError());
+    ASSERT_TRUE(second.isNumber());
+    EXPECT_GE(second.toNumber() - first.toNumber(), 10.0);
+    auto previous = second.toNumber();
+    for (int i = 0; i < 100; ++i) {
+        const auto sample = evaluate("engine.getMonotonicTime()");
+        ASSERT_FALSE(sample.isError());
+        ASSERT_TRUE(sample.isNumber());
+        ASSERT_TRUE(std::isfinite(sample.toNumber()));
+        EXPECT_GE(sample.toNumber(), previous);
+        previous = sample.toNumber();
+    }
+}
+
+TEST_F(ControllerScriptEngineLegacyTest, monotonicClockSharesOriginAcrossInterfaces) {
+    const auto before = evaluate("engine.getMonotonicTime()").toNumber();
+    QTest::qSleep(20);
+    // Replacing a mapping's interface must not reset the process clock origin.
+    ControllerScriptInterfaceLegacy replacement(this, logger);
+    const double replacementTime = replacement.getMonotonicTime();
+    EXPECT_GE(replacementTime - before, 10.0);
+    EXPECT_GE(evaluate("engine.getMonotonicTime()").toNumber(), replacementTime);
+}
+// End of autonomously AI-generated native clock invocation regression.
+
 TEST_F(ControllerScriptEngineLegacyTest, commonScriptHasNoErrors) {
     QFileInfo commonScript(config()->getResourcePath() +
             QStringLiteral("/controllers/common-controller-scripts.js"));
