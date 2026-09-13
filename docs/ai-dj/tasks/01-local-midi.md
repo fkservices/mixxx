@@ -121,9 +121,9 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F09, F03, F11. **Leases:** mapping-entry, mixxx-runtime. **Status:** planned.
+**Dependencies:** F09, F03, F11. **Leases:** mapping-entry, mixxx-runtime. **Status:** accepted.
 
-**Owns:** `res/controllers/AI-DJ.midi.xml`, `res/controllers/AI-DJ-scripts.js`, `ai-dj/test/host/harness.ts`
+**Owns:** `res/controllers/AI-DJ.midi.xml`, `res/controllers/AI-DJ-scripts.js`, `ai-dj/test/host/harness.ts`, `ai-dj/test/host/harness.test.ts`
 
 **Scope:** Initialization, shutdown and module loading only.
 

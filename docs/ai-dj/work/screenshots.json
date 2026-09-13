@@ -42,6 +42,13 @@
       "caption": "Actual Mixxx controller view after replacing the temporary ports with the TypeScript lifecycle adapter. The enabled diagnostic mapping returned the fixed MIDI reply. Performance controls and physical-controller handover still need implementation and testing.",
       "captured_at": "2026-09-13T19:55:56.696Z",
       "evidence": "work/evidence/M02.md"
+    },
+    {
+      "path": "work/screenshots/mixxx-mapping-bootstrap-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Actual Mixxx loaded the AI DJ bootstrap and XML command registration. Native initialization/reload succeeded; performance fragments are not installed yet.",
+      "captured_at": "2026-09-13T20:14:38.954Z",
+      "evidence": "work/evidence/M05.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

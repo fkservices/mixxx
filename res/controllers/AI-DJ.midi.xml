@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Autonomously AI-generated fixed MIDI mapping registration. -->
+<MixxxControllerPreset mixxxVersion="2.5.6" schemaVersion="1">
+  <info><name>AI DJ</name><author>AI DJ project</author><description>Local AI DJ conventional mapping. Bootstrap only until control fragments are assembled.</description></info>
+  <controller id="AI DJ">
+    <scriptfiles><file functionprefix="AIDJ" filename="AI-DJ-scripts.js"/></scriptfiles>
+    <controls>
+      <control><group>[Channel1]</group><key>AIDJ.input</key><description>deck-1.play</description><status>0xB0</status><midino>0x20</midino><options><script-binding/></options></control>
+      <control><group>[Channel1]</group><key>AIDJ.input</key><description>deck-1.volume</description><status>0xB0</status><midino>0x21</midino><options><script-binding/></options></control>
+      <control><group>[Channel1]</group><key>AIDJ.input</key><description>deck-1.cue</description><status>0x90</status><midino>0x23</midino><options><script-binding/></options></control>
+      <control><group>[Channel1]</group><key>AIDJ.input</key><description>deck-1.cue</description><status>0x80</status><midino>0x23</midino><options><script-binding/></options></control>
+      <control><group>[Channel1]</group><key>AIDJ.input</key><description>deck-1.sync</description><status>0xB0</status><midino>0x22</midino><options><script-binding/></options></control>
+      <control><group>[Channel2]</group><key>AIDJ.input</key><description>deck-2.play</description><status>0xB1</status><midino>0x20</midino><options><script-binding/></options></control>
+      <control><group>[Channel2]</group><key>AIDJ.input</key><description>deck-2.volume</description><status>0xB1</status><midino>0x21</midino><options><script-binding/></options></control>
+      <control><group>[Channel2]</group><key>AIDJ.input</key><description>deck-2.cue</description><status>0x91</status><midino>0x23</midino><options><script-binding/></options></control>
+      <control><group>[Channel2]</group><key>AIDJ.input</key><description>deck-2.cue</description><status>0x81</status><midino>0x23</midino><options><script-binding/></options></control>
+      <control><group>[Channel2]</group><key>AIDJ.input</key><description>deck-2.sync</description><status>0xB1</status><midino>0x22</midino><options><script-binding/></options></control>
+      <control><group>[Master]</group><key>AIDJ.input</key><description>mixer.crossfader</description><status>0xB2</status><midino>0x24</midino><options><script-binding/></options></control>
+    </controls>
+    <outputs/>
+  </controller>
+</MixxxControllerPreset>

@@ -799,7 +799,8 @@
       "owns": [
         "res/controllers/AI-DJ.midi.xml",
         "res/controllers/AI-DJ-scripts.js",
-        "ai-dj/test/host/harness.ts"
+        "ai-dj/test/host/harness.ts",
+        "ai-dj/test/host/harness.test.ts"
       ],
       "locks": [
         "mapping-entry",

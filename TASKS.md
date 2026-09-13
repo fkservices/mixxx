@@ -4,7 +4,7 @@
 
 **Current work: implementation authorized and started.** The active goal is “perform tasks.md as proposed.” [GOALS.md](GOALS.md) remains authoritative. The reference catalog has 171 cards and 17 expansion templates. [Execution state and acceptance evidence](docs/ai-dj/work/state.json) are authoritative; a card's presence is not completion.
 
-**Now: sixteen reference tasks and seven expansion tasks accepted.** Foundation and M01–M04 are accepted. The package passes 64 tests. Conventional command encoding now covers the fixed wire map, validates semantic requests and preserves cue/sync host-guard requirements. Next is M05 mapping initialization, followed by the control fragments and real Mixxx checks. Production host guards, executor modes, UI, audio, endurance and listening gates remain open.
+**Now: seventeen reference tasks and seven expansion tasks accepted.** Foundation and M01–M05 are accepted. The package passes 68 tests. Mixxx loaded the new mapping bootstrap, with a real native screenshot in the journal. Fixed fragment ordering and cleanup are tested; no performance fragments are installed yet. Next are M06–M09 control/feedback fragments and M10 assembly, followed by real performance tests. The remaining delivery gates stay open.
 
 [Visual progress page](docs/ai-dj/progress.html) stays synchronized with the ledger. Add real screenshots and their evidence context as UI/runtime checks produce them.
 

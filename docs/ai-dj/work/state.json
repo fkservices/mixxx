@@ -412,6 +412,20 @@
         "64 integrated tests, strict typecheck and build passed.",
         "Valid cue and sync actions return host-guard requirements, never command packets; no runtime send or timing proof claimed."
       ]
+    },
+    "M05": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "e29804e",
+      "started_at": "2026-09-13T20:12:36.498499+00:00",
+      "checks": [
+        "All 11 XML command routes match the frozen profile; fixed lifecycle/fragment assembly contract reviewed.",
+        "68 tests, typecheck and build passed; init/reinit/failure/cleanup tested with independent resource counts.",
+        "Actual isolated Mixxx loaded and reloaded final bootstrap; native screenshot saved. No performance fragments or audio proof."
+      ],
+      "accepted_at": "2026-09-13T20:15:22.635689+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M05.md",
+      "evidence_sha256": "35d4e51ae1f8a32ae30e621376edaf12073ab6ac7ee21a3b23e4a55d9496ed9b"
     }
   },
   "jobs": {
@@ -463,7 +477,7 @@
       "record": "~/Library/Application Support/Mixxx-AI-DJ/jobs/m02-runtime/job.json",
       "ports_pid": 73352,
       "mixxx_pid": 73988,
-      "scope": "Production virtual-port adapter with private fixed diagnostic keeper and isolated Mixxx profile; no performance commands",
+      "scope": "Production virtual ports and isolated Mixxx with M05 AI DJ bootstrap enabled; diagnostic probe mapping superseded, no performance fragments",
       "expected_end": "Explicit verified handoff/stop or two-hour keeper lifetime from 2026-09-13T19:53:57Z; no auto-relaunch",
       "checks": [
         "Independent enumeration sees one AI DJ endpoint per direction.",
