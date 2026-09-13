@@ -38,11 +38,17 @@ for item in gallery:
     path = Path(item['path'])
     assert not path.is_absolute() and '..' not in path.parts and (docs/path).is_file()
     assert item.get('caption') and item.get('captured_at') and item.get('evidence')
+transport_path = docs/'work/runs/R05-REPLY-LIFECYCLE.json'
+transport_checks = json.loads(transport_path.read_text())['scenarios'] if transport_path.exists() else []
+transport_summary = [dict(scenario=s['scenario'], status=s['status'],
+                          frames=s['partialReplyFrames'],
+                          fresh_reply=bool(s['receivedSequences']),
+                          stopped=s['noFramesAfterStop']) for s in transport_checks]
 updated = max((t['updated'] for t in rows+children if t['updated']), default=None)
 payload = dict(schema_version=1, goal=ledger['authorization'], goal_status=ledger['goal_status'],
                updated_at=updated, tasks=rows, children=children, milestones=milestones,
                controller=ledger['external_requirements']['physical_controller'],
-               music=ledger['external_requirements']['musical_fixtures'], screenshots=gallery)
+               music=ledger['external_requirements']['musical_fixtures'], screenshots=gallery, transport_checks=transport_summary)
 data = json.dumps(payload, ensure_ascii=False, indent=2)
 template = (docs/'progress.template.html').read_text()
 html = template.replace('__PROGRESS_DATA__', data.replace('<', '\\u003c'))

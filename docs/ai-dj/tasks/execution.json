@@ -252,16 +252,18 @@
     "M13-CUE-NATIVE": "planned",
     "R05-HOST-ENCODER": "accepted",
     "R05-HOST-DECODER": "accepted",
-    "R05-ENDPOINT-INTEGRATE": "in_review",
+    "R05-ENDPOINT-INTEGRATE": "accepted",
     "R05-ENDPOINT-NATIVE": "planned",
     "R05-NATIVE-CLOCK": "accepted",
     "R12-SUSPEND-RESUME": "planned",
     "R05-NATIVE-INPUT-LOSS": "accepted",
-    "R05-FRAGMENT-SENDER": "in_review",
-    "R05-HOST-FRAGMENT-SENDER": "in_review",
-    "R05-NATIVE-SEND-TIMER": "in_review"
+    "R05-FRAGMENT-SENDER": "accepted",
+    "R05-HOST-FRAGMENT-SENDER": "accepted",
+    "R05-NATIVE-SEND-TIMER": "accepted"
   },
-  "dynamic_dependency_frontier": [],
+  "dynamic_dependency_frontier": [
+    "R05-ENDPOINT-NATIVE"
+  ],
   "global_requirements": [
     "User instruction to start implementation",
     "Current integrated revision and scoped context",

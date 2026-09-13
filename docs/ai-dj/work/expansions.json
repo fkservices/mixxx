@@ -792,7 +792,8 @@
         "R05-HOST-ENCODER",
         "R05-HOST-DECODER",
         "M10",
-        "R05-NATIVE-CLOCK"
+        "R05-NATIVE-CLOCK",
+        "R05-HOST-FRAGMENT-SENDER"
       ],
       "owns": [
         "ai-dj/tools/build-mapping.ts",
@@ -811,7 +812,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "in_review",
+      "status": "accepted",
       "perform": [
         "Verify installed-version native SysEx entry hook, data shape and usable clock source before wiring the endpoint factory.",
         "Integrate codec and wrapper sources reproducibly, preserve conventional MIDI routing, lifecycle and default diagnostic/authority restrictions."
@@ -822,15 +823,15 @@
       ],
       "evidence": "docs/ai-dj/work/evidence/R05-ENDPOINT-INTEGRATE.md",
       "executor": "coordinator",
-      "source_revision": "7149cf9",
+      "source_revision": "ddd1dd3",
       "started_at": "2026-09-13T21:44:13.483268+00:00",
       "checks": [
-        "Eight-fragment mapping queues native replies; cancellation/reset/input-loss/shutdown stop pending frames and stale callbacks.",
-        "176 tests, typecheck and build passed; native maximum queued reply proof pending.",
-        "Native JSON/checksum, idle expiry and four-slot capacity/recovery passed; reset/lifecycle evidence remains.",
-        "Native maximum queued reply passed with opt-in timer and explicit admission deadline; default deadline limitation and native lifecycle replay remain documented."
+        "Eight-fragment mapping accepted with explicit configuration, conventional routing and lifecycle checks.",
+        "Native sender/clock/loss evidence verified; consolidated R05-ENDPOINT-NATIVE and production service gates remain."
       ],
-      "updated_at": "2026-09-13T22:48:14.261988+00:00"
+      "updated_at": "2026-09-13T22:55:25.714068+00:00",
+      "accepted_at": "2026-09-13T22:55:25.714068+00:00",
+      "evidence_sha256": "823acef671f46d3e48f6940fd2e6c1d1401a63defba4fa15d1ea3f2824041991"
     },
     {
       "id": "R05-ENDPOINT-NATIVE",
@@ -1048,7 +1049,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "in_review",
+      "status": "accepted",
       "perform": [
         "Bound queued bytes and frames, serialize the sole sender, and budget fragment bursts against the verified transport receive capacity. Keep expiry and cancellation ahead of bulk traffic.",
         "Retire pending sends on transport/session loss; do not automatically retry uncertain delivery. Integrate with later R10 scheduling without duplicate port owners."
@@ -1059,13 +1060,15 @@
       ],
       "evidence": "docs/ai-dj/work/evidence/R05-FRAGMENT-SENDER.md",
       "executor": "coordinator",
-      "source_revision": "fc8a0aa",
+      "source_revision": "ddd1dd3",
       "started_at": "2026-09-13T22:33:52.657465+00:00",
       "checks": [
-        "Native 7-frame and 128-frame transfers reconstructed exact payloads; all 135 sent frames matched host receive logs with no overflow.",
-        "Native mid-transfer cancellation passed with exact frame correlation and fresh-message recovery; host outbound pacing remains required."
+        "Bounded Node sender accepted: native maximum request and cancellation/fresh-message recovery verified.",
+        "Six focused sender tests plus full 178-test suite pass; future R10 retains sole port ownership."
       ],
-      "updated_at": "2026-09-13T22:36:18.941604+00:00"
+      "updated_at": "2026-09-13T22:55:25.714068+00:00",
+      "accepted_at": "2026-09-13T22:55:25.714068+00:00",
+      "evidence_sha256": "f2badf4d77a2d30e254c8f678867f38b2f53616238aa2a50a678caab619b27a0"
     },
     {
       "id": "R05-HOST-FRAGMENT-SENDER",
@@ -1097,7 +1100,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "in_review",
+      "status": "accepted",
       "perform": [
         "Create a bounded native-clock scheduler for host replies using engine timers; cap queued bytes/results and avoid synchronous maximum-message bursts.",
         "Integrate through the mapping owner so shutdown, input loss and cancellation retire pending replies; distinguish queue acceptance, send return and observed delivery."
@@ -1108,13 +1111,15 @@
       ],
       "evidence": "docs/ai-dj/work/evidence/R05-HOST-FRAGMENT-SENDER.md",
       "executor": "coordinator",
-      "source_revision": "4baf1f6",
+      "source_revision": "ddd1dd3",
       "started_at": "2026-09-13T22:37:54.767314+00:00",
       "checks": [
-        "Native full replies passed with explicit 5,000 ms admission deadline: 135 exact frames each direction, maximum reply span 808.31 ms, no overflow.",
-        "Default 900 ms admission deadline still expires at maximum payload; native cancellation/fault/shutdown replay pending. 177 software tests pass."
+        "Native maximum reply and all four lifecycle probes passed: cancel 6 frames, reset 3, overflow 4, shutdown 6.",
+        "178 software tests pass; cleanup failure now latches. Explicit maximum-reply deadline limitation remains."
       ],
-      "updated_at": "2026-09-13T22:48:14.261988+00:00"
+      "updated_at": "2026-09-13T22:55:25.714068+00:00",
+      "accepted_at": "2026-09-13T22:55:25.714068+00:00",
+      "evidence_sha256": "d34ca97a584cb086146b41e20097382a8dd42c46e4f7a2e5464436370bb25dae"
     },
     {
       "id": "R05-NATIVE-SEND-TIMER",
@@ -1144,7 +1149,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "in_review",
+      "status": "accepted",
       "perform": [
         "Provide opt-in fixed five-millisecond precise one-shot timer for bounded MIDI send scheduling; keep legacy timer semantics unchanged.",
         "Use existing native timer cancellation/destruction lifecycle. Host sender must fail closed when the extension is absent; do not silently use clamped timers or weaken receiver expiry."
@@ -1155,13 +1160,15 @@
       ],
       "evidence": "docs/ai-dj/work/evidence/R05-NATIVE-SEND-TIMER.md",
       "executor": "coordinator",
-      "source_revision": "6a40312",
+      "source_revision": "ddd1dd3",
       "started_at": "2026-09-13T22:44:10.940153+00:00",
       "checks": [
-        "Native build/install passed; both new API tests passed. Fixed opaque timer-ID fixture; all ten native timer tests now pass.",
-        "177 software tests and typecheck/build pass. Native full 65,536-byte reply arrived in 808.31 ms with explicit admission deadline; receiver bounds unchanged."
+        "Native five-ms one-shot API and all ten corrected timer tests passed; exact maximum reply verified.",
+        "Caller admission budget must cover encoding/queue residence; no hard realtime or musical claim."
       ],
-      "updated_at": "2026-09-13T22:48:14.261988+00:00"
+      "updated_at": "2026-09-13T22:55:25.714068+00:00",
+      "accepted_at": "2026-09-13T22:55:25.714068+00:00",
+      "evidence_sha256": "9d6cebfb14a087115c46214c779a8bf0d62299e0245e18f88c18ce5998fc22c9"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

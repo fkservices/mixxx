@@ -1,6 +1,6 @@
 # Bounded MIDI fragment sender
 
-> Autonomously AI-generated implementation notes; native acceptance pending.
+> Autonomously AI-generated implementation history; bounded scope accepted in the task ledger.
 
 The TypeScript sender owns a bounded FIFO of at most four messages and 330,000
 encoded bytes. Admission reserves one of 32 bounded result slots, so an unread
@@ -61,5 +61,10 @@ was restored. Exact partial-send counts and hashes are in the run record.
 R05-HOST-FRAGMENT-SENDER now explicitly tracks the remaining native reply path,
 including bounded queues, native timers, cancellation and maximum-payload proof.
 That required work blocks R05; client-side pacing cannot stand in for it.
+
+Current bounded-scope acceptance is recorded in the task ledger and evidence
+report. Subsequent native lifecycle probes passed for cancellation, reset,
+overflow and mapping shutdown; see [lifecycle record](../runs/R05-REPLY-LIFECYCLE.json).
+Full session recovery, loaded timing and musical release gates remain required.
 
 > End of autonomously AI-generated implementation notes.

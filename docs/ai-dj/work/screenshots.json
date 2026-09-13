@@ -84,6 +84,13 @@
       "caption": "Actual custom Mixxx 2.7 development build running with its separate profile: 48 kHz and 21.3 ms buffer. Native script tests passed; application mapping clock probe and latency acceptance remain pending.",
       "captured_at": "2026-09-13T22:15:08.209917+00:00",
       "evidence": "work/integrations/native-clock.md"
+    },
+    {
+      "path": "work/screenshots/progress-reply-lifecycle-2026-09-13.png",
+      "kind": "progress_page",
+      "caption": "Actual browser view of the native reply lifecycle results: cancellation, MIDI reset, real input overflow and mapping shutdown stopped queued replies. The chart summarizes measured diagnostic packets; it is not a musical or physical-controller performance test.",
+      "captured_at": "2026-09-13T22:57:01.354251+00:00",
+      "evidence": "work/runs/R05-REPLY-LIFECYCLE.json"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

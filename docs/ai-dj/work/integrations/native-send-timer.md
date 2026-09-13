@@ -1,6 +1,6 @@
 # Native MIDI send timer
 
-> Autonomously AI-generated implementation notes; native validation completed, acceptance review pending.
+> Autonomously AI-generated implementation history; bounded scope accepted in the task ledger.
 
 The maximum queued native reply failed in the staged app at revision 6a40312.
 Only 37 of 128 reply frames were sent before expiry; the smaller seven-frame
@@ -34,5 +34,10 @@ costs explicitly. This is one diagnostic run, not a throughput or latency SLA.
 See [native timer record](../runs/R05-NATIVE-SEND-TIMER.json) and
 [reply run history](../runs/R05-HOST-FRAGMENT-SENDER.json). Native mid-reply
 cancellation and fault lifecycle replay remain with the host sender task.
+
+Current bounded-scope acceptance is recorded in the task ledger and evidence
+report. Subsequent native lifecycle probes passed for cancellation, reset,
+overflow and mapping shutdown; see [lifecycle record](../runs/R05-REPLY-LIFECYCLE.json).
+Full session recovery, loaded timing and musical release gates remain required.
 
 > End of autonomously AI-generated implementation notes.

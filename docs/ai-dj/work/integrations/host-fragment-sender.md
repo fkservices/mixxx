@@ -1,6 +1,6 @@
 # Bounded native reply scheduler
 
-> Autonomously AI-generated implementation notes; integration and native proof pending.
+> Autonomously AI-generated implementation history; bounded scope accepted in the task ledger.
 
 The host scheduler is generated deterministically from the bounded Node sender.
 The adapter removes Node imports, uses the host wire encoder, translates timeout
@@ -49,5 +49,17 @@ timer expired at 124/128 frames; queue deadlines must budget encoding costs.
 [Native run history](../runs/R05-HOST-FRAGMENT-SENDER.json) preserves all three
 outcomes. Native cancellation/fault/shutdown during a queued reply still needs
 verification before this task is accepted.
+
+Native cancellation now stopped a reply after six frames and accepted a fresh
+message afterward. A native MIDI reset stopped a reply after three frames and
+kept the endpoint closed to subsequent input. Overflow and shutdown probes are
+in progress. A new assembly regression also exposed missed timer-cleanup
+failure propagation; shutdown now latches a sender cleanup fault even when an
+input-loss fault was already recorded. All 178 software tests pass.
+
+Current bounded-scope acceptance is recorded in the task ledger and evidence
+report. Subsequent native lifecycle probes passed for cancellation, reset,
+overflow and mapping shutdown; see [lifecycle record](../runs/R05-REPLY-LIFECYCLE.json).
+Full session recovery, loaded timing and musical release gates remain required.
 
 > End of autonomously AI-generated implementation notes.

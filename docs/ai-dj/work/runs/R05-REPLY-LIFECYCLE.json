@@ -1,0 +1,241 @@
+{
+  "generation": "Autonomously AI-generated native reply lifecycle record.",
+  "task": "R05-HOST-FRAGMENT-SENDER",
+  "status": "passed-bounded-lifecycle",
+  "recordedAt": "2026-09-13T22:54:48.885544+00:00",
+  "nativeMappingRevision": "5a3df71 for cancellation/reset/overflow; ddd1dd3 for shutdown receipt replay",
+  "nativeApplication": "Private midi-send-timer-stage AI DJ Mixxx.app",
+  "scenarios": [
+    {
+      "scenario": "cancel",
+      "status": "passed",
+      "partialReplyFrames": 6,
+      "receivedSequences": [
+        81
+      ],
+      "exactExpectedFrameMatches": 7,
+      "exactNativeLogMatches": 7,
+      "noFramesAfterStop": true,
+      "stopEvidence": "Native action/fault log boundary matched against exact output frames",
+      "markers": [],
+      "finalState": {
+        "results": [],
+        "status": {
+          "enabled": true,
+          "clock": {
+            "kind": "monotonic",
+            "id": "reply-lifecycle"
+          },
+          "clockProvenance": "caller-supplied-unverified",
+          "endpoint": {
+            "closed": false,
+            "fault": null,
+            "generation": 1,
+            "parser": {
+              "generation": 1,
+              "closed": false,
+              "failed": false,
+              "partialBytes": 0,
+              "incompleteMessages": 0,
+              "retainedPayloadBytes": 0,
+              "pendingDiagnostics": 0,
+              "droppedDiagnostics": 0
+            },
+            "sender": {
+              "closed": false,
+              "fault": null,
+              "generation": 1,
+              "queued": 0,
+              "retainedBytes": 0,
+              "pendingResults": 0
+            }
+          }
+        }
+      },
+      "helperExitCode": 0,
+      "evidenceHashes": {
+        "cancel.jsonl": "48c77f76e2a5107f44d37fc0104e74ab73ca416fd6fa953ba7ffb65ef3479d87",
+        "cancel-host.log": "965d91c1aabde88b25e49f902c294ab80ce09bac13d98ed2a7fe02784d7920cb"
+      }
+    },
+    {
+      "scenario": "reset",
+      "status": "passed",
+      "partialReplyFrames": 3,
+      "receivedSequences": [],
+      "exactExpectedFrameMatches": 3,
+      "exactNativeLogMatches": 3,
+      "noFramesAfterStop": true,
+      "stopEvidence": "Native action/fault log boundary matched against exact output frames",
+      "markers": [],
+      "finalState": {
+        "results": [
+          {
+            "id": "reply:1",
+            "reason": "closed",
+            "attempted": 3,
+            "sent": 3,
+            "delivery": "unconfirmed"
+          }
+        ],
+        "status": {
+          "enabled": false,
+          "clock": {
+            "kind": "monotonic",
+            "id": "reply-lifecycle"
+          },
+          "clockProvenance": "caller-supplied-unverified",
+          "endpoint": {
+            "closed": true,
+            "fault": "parser-failed",
+            "generation": 1,
+            "parser": {
+              "generation": 1,
+              "closed": true,
+              "failed": true,
+              "partialBytes": 0,
+              "incompleteMessages": 0,
+              "retainedPayloadBytes": 0,
+              "pendingDiagnostics": 0,
+              "droppedDiagnostics": 0
+            },
+            "sender": {
+              "closed": true,
+              "fault": null,
+              "generation": 1,
+              "queued": 0,
+              "retainedBytes": 0,
+              "pendingResults": 0
+            }
+          }
+        }
+      },
+      "helperExitCode": 0,
+      "evidenceHashes": {
+        "reset.jsonl": "efeed33c9b56475a121df8156777d54921d893b05fd8ede4d1eff25405868a07",
+        "reset-host.log": "39d3bd79344ad557aebb8da5bc4431e8ffb51b05d259e07273c733b142eba6a6"
+      }
+    },
+    {
+      "scenario": "loss",
+      "status": "passed",
+      "partialReplyFrames": 4,
+      "receivedSequences": [],
+      "exactExpectedFrameMatches": 4,
+      "exactNativeLogMatches": 4,
+      "noFramesAfterStop": true,
+      "stopEvidence": "Native action/fault log boundary matched against exact output frames",
+      "markers": [],
+      "finalState": {
+        "results": [
+          {
+            "id": "reply:1",
+            "reason": "closed",
+            "attempted": 4,
+            "sent": 4,
+            "delivery": "unconfirmed"
+          }
+        ],
+        "status": {
+          "enabled": false,
+          "clock": {
+            "kind": "monotonic",
+            "id": "reply-lifecycle"
+          },
+          "clockProvenance": "caller-supplied-unverified",
+          "endpoint": {
+            "closed": true,
+            "fault": "native-input-loss",
+            "generation": 1,
+            "parser": {
+              "generation": 1,
+              "closed": true,
+              "failed": false,
+              "partialBytes": 0,
+              "incompleteMessages": 0,
+              "retainedPayloadBytes": 0,
+              "pendingDiagnostics": 0,
+              "droppedDiagnostics": 0
+            },
+            "sender": {
+              "closed": true,
+              "fault": null,
+              "generation": 1,
+              "queued": 0,
+              "retainedBytes": 0,
+              "pendingResults": 0
+            }
+          }
+        }
+      },
+      "helperExitCode": 0,
+      "evidenceHashes": {
+        "loss.jsonl": "b9417d40190094ada7c26af7b2f1a864f72eb10360b4d9b81e5d83e4c8b182b7",
+        "loss-host.log": "cd25e8a9b91b626f943848da5c9a40f84a696356231c74f84235772b9ebebf35"
+      }
+    },
+    {
+      "scenario": "shutdown",
+      "status": "passed",
+      "partialReplyFrames": 6,
+      "receivedSequences": [],
+      "exactExpectedFrameMatches": 6,
+      "exactNativeLogMatches": null,
+      "noFramesAfterStop": true,
+      "stopEvidence": "Separate diagnostic short-MIDI receipt of shutdown return, then disabled status one second later",
+      "markers": [
+        [
+          190,
+          126,
+          1
+        ],
+        [
+          190,
+          125,
+          0
+        ]
+      ],
+      "finalState": null,
+      "helperExitCode": 0,
+      "evidenceHashes": {
+        "shutdown.jsonl": "bfc49cb447742f57cfe31da5dd8fc999a4a6331a01d606e3f71f4b4d052934e6",
+        "shutdown-host.log": "93468f26418aa946cd37806e8f96133c54d8745a4cc46902ff4e333a5db34d54"
+      }
+    }
+  ],
+  "allHelpersExited": true,
+  "nativeAppStopped": true,
+  "diagnosticBootstrapRemoved": true,
+  "evidenceHashes": {
+    "runner.mjs": "45da500aa71045a0ac16d16cdd74231e18f9f751d8200ed9639cfa28871ccaeb",
+    "probe.js": "57317616c18f9682528c877e63a6e810de0b55249883be65e620f93066bf06bb",
+    "active-mapping.js": "53771b6f0da95eda40c6f11feedebfe16c0376864aeae1be845379a7824a0656",
+    "shutdown-runner.mjs": "540ad85ea988c1c76a57d62cd68ba5366cccb208ad52192f319c1ffc18889b68",
+    "shutdown-probe.js": "00b93a18ea958ab17fe9bf5c572f997ae780d23805c5a0a300f27104cd3de815",
+    "shutdown-active-mapping.js": "7a3ca6969c7e88a61ec18d10b85fbd56fd30689cf8dacd6b07154b45cbcfbd60",
+    "verify.mjs": "4fabd6fc7a3a50efd039e32d8b6f73891f31e53da62753e61464a8536d0ae69c",
+    "verification.json": "8f3edb177e4a44ff25f35834e777c5108d923c382fc21f152dc95e2542d69bd4",
+    "shutdown-unflushed.jsonl": "a4bed66248d70ed797cd7e3ad51228813dac628171069c4507d40e016e5ce904",
+    "shutdown-unflushed-host.log": "02a9f1897a84cfdf7321f71ff7b21f7f5d529cb7a62d74c7693ae754e62c88af"
+  },
+  "limits": [
+    "One run per scenario; diagnostic traffic only. No timing percentile, physical controller or musical acceptance.",
+    "Shutdown invokes production AIDJ.shutdown from a private native timer callback; it does not simulate an application crash or OS suspend.",
+    "Initial shutdown log was not fully flushed; replay uses separate diagnostic short-MIDI receipts. Complete reply frame contents are checked against expected encoding; full native outgoing log correlation is available for the other three cases.",
+    "Shutdown discards the endpoint reference; durable reconciliation of unfinished work belongs to the later session/outcome layer."
+  ],
+  "generation_end": "End of autonomously AI-generated record.",
+  "cleanupLatchFix": {
+    "revision": "ddd1dd3",
+    "regressionFailedBeforeFix": true,
+    "regressionPassedAfterFix": true,
+    "softwareTestsPassed": 178,
+    "typecheck": "passed",
+    "build": "passed",
+    "evidenceHashes": {
+      "cleanup-before.log": "65f0868000bd8ee4f17e77d064026585adc5099265bdc5c320fd9b85bea90747",
+      "cleanup-after.log": "965bd24c9e8b4ea6fa058f6fffa34858e98da6fd590f6efb918308ecb48d0cdc",
+      "software-tests.log": "0d14a326e819aa72dec02a0d222ce9e20389e3b3e8fd5086c60e789182f81197"
+    }
+  }
+}

@@ -16,6 +16,7 @@
 <div class="stats" id="stats" aria-label="Progress totals"></div>
 <section><h2>The path to a complete set</h2><div id="milestones" class="milestones"></div><p class="muted" style="font-size:12px">Task counts show accepted work, not a percentage of product readiness or an estimate of time remaining. New feature and correction tasks can expand the plan.</p></section>
 <section class="two"><div class="panel"><h2>On the desk now</h2><div id="active"></div></div><div class="panel"><h2>The test booth</h2><div id="booth"></div><div class="notice">A passed software check does not prove audible timing, controller coexistence or an enjoyable mix. Those gates stay open until observed.</div></div></section>
+<section class="panel" id="transport-panel" hidden><h2>When the reply must stop</h2><p class="muted">Native Mixxx tests interrupt a 128-frame diagnostic reply. The small filled bars show frames sent before the stop; the rest were discarded.</p><div class="table-wrap"><table><thead><tr><th scope="col">Intervention</th><th scope="col">Frames sent before stop</th><th scope="col">Fresh message afterward</th><th scope="col">Queued output stopped</th></tr></thead><tbody id="transport-checks"></tbody></table></div><p class="muted" style="font-size:12px;margin-top:14px">One run per case. Shutdown invokes the mapping lifecycle in the native app; physical disconnect, crash recovery and musical timing remain separate. <a href="work/runs/R05-REPLY-LIFECYCLE.json">Read measured evidence ↗</a></p></section>
 <section><div class="work-heading"><h2>Evidence, as it happens</h2><span id="gallery-count" class="pill"></span></div><div id="gallery" class="gallery"></div></section>
 <section class="panel"><h2>Recently accepted</h2><div id="recent"></div></section>
 <section><h2>Every task, in view</h2><div class="controls"><label class="visually-hidden" for="search">Search tasks</label><input id="search" type="search" placeholder="Find MIDI, playlists, B2B, history…"><label class="visually-hidden" for="filter">Task status</label><select id="filter"><option value="all">All statuses</option><option value="running">In progress</option><option value="accepted">Accepted</option><option value="planned">Planned</option><option value="waiting">Waiting</option></select><label class="visually-hidden" for="scope">Task scope</label><select id="scope"><option value="all">All work</option><option value="static">Reference cards</option><option value="dynamic">Added tasks</option></select></div><div class="table-wrap"><table><thead><tr><th scope="col">ID</th><th scope="col">Work</th><th scope="col">Status</th><th scope="col">Evidence</th></tr></thead><tbody id="tasks"></tbody></table></div><p id="table-count" class="table-count" aria-live="polite"></p></section>
@@ -25,7 +26,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T22:48:14.261988+00:00",
+  "updated_at": "2026-09-13T22:55:25.714068+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2461,17 +2462,15 @@
       "id": "R05-ENDPOINT-INTEGRATE",
       "title": "Integrate extended endpoint into reproducible mapping",
       "stage": "setup",
-      "status": "in_review",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
+      "evidence": "work/evidence/R05-ENDPOINT-INTEGRATE.md",
+      "verified": true,
       "checks": [
-        "Eight-fragment mapping queues native replies; cancellation/reset/input-loss/shutdown stop pending frames and stale callbacks.",
-        "176 tests, typecheck and build passed; native maximum queued reply proof pending.",
-        "Native JSON/checksum, idle expiry and four-slot capacity/recovery passed; reset/lifecycle evidence remains.",
-        "Native maximum queued reply passed with opt-in timer and explicit admission deadline; default deadline limitation and native lifecycle replay remain documented."
+        "Eight-fragment mapping accepted with explicit configuration, conventional routing and lifecycle checks.",
+        "Native sender/clock/loss evidence verified; consolidated R05-ENDPOINT-NATIVE and production service gates remain."
       ],
-      "updated": "2026-09-13T22:48:14.261988+00:00",
+      "updated": "2026-09-13T22:55:25.714068+00:00",
       "dynamic": true
     },
     {
@@ -2534,45 +2533,45 @@
       "id": "R05-FRAGMENT-SENDER",
       "title": "Implement bounded deadline-aware MIDI fragment transmission",
       "stage": "setup",
-      "status": "in_review",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
+      "evidence": "work/evidence/R05-FRAGMENT-SENDER.md",
+      "verified": true,
       "checks": [
-        "Native 7-frame and 128-frame transfers reconstructed exact payloads; all 135 sent frames matched host receive logs with no overflow.",
-        "Native mid-transfer cancellation passed with exact frame correlation and fresh-message recovery; host outbound pacing remains required."
+        "Bounded Node sender accepted: native maximum request and cancellation/fresh-message recovery verified.",
+        "Six focused sender tests plus full 178-test suite pass; future R10 retains sole port ownership."
       ],
-      "updated": "2026-09-13T22:36:18.941604+00:00",
+      "updated": "2026-09-13T22:55:25.714068+00:00",
       "dynamic": true
     },
     {
       "id": "R05-HOST-FRAGMENT-SENDER",
       "title": "Bound native host reply fragmentation and cancellation",
       "stage": "setup",
-      "status": "in_review",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
+      "evidence": "work/evidence/R05-HOST-FRAGMENT-SENDER.md",
+      "verified": true,
       "checks": [
-        "Native full replies passed with explicit 5,000 ms admission deadline: 135 exact frames each direction, maximum reply span 808.31 ms, no overflow.",
-        "Default 900 ms admission deadline still expires at maximum payload; native cancellation/fault/shutdown replay pending. 177 software tests pass."
+        "Native maximum reply and all four lifecycle probes passed: cancel 6 frames, reset 3, overflow 4, shutdown 6.",
+        "178 software tests pass; cleanup failure now latches. Explicit maximum-reply deadline limitation remains."
       ],
-      "updated": "2026-09-13T22:48:14.261988+00:00",
+      "updated": "2026-09-13T22:55:25.714068+00:00",
       "dynamic": true
     },
     {
       "id": "R05-NATIVE-SEND-TIMER",
       "title": "Provide and verify native five-millisecond MIDI send timer",
       "stage": "setup",
-      "status": "in_review",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
+      "evidence": "work/evidence/R05-NATIVE-SEND-TIMER.md",
+      "verified": true,
       "checks": [
-        "Native build/install passed; both new API tests passed. Fixed opaque timer-ID fixture; all ten native timer tests now pass.",
-        "177 software tests and typecheck/build pass. Native full 65,536-byte reply arrived in 808.31 ms with explicit admission deadline; receiver bounds unchanged."
+        "Native five-ms one-shot API and all ten corrected timer tests passed; exact maximum reply verified.",
+        "Caller admission budget must cover encoding/queue residence; no hard realtime or musical claim."
       ],
-      "updated": "2026-09-13T22:48:14.261988+00:00",
+      "updated": "2026-09-13T22:55:25.714068+00:00",
       "dynamic": true
     }
   ],
@@ -2740,6 +2739,43 @@
       "caption": "Actual custom Mixxx 2.7 development build running with its separate profile: 48 kHz and 21.3 ms buffer. Native script tests passed; application mapping clock probe and latency acceptance remain pending.",
       "captured_at": "2026-09-13T22:15:08.209917+00:00",
       "evidence": "work/integrations/native-clock.md"
+    },
+    {
+      "path": "work/screenshots/progress-reply-lifecycle-2026-09-13.png",
+      "kind": "progress_page",
+      "caption": "Actual browser view of the native reply lifecycle results: cancellation, MIDI reset, real input overflow and mapping shutdown stopped queued replies. The chart summarizes measured diagnostic packets; it is not a musical or physical-controller performance test.",
+      "captured_at": "2026-09-13T22:57:01.354251+00:00",
+      "evidence": "work/runs/R05-REPLY-LIFECYCLE.json"
+    }
+  ],
+  "transport_checks": [
+    {
+      "scenario": "cancel",
+      "status": "passed",
+      "frames": 6,
+      "fresh_reply": true,
+      "stopped": true
+    },
+    {
+      "scenario": "reset",
+      "status": "passed",
+      "frames": 3,
+      "fresh_reply": false,
+      "stopped": true
+    },
+    {
+      "scenario": "loss",
+      "status": "passed",
+      "frames": 4,
+      "fresh_reply": false,
+      "stopped": true
+    },
+    {
+      "scenario": "shutdown",
+      "status": "passed",
+      "frames": 6,
+      "fresh_reply": false,
+      "stopped": true
     }
   ]
 }</script>
@@ -2771,6 +2807,9 @@ function render(){
  $('recent').innerHTML=all().filter(t=>t.verified).sort((a,b)=>(b.updated??'').localeCompare(a.updated??'')).slice(0,6).map(taskBlock).join('')||'<p class="muted">No acceptance evidence yet.</p>';
  $('gallery-count').textContent=data.screenshots.length+' captured views';
  $('gallery').innerHTML=data.screenshots.length?[...data.screenshots].sort((a,b)=>b.captured_at.localeCompare(a.captured_at)).map(s=>`<figure><a href="${safeLink(s.path)}"><img loading="lazy" src="${safeLink(s.path)}" alt="${escape(s.caption)}"></a><figcaption><span class="pill">${escape(s.kind.replaceAll('_',' '))}</span> ${escape(s.caption)}<br>${escape(s.captured_at)} · <a href="${safeLink(s.evidence)}">Evidence context</a></figcaption></figure>`).join(''):'<div class="empty" style="grid-column:1/-1"><h3>No runtime screenshots yet</h3>Real Mixxx controls, the app timeline and test outcomes will appear here as they are captured. The direction page is a simulated concept, not runtime evidence.</div>';
+ const transport=data.transport_checks??[];
+ $('transport-panel').hidden=transport.length===0;
+ $('transport-checks').innerHTML=transport.map(s=>`<tr><td>${escape({cancel:'Cancel reply',reset:'MIDI reset',loss:'Input overflow',shutdown:'Mapping shutdown'}[s.scenario]??s.scenario)}</td><td>${escape(s.frames)} / 128<div class="bar" aria-hidden="true"><span style="width:${Math.max(0,Math.min(128,Number(s.frames)||0))/128*100}%"></span></div></td><td>${s.fresh_reply?'Reply received':'No reply; endpoint retired'}</td><td>${s.stopped?'Verified':'Unverified'}</td></tr>`).join('');
  renderTable();
 }
 async function refresh(){
