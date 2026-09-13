@@ -66,9 +66,9 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F02. **Leases:** package-manifest. **Status:** planned.
+**Dependencies:** F02. **Leases:** package-manifest. **Status:** accepted.
 
-**Owns:** `ai-dj/package.json`, `ai-dj/tsconfig.json`, `ai-dj/.gitignore`, `ai-dj/test/smoke.test.ts`, `ai-dj/package-lock.json`, `ai-dj/.node-version`
+**Owns:** `ai-dj/package.json`, `ai-dj/tsconfig.json`, `ai-dj/.gitignore`, `ai-dj/test/smoke.test.ts`, `ai-dj/package-lock.json`, `ai-dj/.node-version`, `ai-dj/scripts/test.mjs`
 
 **Scope:** Only compiler/test scripts and one empty-package smoke; no application modules or native install.
 
@@ -150,7 +150,7 @@
 
 **Worker:** L4 / `gpt-6-astra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F02. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** F02. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/core/actions.ts`, `docs/ai-dj/work/contracts/actions.md`
 

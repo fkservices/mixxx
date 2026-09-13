@@ -136,7 +136,8 @@
         "ai-dj/.gitignore",
         "ai-dj/test/smoke.test.ts",
         "ai-dj/package-lock.json",
-        "ai-dj/.node-version"
+        "ai-dj/.node-version",
+        "ai-dj/scripts/test.mjs"
       ],
       "locks": [
         "package-manifest"

@@ -12,6 +12,8 @@ The user supplies a Mixxx playlist; AI may arrange the order while preserving ev
 
 ## Documents
 
+- [Visual build progress](progress.html): evidence-backed task totals, active work, hardware status and a labeled screenshot gallery. Regenerated with the task cards; local HTTP view refreshes every 10 seconds.
+
 - [Task board](../../TASKS.md): current status, first handoffs and checkpoint order.
 - [Execution plan](EXECUTION-PLAN.md): validated batches and actual readiness rules.
 - [First dispatch packets](FIRST-BATCH.md): concrete starting assignments.

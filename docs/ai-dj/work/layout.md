@@ -21,7 +21,7 @@ npm test
 npm test -- test/smoke.test.ts
 ```
 
-The scripts bind to `tsc --noEmit`, `tsc`, and `node --test`. F03 must prove that Node 26.8.1 discovers `.test.ts` files and that the final argument selects only `test/smoke.test.ts`. If actual runner or compiler behavior rejects this contract, F03 records the failure and corrects the scaffold and this contract through coordinator review before downstream tasks depend on a replacement command.
+The scripts bind to `tsc --noEmit`, `tsc`, and `node scripts/test.mjs`. The small launcher invokes Node's test runner with only explicitly supplied selectors, or the source `test` directory when none are supplied. This coordinator correction prevents default discovery from running emitted `dist` tests and prevents a focused selector from also running unrelated source tests. F03 must prove that Node 26.8.1 discovers `.test.ts` files and that the final argument selects only `test/smoke.test.ts`. If actual runner or compiler behavior rejects this contract, F03 records the failure and corrects the scaffold and this contract through coordinator review before downstream tasks depend on a replacement command.
 
 ## Import graph and responsibility
 
@@ -71,7 +71,7 @@ The task catalog's exact file list is the ownership authority; a task never owns
 
 | Owner | Exact files / responsibility | Integration condition |
 | --- | --- | --- |
-| F03, `package-manifest` lease | `ai-dj/package.json`, `ai-dj/package-lock.json`, `ai-dj/.node-version`, `ai-dj/tsconfig.json`, `ai-dj/.gitignore`, `ai-dj/test/smoke.test.ts`, and F03 evidence | Demonstrate all four commands on its handed-off revision. It adds no native MIDI package or application module. |
+| F03, `package-manifest` lease | `ai-dj/package.json`, `ai-dj/package-lock.json`, `ai-dj/.node-version`, `ai-dj/tsconfig.json`, `ai-dj/.gitignore`, `ai-dj/test/smoke.test.ts`, `ai-dj/scripts/test.mjs`, and F03 evidence | Demonstrate all four commands on its handed-off revision. It adds no native MIDI package or application module. |
 | F06, exact paths | `ai-dj/core/actions.ts`, `docs/ai-dj/work/contracts/actions.md`, and F06 evidence | Author against this import contract. Its acceptance waits for the coordinator's integrated F03 typecheck. |
 | A third worker in an allowed batch | Only the exact files in its accepted card, with no active exclusive-lease conflict | Validate in an isolated checkout when peer writes could affect results, or hand off for serialized integrated validation. It may not edit manifests or shared entrypoints without the named lease. |
 | Coordinator | `docs/ai-dj/work/state.json`, expansion/task state, acceptance decisions, integrated revisions, and cross-worker checks | Review exact diffs, serialize shared-resource work, run integrated checks, and record acceptance. Workers do not self-accept. |

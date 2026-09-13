@@ -1,6 +1,8 @@
 # Autonomously AI-generated planning-artifact renderer; no DJ runtime implementation.
 import argparse
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 base = Path(__file__).resolve().parent
@@ -36,4 +38,5 @@ for path,value in outputs.items():
     else:
         path.write_text(value)
 print(('Checked' if args.check else 'Rendered'),len(outputs),'planning files')
+subprocess.run([sys.executable, str(base/'render-progress.py')] + (['--check'] if args.check else []), check=True)
 # End of autonomously AI-generated planning-artifact renderer.

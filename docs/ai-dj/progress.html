@@ -1,0 +1,2262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI DJ — Build progress</title>
+<style>
+:root{color-scheme:dark;--bg:#0c1113;--panel:#151e22;--line:#314147;--text:#edf3ef;--muted:#b0bfc2;--lime:#d3fa87;--blue:#9eceff;--orange:#ffbd89}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,sans-serif}header,main,footer{max-width:1240px;margin:auto;padding:24px 32px}header{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);gap:24px}nav{display:flex;gap:24px}a{color:inherit;text-underline-offset:4px}h1{font-size:clamp(40px,6vw,76px);letter-spacing:-3px;line-height:1.04;font-weight:550;margin:22px 0}h2{font-size:25px;font-weight:550;letter-spacing:-.6px;margin:0 0 20px}h3{font-size:17px;font-weight:600;margin:0 0 9px}p{margin:0 0 14px}.muted,.subtitle{color:var(--muted)}.eyebrow,.label{font:12px ui-monospace,monospace;text-transform:uppercase;letter-spacing:1.5px}.eyebrow{color:var(--lime)}.hero{padding:38px 0}.hero p{max-width:720px;font-size:18px}.status-dot{display:inline-block;width:8px;height:8px;background:var(--lime);border-radius:50%;margin-right:9px}.statusline{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:12px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px}.stat,.panel{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:24px}.stat strong{display:block;font-size:40px;font-weight:550;letter-spacing:-1px}.stat small{color:var(--muted)}.stat:first-child strong{color:var(--lime)}.bar{height:5px;background:#2a373c;border-radius:6px;overflow:hidden;margin:16px 0 8px}.bar span{display:block;height:100%;background:var(--lime)}section{margin-bottom:38px}.two{display:grid;grid-template-columns:1.3fr 1fr;gap:20px}.pill{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:20px;padding:4px 9px;font:11px ui-monospace,monospace;white-space:nowrap}.pill.accepted{color:var(--lime);border-color:#627b40}.pill.running,.pill.in_review{color:var(--blue);border-color:#577b96}.pill.waiting_for_evidence,.pill.waiting_for_job{color:var(--orange)}.work{padding:16px 0;border-top:1px solid var(--line)}.work:first-of-type{border-top:0;padding-top:0}.work-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}.work p{font-size:13px;color:var(--muted);margin:8px 0 0}.milestones{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}.milestone{border-top:3px solid var(--line);padding:15px 5px}.milestone.active{border-color:var(--blue)}.milestone.done{border-color:var(--lime)}.milestone h3{font-size:14px;margin:9px 0}.milestone small{color:var(--muted);font-size:12px}.milestone .label{color:var(--muted)}.controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}button,input,select{font:inherit;color:var(--text);border:1px solid #607279;background:#1a272d;border-radius:6px;padding:10px 13px}button{cursor:pointer}input{flex:1;min-width:180px}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:4px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:10px}table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}th{background:#1c292e;color:var(--muted);font-weight:500}td,th{padding:14px 16px;border-bottom:1px solid var(--line)}td:first-child{font:12px ui-monospace,monospace;color:var(--blue)}td:nth-child(2){min-width:280px}tr:last-child td{border-bottom:0}.table-count{font-size:12px;color:var(--muted);margin:12px 0}.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.gallery img{width:100%;display:block;border-radius:8px;border:1px solid var(--line)}figure{margin:0}figcaption{font-size:13px;margin:12px 0;color:var(--muted)}.empty{padding:30px;border:1px dashed #526870;border-radius:10px;color:var(--muted)}.notice{padding:15px 20px;border-left:3px solid var(--orange);background:#231f19;font-size:13px;margin-top:20px}.proof-list{padding-left:20px;color:var(--muted);font-size:13px}.proof-list li{margin:8px 0}footer{border-top:1px solid var(--line);color:var(--muted);font-size:12px}.skip{position:absolute;top:-80px}.skip:focus{top:0;padding:12px;background:var(--lime);color:#111}.evidence{font-size:12px;color:var(--lime)}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:900px){.milestones{grid-template-columns:repeat(4,1fr)}.two{grid-template-columns:1fr}}@media(max-width:600px){header,main,footer{padding:20px}header{flex-direction:column;gap:10px}.stats{grid-template-columns:1fr 1fr}.stat{padding:18px}.stat strong{font-size:34px}.milestones{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr}h1{letter-spacing:-2px}.hero{padding-top:28px}.work-heading{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<!-- Autonomously AI-generated build progress page at the user's request. -->
+<a class="skip" href="#main">Skip to progress</a>
+<header><strong>AI DJ <span class="muted">/ Build journal</span></strong><nav aria-label="Project"><a href="direction.html">The direction</a><a href="../../TASKS.md">Task board</a><a href="work/state.json">Evidence ledger</a></nav></header>
+<main id="main">
+<section class="hero"><div class="eyebrow"><span class="status-dot"></span>Mixxx · desktop · local</div><h1>Building our<br>other DJ.</h1><p class="subtitle">From MIDI control to a shared booth. Follow the work, see the evidence, and know what still needs a real-world test.</p><div class="statusline"><span id="updated"></span><span id="connection">Embedded progress snapshot</span><button id="refresh" type="button">Refresh</button></div></section>
+<div class="stats" id="stats" aria-label="Progress totals"></div>
+<section><h2>The path to a complete set</h2><div id="milestones" class="milestones"></div><p class="muted" style="font-size:12px">Task counts show accepted work, not a percentage of product readiness or an estimate of time remaining. New feature and correction tasks can expand the plan.</p></section>
+<section class="two"><div class="panel"><h2>On the desk now</h2><div id="active"></div></div><div class="panel"><h2>The test booth</h2><div id="booth"></div><div class="notice">A passed software check does not prove audible timing, controller coexistence or an enjoyable mix. Those gates stay open until observed.</div></div></section>
+<section><div class="work-heading"><h2>Evidence, as it happens</h2><span id="gallery-count" class="pill"></span></div><div id="gallery" class="gallery"></div></section>
+<section class="panel"><h2>Recently accepted</h2><div id="recent"></div></section>
+<section><h2>Every task, in view</h2><div class="controls"><label class="visually-hidden" for="search">Search tasks</label><input id="search" type="search" placeholder="Find MIDI, playlists, B2B, history…"><label class="visually-hidden" for="filter">Task status</label><select id="filter"><option value="all">All statuses</option><option value="running">In progress</option><option value="accepted">Accepted</option><option value="planned">Planned</option><option value="waiting">Waiting</option></select><label class="visually-hidden" for="scope">Task scope</label><select id="scope"><option value="all">All work</option><option value="static">Reference cards</option><option value="dynamic">Added tasks</option></select></div><div class="table-wrap"><table><thead><tr><th scope="col">ID</th><th scope="col">Work</th><th scope="col">Status</th><th scope="col">Evidence</th></tr></thead><tbody id="tasks"></tbody></table></div><p id="table-count" class="table-count" aria-live="polite"></p></section>
+</main>
+<footer><p>Built from the execution ledger and evidence hashes. Served locally, this page checks for updates every 10 seconds. Opened as a file, it shows the last generated snapshot. Screenshots are labeled by what they actually demonstrate.</p><p>Autonomously generated by an AI agent at the user's request. End of AI-generated page.</p></footer>
+<script id="progress-data" type="application/json">{
+  "schema_version": 1,
+  "goal": "perform tasks.md as proposed",
+  "goal_status": "active",
+  "updated_at": "2026-09-13T18:58:21.237143+00:00",
+  "tasks": [
+    {
+      "id": "F01",
+      "title": "Freeze the local test profile",
+      "stage": "00-foundation",
+      "status": "accepted",
+      "model": "gpt-5.6-sol",
+      "evidence": "work/evidence/F01.md",
+      "verified": true,
+      "checks": [
+        "Coordinator read complete baseline and evidence; selected and observed facts separated.",
+        "F11 install and musical-fixture prerequisites materialized in work/expansions.json.",
+        "No runtime, MIDI, music quality or controller result claimed."
+      ],
+      "updated": "2026-09-13T18:47:31.986229+00:00",
+      "dynamic": false
+    },
+    {
+      "id": "F02",
+      "title": "Freeze module ownership and worker validation commands",
+      "stage": "00-foundation",
+      "status": "accepted",
+      "model": "gpt-5.6-sol",
+      "evidence": "work/evidence/F02.md",
+      "verified": true,
+      "checks": [
+        "Coordinator reviewed module, callback, ownership and exact command contract.",
+        "Registry candidates confirmed by worker; installation proof reserved to F03/F04/F05.",
+        "Documentation validators and Markdown lint passed."
+      ],
+      "updated": "2026-09-13T18:51:57.961868+00:00",
+      "dynamic": false
+    },
+    {
+      "id": "F03",
+      "title": "Create the isolated TypeScript package scaffold",
+      "stage": "00-foundation",
+      "status": "accepted",
+      "model": "gpt-5.6-terra",
+      "evidence": "work/evidence/F03.md",
+      "verified": true,
+      "checks": [
+        "Coordinator source/contract review completed.",
+        "Integrated TypeScript typecheck/build and default/focused smoke passed.",
+        "Unrelated failing sentinel proved focused isolation and default discovery."
+      ],
+      "updated": "2026-09-13T18:58:21.237143+00:00",
+      "dynamic": false
+    },
+    {
+      "id": "F04",
+      "title": "Launch candidate native MIDI installation",
+      "stage": "00-foundation",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "F05",
+      "title": "Verify native binding installation result",
+      "stage": "00-foundation",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "F06",
+      "title": "Define semantic action contracts",
+      "stage": "00-foundation",
+      "status": "accepted",
+      "model": "gpt-6-astra",
+      "evidence": "work/evidence/F06.md",
+      "verified": true,
+      "checks": [
+        "Coordinator source/contract review completed.",
+        "Integrated TypeScript typecheck/build and default/focused smoke passed.",
+        "Play/cue/load/jog semantics, stale generations, release obligations and evidence states reviewed; executor/runtime validator remain separate work."
+      ],
+      "updated": "2026-09-13T18:58:21.237143+00:00",
+      "dynamic": false
+    },
+    {
+      "id": "F07",
+      "title": "Define observed state and capability contracts",
+      "stage": "00-foundation",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "F08",
+      "title": "Create runtime message validators",
+      "stage": "00-foundation",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "F09",
+      "title": "Define conventional MIDI addresses including sync",
+      "stage": "00-foundation",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "F10",
+      "title": "Define inventory record and pagination rules",
+      "stage": "00-foundation",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "F11",
+      "title": "Prepare one disposable Mixxx runtime fixture",
+      "stage": "00-foundation",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "F12",
+      "title": "Create evidence capture conventions",
+      "stage": "00-foundation",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M01",
+      "title": "Implement transport port discovery",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M02",
+      "title": "Implement bidirectional port lifecycle",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M03",
+      "title": "Encode conventional command bytes",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M04",
+      "title": "Decode conventional feedback",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M05",
+      "title": "Create Mixxx mapping entry and test harness",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M06",
+      "title": "Map play and deck volume",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M07",
+      "title": "Map crossfader and momentary cue",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M08",
+      "title": "Map the chosen sync operation",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M09",
+      "title": "Subscribe and emit initial control feedback",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M10",
+      "title": "Assemble the initial mapping fragments",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M11",
+      "title": "Wire a minimal local communicator CLI",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M12",
+      "title": "Prove play, volume and fader in actual Mixxx",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M13",
+      "title": "Prove cue, sync and manual feedback",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M14",
+      "title": "Build a bounded timing capture harness",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M15",
+      "title": "Capture idle MIDI timing",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M16",
+      "title": "Capture loaded MIDI timing",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M17",
+      "title": "Capture native UI response timing",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M18",
+      "title": "Capture audible response timing",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M19",
+      "title": "Review the local latency decision",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "M20",
+      "title": "Accept or hold milestone 1",
+      "stage": "01-local-midi",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I01",
+      "title": "Inventory deck transport — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I02",
+      "title": "Inventory mixer — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I03",
+      "title": "Inventory tempo and sync — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I04",
+      "title": "Inventory eq and filter — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I05",
+      "title": "Inventory effects — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I06",
+      "title": "Inventory cues and loops — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I07",
+      "title": "Inventory jog and scratch — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I08",
+      "title": "Inventory samplers and preview — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I09",
+      "title": "Inventory stem decks — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I10",
+      "title": "Inventory microphone auxiliary and vinyl — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I11",
+      "title": "Inventory library navigation — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I12",
+      "title": "Inventory load selected track — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I13",
+      "title": "Inventory stable track selection and playlists — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I14",
+      "title": "Inventory track metadata — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I15",
+      "title": "Inventory beat phrase and energy analysis — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I16",
+      "title": "Inventory mixxx autodj — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I17",
+      "title": "Inventory recording — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I18",
+      "title": "Inventory broadcasting — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I19",
+      "title": "Inventory skin waveform and display — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I20",
+      "title": "Inventory sampler bank files — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I21",
+      "title": "Inventory library management — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I22",
+      "title": "Inventory preferences and setup — first page",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-luna",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "I23",
+      "title": "Close the full initial inventory",
+      "stage": "02-inventory",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R01",
+      "title": "Freeze the extended wire framing",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R02",
+      "title": "Freeze lifecycle and snapshot semantics",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R03",
+      "title": "Implement SysEx packing and encoding",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R04",
+      "title": "Implement bounded SysEx parsing",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R05",
+      "title": "Implement the Mixxx wire endpoint",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R06",
+      "title": "Negotiate session and capabilities",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R07",
+      "title": "Produce host snapshots and deltas",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R08",
+      "title": "Reconcile observed state snapshots",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R09",
+      "title": "Track accepted and observed outcomes",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R10",
+      "title": "Bound the queue and enforce deadlines",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R11",
+      "title": "Deduplicate and constrain retries",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R12",
+      "title": "Implement transport loss and heartbeat disarm",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R13",
+      "title": "Invalidate track and ownership generations",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R14",
+      "title": "Implement hazardous-action policies",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R15",
+      "title": "Define three modes and switching epochs",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R16",
+      "title": "Implement mode enforcement and direct disarm",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R17",
+      "title": "Define per-control handover and dependency groups",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R18",
+      "title": "Implement B2B scoped holds and debounce",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R19",
+      "title": "Replan smoothly after human intervention",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R20",
+      "title": "Implement paired 14-bit continuous controls",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R21",
+      "title": "Integrate accepted reliability fragments",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R22",
+      "title": "Prove failure recovery in actual Mixxx",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R23",
+      "title": "Prove three modes with a physical controller",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R24",
+      "title": "Accept or hold milestone 2",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P01",
+      "title": "Define playlist occurrence and set contracts",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P02",
+      "title": "Specify native ordered playlist read operations",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P03",
+      "title": "Specify stable load and metadata operations",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P04",
+      "title": "Prepare host extension build recipe",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P05",
+      "title": "Define a narrow host bridge integration boundary",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P06",
+      "title": "Implement native playlist page client",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P07",
+      "title": "Implement early M3U8 import fallback",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P08",
+      "title": "Resolve playlist identities and preflight files",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P09",
+      "title": "Implement durable set storage",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P10",
+      "title": "Implement remaining-set edits and pins",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P11",
+      "title": "Validate complete planned occurrence coverage",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P12",
+      "title": "Implement load request client and outcome reconciliation",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P13",
+      "title": "Verify native playlist and load in Mixxx",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P14",
+      "title": "Specify save-new-playlist service operation",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P15",
+      "title": "Implement save-new-playlist client",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P16",
+      "title": "Verify saved set and native playlist round-trip",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P17",
+      "title": "Reconcile resumed and manually changed sets",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P18",
+      "title": "Accept native playlist and set management",
+      "stage": "04-playlists",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "D01",
+      "title": "Define conservative transition templates",
+      "stage": "05-performance",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "D02",
+      "title": "Implement deterministic transition state machine",
+      "stage": "05-performance",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "D03",
+      "title": "Implement bounded parameter-curve executor",
+      "stage": "05-performance",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "D04",
+      "title": "Implement playback occurrence accounting",
+      "stage": "05-performance",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "D05",
+      "title": "Integrate deterministic full-set loop",
+      "stage": "05-performance",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "D06",
+      "title": "Record one short real transition",
+      "stage": "05-performance",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "D07",
+      "title": "Review deterministic transition evidence",
+      "stage": "05-performance",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A01",
+      "title": "Define local analysis feature contract",
+      "stage": "06-ai",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A02",
+      "title": "Choose bounded local analysis tools",
+      "stage": "06-ai",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A03",
+      "title": "Implement analysis cache and job boundary",
+      "stage": "06-ai",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A04",
+      "title": "Specify one adapter task per analysis feature",
+      "stage": "06-ai",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A05",
+      "title": "Verify prepared analysis on fixture tracks",
+      "stage": "06-ai",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A06",
+      "title": "Implement constrained next-track scoring",
+      "stage": "06-ai",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A07",
+      "title": "Define and validate AI structured output",
+      "stage": "06-ai",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A08",
+      "title": "Choose local model and inference runtime candidate",
+      "stage": "06-ai",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A09",
+      "title": "Implement isolated planner process adapter",
+      "stage": "06-ai",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A10",
+      "title": "Implement complete playlist ordering policy",
+      "stage": "06-ai",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A11",
+      "title": "Connect transition choices to live set runner",
+      "stage": "06-ai",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A12",
+      "title": "Benchmark planner load and communicator isolation",
+      "stage": "06-ai",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A13",
+      "title": "Record AutoDJ comparison baseline",
+      "stage": "06-ai",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A14",
+      "title": "Review AI musical quality and constraints",
+      "stage": "06-ai",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O01",
+      "title": "Freeze session event schema and clock rules",
+      "stage": "07-observability",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O02",
+      "title": "Specify raw physical MIDI capture hook",
+      "stage": "07-observability",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O03",
+      "title": "Capture AI outbound intent and wire events",
+      "stage": "07-observability",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O04",
+      "title": "Verify physical capture and manual-intent channel",
+      "stage": "07-observability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O05",
+      "title": "Implement versioned semantic MIDI decoding",
+      "stage": "07-observability",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O06",
+      "title": "Correlate host observations without false attribution",
+      "stage": "07-observability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O07",
+      "title": "Implement bounded recoverable session journal",
+      "stage": "07-observability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O08",
+      "title": "Implement session snapshots and track spans",
+      "stage": "07-observability",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O09",
+      "title": "Implement JSON export and historical import",
+      "stage": "07-observability",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O10",
+      "title": "Implement indexed history queries",
+      "stage": "07-observability",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O11",
+      "title": "Verify end-to-end capture fidelity",
+      "stage": "07-observability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "U01",
+      "title": "Freeze desktop screens and local service API",
+      "stage": "08-desktop-ui",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "U02",
+      "title": "Scaffold the local UI and service connection",
+      "stage": "08-desktop-ui",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "U03",
+      "title": "Implement playlist and set editor screen",
+      "stage": "08-desktop-ui",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "U04",
+      "title": "Implement modes disarm and ownership UI",
+      "stage": "08-desktop-ui",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "U05",
+      "title": "Implement layered track timeline",
+      "stage": "08-desktop-ui",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "U06",
+      "title": "Implement semantic action overlays and filters",
+      "stage": "08-desktop-ui",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "U07",
+      "title": "Implement saved session viewer",
+      "stage": "08-desktop-ui",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "U08",
+      "title": "Verify live/history UI against a real session",
+      "stage": "08-desktop-ui",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R25",
+      "title": "Implement latched manual transport holds",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "R26",
+      "title": "Verify controller profile and pickup behavior",
+      "stage": "03-reliability",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P19",
+      "title": "Implement duration and section constraints",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P20",
+      "title": "Implement source synchronization policies",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P21",
+      "title": "Implement music-pool policy",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P22",
+      "title": "Implement set save strategies",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P23",
+      "title": "Implement existing cue metadata client",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "P24",
+      "title": "Specify explicit save-cue operation",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A15",
+      "title": "Implement energy and style constraints",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A16",
+      "title": "Define local lyric matching inputs and scoring",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A17",
+      "title": "Implement contextual local taste inference",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "A18",
+      "title": "Implement preference review and reset storage",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O12",
+      "title": "Define waveform cache and asset boundary",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O13",
+      "title": "Implement opt-in recording state and asset references",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O14",
+      "title": "Implement retention and recorder degradation policy",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "O15",
+      "title": "Implement redacted session sharing",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "U09",
+      "title": "Implement musical planning settings",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "U10",
+      "title": "Implement notes ratings and preference review",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "U11",
+      "title": "Implement asset and history settings",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "U12",
+      "title": "Implement local setup and controller configuration",
+      "stage": "09-product-options",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "C01",
+      "title": "Expand inventory into capability work",
+      "stage": "10-full-coverage",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "C02",
+      "title": "Close full capability evidence",
+      "stage": "10-full-coverage",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "L01",
+      "title": "Implement persistent desktop launcher",
+      "stage": "11-release",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "L02",
+      "title": "Enforce local API access boundary",
+      "stage": "11-release",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "L03",
+      "title": "Prepare Mac packaging recipe",
+      "stage": "11-release",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "L04",
+      "title": "Write operator setup and recovery guide",
+      "stage": "11-release",
+      "status": "planned",
+      "model": "gpt-5.6-terra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "L05",
+      "title": "Verify clean local desktop setup",
+      "stage": "11-release",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "L06",
+      "title": "Specify endurance and whole-set test matrix",
+      "stage": "11-release",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "L07",
+      "title": "Launch uninterrupted controller soak",
+      "stage": "11-release",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "L08",
+      "title": "Review uninterrupted soak evidence",
+      "stage": "11-release",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "L09",
+      "title": "Launch six-hour full-set capacity run",
+      "stage": "11-release",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "L10",
+      "title": "Review capacity and full-set accounting",
+      "stage": "11-release",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "L11",
+      "title": "Collect final human listening acceptance",
+      "stage": "11-release",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    },
+    {
+      "id": "L12",
+      "title": "Audit release evidence and operator handoff",
+      "stage": "11-release",
+      "status": "planned",
+      "model": "gpt-6-astra",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
+      "dynamic": false
+    }
+  ],
+  "children": [
+    {
+      "id": "SETUP-F01-MIXXX-2.5.6-ARM",
+      "title": "Install and verify isolated Mixxx runtime",
+      "stage": "setup",
+      "status": "accepted",
+      "model": "gpt-5.6-sol",
+      "evidence": "work/evidence/SETUP-F01-MIXXX-2.5.6-ARM.md",
+      "verified": true,
+      "checks": [
+        "Published SHA-256 equals downloaded image hash.",
+        "Installed version/architecture/signature verified.",
+        "Read-only image unmounted and normal profile remains absent; no launch."
+      ],
+      "updated": "2026-09-13T18:50:58.607993+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "SETUP-F01-FIXTURE-TRACKS",
+      "title": "Select two playable Music library fixtures",
+      "stage": "setup",
+      "status": "accepted",
+      "model": "gpt-5.6-sol",
+      "evidence": "work/evidence/SETUP-F01-FIXTURE-TRACKS.md",
+      "verified": true,
+      "checks": [
+        "Both full-file audio decodes exited 0 with no error output.",
+        "Metadata, fingerprints and private manifest verified.",
+        "No media or private source paths added to Git."
+      ],
+      "updated": "2026-09-13T18:49:22.363218+00:00",
+      "dynamic": true
+    }
+  ],
+  "milestones": [
+    {
+      "id": "G0",
+      "title": "Baseline and working contracts",
+      "requires": [
+        "F01",
+        "F02",
+        "F03",
+        "F07",
+        "F09",
+        "F10",
+        "F12"
+      ],
+      "accepted": false
+    },
+    {
+      "id": "G1",
+      "title": "First real MIDI proof",
+      "requires": [
+        "M20"
+      ],
+      "accepted": false
+    },
+    {
+      "id": "G2",
+      "title": "Reliable shared control",
+      "requires": [
+        "R24",
+        "R26"
+      ],
+      "accepted": false
+    },
+    {
+      "id": "G3",
+      "title": "Native playlist and deterministic set",
+      "requires": [
+        "P18",
+        "D07"
+      ],
+      "accepted": false
+    },
+    {
+      "id": "G4",
+      "title": "AI set with live and historical UI",
+      "requires": [
+        "A14",
+        "U08",
+        "U09",
+        "U10",
+        "U11",
+        "U12"
+      ],
+      "accepted": false
+    },
+    {
+      "id": "G5",
+      "title": "Full Mixxx feature evidence",
+      "requires": [
+        "C02"
+      ],
+      "accepted": false
+    },
+    {
+      "id": "G6",
+      "title": "Desktop release candidate",
+      "requires": [
+        "L12"
+      ],
+      "accepted": false
+    }
+  ],
+  "controller": {
+    "status": "operator_will_connect_later",
+    "model": "Hercules DJControl Mix Ultra",
+    "detail": "User explicitly said they will connect later. Exact model identified; physical MIDI/controller evidence remains pending. Continue independent software work without asking again."
+  },
+  "music": {
+    "status": "two_local_fixtures_verified",
+    "detail": "Two full-length local MP3 tracks in authorized Music library passed complete decoding; private manifest outside Git. Mixxx playback and musical analysis remain pending."
+  },
+  "screenshots": [
+    {
+      "path": "work/screenshots/progress-overview-2026-09-13.jpg",
+      "kind": "progress_page",
+      "caption": "Build journal after scaffold and action-contract acceptance: four reference tasks and two setup tasks accepted. Actual browser capture; not Mixxx or DJ runtime proof.",
+      "captured_at": "2026-09-13T18:58:59.871Z",
+      "evidence": "work/evidence/progress-page.md"
+    }
+  ]
+}</script>
+<script>
+// Autonomously AI-generated progress viewer; this page cannot emit MIDI or control Mixxx.
+let data=JSON.parse(document.getElementById('progress-data').textContent);
+let lastPayload=JSON.stringify(data);
+const $=id=>document.getElementById(id);
+const labels={planned:'Planned',eligible:'Ready for dispatch',running:'In progress',in_review:'In review',accepted:'Accepted',waiting_for_job:'Job running',waiting_for_evidence:'Evidence pending',split:'Continued in child tasks'};
+const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const badge=t=>`<span class="pill ${escape(t.status)}">${escape(t.status==='accepted'&&!t.verified?'Evidence needs review':labels[t.status]??t.status)}</span>`;
+const all=()=>[...data.tasks,...data.children];
+function safeLink(value){return typeof value==='string'&&!value.includes('..')&&!value.startsWith('/')&&!value.includes(':')?escape(value):'#';}
+function taskBlock(t){return `<article class="work"><div class="work-heading"><h3><span class="muted">${escape(t.id)}</span> ${escape(t.title)}</h3>${badge(t)}</div>${t.checks.length?`<p>${escape(t.checks[0])}</p>`:''}${t.evidence?`<a class="evidence" href="${safeLink(t.evidence)}">Read acceptance evidence ↗</a>`:''}</article>`;}
+function renderTable(){
+ const query=$('search').value.toLowerCase(),filter=$('filter').value,scope=$('scope').value;
+ const rows=all().filter(t=>(t.id+' '+t.title+' '+t.stage).toLowerCase().includes(query)&&(filter==='all'||(filter==='waiting'?t.status.startsWith('waiting'):t.status===filter))&&(scope==='all'||(scope==='dynamic'?t.dynamic:!t.dynamic)));
+ $('tasks').innerHTML=rows.map(t=>`<tr><td>${escape(t.id)}</td><td>${escape(t.title)}</td><td>${badge(t)}</td><td>${t.evidence?`<a href="${safeLink(t.evidence)}">Verified report ↗</a>`:'—'}</td></tr>`).join('');
+ $('table-count').textContent=`${rows.length} of ${all().length} tasks shown`;
+}
+function render(){
+ const accepted=data.tasks.filter(t=>t.verified).length,added=data.children.filter(t=>t.verified).length,active=all().filter(t=>['running','in_review','waiting_for_job'].includes(t.status));
+ $('updated').textContent=data.updated_at?'Ledger update · '+new Date(data.updated_at).toLocaleString():'No recorded updates';
+ $('stats').innerHTML=`<div class="stat"><span class="label">Reference work</span><strong>${accepted}<small> / ${data.tasks.length}</small></strong><div class="bar"><span style="width:${accepted/data.tasks.length*100}%"></span></div><small>Evidence accepted</small></div><div class="stat"><span class="label">Added work</span><strong>${added}<small> / ${data.children.length}</small></strong><small>Setup and expansion tasks accepted</small></div><div class="stat"><span class="label">In motion</span><strong>${active.length}</strong><small>Active work or review</small></div><div class="stat"><span class="label">Delivery gates</span><strong>${data.milestones.filter(m=>m.accepted).length}<small> / ${data.milestones.length}</small></strong><small>Full goal: ${escape(data.goal_status)}</small></div>`;
+ $('milestones').innerHTML=data.milestones.map((m,i)=>`<div class="milestone ${m.accepted?'done':i===data.milestones.findIndex(x=>!x.accepted)?'active':''}"><span class="label">${escape(m.id)} · ${m.accepted?'Accepted':'Open'}</span><h3>${escape(m.title)}</h3><small>Exit: ${escape(m.requires.join(', '))}</small></div>`).join('');
+ $('active').innerHTML=active.length?active.map(taskBlock).join(''):'<p class="muted">No worker is recorded as active. The next eligible tasks await coordinator dispatch.</p>';
+ const installed=data.children.find(t=>t.id==='SETUP-F01-MIXXX-2.5.6-ARM')?.verified;
+ $('booth').innerHTML=`<article class="work"><h3>Mixxx 2.5.6 · ARM · LateNight</h3><p>${installed?'Installed and signature verified. Runtime behavior needs separate evidence.':'Selected test profile; installation evidence pending.'}</p></article><article class="work"><h3>Local iTunes / Music library</h3><p>${escape(data.music.detail)}</p></article><article class="work"><h3>${escape(data.controller.model??'Physical controller')}</h3><p>${escape(data.controller.status==='operator_will_connect_later'?'Connection deferred. Physical MIDI messages, mapping and B2B handover still need testing.':data.controller.detail)}</p></article>`;
+ $('recent').innerHTML=all().filter(t=>t.verified).sort((a,b)=>(b.updated??'').localeCompare(a.updated??'')).slice(0,6).map(taskBlock).join('')||'<p class="muted">No acceptance evidence yet.</p>';
+ $('gallery-count').textContent=data.screenshots.length+' captured views';
+ $('gallery').innerHTML=data.screenshots.length?data.screenshots.map(s=>`<figure><a href="${safeLink(s.path)}"><img loading="lazy" src="${safeLink(s.path)}" alt="${escape(s.caption)}"></a><figcaption><span class="pill">${escape(s.kind.replaceAll('_',' '))}</span> ${escape(s.caption)}<br>${escape(s.captured_at)} · <a href="${safeLink(s.evidence)}">Evidence context</a></figcaption></figure>`).join(''):'<div class="empty" style="grid-column:1/-1"><h3>No runtime screenshots yet</h3>Real Mixxx controls, the app timeline and test outcomes will appear here as they are captured. The direction page is a simulated concept, not runtime evidence.</div>';
+ renderTable();
+}
+async function refresh(){
+ if(location.protocol==='file:'){$('connection').textContent='File snapshot · reopen after regeneration';return;}
+ try{const response=await fetch('work/progress.json',{cache:'no-store'});if(!response.ok)throw Error();const next=await response.json();if(next.schema_version!==1||!Array.isArray(next.tasks))throw Error();const serialized=JSON.stringify(next);if(serialized!==lastPayload){data=next;lastPayload=serialized;render();}$('connection').textContent='Local feed connected · checks every 10s';}catch{$('connection').textContent='Feed unavailable · showing last snapshot';}
+}
+for(const id of ['search','filter','scope'])$(id).addEventListener('input',renderTable);
+$('refresh').addEventListener('click',refresh);render();refresh();setInterval(refresh,10000);
+// End of autonomously AI-generated progress viewer.
+</script>
+</body>
+</html>

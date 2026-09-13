@@ -6,6 +6,8 @@
 
 **Execution status:** the user activated the goal “perform tasks.md as proposed.” Implementation is authorized; follow [TASKS.md](TASKS.md), the worker limits and the full acceptance scope below. Track actual task states and evidence in [the execution ledger](docs/ai-dj/work/state.json). Planning artifacts remain specifications, not completion evidence.
 
+**Progress reporting:** Maintain [the visual HTML build journal](docs/ai-dj/progress.html) as work progresses, using actual ledger states and acceptance evidence. Add labeled screenshots of real Mixxx/app behavior when available; distinguish progress-page views and mockups from runtime proof.
+
 **Current phase: implementation.** Execute the accepted catalog, including dynamic capability/host/analysis tasks, native UI/audio/controller proof, session UI/history, endurance and human listening acceptance. Preserve the complete scope. The goal is not complete when only the first prototype or scaffold works. Existing authorization to commit and push our work to the fork remains in effect; no upstream issue or PR is requested.
 
 **Discovery complete for planning:** all three rounds of 20 questions are resolved. The user directly supplied 26 answers, supplied a standing preference resolving 2 more, and explicitly delegated the remaining 32 choices with “answer all the other questions your self.” [Discovery](docs/ai-dj/DISCOVERY.md) preserves that distinction; [delegated defaults](docs/ai-dj/DEFAULTS.md) remain editable. No further questionnaire response is required. Evidence about actual hardware, timing or tool capability is still required during implementation.

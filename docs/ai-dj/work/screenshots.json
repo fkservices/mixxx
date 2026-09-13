@@ -1,0 +1,13 @@
+{
+  "disclosure": "Autonomously AI-generated screenshot manifest; each capture has a bounded evidence claim.",
+  "items": [
+    {
+      "path": "work/screenshots/progress-overview-2026-09-13.jpg",
+      "kind": "progress_page",
+      "caption": "Build journal after scaffold and action-contract acceptance: four reference tasks and two setup tasks accepted. Actual browser capture; not Mixxx or DJ runtime proof.",
+      "captured_at": "2026-09-13T18:58:59.871Z",
+      "evidence": "work/evidence/progress-page.md"
+    }
+  ],
+  "generation_end": "End of autonomously AI-generated manifest."
+}
