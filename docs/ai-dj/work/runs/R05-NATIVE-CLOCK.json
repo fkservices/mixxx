@@ -3,7 +3,7 @@
   "task": "R05-NATIVE-CLOCK",
   "status": "partial",
   "sourceRevision": "2c5c19d",
-  "recordedAt": "2026-09-13T22:15:08.209917+00:00",
+  "recordedAt": "2026-09-13T22:17:17.498347+00:00",
   "nativeClockHeaderSha256": "7554e3ca565a4fd886c12bbb4978ff1d1a6b32392efa03f072d8ce13dadd9d43",
   "compiler": "Apple clang 17.0.0, arm64-apple-darwin27.0.0",
   "flags": [
@@ -41,7 +41,7 @@
       "clock-tests.json": "91f7bd8b233b5c9aab8ec581a64315bc5d3d47ac73a91fba4c971d965ab90e68"
     }
   },
-  "installedHostApi": "not installed",
+  "installedHostApi": "verified in isolated custom 2.7 application mapping",
   "buildDependencySha256": "4dec26e22803decbf0ce664ef53c12e6d846df7222bb48d3a47999878e9ba02c",
   "buildDependencyVerification": "CMake download hash matched repository pin",
   "configureJob": {
@@ -69,7 +69,7 @@
     "binarySha256": "7810f879296920910f8770f2f7c27faaf1f3e60ad09d8ef619ec03cb85f0151c",
     "launched": true,
     "bundleId": "com.fkservices.mixxxaidj.dev",
-    "mappingProbe": "pending; no feedback observed before diagnostic helper stopped"
+    "mappingProbe": "passed numeric and Unicode diagnostic round trips"
   },
   "scriptRegression": {
     "status": "succeeded",
@@ -90,5 +90,35 @@
     "fix": "Quote configured CMake bundle path lists",
     "retryInstallExitCode": 0,
     "identity": "Separate development bundle ID; original sandbox entitlements retained"
+  },
+  "nativeMappingProbe": {
+    "status": "passed",
+    "sourceRevision": "b0bdf26",
+    "nativeClockType": "function",
+    "firstMs": 4.2e-05,
+    "secondMs": 24.207334,
+    "roundTrips": [
+      {
+        "opcode": 112,
+        "sequence": 1,
+        "payload": -1.5
+      },
+      {
+        "opcode": 113,
+        "sequence": 2,
+        "payload": "é🎧"
+      }
+    ],
+    "helperExitCode": 0,
+    "hostStopped": true,
+    "diagnosticMappingRemoved": true,
+    "evidenceHashes": {
+      "capture-retry.jsonl": "2f5c5ef340ba7864a3e78cbcc4173a20158b40dc94e1650d218819a859531788",
+      "native-probe-evidence.log": "5232465bb42abace486ff8e4673b5372859fab47ee7fc5a01d2db936135a6301"
+    },
+    "limitations": [
+      "Caller provenance label is unchanged; native source and actual host evidence establish this probe only.",
+      "No sleep/resume invalidation, latency percentile, malformed-input, or musical acceptance is claimed."
+    ]
   }
 }

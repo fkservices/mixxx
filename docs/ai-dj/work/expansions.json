@@ -915,12 +915,12 @@
       ],
       "evidence": "docs/ai-dj/work/evidence/R05-NATIVE-CLOCK.md",
       "checks": [
-        "Custom Mixxx 2.7 launched with a separate sandbox identity/profile; screenshot recorded. Mapping clock probe remains pending.",
+        "Actual custom Mixxx mapping called native clock and returned numeric/Unicode MIDI diagnostics unchanged; sleep/resume policy remains unverified.",
         "Native build completed successfully; custom Mixxx 2.7.0 bundle and test binary hashes recorded.",
         "Three native clock tests passed, including actual Qt/JavaScript invocation and shared-origin progression.",
-        "All 43 native controller-script regression tests passed; application mapping clock probe and resume policy remain unverified."
+        "All 43 native controller-script regression tests passed; application mapping clock probe passed; resume policy remains unverified."
       ],
-      "updated_at": "2026-09-13T22:15:08.209917+00:00"
+      "updated_at": "2026-09-13T22:17:17.498347+00:00"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

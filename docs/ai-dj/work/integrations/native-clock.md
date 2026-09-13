@@ -40,8 +40,8 @@ The full native build completed successfully. Both added controller script-engin
 tests passed: JavaScript invocation/progression without script timers and shared
 origin across interface replacement. The existing steady-clock resolution test
 also passed (three native tests, zero failures). The actual native test binary
-hash is in the run record. Mapping use in the custom application and runtime
-clock-domain checks remain required. The broader controller-script regression also passed all 43 tests, with
+hash is in the run record. Mapping use in the custom application now passed; runtime
+clock-domain and resume checks remain required. The broader controller-script regression also passed all 43 tests, with
 zero failures, errors or disabled tests. These counts overlap: both new clock
 tests are included in the broader suite.
 
@@ -60,7 +60,7 @@ successful native verification.
 The [partial run record](../runs/R05-NATIVE-CLOCK.json) records the compiled helper
 fixture hashes and terminal configure/build/clock-test/regression results.
 No build or test process remains running. The custom-application mapping clock
-probe remains pending; the native-clock task remains in review.
+probe passed; the native-clock task remains in review for resume handling.
 
 ## Native application launch
 
@@ -75,8 +75,20 @@ The staged application now runs as **AI DJ Mixxx**, with development bundle ID
 sandbox entitlements. The installed stock application was not modified.
 A real preferences screenshot records 48 kHz and a 21.3 ms buffer; the earlier
 stock fixture used 5.33 ms, so timing results must not be transferred between them.
-The diagnostic helper observed no feedback before being stopped. Native mapping
-clock invocation, production deadline behavior and resume invalidation remain
-unverified. Launch and settings screenshots do not prove those behaviors.
+The first diagnostic helper observed no feedback before being stopped. The copied
+controller configuration still referenced the stock profile. With the host stopped,
+that path was corrected to the isolated custom mapping; the retry passed.
+
+The actual mapping reported `engine.getMonotonicTime` as a function. Samples
+progressed from 0.000042 to 24.207334 milliseconds. Node independently decoded
+exact numeric (`-1.5`) and Unicode (`é🎧`) return payloads with their expected
+session and sequence IDs. The source-backed native clock was used by the endpoint;
+the caller-provided provenance label itself remains untrusted. Private capture
+and filtered host log hashes are in the run record.
+
+The helper exited successfully, the custom host stopped, and its temporary
+diagnostic bootstrap was replaced with the repository mapping. Production deadline
+behavior, malformed-input coverage and resume invalidation remain unverified.
+Launch and settings screenshots do not prove those behaviors.
 
 > End of autonomously AI-generated implementation notes.
