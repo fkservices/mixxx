@@ -65,7 +65,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F09, F08. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** F09, F08. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/midi/conventional-encode.ts`, `ai-dj/test/midi/conventional-encode.test.ts`
 

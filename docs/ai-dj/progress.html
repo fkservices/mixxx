@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T20:08:58.744361+00:00",
+  "updated_at": "2026-09-13T20:11:04.268211+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -258,12 +258,16 @@
       "id": "M03",
       "title": "Encode conventional command bytes",
       "stage": "01-local-midi",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/M03.md",
+      "verified": true,
+      "checks": [
+        "Frozen profile vectors and exact semantic routing reviewed; raw fixture serialization remains separate from production admission.",
+        "64 integrated tests, strict typecheck and build passed.",
+        "Valid cue and sync actions return host-guard requirements, never command packets; no runtime send or timing proof claimed."
+      ],
+      "updated": "2026-09-13T20:11:04.268211+00:00",
       "dynamic": false
     },
     {

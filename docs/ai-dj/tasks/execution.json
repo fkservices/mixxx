@@ -18,7 +18,7 @@
     "F12": "accepted",
     "M01": "accepted",
     "M02": "accepted",
-    "M03": "planned",
+    "M03": "accepted",
     "M04": "accepted",
     "M05": "planned",
     "M06": "planned",
@@ -191,10 +191,10 @@
     "F12",
     "M01",
     "M02",
+    "M03",
     "M04"
   ],
   "dependency_frontier": [
-    "M03",
     "M05",
     "I01",
     "I02",

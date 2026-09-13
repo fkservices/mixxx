@@ -399,6 +399,19 @@
         "Output retains unknown actor and unproven host observation; no request, outbound command or authoritative state is fabricated."
       ],
       "monitor_status": "terminated_after_all_handoffs"
+    },
+    "M03": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "972717d",
+      "accepted_at": "2026-09-13T20:11:04.268211+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M03.md",
+      "evidence_sha256": "2e21f9c7d15d3c9ba4d5cf80a63e5cd55d06606cb6511f49b95e0eec76fcce33",
+      "checks": [
+        "Frozen profile vectors and exact semantic routing reviewed; raw fixture serialization remains separate from production admission.",
+        "64 integrated tests, strict typecheck and build passed.",
+        "Valid cue and sync actions return host-guard requirements, never command packets; no runtime send or timing proof claimed."
+      ]
     }
   },
   "jobs": {
