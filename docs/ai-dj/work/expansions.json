@@ -827,9 +827,9 @@
       "checks": [
         "Reproducible seven-fragment assembly, XML SysEx hook and explicit one-initialization configuration implemented.",
         "163 tests passed, including activation rollback and clock-regression dispatch retirement; typecheck/build passed.",
-        "Custom 2.7 native clock and numeric/text MIDI round trips passed; final integration review and broader native cases remain."
+        "Custom native clock, numeric/text/JSON round trips and checksum rejection passed; expiry/reset/lifecycle cases remain."
       ],
-      "updated_at": "2026-09-13T22:19:50.573303+00:00"
+      "updated_at": "2026-09-13T22:21:05.991116+00:00"
     },
     {
       "id": "R05-ENDPOINT-NATIVE",

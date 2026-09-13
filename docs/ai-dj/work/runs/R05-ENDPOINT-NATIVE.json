@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "task": "R05-ENDPOINT-NATIVE",
+  "status": "partial",
+  "sourceRevision": "abae078",
+  "recordedAt": "2026-09-13T22:21:05.991116+00:00",
+  "hostVersion": "custom Mixxx 2.7.0",
+  "nativeClock": "engine.getMonotonicTime",
+  "fixture": "Private opcode 9 JSON echo; no production service or performance action handler",
+  "received": {
+    "opcode": 9,
+    "sequence": 3,
+    "session": "0123456789abcdef0123456789abcdef",
+    "payload": {
+      "probe": "json-only",
+      "text": "é🎧",
+      "values": [
+        1,
+        true,
+        null
+      ]
+    }
+  },
+  "inputResults": [
+    {
+      "dispatched": 0,
+      "rejected": 0,
+      "closed": false,
+      "diagnostics": [
+        "checksum-mismatch"
+      ],
+      "droppedDiagnostics": 0
+    },
+    {
+      "dispatched": 1,
+      "rejected": 0,
+      "closed": false,
+      "diagnostics": [],
+      "droppedDiagnostics": 0
+    }
+  ],
+  "helperExitCode": 0,
+  "hostStopped": true,
+  "diagnosticBootstrapRemoved": true,
+  "evidenceHashes": {
+    "runner.mjs": "74dc56f05a09b8c4a6216a068f28005659954613364eecbc3465cc417236a4fa",
+    "probe.js": "c11ef664d4f980151a19177fef3fac74077514785d8ef1a659417eb35f14138e",
+    "capture.jsonl": "d5878b1bd8e3e831d8fe72397a0bc8501ec8722d94c8ab40e84345ca67d9c161",
+    "host-evidence.log": "c66309420099cd10745e4fc303ee000173d5628aa6fd2ff67afa360b1b5d8406"
+  },
+  "installedMappingSha256": "72f796c0e1a4c30142bad127d58804c93a558c533dcd81d94c25c1389d17e441",
+  "limitations": [
+    "Single-frame JSON and checksum corruption only; expiry/reset/capacity/lifecycle coverage remains.",
+    "Opcode 9 payload is a private codec fixture, not a valid production session message.",
+    "No setters exist in the probe handler; no performance input sent. This is not an exhaustive hostile-message setter audit."
+  ]
+}

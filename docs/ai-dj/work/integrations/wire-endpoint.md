@@ -117,4 +117,21 @@ a regression; correcting that fixture made the intended scenario meaningful.
 All 163 software tests, typecheck and build passed. These remain VM evidence;
 native malformed-message, JSON and lifecycle cases are still required.
 
+## Native JSON and checksum probe
+
+The custom 2.7 host received a private opcode 9 JSON codec fixture containing
+Unicode, a number, a boolean and null. A frame with one CRC byte corrupted
+produced `checksum-mismatch` and zero dispatches. The immediately following valid
+frame dispatched once; Node decoded the identical object, session and sequence.
+The host remained open between rejection and the valid frame. This fixture does
+not implement the production opcode 9 service or authorize performance control.
+
+The terminal capture contains one JSON reply. Filtered host logs, probe source,
+runner and installed mapping hashes are recorded in the
+[partial native record](../runs/R05-ENDPOINT-NATIVE.json). The helper exited with
+code zero; the verified host process stopped before restoring the repository
+mapping without the temporary bootstrap. No performance message was sent.
+Native expiry, reset, capacity and lifecycle cases still remain; this supporting
+probe does not accept the native endpoint card or its integration prerequisite.
+
 > End of autonomously AI-generated investigation.
