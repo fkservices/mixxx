@@ -686,6 +686,18 @@
       "accepted_at": "2026-09-13T23:46:15.078674+00:00",
       "evidence": "docs/ai-dj/work/evidence/M17.md",
       "evidence_sha256": "26dd80aa668b170d37b33ce6161a9d7161f7eb813b4c73197106c3916128773f"
+    },
+    "P01": {
+      "status": "accepted",
+      "source_revision": "0945e0b",
+      "accepted_at": "2026-09-13T23:51:20.276018+00:00",
+      "evidence": "docs/ai-dj/work/evidence/P01.md",
+      "evidence_sha256": "0185d55e2c71c76538a1c9cb526cf416bfdc55a929c6b15c14730e826cce89f4",
+      "checks": [
+        "Occurrence-aware playlist/set contracts and normative invariants reviewed against F07/R15 and user decisions.",
+        "A/B/A example, eight negative compile cases, typecheck/build and 192 existing tests passed.",
+        "Contract-only scope; native playlist access, persistence and runtime enforcement remain pending."
+      ]
     }
   },
   "jobs": {

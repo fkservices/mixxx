@@ -83,7 +83,7 @@
     "R22": "planned",
     "R23": "planned",
     "R24": "planned",
-    "P01": "planned",
+    "P01": "accepted",
     "P02": "planned",
     "P03": "planned",
     "P04": "planned",
@@ -212,7 +212,8 @@
     "R04",
     "R05",
     "R15",
-    "R20"
+    "R20",
+    "P01"
   ],
   "dependency_frontier": [
     "M18",
@@ -238,7 +239,9 @@
     "I20",
     "I21",
     "I22",
-    "P01"
+    "P07",
+    "P09",
+    "O01"
   ],
   "dispatchable_now": [],
   "dynamic_task_status": {
