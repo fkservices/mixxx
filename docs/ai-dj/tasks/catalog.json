@@ -848,7 +848,8 @@
       ],
       "owns": [
         "ai-dj/hosts/mixxx/fragments/play-volume.js",
-        "ai-dj/test/host/play-volume.test.ts"
+        "ai-dj/test/host/play-volume.test.ts",
+        "ai-dj/test/host/harness.ts"
       ],
       "locks": [],
       "conditions": "Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.",

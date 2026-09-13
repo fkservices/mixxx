@@ -149,9 +149,9 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** M05. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** M05. **Leases:** Exact path reservation. **Status:** accepted.
 
-**Owns:** `ai-dj/hosts/mixxx/fragments/play-volume.js`, `ai-dj/test/host/play-volume.test.ts`
+**Owns:** `ai-dj/hosts/mixxx/fragments/play-volume.js`, `ai-dj/test/host/play-volume.test.ts`, `ai-dj/test/host/harness.ts`
 
 **Scope:** Two simple controls on two decks.
 

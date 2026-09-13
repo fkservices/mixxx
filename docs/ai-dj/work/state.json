@@ -426,6 +426,20 @@
       "accepted_at": "2026-09-13T20:15:22.635689+00:00",
       "evidence": "docs/ai-dj/work/evidence/M05.md",
       "evidence_sha256": "35d4e51ae1f8a32ae30e621376edaf12073ab6ac7ee21a3b23e4a55d9496ed9b"
+    },
+    "M06": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "a5fc143",
+      "started_at": "2026-09-13T20:17:10.075633+00:00",
+      "accepted_at": "2026-09-13T20:17:46.460384+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M06.md",
+      "evidence_sha256": "9021466a8faab21fae79b684046713a898993f9db3ef8435ddc2e91d3c74b8b6",
+      "checks": [
+        "Fixed desired-play and normalized-volume routes reviewed against F09 and released connection API.",
+        "73 integrated tests, strict typecheck and build passed; all volume bytes and unavailable-route handling tested.",
+        "Fragment not yet assembled or installed; real Mixxx/UI/audio/timing remain later checks."
+      ]
     }
   },
   "jobs": {

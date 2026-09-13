@@ -13,7 +13,8 @@ export interface MappingLifecycle {
 export function createHostHarness(fragments: readonly string[] = []) {
   const values = new Map<string, number>();
   const parameters = new Map<string, number>();
-  const connections = new Set<{ group: string; key: string; callback: Callback; disconnect(): void; trigger(): void }>();
+  const connections = new Set<{ readonly isConnected: boolean; group: string; key: string; callback: Callback; disconnect(): void; trigger(): void }>();
+  const unavailableControls = new Set<string>();
   const timers = new Map<number, Callback>();
   const writes: Array<{ api: string; group: string; key: string; value: number }> = [];
   const packets: number[][] = [];
@@ -31,7 +32,8 @@ export function createHostHarness(fragments: readonly string[] = []) {
     setValue: (g: string, k: string, v: number) => write("setValue", values, g, k, v),
     setParameter: (g: string, k: string, v: number) => write("setParameter", parameters, g, k, v),
     makeConnection(g: string, k: string, callback: Callback) {
-      const connection = { group: g, key: k, callback, disconnect() { connections.delete(connection); }, trigger() { callback(read(values, g, k), g, k); } };
+      if (unavailableControls.has(keyOf(g, k))) return undefined;
+      const connection = { get isConnected(): boolean { return connections.has(connection); }, group: g, key: k, callback, disconnect() { connections.delete(connection); }, trigger() { callback(read(values, g, k), g, k); } };
       connections.add(connection); return connection;
     },
     beginTimer(interval: number, callback: Callback) { assert.ok(Number.isFinite(interval) && interval > 0); const id = nextTimer++; timers.set(id, callback); return id; },
@@ -43,6 +45,7 @@ export function createHostHarness(fragments: readonly string[] = []) {
   for (const [i, fragment] of fragments.entries()) vm.runInContext(fragment, context, { timeout: 1000, filename: `fragment-${i}.js` });
   const mapping = context.AIDJ as MappingLifecycle;
   return { mapping, engine, values, parameters, connections, timers, writes, packets, logs,
+    setAvailable: (group: string, key: string, available: boolean) => { if (available) unavailableControls.delete(keyOf(group, key)); else { unavailableControls.add(keyOf(group, key)); for (const c of [...connections]) if (c.group === group && c.key === key) c.disconnect(); } },
     evaluate: (script: string) => vm.runInContext(script, context, { timeout: 1000 }),
     tick: () => { for (const callback of [...timers.values()]) callback(); },
   };
