@@ -16,6 +16,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Define playlist snapshot/version, distinct occurrence ID, library-scoped track identity, planned vs actual order and terminal outcomes.
@@ -41,6 +43,8 @@
 **Scope:** One paginated ordered-playlist service contract; implementation through OP tasks.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -68,6 +72,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Find existing host load service and identity/error observation; define allowlisted MIDI operation.
@@ -93,6 +99,8 @@
 **Scope:** Inspect prerequisites and launch one build job; no waiting for full compile.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -120,6 +128,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Define request dispatch on appropriate host thread, bounded responses and control/UI notifications.
@@ -145,6 +155,8 @@
 **Scope:** Client consuming frozen paginated contract.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -172,6 +184,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Parse local M3U8 with ordered occurrences, relative paths and bounded input.
@@ -197,6 +211,8 @@
 **Scope:** Resolve one snapshot to stable host IDs.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -224,6 +240,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Persist immutable source snapshot and editable set revision separately.
@@ -249,6 +267,8 @@
 **Scope:** Move/pin/remove/add in the remaining queue.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -276,6 +296,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Require exact occurrence multiset and valid IDs/pins; reject omissions and extra repeats.
@@ -301,6 +323,8 @@
 **Scope:** Stable-ID load client only.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -328,6 +352,8 @@
 
 **Prerequisites:** Playlist-read, bridge and load OP children built/tested/integrated; terminal host build accepted via JOB-REVIEW.
 
+**Evidence gates:** Ordered playlist, bridge and load OP children integrated; terminal host build review accepted.
+
 **Perform:**
 
 1. After required OP children integrate, import native ordered occurrences and load by stable ID with changed UI focus.
@@ -353,6 +379,8 @@
 **Scope:** New named playlist save; preserve source.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -380,6 +408,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Send validated set occurrence order with request identity and revision.
@@ -405,6 +435,8 @@
 **Scope:** One saved set re-open and host read-back.
 
 **Prerequisites:** Playlist-save OP children and host build result accepted.
+
+**Evidence gates:** Save-new-playlist OP children integrated and host build reviewed.
 
 **Perform:**
 
@@ -432,6 +464,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Reconcile actual identity/playhead and played/interrupted occurrences after manual loads or restart.
@@ -457,6 +491,8 @@
 **Scope:** Evidence review only.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 

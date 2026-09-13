@@ -16,6 +16,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Start one communicator service and open UI; preserve performance when tab closes.
@@ -41,6 +43,8 @@
 **Scope:** Loopback origin/session checks only.
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -68,6 +72,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Package pinned Node/native runtime, service, UI and mapping assets with version manifest.
@@ -93,6 +99,8 @@
 **Scope:** Local setup, three modes, recording and recovery only.
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -120,6 +128,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Package exists; explicit save-cue OP descendants and other required component integrations accepted.
+
 **Perform:**
 
 1. Install/launch from artifact, choose native playlist, edit/save and perform short set.
@@ -145,6 +155,8 @@
 **Scope:** Test recipe only; long runs are durable jobs.
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -172,6 +184,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Acquire runtime lease and launch recipe with durable event/audio outputs and job handle.
@@ -197,6 +211,8 @@
 **Scope:** One terminal job review, using bounded summary and flagged excerpts.
 
 **Prerequisites:** L07 job terminal with all JOB observer/review children recorded.
+
+**Evidence gates:** Same L07 job terminal; all required observation/review pages available.
 
 **Perform:**
 
@@ -224,6 +240,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Launch frozen recipe on actual Mixxx with bounded journal/UI queries and local analysis/inference load.
@@ -249,6 +267,8 @@
 **Scope:** One terminal endurance summary plus bounded flagged windows.
 
 **Prerequisites:** L09 terminal and all review pages collected; human evaluation is separate.
+
+**Evidence gates:** Same L09 job terminal; all required observation/review pages available.
 
 **Perform:**
 
@@ -276,6 +296,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Before marking this review accepted: Human listening sessions completed for required packets; no AI self-certification.
+
 **Perform:**
 
 1. Link full recordings, representative blind comparisons and timestamped automated flags.
@@ -301,6 +323,8 @@
 **Scope:** Final evidence index, not rerunning every test.
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** All static cards and required dynamic descendants accepted on the release revision; no orphan jobs or stale gate evidence.
 
 **Perform:**
 

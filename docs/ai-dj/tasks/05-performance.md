@@ -16,6 +16,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Specify preconditions, musical body preservation, cue/sync actions, curves, deadlines and postconditions.
@@ -41,6 +43,8 @@
 **Scope:** State transitions, not all musical policies.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -68,6 +72,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Schedule bounded slopes from observed values with monotonic deadlines.
@@ -93,6 +99,8 @@
 **Scope:** Track lifecycle and eligible musical exposure.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -120,6 +128,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Advance across completed or explicitly resolved occurrences; skip confirmed unplayable entries with reasons and try next playable.
@@ -146,6 +156,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Capture MIDI/state/UI/audio for two accepted templates on actual Mixxx.
@@ -171,6 +183,8 @@
 **Scope:** Review one short set plus playlist gate.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Before marking this review accepted: Human listening response available for this bounded recording packet; otherwise review remains waiting for evidence.
 
 **Perform:**
 

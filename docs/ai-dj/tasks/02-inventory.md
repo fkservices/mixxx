@@ -8,13 +8,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/transport/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -34,13 +36,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/mixer/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -60,13 +64,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/tempo-sync/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -86,13 +92,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/eq-filter/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -112,13 +120,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/effects/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -138,13 +148,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/cues-loops/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -164,13 +176,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/jog-scratch/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -190,13 +204,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/samplers-preview/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -216,13 +232,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/stems/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -242,13 +260,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/inputs-vinyl/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -268,13 +288,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/library-navigation/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -294,13 +316,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/selected-load/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -320,13 +344,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/catalog-selection/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -346,13 +372,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/metadata/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -372,13 +400,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/analysis/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -398,13 +428,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/autodj/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -424,13 +456,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/recording/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -450,13 +484,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/broadcast/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -476,13 +512,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/display/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -502,13 +540,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/sampler-banks/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -528,13 +568,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/library-management/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -554,13 +596,15 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `docs/ai-dj/work/inventory/preferences/page-01.json`
 
 **Scope:** At most 20 canonical candidates or one menu subtree; create INV-PAGE continuations for the rest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -587,6 +631,8 @@
 **Scope:** Merge up to 40 new rows per pass using INV-MERGE; final closure only when all pages done.
 
 **Prerequisites:** All family pages and any INV-PAGE/INV-MERGE children accepted; selected runtime profile available.
+
+**Evidence gates:** Inventory continuation manifest closed; every family and page accounted for.
 
 **Perform:**
 

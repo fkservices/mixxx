@@ -16,6 +16,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Compute duration including overlaps and minimum meaningful section constraints.
@@ -41,6 +43,8 @@
 **Scope:** Snapshot/manual refresh and future-entry live sync.
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -68,6 +72,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Default restricted AI pool; permit verified local additions in free mode.
@@ -93,6 +99,8 @@
 **Scope:** Three selected persistence strategies.
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -120,6 +128,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Consume the versioned host metadata operation; preserve user markers.
@@ -145,6 +155,8 @@
 **Scope:** One opt-in host marker mutation contract.
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -172,6 +184,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Combine AI-selected style with user presets, intensity and custom curve.
@@ -197,6 +211,8 @@
 **Scope:** Confidence-aware hook/phrase scoring over prepared timed text.
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -224,6 +240,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Use ratings, saved settings, set edits and contextual manual actions.
@@ -249,6 +267,8 @@
 **Scope:** Preference versioning and user correction.
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -276,6 +296,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Specify fingerprinted peaks/overview, time scale and source.
@@ -301,6 +323,8 @@
 **Scope:** Local references and explicit recording intent, not an audio engine.
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -328,6 +352,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Keep until delete by default; opt-in age/size cleanup respects pinned sessions.
@@ -353,6 +379,8 @@
 **Scope:** One JSON sharing/export profile.
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -380,6 +408,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Expose automatic/user duration, style, tempo and section settings.
@@ -405,6 +435,8 @@
 **Scope:** Local notes/ratings and preference controls.
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -432,6 +464,8 @@
 
 **Prerequisites:** Waveform ANALYSIS children accepted or missing assets explicitly represented; generation coverage still required at full delivery.
 
+**Evidence gates:** Waveform generator children tracked; missing assets displayed honestly, full delivery still requires agreed generation capability.
+
 **Perform:**
 
 1. Display verified cached waveforms through bounded asset API; add explicit recording/share settings.
@@ -457,6 +491,8 @@
 **Scope:** One Mac profile/port/device setup screen.
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 

@@ -16,6 +16,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Choose development identifier, version/opcodes, session/sequence widths, payload lengths, numeric/string packing and checksum.
@@ -41,6 +43,8 @@
 **Scope:** State machine contract only.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -68,6 +72,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Encode bounded values and UTF-8 using 7-bit-safe framing.
@@ -93,6 +99,8 @@
 **Scope:** Frame parser and fragment reassembly only.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -120,6 +128,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Apply frozen wire framing to Mixxx script entry and output functions.
@@ -145,6 +155,8 @@
 **Scope:** HELLO/capabilities round-trip only.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -172,6 +184,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Emit begin/items/end and change deltas with a consistent revision rule.
@@ -197,6 +211,8 @@
 **Scope:** Snapshot consumer only.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -224,6 +240,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Return ACCEPTED separately from RESULT/ERROR and read current state for unchanged setters.
@@ -249,6 +267,8 @@
 **Scope:** Queue priority and expiry only.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -276,6 +296,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Reject duplicate trigger execution and expire dedupe state by session.
@@ -301,6 +323,8 @@
 **Scope:** Heartbeat state and disconnect behavior.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -328,6 +352,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Invalidate queued commands on track load or ownership change.
@@ -353,6 +379,8 @@
 **Scope:** Guards for active load, audible stop, gain and recording/broadcast.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -380,6 +408,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Define AI Only, B2B and Playlist Only permissions plus mode epochs and separate explicit-disarm latch.
@@ -405,6 +435,8 @@
 **Scope:** Enforcement independent of planner/UI.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -432,6 +464,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Define control-group dependencies, ownership invalidation and touch/intent capability flags.
@@ -457,6 +491,8 @@
 **Scope:** Hold state machine, no planner integration.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -484,6 +520,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Replan from actual user values at the next eligible transition, retaining mode/ownership generations.
@@ -509,6 +547,8 @@
 **Scope:** One explicit pair profile; no NRPN/MIDI2 expansion.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -536,6 +576,8 @@
 
 **Prerequisites:** All integration children accepted; if more than two fragments remain, split before dispatch.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Use INTEGRATE children to wire fragments to frozen interfaces on one branch.
@@ -561,6 +603,8 @@
 **Scope:** One five-case runtime script, at most eight minutes.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -588,6 +632,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Actual physical controller available; capture/manual-intent path verified.
+
 **Perform:**
 
 1. Run AI Only smooth recovery, B2B hold through current transition and conditional later-transition reclaim, plus Playlist Only zero-output cases.
@@ -613,6 +659,8 @@
 **Scope:** Bounded reliability evidence review.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -640,6 +688,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Latch manual Pause/Stop in B2B and cancel play/cue/load dependencies.
@@ -665,6 +715,8 @@
 **Scope:** One actual device/mapping, at most five controls.
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 

@@ -16,6 +16,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Define raw input/output, semantic action, AI intent, actual observation, source/device/epoch, track occurrence and mode/ownership events.
@@ -41,6 +43,8 @@
 **Scope:** One host dispatch observation design; no presumed OS multi-client tap.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -68,6 +72,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Link plan/action IDs to queued, canceled and actually emitted bytes.
@@ -93,6 +99,8 @@
 **Scope:** One controller, mapped+unmapped events and touch if available.
 
 **Prerequisites:** Raw capture OP children built/integrated, selected physical controller available; no fixture substitute for actual hardware.
+
+**Evidence gates:** Actual device/model/mapping selected; required raw-capture OP children built and integrated.
 
 **Perform:**
 
@@ -120,6 +128,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Decode using device mapping/profile into control, direction, normalized value/delta and press/release.
@@ -146,6 +156,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Link explicit request IDs and physical input IDs where evidence exists.
@@ -171,6 +183,8 @@
 **Scope:** Append-only recording with chunk/rotation manifest.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -199,6 +213,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Build deck/occurrence spans, overlaps, curves and mode/ownership intervals with periodic snapshots.
@@ -224,6 +240,8 @@
 **Scope:** One versioned JSON exchange format.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -251,6 +269,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Index chunk/snapshot ranges for live and historical reads.
@@ -276,6 +296,8 @@
 **Scope:** Short mixed-source session including unmapped events.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 

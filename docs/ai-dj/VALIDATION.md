@@ -10,8 +10,9 @@ Run from the repository root:
 
 ```sh
 python3 docs/ai-dj/tasks/render.py --check
+python3 docs/ai-dj/tasks/plan-execution.py --check
 python3 docs/ai-dj/tasks/validate.py
-npx --yes markdownlint-cli2@0.23.2 GOALS.md 'docs/ai-dj/**/*.md'
+npx --yes markdownlint-cli2@0.23.2 GOALS.md TASKS.md 'docs/ai-dj/**/*.md'
 git diff --check
 ```
 
@@ -37,6 +38,12 @@ The separate synthetic session JSON remains an unfinished illustrative excerpt: 
 - Playlist pool, performance mode, source sync and save strategy are separate settings. Missing/unplayable tracks advance with an explicit skip reason; playable omissions still need user action.
 - Full coverage includes all 22 feature families and required dynamic children. Unknown counts, unsupported features and missing runtime evidence cannot disappear from gates.
 - Timing budgets are design targets, and long jobs persist across bounded workers. Actual six-hour capacity, raw-event fidelity, host UI and human listening remain future release evidence.
+
+## Task-planning refinement
+
+The execution compiler now produces 81 reference batches for all 171 cards. Each batch has at most three workers, no same-batch dependencies and no conflicting exact paths or exclusive resources. All 46 live-runtime cards are serialized. These batches are logical order, not timing estimates or dispatched work.
+
+The review corrected dependent tasks shown as parallel, runtime inventory/port tasks missing the prepared-fixture prerequisite, and implicit wait conditions for native installs, host operations, analysis and long-session reviews. M19 now measures only available prototype surfaces; the app-display timing gate is explicitly measured at U08/L05 once that UI exists. The first four assignments have concrete dispatch packets. No new runtime source or hardware configuration was created.
 
 ## Remaining implementation evidence
 

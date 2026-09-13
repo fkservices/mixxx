@@ -1,0 +1,1211 @@
+{
+  "disclosure": "Autonomously AI-generated reference execution plan; no workers dispatched and no runtime built.",
+  "schema_version": 1,
+  "catalog_sha256": "04541f8ab509cbf02df2d32a00549da02ae3d03861af9535970f3788f2bb874c",
+  "authorization": "planning_only",
+  "current_task_status": {
+    "F01": "planned",
+    "F02": "planned",
+    "F03": "planned",
+    "F04": "planned",
+    "F05": "planned",
+    "F06": "planned",
+    "F07": "planned",
+    "F08": "planned",
+    "F09": "planned",
+    "F10": "planned",
+    "F11": "planned",
+    "F12": "planned",
+    "M01": "planned",
+    "M02": "planned",
+    "M03": "planned",
+    "M04": "planned",
+    "M05": "planned",
+    "M06": "planned",
+    "M07": "planned",
+    "M08": "planned",
+    "M09": "planned",
+    "M10": "planned",
+    "M11": "planned",
+    "M12": "planned",
+    "M13": "planned",
+    "M14": "planned",
+    "M15": "planned",
+    "M16": "planned",
+    "M17": "planned",
+    "M18": "planned",
+    "M19": "planned",
+    "M20": "planned",
+    "I01": "planned",
+    "I02": "planned",
+    "I03": "planned",
+    "I04": "planned",
+    "I05": "planned",
+    "I06": "planned",
+    "I07": "planned",
+    "I08": "planned",
+    "I09": "planned",
+    "I10": "planned",
+    "I11": "planned",
+    "I12": "planned",
+    "I13": "planned",
+    "I14": "planned",
+    "I15": "planned",
+    "I16": "planned",
+    "I17": "planned",
+    "I18": "planned",
+    "I19": "planned",
+    "I20": "planned",
+    "I21": "planned",
+    "I22": "planned",
+    "I23": "planned",
+    "R01": "planned",
+    "R02": "planned",
+    "R03": "planned",
+    "R04": "planned",
+    "R05": "planned",
+    "R06": "planned",
+    "R07": "planned",
+    "R08": "planned",
+    "R09": "planned",
+    "R10": "planned",
+    "R11": "planned",
+    "R12": "planned",
+    "R13": "planned",
+    "R14": "planned",
+    "R15": "planned",
+    "R16": "planned",
+    "R17": "planned",
+    "R18": "planned",
+    "R19": "planned",
+    "R20": "planned",
+    "R21": "planned",
+    "R22": "planned",
+    "R23": "planned",
+    "R24": "planned",
+    "P01": "planned",
+    "P02": "planned",
+    "P03": "planned",
+    "P04": "planned",
+    "P05": "planned",
+    "P06": "planned",
+    "P07": "planned",
+    "P08": "planned",
+    "P09": "planned",
+    "P10": "planned",
+    "P11": "planned",
+    "P12": "planned",
+    "P13": "planned",
+    "P14": "planned",
+    "P15": "planned",
+    "P16": "planned",
+    "P17": "planned",
+    "P18": "planned",
+    "D01": "planned",
+    "D02": "planned",
+    "D03": "planned",
+    "D04": "planned",
+    "D05": "planned",
+    "D06": "planned",
+    "D07": "planned",
+    "A01": "planned",
+    "A02": "planned",
+    "A03": "planned",
+    "A04": "planned",
+    "A05": "planned",
+    "A06": "planned",
+    "A07": "planned",
+    "A08": "planned",
+    "A09": "planned",
+    "A10": "planned",
+    "A11": "planned",
+    "A12": "planned",
+    "A13": "planned",
+    "A14": "planned",
+    "O01": "planned",
+    "O02": "planned",
+    "O03": "planned",
+    "O04": "planned",
+    "O05": "planned",
+    "O06": "planned",
+    "O07": "planned",
+    "O08": "planned",
+    "O09": "planned",
+    "O10": "planned",
+    "O11": "planned",
+    "U01": "planned",
+    "U02": "planned",
+    "U03": "planned",
+    "U04": "planned",
+    "U05": "planned",
+    "U06": "planned",
+    "U07": "planned",
+    "U08": "planned",
+    "R25": "planned",
+    "R26": "planned",
+    "P19": "planned",
+    "P20": "planned",
+    "P21": "planned",
+    "P22": "planned",
+    "P23": "planned",
+    "P24": "planned",
+    "A15": "planned",
+    "A16": "planned",
+    "A17": "planned",
+    "A18": "planned",
+    "O12": "planned",
+    "O13": "planned",
+    "O14": "planned",
+    "O15": "planned",
+    "U09": "planned",
+    "U10": "planned",
+    "U11": "planned",
+    "U12": "planned",
+    "C01": "planned",
+    "C02": "planned",
+    "L01": "planned",
+    "L02": "planned",
+    "L03": "planned",
+    "L04": "planned",
+    "L05": "planned",
+    "L06": "planned",
+    "L07": "planned",
+    "L08": "planned",
+    "L09": "planned",
+    "L10": "planned",
+    "L11": "planned",
+    "L12": "planned"
+  },
+  "accepted_task_ids": [],
+  "dependency_frontier": [
+    "F01"
+  ],
+  "dispatchable_now": [],
+  "global_requirements": [
+    "User instruction to start implementation",
+    "Current integrated revision and scoped context",
+    "Independent worker deadline monitor",
+    "Reserved exact paths/resources",
+    "Available model and required evidence"
+  ],
+  "maximum_workers": 3,
+  "coordinator_slots": 1,
+  "batches": [
+    {
+      "id": "B001",
+      "task_ids": [
+        "F01"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B002",
+      "task_ids": [
+        "F02"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B003",
+      "task_ids": [
+        "F03",
+        "F06"
+      ],
+      "worker_slots": 2,
+      "exclusive_resources": [
+        "package-manifest"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B004",
+      "task_ids": [
+        "F04",
+        "F07"
+      ],
+      "worker_slots": 2,
+      "exclusive_resources": [
+        "install-job",
+        "package-manifest"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B005",
+      "task_ids": [
+        "F05",
+        "F08",
+        "F09"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "install-job"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B006",
+      "task_ids": [
+        "F10",
+        "F11",
+        "F12"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B007",
+      "task_ids": [
+        "M01",
+        "M03",
+        "M04"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "midi-enumeration"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B008",
+      "task_ids": [
+        "M02",
+        "R01"
+      ],
+      "worker_slots": 2,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B009",
+      "task_ids": [
+        "M05",
+        "R02",
+        "R03"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mapping-entry",
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B010",
+      "task_ids": [
+        "M06",
+        "M07",
+        "M08"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B011",
+      "task_ids": [
+        "M09",
+        "I01",
+        "R04"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B012",
+      "task_ids": [
+        "M10",
+        "R05",
+        "R15"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mapping-entry",
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B013",
+      "task_ids": [
+        "M11",
+        "I02",
+        "R20"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "app-entry",
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B014",
+      "task_ids": [
+        "M12",
+        "M14",
+        "P01"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B015",
+      "task_ids": [
+        "M13",
+        "P07",
+        "P09"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B016",
+      "task_ids": [
+        "M15",
+        "P10",
+        "O01"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B017",
+      "task_ids": [
+        "M16",
+        "P11",
+        "O02"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B018",
+      "task_ids": [
+        "M17",
+        "O05",
+        "O07"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B019",
+      "task_ids": [
+        "M18",
+        "U01"
+      ],
+      "worker_slots": 2,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B020",
+      "task_ids": [
+        "M19",
+        "I03",
+        "U02"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime",
+        "ui-entry"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B021",
+      "task_ids": [
+        "I04"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B022",
+      "task_ids": [
+        "I05"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B023",
+      "task_ids": [
+        "I06"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B024",
+      "task_ids": [
+        "I07"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B025",
+      "task_ids": [
+        "I08"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B026",
+      "task_ids": [
+        "I09"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B027",
+      "task_ids": [
+        "I10"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B028",
+      "task_ids": [
+        "I11"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B029",
+      "task_ids": [
+        "I12"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B030",
+      "task_ids": [
+        "I13"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B031",
+      "task_ids": [
+        "I14",
+        "P02"
+      ],
+      "worker_slots": 2,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B032",
+      "task_ids": [
+        "I15",
+        "P06"
+      ],
+      "worker_slots": 2,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B033",
+      "task_ids": [
+        "I16",
+        "P20"
+      ],
+      "worker_slots": 2,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B034",
+      "task_ids": [
+        "I17"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B035",
+      "task_ids": [
+        "I18"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B036",
+      "task_ids": [
+        "I19"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B037",
+      "task_ids": [
+        "I20"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B038",
+      "task_ids": [
+        "I21"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B039",
+      "task_ids": [
+        "I22"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B040",
+      "task_ids": [
+        "I23",
+        "O04"
+      ],
+      "worker_slots": 2,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B041",
+      "task_ids": [
+        "M20",
+        "R06"
+      ],
+      "worker_slots": 2,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B042",
+      "task_ids": [
+        "R07"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B043",
+      "task_ids": [
+        "R08"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B044",
+      "task_ids": [
+        "R09"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B045",
+      "task_ids": [
+        "R10",
+        "R13",
+        "O06"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B046",
+      "task_ids": [
+        "R11",
+        "R14",
+        "R17"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B047",
+      "task_ids": [
+        "R12",
+        "P03",
+        "D01"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B048",
+      "task_ids": [
+        "R16",
+        "P04",
+        "P08"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "host-build"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B049",
+      "task_ids": [
+        "R18",
+        "P05",
+        "P12"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B050",
+      "task_ids": [
+        "R19",
+        "P14",
+        "A01"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B051",
+      "task_ids": [
+        "R21",
+        "P15",
+        "D03"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "app-entry",
+        "mapping-entry"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B052",
+      "task_ids": [
+        "R22",
+        "D02",
+        "A02"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B053",
+      "task_ids": [
+        "A03",
+        "A06",
+        "O03"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B054",
+      "task_ids": [
+        "A04",
+        "A07",
+        "U03"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B055",
+      "task_ids": [
+        "A05",
+        "A08",
+        "R25"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B056",
+      "task_ids": [
+        "R23",
+        "P17",
+        "A09"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B057",
+      "task_ids": [
+        "R24",
+        "D04",
+        "U04"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B058",
+      "task_ids": [
+        "P13",
+        "O08",
+        "P19"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B059",
+      "task_ids": [
+        "P16",
+        "O09",
+        "U05"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B060",
+      "task_ids": [
+        "P18",
+        "O10",
+        "R26"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B061",
+      "task_ids": [
+        "D05",
+        "O11",
+        "U06"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B062",
+      "task_ids": [
+        "D06",
+        "U07",
+        "P21"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B063",
+      "task_ids": [
+        "D07",
+        "P22",
+        "P23"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B064",
+      "task_ids": [
+        "A13",
+        "P24",
+        "A15"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B065",
+      "task_ids": [
+        "A16",
+        "A17",
+        "O12"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B066",
+      "task_ids": [
+        "A10",
+        "A18",
+        "O13"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B067",
+      "task_ids": [
+        "A11",
+        "O14",
+        "O15"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B068",
+      "task_ids": [
+        "A12",
+        "U09",
+        "U10"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B069",
+      "task_ids": [
+        "A14",
+        "U11",
+        "U12"
+      ],
+      "worker_slots": 3,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B070",
+      "task_ids": [
+        "C01",
+        "L01"
+      ],
+      "worker_slots": 2,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B071",
+      "task_ids": [
+        "C02",
+        "L02"
+      ],
+      "worker_slots": 2,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B072",
+      "task_ids": [
+        "U08",
+        "L03"
+      ],
+      "worker_slots": 2,
+      "exclusive_resources": [
+        "mixxx-runtime",
+        "package-manifest"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B073",
+      "task_ids": [
+        "L04"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B074",
+      "task_ids": [
+        "L05"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B075",
+      "task_ids": [
+        "L06"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B076",
+      "task_ids": [
+        "L07"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B077",
+      "task_ids": [
+        "L08"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B078",
+      "task_ids": [
+        "L09"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [
+        "mixxx-runtime"
+      ],
+      "status": "reference_only"
+    },
+    {
+      "id": "B079",
+      "task_ids": [
+        "L10"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B080",
+      "task_ids": [
+        "L11"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    },
+    {
+      "id": "B081",
+      "task_ids": [
+        "L12"
+      ],
+      "worker_slots": 1,
+      "exclusive_resources": [],
+      "status": "reference_only"
+    }
+  ],
+  "checkpoints": [
+    {
+      "id": "G0",
+      "title": "Baseline and working contracts",
+      "requires": [
+        "F01",
+        "F02",
+        "F03",
+        "F07",
+        "F09",
+        "F10",
+        "F12"
+      ],
+      "acceptance": "Named profile, package checks and typed contracts; no MIDI success claim.",
+      "status": "not_started"
+    },
+    {
+      "id": "G1",
+      "title": "First real MIDI proof",
+      "requires": [
+        "M20"
+      ],
+      "acceptance": "Five controls, observed feedback, timing review and initial all-family inventory.",
+      "status": "not_started"
+    },
+    {
+      "id": "G2",
+      "title": "Reliable shared control",
+      "requires": [
+        "R24",
+        "R26"
+      ],
+      "acceptance": "Real-controller B2B, AI Only, Playlist Only, mode changes and deterministic disarm.",
+      "status": "not_started"
+    },
+    {
+      "id": "G3",
+      "title": "Native playlist and deterministic set",
+      "requires": [
+        "P18",
+        "D07"
+      ],
+      "acceptance": "Ordered native occurrences, stable loads, saves, accounting and reviewed transitions.",
+      "status": "not_started"
+    },
+    {
+      "id": "G4",
+      "title": "AI set with live and historical UI",
+      "requires": [
+        "A14",
+        "U08",
+        "U09",
+        "U10",
+        "U11",
+        "U12"
+      ],
+      "acceptance": "Constrained AI, requested settings, session capture and human-reviewed musical choices.",
+      "status": "not_started"
+    },
+    {
+      "id": "G5",
+      "title": "Full Mixxx feature evidence",
+      "requires": [
+        "C02"
+      ],
+      "acceptance": "All 22 families, every required canonical capability and four independent evidence dimensions.",
+      "status": "not_started"
+    },
+    {
+      "id": "G6",
+      "title": "Desktop release candidate",
+      "requires": [
+        "L12"
+      ],
+      "acceptance": "Clean setup, whole-set/soak/endurance, completed dynamic work and human listening acceptance.",
+      "status": "not_started"
+    }
+  ],
+  "caveats": [
+    "Reference batches are logical order, not calendar promises.",
+    "An item in a batch is not runnable until dependencies and evidence are actually accepted.",
+    "Long jobs retain resource leases across worker handoffs. Recompute readiness after every result.",
+    "Three workers is a ceiling, not a target. Never fill a slot with blocked or conflicting work.",
+    "Templates/continuations/defects add cards and force regeneration."
+  ],
+  "generation_end": "End of autonomously AI-generated reference execution plan."
+}

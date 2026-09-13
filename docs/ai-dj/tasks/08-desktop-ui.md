@@ -16,6 +16,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Choose minimal TS/HTML UI framework and define playlist, set, live session, history and mode controls.
@@ -41,6 +43,8 @@
 **Scope:** Shell/navigation and reconnect/stale indicator only.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -68,6 +72,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Show native playlist issues and every occurrence, then AI order with reasons.
@@ -93,6 +99,8 @@
 **Scope:** Mode/arm/disarm/per-control hold display.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -121,6 +129,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Render actual occurrence spans over common session clock with zoom and live-follow.
@@ -146,6 +156,8 @@
 **Scope:** Curves/markers and bounded event inspector.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -173,6 +185,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Load exported JSON/session index and restore timeline from nearest snapshot.
@@ -199,6 +213,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Observe live tracks/actions from actual Mixxx, then load its exported history.
@@ -208,6 +224,7 @@
 
 1. Require live and saved projections agree on order/durations/curves/ownership.
 2. Check keyboard controls, narrow-window readability and history zero-output property.
+3. Measure host observation to actual app display against p95 <=100 ms, with clock uncertainty; this closes the app-display measurement deferred by M19.
 
 **Evidence:** `docs/ai-dj/work/evidence/U08.md`. Stop expanding scope by minute 20. If any remaining execution or validation cannot finish by minute 25, create bounded continuation cards using SPLIT; hand off by minute 27. Supervisor stops worker at minute 30.
 

@@ -53,14 +53,7 @@ Report exact changes, checks, gaps, evidence and next children. Never mark parti
 
 The dependency DAG gives order; it does not alone authorize parallel writes. Coordinator checks exact path overlap and imported contract revisions before every batch. Files listed as owned by earlier tasks transfer only after those tasks are accepted. Contributions to shared entrypoints go through an INTEGRATE task.
 
-| Candidate batch | Prerequisites | Separation |
-| --- | --- | --- |
-| F06 + F04 + F11 | F02/F03/F09 as each card requires | Contract, install and runtime setup; do not launch until the individual prerequisites are satisfied |
-| M06 + M07 + M08 | M05 accepted | Separate mapping fragments; M10 owns final assembly |
-| I01 + I02 + I03, then further pages | F01/F10 accepted | Distinct family files; defer UI runtime cross-checks if runtime lease is occupied |
-| P06 + P07 | Their contracts accepted | Native page client and M3U8 parser files |
-| O03 + P20 + A15 | Each card's dependencies accepted | Recorder tap, source-sync and energy policy modules |
-| U03 + U04 + U05 | Respective dependencies accepted | Separate screens; shared shell changes queued to integrator |
+Use the [validated execution batches](tasks/batches.md) and [task board](../../TASKS.md) instead of illustrative groupings. Their compiler checks accepted-prerequisite ordering, a maximum of three workers, exact owned paths and exclusive resource conflicts. Runtime inventory cards require F11 and cannot run together on the same fixture. [First dispatch packets](FIRST-BATCH.md) bind the starting handoffs. See [execution rules](EXECUTION-PLAN.md) for actual readiness and long-job gates.
 
 Exclusive resources include `package-manifest`, `mapping-entry`, `ui-entry`, `host-build`, MIDI enumeration/configuration and `mixxx-runtime`. The runtime lease covers the exact Mixxx profile, ports, audio device, physical controller, native UI and output recording. Use one live runtime owner. Never run a second test against a profile/port already owned by a long job. Read-only work is parallel only when it does not perturb the measurement.
 
@@ -89,7 +82,7 @@ Milestone 1 inventories every family but may record implementation gaps. Full-co
 
 ## Validation and completion
 
-Run `python3 docs/ai-dj/tasks/render.py --check` and `python3 docs/ai-dj/tasks/validate.py` after planning changes. During implementation, F03 supplies focused typecheck/test/build commands; cards must bind exact invocations before dispatch. Apply meaningful failure/race tests and actual Mixxx/UI/audio/controller checks wherever the card requires them. Synthetic JSON or mock tests cannot substitute for these gates.
+Run `python3 docs/ai-dj/tasks/render.py --check`, `python3 docs/ai-dj/tasks/plan-execution.py --check` and `python3 docs/ai-dj/tasks/validate.py` after planning changes. During implementation, F03 supplies focused typecheck/test/build commands; cards must bind exact invocations before dispatch. Apply meaningful failure/race tests and actual Mixxx/UI/audio/controller checks wherever the card requires them. Synthetic JSON or mock tests cannot substitute for these gates.
 
 L12 accepts only a coherent integrated revision with native playlist operations, three modes, physical B2B, all required Mixxx feature evidence, live/history UI, whole-set accounting, endurance, timing and explicit human listening acceptance. Planning completion does not mark any of those runtime gates passed.
 

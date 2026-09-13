@@ -16,6 +16,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Wrap binding enumeration behind a transport interface.
@@ -34,13 +36,15 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** M01. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** M01, F11. **Leases:** mixxx-runtime. **Status:** planned.
 
 **Owns:** `ai-dj/midi/connection.ts`, `ai-dj/test/midi/connection.test.ts`
 
 **Scope:** Open/close two routes with explicit filter configuration.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -68,6 +72,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Convert validated actions to frozen profile bytes with explicit scaling.
@@ -93,6 +99,8 @@
 **Scope:** Only feedback for five initial controls.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -120,6 +128,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Add mapping registration for the frozen conventional profile and a single deterministic script namespace.
@@ -145,6 +155,8 @@
 **Scope:** Two simple controls on two decks.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -172,6 +184,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Normalize crossfader without confusing raw -1..1 and parameter 0..1.
@@ -197,6 +211,8 @@
 **Scope:** One explicit sync semantic from F09.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -224,6 +240,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Subscribe to actual host changes and encode feedback on separate route.
@@ -249,6 +267,8 @@
 **Scope:** One deterministic bundle; fragments are already accepted.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -276,6 +296,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Connect transport, codecs, observed store and diagnostics; default disarmed.
@@ -301,6 +323,8 @@
 **Scope:** Three simple controls, two decks, fixed small test sequence.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -328,6 +352,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Exercise cue press/release and selected sync behavior in actual host.
@@ -353,6 +379,8 @@
 **Scope:** Capture and summaries, no live benchmark yet.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -380,6 +408,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Run loopback calibration, then simple-control host confirmation sampling as distinct phases.
@@ -405,6 +435,8 @@
 **Scope:** Same at-most-eight-minute sequence with controlled separate-process CPU load.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -432,6 +464,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Record actual host UI with timestamped stimulus and a documented clock/frame calibration.
@@ -457,6 +491,8 @@
 **Scope:** One short recorded cue/play/sync test using known local fixture audio.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -484,16 +520,18 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** All timing runs use the same frozen profile; any measured corrections stay in a tracked child chain.
+
 **Perform:**
 
-1. Compare DEFAULTS command observation p95 <=30 ms / p99 <=75 ms and app display p95 <=100 ms; review native UI, audio, tails and jitter separately.
-2. Decide Node executor sufficient, further measurement needed, or native/host scheduler spike required.
-3. Freeze or evaluate the proposed DEFAULTS R3-Q17 budgets and a host-quantized audible timing gate, with clock uncertainty; targets are not measured claims.
+1. Compare command-to-observation p95 <=30 ms / p99 <=75 ms with observed native UI, audio, jitter and clock uncertainty.
+2. Decide Node executor sufficient for the tested controls, further measurement needed, or a narrow scheduler correction required.
+3. Keep the app-display p95 <=100 ms budget explicitly unmeasured until U08/L05; do not treat log timestamps as a measurement of an unbuilt app UI.
 
 **Validate:**
 
-1. Compare DEFAULTS budgets: command-to-observation p95 <=30 ms / p99 <=75 ms, observed state to app UI p95 <=100 ms; assess native UI, audible timing and clock uncertainty separately.
-2. Preserve failed/unmeasured budgets; if extension needed instantiate SCHED tasks before claiming timing acceptance.
+1. Require real command/state/native-UI/audio evidence for the tested initial profile, with limits and missed deadlines.
+2. Instantiate SCHED children for failed timing gates; U08/L05 owns later app-display measurement, so neither pretend it passed nor silently require unbuilt UI for M1.
 
 **Evidence:** `docs/ai-dj/work/evidence/M19.md`. Stop expanding scope by minute 20. If any remaining execution or validation cannot finish by minute 25, create bounded continuation cards using SPLIT; hand off by minute 27. Supervisor stops worker at minute 30.
 
@@ -510,6 +548,8 @@
 **Scope:** Evidence audit only.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Any timing-correction children required by M19 accepted; inventory closure accepted.
 
 **Perform:**
 

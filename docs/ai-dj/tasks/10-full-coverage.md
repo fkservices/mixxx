@@ -16,6 +16,8 @@
 
 **Prerequisites:** Dependencies accepted on integrated revision; dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. For each canonical feature allocate CAP-SPEC/BUILD/TEST/RUNTIME children or link accepted implementation evidence.
@@ -41,6 +43,8 @@
 **Scope:** Review at most twenty family closure summaries; continuation required for remainder.
 
 **Prerequisites:** All capability expansion pages materialized and required CAP/OP children accepted; any failure keeps this gate open.
+
+**Evidence gates:** All capability expansion pages and required CAP/OP descendants accepted, with zero unresolved required feature gaps.
 
 **Perform:**
 

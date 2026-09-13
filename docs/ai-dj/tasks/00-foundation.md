@@ -16,16 +16,19 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Record OS/CPU/audio setup and installed tools without secrets; compare available stable/alpha features against RESEARCH.md.
 2. Choose exact host version, test-profile location and two safe local fixture tracks; record deferred alpha/QML profiles.
-3. Freeze or evaluate the proposed DEFAULTS R3-Q17 budgets and a host-quantized audible timing gate, with clock uncertainty; targets are not measured claims.
+3. Select proposed budgets from DEFAULTS R3-Q17 and specify how later M19 will measure/accept them, including clock uncertainty. Do not claim to measure nonexistent runtime behavior in F01.
 
 **Validate:**
 
 1. Verify host version using actual executable or record installation pending; distinguish inspected source from runtime.
 2. Confirm fixtures do not overwrite a live performance profile and decisions preserve all-local testing.
+3. Record unavailable host/fixture evidence explicitly and materialize a setup prerequisite for F11; documentation-only baseline selection can finish without falsely claiming installation.
 
 **Evidence:** `docs/ai-dj/work/evidence/F01.md`. Stop expanding scope by minute 20. If any remaining execution or validation cannot finish by minute 25, create bounded continuation cards using SPLIT; hand off by minute 27. Supervisor stops worker at minute 30.
 
@@ -42,6 +45,8 @@
 **Scope:** One independent TypeScript package under ai-dj/ in this fork; no framework selection exercise.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -69,6 +74,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Create private package and strict TS configuration with bounded test selection.
@@ -95,6 +102,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Check current binding documentation and choose a compatible Node/package candidate.
@@ -119,7 +128,9 @@
 
 **Scope:** Review one terminal installation and load the binding; do not debug a chain of unrelated build errors.
 
-**Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+**Prerequisites:** F04 install job is terminal and its exit/log artifacts are available. While it is running, use a separate JOB-OBSERVE child and continue independent tasks; do not occupy F05 waiting for completion.
+
+**Evidence gates:** Terminal native-install result accepted, successful import required before accepting F05.
 
 **Perform:**
 
@@ -147,6 +158,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Define desired-state, trigger, momentary and relative actions with IDs, deadlines and bounded arguments.
@@ -172,6 +185,8 @@
 **Scope:** Only state/capability types and freshness rules.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -199,6 +214,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Implement bounded parsing of external action and state inputs; reject unknown fields according to frozen contract.
@@ -224,6 +241,8 @@
 **Scope:** Five initial controls: play, volume, crossfader, cue, sync.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 
@@ -251,6 +270,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
+
 **Perform:**
 
 1. Specify canonical IDs, aliases, version/UI profile, instance counts, control or service operation and command/feedback/UI/runtime evidence.
@@ -277,6 +298,8 @@
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
 
+**Evidence gates:** Selected Mixxx executable/profile and two operator-provided usable tracks available; any install/setup jobs reviewed.
+
 **Perform:**
 
 1. Prepare isolated profile with chosen skin; record track identities, tempo and safe output routing.
@@ -302,6 +325,8 @@
 **Scope:** Structured event capture only; no performance dashboard.
 
 **Prerequisites:** Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.
+
+**Evidence gates:** Accepted dependency evidence and dispatch checks.
 
 **Perform:**
 

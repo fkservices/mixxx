@@ -15,7 +15,7 @@ for stage in sorted({t['stage'] for t in data['tasks']}):
     index.append(f'| [{stage}]({stage}.md) | {len(tasks)} |')
     lines = [f'# {stage}', '', '> Autonomously AI-generated planning cards. No implementation claimed.', '', '[Worker rules](../WORKER-TASKS.md) · [Catalog](README.md)', '']
     for t in tasks:
-        lines += [f"## {t['id']}: {t['title']}", '', f"**Worker:** {t['level']} / `{t['model']}` / {t['reasoning_effort']}. **Budget:** 25 minutes; maximum 30 including handoff.", '', f"**Dependencies:** {', '.join(t['depends_on']) or 'None'}. **Leases:** {', '.join(t['locks']) or 'Exact path reservation'}. **Status:** planned.", '', f"**Owns:** {', '.join('`'+p+'`' for p in t['owns'])}", '', '**Scope:** '+t['scope'], '', '**Prerequisites:** '+t['conditions'], '', '**Perform:**', '']
+        lines += [f"## {t['id']}: {t['title']}", '', f"**Worker:** {t['level']} / `{t['model']}` / {t['reasoning_effort']}. **Budget:** 25 minutes; maximum 30 including handoff.", '', f"**Dependencies:** {', '.join(t['depends_on']) or 'None'}. **Leases:** {', '.join(t['locks']) or 'Exact path reservation'}. **Status:** planned.", '', f"**Owns:** {', '.join('`'+p+'`' for p in t['owns'])}", '', '**Scope:** '+t['scope'], '', '**Prerequisites:** '+t['conditions'], '', '**Evidence gates:** '+(' '.join(t.get('entry_requirements', [])) or 'Accepted dependency evidence and dispatch checks.'), '', '**Perform:**', '']
         lines += [f'{i}. {v}' for i,v in enumerate(t['perform'],1)]
         lines += ['', '**Validate:**', ''] + [f'{i}. {v}' for i,v in enumerate(t['validate'],1)]
         lines += ['', f"**Evidence:** `{t['evidence']}`. {t['split_rule']}", '', '**Completion:** '+t['dynamic_completion'], '']

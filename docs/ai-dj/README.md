@@ -12,6 +12,10 @@ The user supplies a Mixxx playlist; AI may arrange the order while preserving ev
 
 ## Documents
 
+- [Task board](../../TASKS.md): current status, first handoffs and checkpoint order.
+- [Execution plan](EXECUTION-PLAN.md): validated batches and actual readiness rules.
+- [First dispatch packets](FIRST-BATCH.md): concrete starting assignments.
+
 - [Current goal](../../GOALS.md): authoritative scope and planning completion criteria.
 - [All 60 discovery decisions](DISCOVERY.md): user answers and delegated defaults, with provenance.
 - [Delegated defaults](DEFAULTS.md): editable starting policies and numeric targets.

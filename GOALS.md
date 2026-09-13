@@ -4,7 +4,7 @@
 
 **Goal instruction:** Follow GOALS.md.
 
-**Planning status:** discovery, aligned specifications, HTML direction and bounded task catalog are prepared and validated. Runtime implementation remains unstarted; all implementation cards are planned. Publication and verification are recorded in the delivery commit and response.
+**Planning status:** discovery, aligned specifications, HTML direction and bounded task catalog are prepared and validated. Runtime implementation remains unstarted; all implementation cards are planned. Task planning now includes a [task board](TASKS.md), validated execution batches, explicit evidence gates and concrete first dispatch packets. Publication and verification are recorded in the delivery commits and responses.
 
 **Current phase: planning only.** Produce a complete, reviewable implementation plan and small worker assignments. Do not implement the DJ runtime, install audio/MIDI hardware integrations or claim a working DJ product in this phase. Commit and push the planning documents to the existing fork branch as already authorized.
 
@@ -93,7 +93,7 @@ Planning is complete only when these artifacts cover the whole current scope and
 - [Feature coverage](docs/ai-dj/CONTROL-COVERAGE.md)
 - [Source research](docs/ai-dj/RESEARCH.md)
 
-The [worker catalog](docs/ai-dj/WORKER-TASKS.md) and [traceability](docs/ai-dj/TRACEABILITY.md) define the planned implementation. [Planning validation](docs/ai-dj/VALIDATION.md) records checks of these artifacts, separate from future runtime proof.
+The [task board](TASKS.md), [execution plan](docs/ai-dj/EXECUTION-PLAN.md), [first dispatch packets](docs/ai-dj/FIRST-BATCH.md), [worker catalog](docs/ai-dj/WORKER-TASKS.md) and [traceability](docs/ai-dj/TRACEABILITY.md) define the planned implementation. [Planning validation](docs/ai-dj/VALIDATION.md) records checks of these artifacts, separate from future runtime proof.
 
 ## Updating this goal
 

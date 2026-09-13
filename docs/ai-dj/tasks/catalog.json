@@ -49,11 +49,12 @@
       "perform": [
         "Record OS/CPU/audio setup and installed tools without secrets; compare available stable/alpha features against RESEARCH.md.",
         "Choose exact host version, test-profile location and two safe local fixture tracks; record deferred alpha/QML profiles.",
-        "Freeze or evaluate the proposed DEFAULTS R3-Q17 budgets and a host-quantized audible timing gate, with clock uncertainty; targets are not measured claims."
+        "Select proposed budgets from DEFAULTS R3-Q17 and specify how later M19 will measure/accept them, including clock uncertainty. Do not claim to measure nonexistent runtime behavior in F01."
       ],
       "validate": [
         "Verify host version using actual executable or record installation pending; distinguish inspected source from runtime.",
-        "Confirm fixtures do not overwrite a live performance profile and decisions preserve all-local testing."
+        "Confirm fixtures do not overwrite a live performance profile and decisions preserve all-local testing.",
+        "Record unavailable host/fixture evidence explicitly and materialize a setup prerequisite for F11; documentation-only baseline selection can finish without falsely claiming installation."
       ],
       "evidence": "docs/ai-dj/work/evidence/F01.md",
       "split_rule": "Stop expanding scope by minute 20. If any remaining execution or validation cannot finish by minute 25, create bounded continuation cards using SPLIT; hand off by minute 27. Supervisor stops worker at minute 30.",
@@ -67,7 +68,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "F02",
@@ -110,7 +112,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "F03",
@@ -158,7 +161,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "F04",
@@ -206,7 +210,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "F05",
@@ -229,7 +234,7 @@
       "locks": [
         "install-job"
       ],
-      "conditions": "Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.",
+      "conditions": "F04 install job is terminal and its exit/log artifacts are available. While it is running, use a separate JOB-OBSERVE child and continue independent tasks; do not occupy F05 waiting for completion.",
       "scope": "Review one terminal installation and load the binding; do not debug a chain of unrelated build errors.",
       "perform": [
         "Resume the same F04 handle through JOB-OBSERVE if needed, then collect its terminal status.",
@@ -251,7 +256,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Terminal native-install result accepted, successful import required before accepting F05."
+      ]
     },
     {
       "id": "F06",
@@ -295,7 +303,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "F07",
@@ -340,7 +349,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "F08",
@@ -385,7 +395,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "F09",
@@ -429,7 +440,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "F10",
@@ -473,7 +485,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "F11",
@@ -519,7 +532,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Selected Mixxx executable/profile and two operator-provided usable tracks available; any install/setup jobs reviewed."
+      ]
     },
     {
       "id": "F12",
@@ -565,7 +581,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M01",
@@ -612,7 +629,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M02",
@@ -627,7 +645,8 @@
       },
       "max_worker_minutes": 30,
       "depends_on": [
-        "M01"
+        "M01",
+        "F11"
       ],
       "owns": [
         "ai-dj/midi/connection.ts",
@@ -658,7 +677,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M03",
@@ -703,7 +723,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M04",
@@ -748,7 +769,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M05",
@@ -798,7 +820,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M06",
@@ -842,7 +865,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M07",
@@ -886,7 +910,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M08",
@@ -930,7 +955,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M09",
@@ -974,7 +1000,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M10",
@@ -1024,7 +1051,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M11",
@@ -1075,7 +1103,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M12",
@@ -1122,7 +1151,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M13",
@@ -1167,7 +1197,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M14",
@@ -1212,7 +1243,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M15",
@@ -1258,7 +1290,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M16",
@@ -1303,7 +1336,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M17",
@@ -1349,7 +1383,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M18",
@@ -1395,7 +1430,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "M19",
@@ -1422,13 +1458,13 @@
       "conditions": "Dependencies accepted on the integrated revision; common dispatch prerequisites in WORKER-TASKS.md apply.",
       "scope": "Review four terminal reports; do not implement a scheduler.",
       "perform": [
-        "Compare DEFAULTS command observation p95 <=30 ms / p99 <=75 ms and app display p95 <=100 ms; review native UI, audio, tails and jitter separately.",
-        "Decide Node executor sufficient, further measurement needed, or native/host scheduler spike required.",
-        "Freeze or evaluate the proposed DEFAULTS R3-Q17 budgets and a host-quantized audible timing gate, with clock uncertainty; targets are not measured claims."
+        "Compare command-to-observation p95 <=30 ms / p99 <=75 ms with observed native UI, audio, jitter and clock uncertainty.",
+        "Decide Node executor sufficient for the tested controls, further measurement needed, or a narrow scheduler correction required.",
+        "Keep the app-display p95 <=100 ms budget explicitly unmeasured until U08/L05; do not treat log timestamps as a measurement of an unbuilt app UI."
       ],
       "validate": [
-        "Compare DEFAULTS budgets: command-to-observation p95 <=30 ms / p99 <=75 ms, observed state to app UI p95 <=100 ms; assess native UI, audible timing and clock uncertainty separately.",
-        "Preserve failed/unmeasured budgets; if extension needed instantiate SCHED tasks before claiming timing acceptance."
+        "Require real command/state/native-UI/audio evidence for the tested initial profile, with limits and missed deadlines.",
+        "Instantiate SCHED children for failed timing gates; U08/L05 owns later app-display measurement, so neither pretend it passed nor silently require unbuilt UI for M1."
       ],
       "evidence": "docs/ai-dj/work/evidence/M19.md",
       "split_rule": "Stop expanding scope by minute 20. If any remaining execution or validation cannot finish by minute 25, create bounded continuation cards using SPLIT; hand off by minute 27. Supervisor stops worker at minute 30.",
@@ -1442,7 +1478,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "All timing runs use the same frozen profile; any measured corrections stay in a tracked child chain."
+      ]
     },
     {
       "id": "M20",
@@ -1486,7 +1525,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Any timing-correction children required by M19 accepted; inventory closure accepted."
+      ]
     },
     {
       "id": "I01",
@@ -1502,7 +1544,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/transport/page-01.json"
@@ -1532,7 +1575,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I02",
@@ -1548,7 +1592,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/mixer/page-01.json"
@@ -1578,7 +1623,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I03",
@@ -1594,7 +1640,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/tempo-sync/page-01.json"
@@ -1624,7 +1671,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I04",
@@ -1640,7 +1688,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/eq-filter/page-01.json"
@@ -1670,7 +1719,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I05",
@@ -1686,7 +1736,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/effects/page-01.json"
@@ -1716,7 +1767,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I06",
@@ -1732,7 +1784,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/cues-loops/page-01.json"
@@ -1762,7 +1815,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I07",
@@ -1778,7 +1832,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/jog-scratch/page-01.json"
@@ -1808,7 +1863,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I08",
@@ -1824,7 +1880,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/samplers-preview/page-01.json"
@@ -1854,7 +1911,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I09",
@@ -1870,7 +1928,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/stems/page-01.json"
@@ -1900,7 +1959,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I10",
@@ -1916,7 +1976,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/inputs-vinyl/page-01.json"
@@ -1946,7 +2007,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I11",
@@ -1962,7 +2024,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/library-navigation/page-01.json"
@@ -1992,7 +2055,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I12",
@@ -2008,7 +2072,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/selected-load/page-01.json"
@@ -2038,7 +2103,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I13",
@@ -2054,7 +2120,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/catalog-selection/page-01.json"
@@ -2084,7 +2151,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I14",
@@ -2100,7 +2168,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/metadata/page-01.json"
@@ -2130,7 +2199,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I15",
@@ -2146,7 +2216,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/analysis/page-01.json"
@@ -2176,7 +2247,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I16",
@@ -2192,7 +2264,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/autodj/page-01.json"
@@ -2222,7 +2295,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I17",
@@ -2238,7 +2312,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/recording/page-01.json"
@@ -2268,7 +2343,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I18",
@@ -2284,7 +2360,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/broadcast/page-01.json"
@@ -2314,7 +2391,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I19",
@@ -2330,7 +2408,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/display/page-01.json"
@@ -2360,7 +2439,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I20",
@@ -2376,7 +2456,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/sampler-banks/page-01.json"
@@ -2406,7 +2487,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I21",
@@ -2422,7 +2504,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/library-management/page-01.json"
@@ -2452,7 +2535,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I22",
@@ -2468,7 +2552,8 @@
       "max_worker_minutes": 30,
       "depends_on": [
         "F10",
-        "F01"
+        "F01",
+        "F11"
       ],
       "owns": [
         "docs/ai-dj/work/inventory/preferences/page-01.json"
@@ -2498,7 +2583,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "I23",
@@ -2563,7 +2649,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Inventory continuation manifest closed; every family and page accounted for."
+      ]
     },
     {
       "id": "R01",
@@ -2607,7 +2696,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R02",
@@ -2651,7 +2741,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R03",
@@ -2696,7 +2787,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R04",
@@ -2740,7 +2832,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R05",
@@ -2786,7 +2879,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R06",
@@ -2833,7 +2927,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R07",
@@ -2877,7 +2972,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R08",
@@ -2921,7 +3017,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R09",
@@ -2966,7 +3063,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R10",
@@ -3010,7 +3108,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R11",
@@ -3055,7 +3154,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R12",
@@ -3100,7 +3200,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R13",
@@ -3145,7 +3246,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R14",
@@ -3190,7 +3292,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R15",
@@ -3234,7 +3337,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R16",
@@ -3281,7 +3385,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R17",
@@ -3325,7 +3430,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R18",
@@ -3370,7 +3476,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R19",
@@ -3414,7 +3521,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R20",
@@ -3459,7 +3567,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R21",
@@ -3517,7 +3626,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R22",
@@ -3563,7 +3673,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R23",
@@ -3610,7 +3721,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Actual physical controller available; capture/manual-intent path verified."
+      ]
     },
     {
       "id": "R24",
@@ -3653,7 +3767,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P01",
@@ -3699,7 +3814,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P02",
@@ -3743,7 +3859,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P03",
@@ -3789,7 +3906,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P04",
@@ -3837,7 +3955,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P05",
@@ -3881,7 +4000,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P06",
@@ -3927,7 +4047,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P07",
@@ -3972,7 +4093,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P08",
@@ -4018,7 +4140,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P09",
@@ -4063,7 +4186,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P10",
@@ -4107,7 +4231,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P11",
@@ -4152,7 +4277,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P12",
@@ -4198,7 +4324,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P13",
@@ -4247,7 +4374,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Ordered playlist, bridge and load OP children integrated; terminal host build review accepted."
+      ]
     },
     {
       "id": "P14",
@@ -4292,7 +4422,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P15",
@@ -4337,7 +4468,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P16",
@@ -4383,7 +4515,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Save-new-playlist OP children integrated and host build reviewed."
+      ]
     },
     {
       "id": "P17",
@@ -4430,7 +4565,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P18",
@@ -4476,7 +4612,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "D01",
@@ -4520,7 +4657,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "D02",
@@ -4566,7 +4704,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "D03",
@@ -4612,7 +4751,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "D04",
@@ -4657,7 +4797,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "D05",
@@ -4704,7 +4845,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "D06",
@@ -4750,7 +4892,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "D07",
@@ -4793,7 +4936,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Before marking this review accepted: Human listening response available for this bounded recording packet; otherwise review remains waiting for evidence."
+      ]
     },
     {
       "id": "A01",
@@ -4838,7 +4984,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A02",
@@ -4881,7 +5028,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A03",
@@ -4927,7 +5075,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A04",
@@ -4970,7 +5119,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A05",
@@ -5013,7 +5163,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Required ANALYSIS children and terminal analysis-job reviews accepted."
+      ]
     },
     {
       "id": "A06",
@@ -5058,7 +5211,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A07",
@@ -5105,7 +5259,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A08",
@@ -5149,7 +5304,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A09",
@@ -5194,7 +5350,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A10",
@@ -5244,7 +5401,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A11",
@@ -5294,7 +5452,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A12",
@@ -5340,7 +5499,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Chosen model is actually installed; download/install JOB results accepted."
+      ]
     },
     {
       "id": "A13",
@@ -5385,7 +5547,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A14",
@@ -5429,7 +5592,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Before marking this review accepted: Human comparison ratings available; otherwise prepare packet then leave acceptance pending."
+      ]
     },
     {
       "id": "O01",
@@ -5475,7 +5641,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "O02",
@@ -5519,7 +5686,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "O03",
@@ -5564,7 +5732,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "O04",
@@ -5610,7 +5779,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Actual device/model/mapping selected; required raw-capture OP children built and integrated."
+      ]
     },
     {
       "id": "O05",
@@ -5656,7 +5828,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "O06",
@@ -5701,7 +5874,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "O07",
@@ -5747,7 +5921,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "O08",
@@ -5793,7 +5968,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "O09",
@@ -5837,7 +6013,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "O10",
@@ -5881,7 +6058,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "O11",
@@ -5930,7 +6108,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "U01",
@@ -5975,7 +6154,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "U02",
@@ -6024,7 +6204,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "U03",
@@ -6070,7 +6251,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "U04",
@@ -6118,7 +6300,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "U05",
@@ -6163,7 +6346,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "U06",
@@ -6209,7 +6393,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "U07",
@@ -6254,7 +6439,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "U08",
@@ -6290,7 +6476,8 @@
       ],
       "validate": [
         "Require live and saved projections agree on order/durations/curves/ownership.",
-        "Check keyboard controls, narrow-window readability and history zero-output property."
+        "Check keyboard controls, narrow-window readability and history zero-output property.",
+        "Measure host observation to actual app display against p95 <=100 ms, with clock uncertainty; this closes the app-display measurement deferred by M19."
       ],
       "evidence": "docs/ai-dj/work/evidence/U08.md",
       "split_rule": "Stop expanding scope by minute 20. If any remaining execution or validation cannot finish by minute 25, create bounded continuation cards using SPLIT; hand off by minute 27. Supervisor stops worker at minute 30.",
@@ -6304,7 +6491,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R25",
@@ -6348,7 +6536,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "R26",
@@ -6393,7 +6582,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P19",
@@ -6438,7 +6628,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P20",
@@ -6483,7 +6674,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P21",
@@ -6528,7 +6720,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P22",
@@ -6573,7 +6766,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P23",
@@ -6618,7 +6812,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "P24",
@@ -6662,7 +6857,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A15",
@@ -6707,7 +6903,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A16",
@@ -6753,7 +6950,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A17",
@@ -6798,7 +6996,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "A18",
@@ -6843,7 +7042,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "O12",
@@ -6887,7 +7087,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "O13",
@@ -6932,7 +7133,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "O14",
@@ -6976,7 +7178,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "O15",
@@ -7021,7 +7224,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "U09",
@@ -7071,7 +7275,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "U10",
@@ -7116,7 +7321,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "U11",
@@ -7164,7 +7370,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Waveform generator children tracked; missing assets displayed honestly, full delivery still requires agreed generation capability."
+      ]
     },
     {
       "id": "U12",
@@ -7209,7 +7418,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "C01",
@@ -7255,7 +7465,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "C02",
@@ -7298,7 +7509,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "All capability expansion pages and required CAP/OP descendants accepted, with zero unresolved required feature gaps."
+      ]
     },
     {
       "id": "L01",
@@ -7343,7 +7557,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "L02",
@@ -7388,7 +7603,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "L03",
@@ -7435,7 +7651,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "L04",
@@ -7480,7 +7697,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "L05",
@@ -7531,7 +7749,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Package exists; explicit save-cue OP descendants and other required component integrations accepted."
+      ]
     },
     {
       "id": "L06",
@@ -7578,7 +7799,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "L07",
@@ -7623,7 +7845,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "L08",
@@ -7666,7 +7889,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Same L07 job terminal; all required observation/review pages available."
+      ]
     },
     {
       "id": "L09",
@@ -7711,7 +7937,8 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": []
     },
     {
       "id": "L10",
@@ -7754,7 +7981,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Same L09 job terminal; all required observation/review pages available."
+      ]
     },
     {
       "id": "L11",
@@ -7798,7 +8028,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "Before marking this review accepted: Human listening sessions completed for required packets; no AI self-certification."
+      ]
     },
     {
       "id": "L12",
@@ -7845,7 +8078,10 @@
         "integrated_revision_recorded",
         "supervisor_deadline_registered"
       ],
-      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding."
+      "dynamic_completion": "All required children/continuations, long-job results and affected integration checks must be accepted; conditional children require trigger evidence or explicit not-triggered finding.",
+      "entry_requirements": [
+        "All static cards and required dynamic descendants accepted on the release revision; no orphan jobs or stale gate evidence."
+      ]
     }
   ],
   "templates": [
