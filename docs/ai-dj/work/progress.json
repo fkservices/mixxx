@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T23:08:04.694863+00:00",
+  "updated_at": "2026-09-13T23:15:01.483280+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2381,16 +2381,16 @@
       "id": "M13-CUE-TRANSPORT",
       "title": "Carry cue observations through the extended MIDI endpoint",
       "stage": "setup",
-      "status": "running",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
+      "evidence": "work/evidence/M13-CUE-TRANSPORT.md",
+      "verified": true,
       "checks": [
-        "Host cue observer now sends ordered diagnostic records through the actual JS endpoint into the strict receiver; overflow intervals remain explicit.",
-        "All 189 software tests, TypeScript typecheck and build passed. A 400-callback burst verifies loss ordering.",
-        "Assembled mapping is default-disabled and uses one dedicated extended sender; actual Mixxx capture remains pending."
+        "Native batched cue transport: 15,670 observations, zero gaps/errors; all 7,856 frames matched Mixxx output.",
+        "All 192 software tests, typecheck/build and exact assembly passed; idle saturation corrected without reducing refresh coverage.",
+        "Bounded transport/assembly accepted; raw preview regression, full cue-mode review, controller and musical gates remain."
       ],
-      "updated": "2026-09-13T23:08:04.694863+00:00",
+      "updated": "2026-09-13T23:15:01.483280+00:00",
       "dynamic": true
     },
     {
@@ -2401,8 +2401,11 @@
       "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
-      "checks": [],
-      "updated": null,
+      "checks": [
+        "Preliminary native manual marker, CUE press/release and right-click behavior captured in mode 0.",
+        "Raw MIDI preview regression and full review still required before acceptance."
+      ],
+      "updated": "2026-09-13T23:15:01.483280+00:00",
       "dynamic": true
     },
     {
@@ -2560,16 +2563,16 @@
       "id": "M13-CUE-INTEGRATE",
       "title": "Integrate diagnostic cue lifecycle into the assembled mapping",
       "stage": "setup",
-      "status": "in_review",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
+      "evidence": "work/evidence/M13-CUE-INTEGRATE.md",
+      "verified": true,
       "checks": [
-        "Ten-fragment assembly passes all 189 software tests and exact regeneration.",
-        "Exclusive opt-in, ordinary volume coexistence, reload without configuration and input-loss/reset cleanup verified in VM.",
-        "Native capture and final review pending; no native acceptance claimed."
+        "Native batched cue transport: 15,670 observations, zero gaps/errors; all 7,856 frames matched Mixxx output.",
+        "All 192 software tests, typecheck/build and exact assembly passed; idle saturation corrected without reducing refresh coverage.",
+        "Bounded transport/assembly accepted; raw preview regression, full cue-mode review, controller and musical gates remain."
       ],
-      "updated": "2026-09-13T23:08:04.694863+00:00",
+      "updated": "2026-09-13T23:15:01.483280+00:00",
       "dynamic": true
     }
   ],
@@ -2744,6 +2747,20 @@
       "caption": "Actual browser view of the native reply lifecycle results: cancellation, MIDI reset, real input overflow and mapping shutdown stopped queued replies. The chart summarizes measured diagnostic packets; it is not a musical or physical-controller performance test.",
       "captured_at": "2026-09-13T22:57:01.354251+00:00",
       "evidence": "work/runs/R05-REPLY-LIFECYCLE.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-cue-observation-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Actual native cue marker after manual placement in the initial single-record run. Cue edges arrived, but sustained refresh traffic caused 874 explicitly reported drops; this run motivated batching.",
+      "captured_at": "2026-09-13T23:10:55.611590+00:00",
+      "evidence": "work/runs/M13-CUE-TRANSPORT.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-cue-batched-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Actual native cue marker at 1:31.12 during the corrected batched run. Capture verified full numeric cue position and press/release edges, with 15,670 observations and zero gaps. This is transport evidence, not musical or controller acceptance.",
+      "captured_at": "2026-09-13T23:13:02.918483+00:00",
+      "evidence": "work/runs/M13-CUE-TRANSPORT.json"
     }
   ],
   "transport_checks": [

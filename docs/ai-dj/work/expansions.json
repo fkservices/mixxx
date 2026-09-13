@@ -631,7 +631,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "running",
+      "status": "accepted",
       "perform": [
         "Integrate diagnostic-opt-in closed JSON observation records through existing R01/R05 diagnostic text framing and closed receiver.",
         "Update assembled mapping through its reproducible builder and required exact-path INTEGRATE continuation if ownership is shared; preserve conventional command semantics and production guards."
@@ -641,12 +641,15 @@
         "Verify only host-produced observations reach diagnostic capture; no fixture injection, actor claim or production authoritative state."
       ],
       "evidence": "docs/ai-dj/work/evidence/M13-CUE-TRANSPORT.md",
-      "updated_at": "2026-09-13T23:08:04.694863+00:00",
+      "updated_at": "2026-09-13T23:15:01.483280+00:00",
       "checks": [
-        "Host cue observer now sends ordered diagnostic records through the actual JS endpoint into the strict receiver; overflow intervals remain explicit.",
-        "All 189 software tests, TypeScript typecheck and build passed. A 400-callback burst verifies loss ordering.",
-        "Assembled mapping is default-disabled and uses one dedicated extended sender; actual Mixxx capture remains pending."
-      ]
+        "Native batched cue transport: 15,670 observations, zero gaps/errors; all 7,856 frames matched Mixxx output.",
+        "All 192 software tests, typecheck/build and exact assembly passed; idle saturation corrected without reducing refresh coverage.",
+        "Bounded transport/assembly accepted; raw preview regression, full cue-mode review, controller and musical gates remain."
+      ],
+      "source_revision": "47c9d3e49f189d35be36fe1fff6d7dfa335b4f98",
+      "accepted_at": "2026-09-13T23:15:01.483280+00:00",
+      "evidence_sha256": "8aa62748f4bdbea54e687ad648c76f568c796b84e150fb6a43b1b7713cdd351e"
     },
     {
       "id": "M13-CUE-NATIVE",
@@ -684,7 +687,12 @@
         "Require marker/control changes visible at the receiver without AI commands or fabricated state.",
         "Verify no stuck preview, no echo, unknown actor preserved, generation cleanup and paused handoff."
       ],
-      "evidence": "docs/ai-dj/work/evidence/M13-CUE-NATIVE.md"
+      "evidence": "docs/ai-dj/work/evidence/M13-CUE-NATIVE.md",
+      "updated_at": "2026-09-13T23:15:01.483280+00:00",
+      "checks": [
+        "Preliminary native manual marker, CUE press/release and right-click behavior captured in mode 0.",
+        "Raw MIDI preview regression and full review still required before acceptance."
+      ]
     },
     {
       "id": "R05-HOST-ENCODER",
@@ -1217,7 +1225,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "in_review",
+      "status": "accepted",
       "perform": [
         "Add a mutually exclusive diagnostic cue configuration with a dedicated sender and one-initialization lifetime.",
         "Assemble observer and cue stream with the existing trusted builder; preserve conventional routes and default-disabled extended services."
@@ -1227,12 +1235,15 @@
         "Run all integrated software tests and exact mapping regeneration. Native UI and MIDI capture remain M13-CUE-NATIVE."
       ],
       "evidence": "docs/ai-dj/work/evidence/M13-CUE-INTEGRATE.md",
-      "updated_at": "2026-09-13T23:08:04.694863+00:00",
+      "updated_at": "2026-09-13T23:15:01.483280+00:00",
       "checks": [
-        "Ten-fragment assembly passes all 189 software tests and exact regeneration.",
-        "Exclusive opt-in, ordinary volume coexistence, reload without configuration and input-loss/reset cleanup verified in VM.",
-        "Native capture and final review pending; no native acceptance claimed."
-      ]
+        "Native batched cue transport: 15,670 observations, zero gaps/errors; all 7,856 frames matched Mixxx output.",
+        "All 192 software tests, typecheck/build and exact assembly passed; idle saturation corrected without reducing refresh coverage.",
+        "Bounded transport/assembly accepted; raw preview regression, full cue-mode review, controller and musical gates remain."
+      ],
+      "source_revision": "47c9d3e49f189d35be36fe1fff6d7dfa335b4f98",
+      "accepted_at": "2026-09-13T23:15:01.483280+00:00",
+      "evidence_sha256": "27c2f7e4714a9cddf0cf98c98d103ec7c69b7fb9c2bd52bd2dca00cc5def0f62"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

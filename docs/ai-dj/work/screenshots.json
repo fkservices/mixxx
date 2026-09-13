@@ -91,6 +91,20 @@
       "caption": "Actual browser view of the native reply lifecycle results: cancellation, MIDI reset, real input overflow and mapping shutdown stopped queued replies. The chart summarizes measured diagnostic packets; it is not a musical or physical-controller performance test.",
       "captured_at": "2026-09-13T22:57:01.354251+00:00",
       "evidence": "work/runs/R05-REPLY-LIFECYCLE.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-cue-observation-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Actual native cue marker after manual placement in the initial single-record run. Cue edges arrived, but sustained refresh traffic caused 874 explicitly reported drops; this run motivated batching.",
+      "captured_at": "2026-09-13T23:10:55.611590+00:00",
+      "evidence": "work/runs/M13-CUE-TRANSPORT.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-cue-batched-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Actual native cue marker at 1:31.12 during the corrected batched run. Capture verified full numeric cue position and press/release edges, with 15,670 observations and zero gaps. This is transport evidence, not musical or controller acceptance.",
+      "captured_at": "2026-09-13T23:13:02.918483+00:00",
+      "evidence": "work/runs/M13-CUE-TRANSPORT.json"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."
