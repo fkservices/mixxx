@@ -3,7 +3,7 @@
   "task": "R05-ENDPOINT-NATIVE",
   "status": "partial",
   "sourceRevision": "abae078",
-  "recordedAt": "2026-09-13T22:23:15.337902+00:00",
+  "recordedAt": "2026-09-13T22:24:43.621517+00:00",
   "hostVersion": "custom Mixxx 2.7.0",
   "nativeClock": "engine.getMonotonicTime",
   "fixture": "Private opcode 9 JSON echo; no production service or performance action handler",
@@ -52,7 +52,8 @@
   "limitations": [
     "Native JSON/checksum, idle expiry and four-slot capacity passed; reset/lifecycle and absolute expiry remain.",
     "Opcode 9 payload is a private codec fixture, not a valid production session message.",
-    "No setters exist in the probe handler; no performance input sent. This is not an exhaustive hostile-message setter audit."
+    "No setters exist in the probe handler; no performance input sent. This is not an exhaustive hostile-message setter audit.",
+    "Observed reset-routing failure and rapid seven-frame callback shortfall must be resolved before native endpoint acceptance."
   ],
   "expiryProbe": {
     "sourceRevision": "cbaa92c",
@@ -373,5 +374,22 @@
       "host-evidence.log": "ef2a59dc11a41bc13dbb95bf98bdceccb7c266de747e65b21f3fc78600e1bfe3"
     },
     "installedMappingSha256": "758d379c7708f9d67614b6489a9193f511cf50c414ca8f868961829ecbb260d7"
+  },
+  "absoluteResetProbe": {
+    "sourceRevision": "5fc7cc3",
+    "status": "failed-integration-checks",
+    "pacedAbsoluteExpiry": "Seven callbacks over 1080ms; timeout on final fragment; no dispatch.",
+    "rapidFollowups": "Each seven-frame send produced six mapping callbacks and no reply; cause unconfirmed.",
+    "reset": "Host logged incoming 0xFF; no endpoint reset diagnostic; endpoint remained enabled.",
+    "helperExitCode": 0,
+    "hostStopped": true,
+    "diagnosticBootstrapRemoved": true,
+    "evidenceHashes": {
+      "runner.mjs": "734660501b6ea80beccebc7fe07dcad7fe17ec63ce4e0a85af1da511477b3929",
+      "probe.js": "ddfd4f7c72f307f153c53e2a432d70b368c2bd5c4c865abf3961ec5b77c6c382",
+      "capture.jsonl": "8b91a07b96482b52b514e170e816e7a57510f08269c6d84a08f3af6aec2c9de7",
+      "host-evidence.log": "31fc1c20673d393c61314bcc1d4355141394cd46722d87188b52fa2128a456d8"
+    },
+    "installedMappingSha256": "7c4af67beea2658f2e5c3d2100b6c765eb970382f111e7ba37049cfab30acd63"
   }
 }

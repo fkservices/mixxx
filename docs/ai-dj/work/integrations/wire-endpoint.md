@@ -163,4 +163,24 @@ maximum aggregate memory or a long soak. The helper and host exited and the
 repository mapping was restored. Hashed artifacts are in the capacity section
 of the partial native record. Reset, lifecycle and absolute-expiry cases remain.
 
+## Native absolute deadline and newly observed integration failures
+
+A 3,573-byte JSON message arrived as seven fragments about 180 ms apart. Native
+callbacks spanned 1,080 ms, with `message-timeout` on the seventh fragment and no
+dispatch. Activity within the idle interval did not extend the absolute deadline.
+
+Two subsequent rapid seven-frame sends each produced only six mapping callbacks
+and no complete reply. The precise loss point is unconfirmed; sender pacing alone
+must not be treated as a reliability fix. Capture and native receive evidence
+need correlation to locate the missing frame before acceptance.
+
+The native host logged incoming MIDI reset (`0xFF`) between those bursts, but no
+endpoint reset diagnostic occurred and later input showed the endpoint enabled.
+Thus parser-level reset fixtures do not establish native reset handling. The
+actual short-message routing must propagate reset to endpoint retirement.
+
+Both findings keep integration unaccepted. No performance handlers were installed.
+The helper exited, host stopped, and diagnostic bootstrap was removed. Filtered
+logs and capture hashes are in the absolute/reset section of the partial record.
+
 > End of autonomously AI-generated investigation.
