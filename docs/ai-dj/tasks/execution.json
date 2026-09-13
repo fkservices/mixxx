@@ -31,7 +31,7 @@
     "M13": "accepted",
     "M14": "accepted",
     "M15": "accepted",
-    "M16": "planned",
+    "M16": "accepted",
     "M17": "planned",
     "M18": "planned",
     "M19": "planned",
@@ -204,6 +204,7 @@
     "M13",
     "M14",
     "M15",
+    "M16",
     "R01",
     "R02",
     "R03",
@@ -213,7 +214,6 @@
     "R20"
   ],
   "dependency_frontier": [
-    "M16",
     "M17",
     "M18",
     "I01",

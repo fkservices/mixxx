@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T23:34:27.093827+00:00",
+  "updated_at": "2026-09-13T23:41:32.354694+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -441,12 +441,16 @@
       "id": "M16",
       "title": "Capture loaded MIDI timing",
       "stage": "01-local-midi",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/M16.md",
+      "verified": true,
+      "checks": [
+        "400 calibration and 1,000 loaded host samples independently verified; zero missing; unchanged mapping/stimulus/profile.",
+        "Four separate-process analysis workers averaged 3.74 CPU cores; resource telemetry and worst delays retained.",
+        "Benchmark and workload exited 0; volume restored; native host quit; base mapping restored."
+      ],
+      "updated": "2026-09-13T23:41:32.354694+00:00",
       "dynamic": false
     },
     {
@@ -2862,6 +2866,20 @@
       "caption": "Idle-test sound configuration verified after sampling: Core Audio, 48 kHz, 21.3 ms audio buffer. This is configuration evidence, not measured audio response.",
       "captured_at": "2026-09-13T23:34:27.092627+00:00",
       "evidence": "work/runs/M15.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-loaded-timing-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Native Mixxx during the CPU-loaded MIDI test. Empty, paused decks and moving volume use the same profile as the idle measurement. Separate workload telemetry is retained in the run report.",
+      "captured_at": "2026-09-13T23:36:50.630367+00:00",
+      "evidence": "work/runs/M16.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-loaded-buffer-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "After the loaded run, native preferences still show Core Audio at 48 kHz with the same 21.3 ms buffer. Zero underflows were reported by the native diagnostics.",
+      "captured_at": "2026-09-13T23:41:32.355644+00:00",
+      "evidence": "work/runs/M16.json"
     }
   ],
   "transport_checks": [
@@ -2895,10 +2913,10 @@
     }
   ],
   "timing": {
-    "status": "Completed: 400 calibration echoes and 1,000 Mixxx volume confirmations. Zero missing samples. Other timing gates remain open.",
+    "status": "Idle: Completed: 400 calibration echoes and 1,000 Mixxx volume confirmations. Zero missing samples. Other timing gates remain open. CPU load: Completed: 400 echoes and 1,000 host confirmations; zero missing. Four analysis workers averaged 3.74 CPU cores. Wider timing gates remain open.",
     "rows": [
       {
-        "label": "MIDI loopback · full RTT",
+        "label": "Idle · MIDI loopback · full RTT",
         "phase": "loopback",
         "metric": "response",
         "count": 400,
@@ -2908,7 +2926,7 @@
         "max": 11.91479199999958
       },
       {
-        "label": "Loopback dispatch lateness",
+        "label": "Idle · Loopback dispatch lateness",
         "phase": "loopback",
         "metric": "dispatch",
         "count": 400,
@@ -2918,7 +2936,7 @@
         "max": 3.2159999999967113
       },
       {
-        "label": "Mixxx command → state",
+        "label": "Idle · Mixxx command → state",
         "phase": "host",
         "metric": "response",
         "count": 1000,
@@ -2928,7 +2946,7 @@
         "max": 12.593708999978844
       },
       {
-        "label": "Host dispatch lateness",
+        "label": "Idle · Host dispatch lateness",
         "phase": "host",
         "metric": "dispatch",
         "count": 1000,
@@ -2936,6 +2954,46 @@
         "p95": 1.7659589999821037,
         "p99": 3.607625000004191,
         "max": 84.72741700001643
+      },
+      {
+        "label": "CPU load · MIDI loopback · full RTT",
+        "phase": "loopback",
+        "metric": "response",
+        "count": 400,
+        "p50": 0.22829100000126346,
+        "p95": 0.5027079999999842,
+        "p99": 0.7249579999997877,
+        "max": 16.899584000000687
+      },
+      {
+        "label": "CPU load · Loopback dispatch lateness",
+        "phase": "loopback",
+        "metric": "dispatch",
+        "count": 400,
+        "p50": -0.3442909999994299,
+        "p95": 0.4822500000009313,
+        "p99": 0.9012920000004669,
+        "max": 32.60766599999988
+      },
+      {
+        "label": "CPU load · Mixxx command → state",
+        "phase": "host",
+        "metric": "response",
+        "count": 1000,
+        "p50": 1.2023340000014286,
+        "p95": 2.5129590000142343,
+        "p99": 5.134375000023283,
+        "max": 19.263292000003275
+      },
+      {
+        "label": "CPU load · Host dispatch lateness",
+        "phase": "host",
+        "metric": "dispatch",
+        "count": 1000,
+        "p50": -0.4124580000061542,
+        "p95": 0.5293750000128057,
+        "p99": 0.9561249999969732,
+        "max": 3.438625000009779
       }
     ]
   }

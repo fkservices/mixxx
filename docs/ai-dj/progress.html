@@ -17,7 +17,7 @@
 <section><h2>The path to a complete set</h2><div id="milestones" class="milestones"></div><p class="muted" style="font-size:12px">Task counts show accepted work, not a percentage of product readiness or an estimate of time remaining. New feature and correction tasks can expand the plan.</p></section>
 <section class="two"><div class="panel"><h2>On the desk now</h2><div id="active"></div></div><div class="panel"><h2>The test booth</h2><div id="booth"></div><div class="notice">A passed software check does not prove audible timing, controller coexistence or an enjoyable mix. Those gates stay open until observed.</div></div></section>
 <section class="panel" id="transport-panel" hidden><h2>When the reply must stop</h2><p class="muted">Native Mixxx tests interrupt a 128-frame diagnostic reply. The small filled bars show frames sent before the stop; the rest were discarded.</p><div class="table-wrap"><table><thead><tr><th scope="col">Intervention</th><th scope="col">Frames sent before stop</th><th scope="col">Fresh message afterward</th><th scope="col">Queued output stopped</th></tr></thead><tbody id="transport-checks"></tbody></table></div><p class="muted" style="font-size:12px;margin-top:14px">One run per case. Shutdown invokes the mapping lifecycle in the native app; physical disconnect, crash recovery and musical timing remain separate. <a href="work/runs/R05-REPLY-LIFECYCLE.json">Read measured evidence ↗</a></p></section>
-<section class="panel" id="timing-panel" hidden><h2>How quickly does Mixxx answer?</h2><p id="timing-status" class="muted"></p><div class="table-wrap"><table><thead><tr><th scope="col">Measurement</th><th scope="col">Samples</th><th scope="col">Median</th><th scope="col">95th percentile</th><th scope="col">99th percentile</th><th scope="col">Maximum</th></tr></thead><tbody id="timing-values"></tbody></table></div><p class="muted" style="font-size:12px;margin-top:14px">Times are milliseconds. Full loopback round trips and Mixxx state feedback are separate measurements. Feedback value matching is not a causal acknowledgement. Empty, paused decks; no audio or UI latency claim. <a href="work/runs/M15.json">Measurement details ↗</a></p></section>
+<section class="panel" id="timing-panel" hidden><h2>How quickly does Mixxx answer?</h2><p id="timing-status" class="muted"></p><div class="table-wrap"><table><thead><tr><th scope="col">Measurement</th><th scope="col">Samples</th><th scope="col">Median</th><th scope="col">95th percentile</th><th scope="col">99th percentile</th><th scope="col">Maximum</th></tr></thead><tbody id="timing-values"></tbody></table></div><p class="muted" style="font-size:12px;margin-top:14px">Times are milliseconds. Full loopback round trips and Mixxx state feedback are separate measurements. Feedback value matching is not a causal acknowledgement. Empty, paused decks; no audio or UI latency claim. <a href="work/runs/M15.json">Idle measurement ↗</a> · <a href="work/runs/M16.json">CPU-load measurement ↗</a></p></section>
 <section><div class="work-heading"><h2>Evidence, as it happens</h2><span id="gallery-count" class="pill"></span></div><div id="gallery" class="gallery"></div></section>
 <section class="panel"><h2>Recently accepted</h2><div id="recent"></div></section>
 <section><h2>Every task, in view</h2><div class="controls"><label class="visually-hidden" for="search">Search tasks</label><input id="search" type="search" placeholder="Find MIDI, playlists, B2B, history…"><label class="visually-hidden" for="filter">Task status</label><select id="filter"><option value="all">All statuses</option><option value="running">In progress</option><option value="accepted">Accepted</option><option value="planned">Planned</option><option value="waiting">Waiting</option></select><label class="visually-hidden" for="scope">Task scope</label><select id="scope"><option value="all">All work</option><option value="static">Reference cards</option><option value="dynamic">Added tasks</option></select></div><div class="table-wrap"><table><thead><tr><th scope="col">ID</th><th scope="col">Work</th><th scope="col">Status</th><th scope="col">Evidence</th></tr></thead><tbody id="tasks"></tbody></table></div><p id="table-count" class="table-count" aria-live="polite"></p></section>
@@ -27,7 +27,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T23:34:27.093827+00:00",
+  "updated_at": "2026-09-13T23:41:32.354694+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -466,12 +466,16 @@
       "id": "M16",
       "title": "Capture loaded MIDI timing",
       "stage": "01-local-midi",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/M16.md",
+      "verified": true,
+      "checks": [
+        "400 calibration and 1,000 loaded host samples independently verified; zero missing; unchanged mapping/stimulus/profile.",
+        "Four separate-process analysis workers averaged 3.74 CPU cores; resource telemetry and worst delays retained.",
+        "Benchmark and workload exited 0; volume restored; native host quit; base mapping restored."
+      ],
+      "updated": "2026-09-13T23:41:32.354694+00:00",
       "dynamic": false
     },
     {
@@ -2887,6 +2891,20 @@
       "caption": "Idle-test sound configuration verified after sampling: Core Audio, 48 kHz, 21.3 ms audio buffer. This is configuration evidence, not measured audio response.",
       "captured_at": "2026-09-13T23:34:27.092627+00:00",
       "evidence": "work/runs/M15.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-loaded-timing-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Native Mixxx during the CPU-loaded MIDI test. Empty, paused decks and moving volume use the same profile as the idle measurement. Separate workload telemetry is retained in the run report.",
+      "captured_at": "2026-09-13T23:36:50.630367+00:00",
+      "evidence": "work/runs/M16.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-loaded-buffer-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "After the loaded run, native preferences still show Core Audio at 48 kHz with the same 21.3 ms buffer. Zero underflows were reported by the native diagnostics.",
+      "captured_at": "2026-09-13T23:41:32.355644+00:00",
+      "evidence": "work/runs/M16.json"
     }
   ],
   "transport_checks": [
@@ -2920,10 +2938,10 @@
     }
   ],
   "timing": {
-    "status": "Completed: 400 calibration echoes and 1,000 Mixxx volume confirmations. Zero missing samples. Other timing gates remain open.",
+    "status": "Idle: Completed: 400 calibration echoes and 1,000 Mixxx volume confirmations. Zero missing samples. Other timing gates remain open. CPU load: Completed: 400 echoes and 1,000 host confirmations; zero missing. Four analysis workers averaged 3.74 CPU cores. Wider timing gates remain open.",
     "rows": [
       {
-        "label": "MIDI loopback · full RTT",
+        "label": "Idle · MIDI loopback · full RTT",
         "phase": "loopback",
         "metric": "response",
         "count": 400,
@@ -2933,7 +2951,7 @@
         "max": 11.91479199999958
       },
       {
-        "label": "Loopback dispatch lateness",
+        "label": "Idle · Loopback dispatch lateness",
         "phase": "loopback",
         "metric": "dispatch",
         "count": 400,
@@ -2943,7 +2961,7 @@
         "max": 3.2159999999967113
       },
       {
-        "label": "Mixxx command → state",
+        "label": "Idle · Mixxx command → state",
         "phase": "host",
         "metric": "response",
         "count": 1000,
@@ -2953,7 +2971,7 @@
         "max": 12.593708999978844
       },
       {
-        "label": "Host dispatch lateness",
+        "label": "Idle · Host dispatch lateness",
         "phase": "host",
         "metric": "dispatch",
         "count": 1000,
@@ -2961,6 +2979,46 @@
         "p95": 1.7659589999821037,
         "p99": 3.607625000004191,
         "max": 84.72741700001643
+      },
+      {
+        "label": "CPU load · MIDI loopback · full RTT",
+        "phase": "loopback",
+        "metric": "response",
+        "count": 400,
+        "p50": 0.22829100000126346,
+        "p95": 0.5027079999999842,
+        "p99": 0.7249579999997877,
+        "max": 16.899584000000687
+      },
+      {
+        "label": "CPU load · Loopback dispatch lateness",
+        "phase": "loopback",
+        "metric": "dispatch",
+        "count": 400,
+        "p50": -0.3442909999994299,
+        "p95": 0.4822500000009313,
+        "p99": 0.9012920000004669,
+        "max": 32.60766599999988
+      },
+      {
+        "label": "CPU load · Mixxx command → state",
+        "phase": "host",
+        "metric": "response",
+        "count": 1000,
+        "p50": 1.2023340000014286,
+        "p95": 2.5129590000142343,
+        "p99": 5.134375000023283,
+        "max": 19.263292000003275
+      },
+      {
+        "label": "CPU load · Host dispatch lateness",
+        "phase": "host",
+        "metric": "dispatch",
+        "count": 1000,
+        "p50": -0.4124580000061542,
+        "p95": 0.5293750000128057,
+        "p99": 0.9561249999969732,
+        "max": 3.438625000009779
       }
     ]
   }

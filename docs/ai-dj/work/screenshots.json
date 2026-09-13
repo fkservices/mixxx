@@ -175,6 +175,20 @@
       "caption": "Idle-test sound configuration verified after sampling: Core Audio, 48 kHz, 21.3 ms audio buffer. This is configuration evidence, not measured audio response.",
       "captured_at": "2026-09-13T23:34:27.092627+00:00",
       "evidence": "work/runs/M15.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-loaded-timing-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "Native Mixxx during the CPU-loaded MIDI test. Empty, paused decks and moving volume use the same profile as the idle measurement. Separate workload telemetry is retained in the run report.",
+      "captured_at": "2026-09-13T23:36:50.630367+00:00",
+      "evidence": "work/runs/M16.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-loaded-buffer-2026-09-13.png",
+      "kind": "native_ui",
+      "caption": "After the loaded run, native preferences still show Core Audio at 48 kHz with the same 21.3 ms buffer. Zero underflows were reported by the native diagnostics.",
+      "captured_at": "2026-09-13T23:41:32.355644+00:00",
+      "evidence": "work/runs/M16.json"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

@@ -49,8 +49,15 @@ payload = dict(schema_version=1, goal=ledger['authorization'], goal_status=ledge
                updated_at=updated, tasks=rows, children=children, milestones=milestones,
                controller=ledger['external_requirements']['physical_controller'],
                music=ledger['external_requirements']['musical_fixtures'], screenshots=gallery, transport_checks=transport_summary)
-timing_path = docs/'work/runs/M15.json'
-payload['timing'] = json.loads(timing_path.read_text())['visual_summary'] if timing_path.exists() else None
+timings = []
+for task_id, label in [('M15', 'Idle'), ('M16', 'CPU load')]:
+    path = docs/f'work/runs/{task_id}.json'
+    if path.exists():
+        summary = json.loads(path.read_text()).get('visual_summary')
+        if summary:
+            timings.append(dict(label=label, **summary))
+payload['timing'] = dict(status=' '.join(t['label'] + ': ' + t['status'] for t in timings),
+    rows=[dict(r, label=t['label'] + ' · ' + r['label']) for t in timings for r in t['rows']]) if timings else None
 data = json.dumps(payload, ensure_ascii=False, indent=2)
 template = (docs/'progress.template.html').read_text()
 html = template.replace('__PROGRESS_DATA__', data.replace('<', '\\u003c'))

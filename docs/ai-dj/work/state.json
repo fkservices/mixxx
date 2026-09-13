@@ -657,6 +657,22 @@
       "accepted_at": "2026-09-13T23:34:27.093823+00:00",
       "evidence": "docs/ai-dj/work/evidence/M15.md",
       "evidence_sha256": "2efeac3b56c7900a060cedb5d37d0b18bb399a6848eeaba16e34e5962c1838e0"
+    },
+    "M16": {
+      "status": "accepted",
+      "source_revision": "d2b34d9",
+      "started_at": "2026-09-13T23:35:37.916632+00:00",
+      "owned_paths": [
+        "docs/ai-dj/work/runs/M16.json"
+      ],
+      "checks": [
+        "400 calibration and 1,000 loaded host samples independently verified; zero missing; unchanged mapping/stimulus/profile.",
+        "Four separate-process analysis workers averaged 3.74 CPU cores; resource telemetry and worst delays retained.",
+        "Benchmark and workload exited 0; volume restored; native host quit; base mapping restored."
+      ],
+      "accepted_at": "2026-09-13T23:41:32.354694+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M16.md",
+      "evidence_sha256": "63b94f4a149893dd3d9eb44fcd793dc57e27b673d69d3169b22fce357b4fbce1"
     }
   },
   "jobs": {
