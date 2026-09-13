@@ -344,7 +344,7 @@
 
 **Worker:** L1 / `gpt-5.6-luna` / medium. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** F10, F01, F11. **Leases:** mixxx-runtime. **Status:** split.
 
 **Owns:** `docs/ai-dj/work/inventory/catalog-selection/page-01.json`
 

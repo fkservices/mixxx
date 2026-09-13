@@ -698,6 +698,18 @@
         "A/B/A example, eight negative compile cases, typecheck/build and 192 existing tests passed.",
         "Contract-only scope; native playlist access, persistence and runtime enforcement remain pending."
       ]
+    },
+    "I13": {
+      "status": "split",
+      "source_revision": "7adf82c",
+      "updated_at": "2026-09-13T23:55:45.121090+00:00",
+      "evidence": "docs/ai-dj/work/evidence/I13.md",
+      "evidence_sha256": "2494b261a3a050d71a533a7902f649004911fd0b81afeb73b201d1fc597d9d84",
+      "checks": [
+        "First inventory page reviewed: ten source/native-menu candidates, schema valid, no runtime capabilities claimed.",
+        "Ordered reader preserves duplicates but conflates query failure and empty results; versioned service still needed.",
+        "I13-PAGE-02 materialized; family closure and P02 remain pending."
+      ]
     }
   },
   "jobs": {

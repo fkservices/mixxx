@@ -48,7 +48,7 @@
     "I10": "planned",
     "I11": "planned",
     "I12": "planned",
-    "I13": "planned",
+    "I13": "split",
     "I14": "planned",
     "I15": "planned",
     "I16": "planned",
@@ -229,7 +229,6 @@
     "I10",
     "I11",
     "I12",
-    "I13",
     "I14",
     "I15",
     "I16",
@@ -272,11 +271,13 @@
     "M13-CUE-INTEGRATE": "accepted",
     "M13-FINAL-HOST": "accepted",
     "L12-NATIVE-ACCESSIBILITY": "planned",
-    "M19-UI-CAPTURE": "planned"
+    "M19-UI-CAPTURE": "planned",
+    "I13-PAGE-02": "planned"
   },
   "dynamic_dependency_frontier": [
     "L12-NATIVE-ACCESSIBILITY",
-    "M19-UI-CAPTURE"
+    "M19-UI-CAPTURE",
+    "I13-PAGE-02"
   ],
   "global_requirements": [
     "User instruction to start implementation",

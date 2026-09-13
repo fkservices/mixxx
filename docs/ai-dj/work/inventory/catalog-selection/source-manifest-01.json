@@ -1,0 +1,129 @@
+{
+  "generation": "Autonomously AI-generated source evidence; not runtime capability proof.",
+  "artifactId": "I13-source-manifest",
+  "revision": "7adf82c",
+  "context": {
+    "sessionId": "I13-native-menu-20260913",
+    "hostInstanceId": "I13-menu-host",
+    "connectionGeneration": 0,
+    "capabilityRevision": 0,
+    "profile": {
+      "profileId": "native-clock-inventory",
+      "profileRevision": 1,
+      "host": "mixxx",
+      "version": "2.7.0",
+      "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+      "platform": "macos",
+      "skinId": "LateNight",
+      "skinRevision": "source-7adf82c",
+      "configurationId": "native-clock"
+    }
+  },
+  "entries": [
+    {
+      "capabilityId": "mixxx.playlist.browse",
+      "path": "src/library/dao/playlistdao.cpp",
+      "startLine": 592,
+      "endLine": 617,
+      "symbol": "PlaylistDAO::getPlaylists",
+      "finding": "Returns id/name pairs filtered by hidden type and lexicographic name order; empty also represents query failure."
+    },
+    {
+      "capabilityId": "mixxx.playlist.name",
+      "path": "src/library/dao/playlistdao.cpp",
+      "startLine": 112,
+      "endLine": 132,
+      "symbol": "PlaylistDAO::getPlaylistName",
+      "finding": "Returns name by numeric ID; empty string also represents missing row or query failure."
+    },
+    {
+      "capabilityId": "mixxx.playlist.resolve-name",
+      "path": "src/library/dao/playlistdao.cpp",
+      "startLine": 179,
+      "endLine": 194,
+      "symbol": "PlaylistDAO::getPlaylistIdFromName",
+      "finding": "Returns the first matching ID or invalid sentinel; mutable names are not stable identity."
+    },
+    {
+      "capabilityId": "mixxx.playlist.ordered-entries",
+      "path": "src/library/dao/playlistdao.cpp",
+      "startLine": 154,
+      "endLine": 172,
+      "symbol": "PlaylistDAO::getTrackIdsInPlaylistOrder",
+      "finding": "SELECT track_id ORDER BY position ASC preserves duplicate rows. Result lacks row IDs/revision/error discriminator and is not paginated."
+    },
+    {
+      "capabilityId": "mixxx.playlist.membership",
+      "path": "src/library/dao/playlistdao.cpp",
+      "startLine": 134,
+      "endLine": 152,
+      "symbol": "PlaylistDAO::getTrackIds",
+      "finding": "SELECT DISTINCT track_id collapses duplicates and has no ORDER BY. Not an ordered occurrence reader; not an alias of ordered-entries."
+    },
+    {
+      "capabilityId": "mixxx.playlist.exists",
+      "path": "src/library/dao/playlistdao.cpp",
+      "startLine": 506,
+      "endLine": 523,
+      "symbol": "PlaylistDAO::playlistExists",
+      "finding": "False conflates not found and query failure; cannot alone prove confirmed absence."
+    },
+    {
+      "capabilityId": "mixxx.playlist.count",
+      "path": "src/library/dao/playlistdao.cpp",
+      "startLine": 1155,
+      "endLine": 1172,
+      "symbol": "PlaylistDAO::tracksInPlaylist",
+      "finding": "COUNT(id) counts rows including repeats; -1 indicates query/no-result failure. Separate call is not a coherent snapshot."
+    },
+    {
+      "capabilityId": "mixxx.playlist.locked",
+      "path": "src/library/dao/playlistdao.cpp",
+      "startLine": 470,
+      "endLine": 485,
+      "symbol": "PlaylistDAO::isPlaylistLocked",
+      "finding": "Boolean lookup; false also covers missing row/query failure. Unknown must not become confirmed unlocked."
+    },
+    {
+      "capabilityId": "mixxx.playlist.hidden-type",
+      "path": "src/library/dao/playlistdao.cpp",
+      "startLine": 668,
+      "endLine": 690,
+      "symbol": "PlaylistDAO::getHiddenType",
+      "finding": "Hidden type includes normal, AutoDJ and set log; invalid/missing/error yields unknown."
+    },
+    {
+      "capabilityId": "mixxx.playlist.create",
+      "path": "src/library/dao/playlistdao.cpp",
+      "startLine": 50,
+      "endLine": 94,
+      "symbol": "PlaylistDAO::createPlaylist",
+      "finding": "Transactional native insertion returns ID or invalid sentinel and emits added. Native dialog exists; save, deduplication and MIDI admission untested."
+    }
+  ],
+  "hashes": {
+    "src/library/dao/playlistdao.cpp": "adc1638d2b8b785c5513b358d2c2cbf30fbc97deb293bfbd13be1853156c2f43",
+    "src/library/dao/playlistdao.h": "59ffe435f6b89d5ada2d6adda201f6ee3728edfd82614103c3b6e7e5bd15be3b",
+    "src/library/export/engineprimeexportjob.cpp": "e6e7531cce152db8a07dad0fc04e7a370784f26b7eedb57d4a94b36d07210607"
+  },
+  "nativeBinarySha256": "c6a2f96bb0112ae1c18a0e5392c462a1591fb6d3fa310e16651a9ee7a2dbf173",
+  "nativeMenu": [
+    "Rescan Library",
+    "Export Library to Engine DJ",
+    "Search in Current View...",
+    "Search in Tracks Library...",
+    "Create New Playlist",
+    "Create New Crate"
+  ],
+  "artifacts": {
+    "I13-dialog-jpeg": "docs/ai-dj/work/screenshots/mixxx-playlist-create-dialog-2026-09-13.jpg"
+  },
+  "graph": {
+    "generation": "2026-09-13T16:44:03Z",
+    "pagination": "64 PlaylistDAO graph entries, pages 60+4 fully read; not a complete family inventory",
+    "coverage": "DAO .cpp partial ranges 28,37,344,1045,1067,1193; header 19,136; export 806. All reported lines read directly.",
+    "trace": "Ordered-reader inbound EnginePrimeExportJob::loadPlaylist confirmed at source line 600. Heuristic outbound graph names are not reliable Qt call targets and are not used as evidence."
+  },
+  "generation_end": "End of AI-generated source evidence.",
+  "runId": "I13-PAGE-01"
+}

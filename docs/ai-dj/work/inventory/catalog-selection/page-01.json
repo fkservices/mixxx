@@ -1,0 +1,1062 @@
+{
+  "schemaVersion": 1,
+  "kind": "inventory-page",
+  "inventoryId": "native-clock-inventory",
+  "inventoryRevision": 1,
+  "context": {
+    "sessionId": "I13-native-menu-20260913",
+    "hostInstanceId": "I13-menu-host",
+    "connectionGeneration": 0,
+    "capabilityRevision": 0,
+    "profile": {
+      "profileId": "native-clock-inventory",
+      "profileRevision": 1,
+      "host": "mixxx",
+      "version": "2.7.0",
+      "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+      "platform": "macos",
+      "skinId": "LateNight",
+      "skinRevision": "source-7adf82c",
+      "configurationId": "native-clock"
+    }
+  },
+  "family": "autonomous-track-selection",
+  "pageId": "I13-page-01",
+  "pageNumber": 0,
+  "previousPageId": null,
+  "rowLimit": 20,
+  "sources": [
+    {
+      "sourceId": "I13-dao",
+      "kind": "source",
+      "scope": "PlaylistDAO ten read/create candidates; exact ranges in source manifest",
+      "revision": "7adf82c",
+      "cursorBefore": null,
+      "cursorAfter": "I13-dao-mutations-and-selection",
+      "exhausted": false,
+      "evidence": [
+        {
+          "evidenceId": "I13-source-scope",
+          "artifactId": "I13-source-manifest",
+          "runId": "I13-PAGE-01",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-13T23:55:03Z",
+          "description": "Direct source reads and graph lookup for selected PlaylistDAO read methods plus create; remaining mutators not exhausted."
+        }
+      ]
+    },
+    {
+      "sourceId": "I13-library-menu",
+      "kind": "native-menu",
+      "scope": "Top-level Library menu and Create New Playlist dialog only",
+      "revision": "sha256-c6a2f96bb0112ae1c18a0e53",
+      "cursorBefore": null,
+      "cursorAfter": "I13-sidebar-context-menu",
+      "exhausted": false,
+      "evidence": [
+        {
+          "evidenceId": "I13-native-dialog",
+          "artifactId": "I13-dialog-jpeg",
+          "runId": "I13-PAGE-01",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-13T23:55:03Z",
+          "description": "Native Library menu includes Create New Playlist; dialog with name field and Cancel/Create buttons inspected, then cancelled without saving. No API or MIDI result established."
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.browse",
+      "family": "autonomous-track-selection",
+      "label": "Browse playlists",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Returns id/name pairs filtered by hidden type and lexicographic name order; empty also represents query failure. Typed, bounded host-service result still needs specification."
+        },
+        "write": {
+          "kind": "read-only",
+          "reason": "This candidate is a read operation; mutations are separate candidates."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-browse",
+          "artifactId": "I13-source-manifest",
+          "runId": "I13-PAGE-01",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-13T23:55:03Z",
+          "description": "src/library/dao/playlistdao.cpp:592-617 PlaylistDAO::getPlaylists: Returns id/name pairs filtered by hidden type and lexicographic name order; empty also represents query failure."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-browse-q0",
+          "question": "Source-to-native-binary operation equivalence requires actual host tests.",
+          "continuationId": "I13-PAGE-02"
+        },
+        {
+          "id": "I13-browse-q1",
+          "question": "Resolve stable target identity, explicit failures, service pagination/versioning and command/feedback/UI/runtime assessments.",
+          "continuationId": "I13-PAGE-02"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.name",
+      "family": "autonomous-track-selection",
+      "label": "Read playlist name",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Returns name by numeric ID; empty string also represents missing row or query failure. Typed, bounded host-service result still needs specification."
+        },
+        "write": {
+          "kind": "read-only",
+          "reason": "This candidate is a read operation; mutations are separate candidates."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-name",
+          "artifactId": "I13-source-manifest",
+          "runId": "I13-PAGE-01",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-13T23:55:03Z",
+          "description": "src/library/dao/playlistdao.cpp:112-132 PlaylistDAO::getPlaylistName: Returns name by numeric ID; empty string also represents missing row or query failure."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-name-q0",
+          "question": "Source-to-native-binary operation equivalence requires actual host tests.",
+          "continuationId": "I13-PAGE-02"
+        },
+        {
+          "id": "I13-name-q1",
+          "question": "Resolve stable target identity, explicit failures, service pagination/versioning and command/feedback/UI/runtime assessments.",
+          "continuationId": "I13-PAGE-02"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.resolve-name",
+      "family": "autonomous-track-selection",
+      "label": "Resolve playlist by name",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Returns the first matching ID or invalid sentinel; mutable names are not stable identity. Typed, bounded host-service result still needs specification."
+        },
+        "write": {
+          "kind": "read-only",
+          "reason": "This candidate is a read operation; mutations are separate candidates."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-resolve-name",
+          "artifactId": "I13-source-manifest",
+          "runId": "I13-PAGE-01",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-13T23:55:03Z",
+          "description": "src/library/dao/playlistdao.cpp:179-194 PlaylistDAO::getPlaylistIdFromName: Returns the first matching ID or invalid sentinel; mutable names are not stable identity."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-resolve-name-q0",
+          "question": "Source-to-native-binary operation equivalence requires actual host tests.",
+          "continuationId": "I13-PAGE-02"
+        },
+        {
+          "id": "I13-resolve-name-q1",
+          "question": "Resolve stable target identity, explicit failures, service pagination/versioning and command/feedback/UI/runtime assessments.",
+          "continuationId": "I13-PAGE-02"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.ordered-entries",
+      "family": "autonomous-track-selection",
+      "label": "Read ordered playlist entries",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "SELECT track_id ORDER BY position ASC preserves duplicate rows. Result lacks row IDs/revision/error discriminator and is not paginated. Typed, bounded host-service result still needs specification."
+        },
+        "write": {
+          "kind": "read-only",
+          "reason": "This candidate is a read operation; mutations are separate candidates."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-ordered-entries",
+          "artifactId": "I13-source-manifest",
+          "runId": "I13-PAGE-01",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-13T23:55:03Z",
+          "description": "src/library/dao/playlistdao.cpp:154-172 PlaylistDAO::getTrackIdsInPlaylistOrder: SELECT track_id ORDER BY position ASC preserves duplicate rows. Result lacks row IDs/revision/error discriminator and is not paginated."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-ordered-entries-q0",
+          "question": "Source-to-native-binary operation equivalence requires actual host tests.",
+          "continuationId": "I13-PAGE-02"
+        },
+        {
+          "id": "I13-ordered-entries-q1",
+          "question": "Resolve stable target identity, explicit failures, service pagination/versioning and command/feedback/UI/runtime assessments.",
+          "continuationId": "I13-PAGE-02"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.membership",
+      "family": "autonomous-track-selection",
+      "label": "Read distinct track membership",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "SELECT DISTINCT track_id collapses duplicates and has no ORDER BY. Not an ordered occurrence reader; not an alias of ordered-entries. Typed, bounded host-service result still needs specification."
+        },
+        "write": {
+          "kind": "read-only",
+          "reason": "This candidate is a read operation; mutations are separate candidates."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-membership",
+          "artifactId": "I13-source-manifest",
+          "runId": "I13-PAGE-01",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-13T23:55:03Z",
+          "description": "src/library/dao/playlistdao.cpp:134-152 PlaylistDAO::getTrackIds: SELECT DISTINCT track_id collapses duplicates and has no ORDER BY. Not an ordered occurrence reader; not an alias of ordered-entries."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-membership-q0",
+          "question": "Source-to-native-binary operation equivalence requires actual host tests.",
+          "continuationId": "I13-PAGE-02"
+        },
+        {
+          "id": "I13-membership-q1",
+          "question": "Resolve stable target identity, explicit failures, service pagination/versioning and command/feedback/UI/runtime assessments.",
+          "continuationId": "I13-PAGE-02"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.exists",
+      "family": "autonomous-track-selection",
+      "label": "Check playlist existence",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "False conflates not found and query failure; cannot alone prove confirmed absence. Typed, bounded host-service result still needs specification."
+        },
+        "write": {
+          "kind": "read-only",
+          "reason": "This candidate is a read operation; mutations are separate candidates."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-exists",
+          "artifactId": "I13-source-manifest",
+          "runId": "I13-PAGE-01",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-13T23:55:03Z",
+          "description": "src/library/dao/playlistdao.cpp:506-523 PlaylistDAO::playlistExists: False conflates not found and query failure; cannot alone prove confirmed absence."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-exists-q0",
+          "question": "Source-to-native-binary operation equivalence requires actual host tests.",
+          "continuationId": "I13-PAGE-02"
+        },
+        {
+          "id": "I13-exists-q1",
+          "question": "Resolve stable target identity, explicit failures, service pagination/versioning and command/feedback/UI/runtime assessments.",
+          "continuationId": "I13-PAGE-02"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.count",
+      "family": "autonomous-track-selection",
+      "label": "Count playlist occurrences",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "COUNT(id) counts rows including repeats; -1 indicates query/no-result failure. Separate call is not a coherent snapshot. Typed, bounded host-service result still needs specification."
+        },
+        "write": {
+          "kind": "read-only",
+          "reason": "This candidate is a read operation; mutations are separate candidates."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-count",
+          "artifactId": "I13-source-manifest",
+          "runId": "I13-PAGE-01",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-13T23:55:03Z",
+          "description": "src/library/dao/playlistdao.cpp:1155-1172 PlaylistDAO::tracksInPlaylist: COUNT(id) counts rows including repeats; -1 indicates query/no-result failure. Separate call is not a coherent snapshot."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-count-q0",
+          "question": "Source-to-native-binary operation equivalence requires actual host tests.",
+          "continuationId": "I13-PAGE-02"
+        },
+        {
+          "id": "I13-count-q1",
+          "question": "Resolve stable target identity, explicit failures, service pagination/versioning and command/feedback/UI/runtime assessments.",
+          "continuationId": "I13-PAGE-02"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.locked",
+      "family": "autonomous-track-selection",
+      "label": "Read playlist lock",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Boolean lookup; false also covers missing row/query failure. Unknown must not become confirmed unlocked. Typed, bounded host-service result still needs specification."
+        },
+        "write": {
+          "kind": "read-only",
+          "reason": "This candidate is a read operation; mutations are separate candidates."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-locked",
+          "artifactId": "I13-source-manifest",
+          "runId": "I13-PAGE-01",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-13T23:55:03Z",
+          "description": "src/library/dao/playlistdao.cpp:470-485 PlaylistDAO::isPlaylistLocked: Boolean lookup; false also covers missing row/query failure. Unknown must not become confirmed unlocked."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-locked-q0",
+          "question": "Source-to-native-binary operation equivalence requires actual host tests.",
+          "continuationId": "I13-PAGE-02"
+        },
+        {
+          "id": "I13-locked-q1",
+          "question": "Resolve stable target identity, explicit failures, service pagination/versioning and command/feedback/UI/runtime assessments.",
+          "continuationId": "I13-PAGE-02"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.hidden-type",
+      "family": "autonomous-track-selection",
+      "label": "Read playlist category",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Hidden type includes normal, AutoDJ and set log; invalid/missing/error yields unknown. Typed, bounded host-service result still needs specification."
+        },
+        "write": {
+          "kind": "read-only",
+          "reason": "This candidate is a read operation; mutations are separate candidates."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-hidden-type",
+          "artifactId": "I13-source-manifest",
+          "runId": "I13-PAGE-01",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-13T23:55:03Z",
+          "description": "src/library/dao/playlistdao.cpp:668-690 PlaylistDAO::getHiddenType: Hidden type includes normal, AutoDJ and set log; invalid/missing/error yields unknown."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-hidden-type-q0",
+          "question": "Source-to-native-binary operation equivalence requires actual host tests.",
+          "continuationId": "I13-PAGE-02"
+        },
+        {
+          "id": "I13-hidden-type-q1",
+          "question": "Resolve stable target identity, explicit failures, service pagination/versioning and command/feedback/UI/runtime assessments.",
+          "continuationId": "I13-PAGE-02"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.create",
+      "family": "autonomous-track-selection",
+      "label": "Create playlist",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Transactional native insertion returns ID or invalid sentinel and emits added. Native dialog exists; save, deduplication and MIDI admission untested. Typed, bounded host-service result still needs specification."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Explicit creation outcome/guards not specified."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-02"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "located",
+        "panel": "Library menu",
+        "locator": "Create New Playlist -> name dialog; cancelled",
+        "sourceEvidence": [
+          {
+            "evidenceId": "I13-native-dialog",
+            "artifactId": "I13-dialog-jpeg",
+            "runId": "I13-PAGE-01",
+            "context": {
+              "sessionId": "I13-native-menu-20260913",
+              "hostInstanceId": "I13-menu-host",
+              "connectionGeneration": 0,
+              "capabilityRevision": 0,
+              "profile": {
+                "profileId": "native-clock-inventory",
+                "profileRevision": 1,
+                "host": "mixxx",
+                "version": "2.7.0",
+                "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+                "platform": "macos",
+                "skinId": "LateNight",
+                "skinRevision": "source-7adf82c",
+                "configurationId": "native-clock"
+              }
+            },
+            "capturedAt": "2026-09-13T23:55:03Z",
+            "description": "Native Library menu includes Create New Playlist; dialog with name field and Cancel/Create buttons inspected, then cancelled without saving. No API or MIDI result established."
+          }
+        ]
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-create",
+          "artifactId": "I13-source-manifest",
+          "runId": "I13-PAGE-01",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-13T23:55:03Z",
+          "description": "src/library/dao/playlistdao.cpp:50-94 PlaylistDAO::createPlaylist: Transactional native insertion returns ID or invalid sentinel and emits added. Native dialog exists; save, deduplication and MIDI admission untested."
+        },
+        {
+          "evidenceId": "I13-native-dialog",
+          "artifactId": "I13-dialog-jpeg",
+          "runId": "I13-PAGE-01",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-13T23:55:03Z",
+          "description": "Native Library menu includes Create New Playlist; dialog with name field and Cancel/Create buttons inspected, then cancelled without saving. No API or MIDI result established."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-create-q0",
+          "question": "Source-to-native-binary operation equivalence requires actual host tests.",
+          "continuationId": "I13-PAGE-02"
+        },
+        {
+          "id": "I13-create-q1",
+          "question": "Resolve stable target identity, explicit failures, service pagination/versioning and command/feedback/UI/runtime assessments.",
+          "continuationId": "I13-PAGE-02"
+        }
+      ]
+    }
+  ],
+  "boundary": {
+    "status": "more",
+    "nextCursor": "I13-page-02",
+    "continuationId": "I13-PAGE-02",
+    "remainingScopes": [
+      "Playlist mutations, reorder/shuffle and aliases; stable selected-track identity and target enumeration.",
+      "Playlist sidebar/table context menus; native manual for matching source version.",
+      "Runtime library/playlist instances and source-to-binary validation; family closure not established."
+    ]
+  }
+}

@@ -1382,6 +1382,48 @@
       ],
       "evidence": "docs/ai-dj/work/evidence/M19-UI-CAPTURE.md",
       "updated_at": "2026-09-13T23:46:15.078674+00:00"
+    },
+    {
+      "id": "I13-PAGE-02",
+      "title": "Continue stable selection and playlist inventory",
+      "parent": "I13",
+      "blocks": [
+        "I13"
+      ],
+      "template": "INV-PAGE",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "F10",
+        "F01",
+        "F11"
+      ],
+      "owns": [
+        "docs/ai-dj/work/inventory/catalog-selection/page-02.json",
+        "docs/ai-dj/work/evidence/I13-PAGE-02.md"
+      ],
+      "locks": [
+        "mixxx-runtime"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Resume exact context/cursor from page-01; review mutations/reorder/shuffle and stable selected-track identity, at most twenty candidates or one subtree.",
+        "Cross-check remaining native sidebar/table menu and matching-version manual; enumerate runtime targets. Preserve accessibility crash evidence and create further continuations if scope remains."
+      ],
+      "validate": [
+        "Require unique canonical IDs, separate untested/verified dimensions, exact source/range evidence and no conflation of DISTINCT membership with ordered occurrences.",
+        "Require four-source discovery closure only when all remaining scopes and target instances are exhausted; otherwise materialize another INV-PAGE."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/I13-PAGE-02.md",
+      "updated_at": "2026-09-13T23:55:45.121090+00:00"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

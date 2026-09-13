@@ -203,6 +203,13 @@
       "caption": "Native volume up in trial 9: matching pixels and MIDI feedback, but a 191.96 ms capture bound leaves the 150 ms target unresolved.",
       "captured_at": "2026-09-13T23:46:15.078674+00:00",
       "evidence": "work/runs/M17.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-playlist-create-dialog-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Native Create New Playlist dialog inspected during inventory, then cancelled without saving. This locates a UI entry point; no MIDI create/read operation is verified.",
+      "captured_at": "2026-09-13T23:55:45.121090+00:00",
+      "evidence": "work/evidence/I13.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

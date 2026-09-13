@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T23:51:20.276018+00:00",
+  "updated_at": "2026-09-13T23:55:45.121090+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -653,12 +653,16 @@
       "id": "I13",
       "title": "Inventory stable track selection and playlists — first page",
       "stage": "02-inventory",
-      "status": "planned",
+      "status": "split",
       "model": "gpt-5.6-luna",
       "evidence": null,
       "verified": false,
-      "checks": [],
-      "updated": null,
+      "checks": [
+        "First inventory page reviewed: ten source/native-menu candidates, schema valid, no runtime capabilities claimed.",
+        "Ordered reader preserves duplicates but conflates query failure and empty results; versioned service still needed.",
+        "I13-PAGE-02 materialized; family closure and P02 remain pending."
+      ],
+      "updated": "2026-09-13T23:55:45.121090+00:00",
       "dynamic": false
     },
     {
@@ -2629,6 +2633,18 @@
       "checks": [],
       "updated": "2026-09-13T23:46:15.078674+00:00",
       "dynamic": true
+    },
+    {
+      "id": "I13-PAGE-02",
+      "title": "Continue stable selection and playlist inventory",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": "2026-09-13T23:55:45.121090+00:00",
+      "dynamic": true
     }
   ],
   "milestones": [
@@ -2914,6 +2930,13 @@
       "caption": "Native volume up in trial 9: matching pixels and MIDI feedback, but a 191.96 ms capture bound leaves the 150 ms target unresolved.",
       "captured_at": "2026-09-13T23:46:15.078674+00:00",
       "evidence": "work/runs/M17.json"
+    },
+    {
+      "path": "work/screenshots/mixxx-playlist-create-dialog-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Native Create New Playlist dialog inspected during inventory, then cancelled without saving. This locates a UI entry point; no MIDI create/read operation is verified.",
+      "captured_at": "2026-09-13T23:55:45.121090+00:00",
+      "evidence": "work/evidence/I13.md"
     }
   ],
   "transport_checks": [
