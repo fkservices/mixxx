@@ -4,7 +4,7 @@
 
 **Current work: implementation authorized and started.** The active goal is “perform tasks.md as proposed.” [GOALS.md](GOALS.md) remains authoritative. The reference catalog has 171 cards and 17 expansion templates. [Execution state and acceptance evidence](docs/ai-dj/work/state.json) are authoritative; a card's presence is not completion.
 
-**Now: twenty-two reference tasks and seven expansion tasks accepted.** Foundation and M01–M10 are accepted. The package passes 92 tests. The reproducible four-fragment mapping is loaded in isolated Mixxx: all 18 initial presence/value routes were logged, and Node received sampled feedback. The journal includes a new native screenshot. Next are capture tooling and dedicated live performance checks. Native loading is not playback, timing or musical completion; full delivery gates remain open.
+**Now: twenty-two reference tasks and eight expansion tasks accepted.** M11 is split: its manual fixture service core now connects transport callbacks, codecs, raw observed state and diagnostics, starts disarmed and rejects stale feedback. The package passes 96 tests. Next is the separate local CLI/IPC client with durable capture and proof that client exit leaves the service running. The native diagnostic keeper is unchanged; full M11 and delivery gates remain open.
 
 [Visual progress page](docs/ai-dj/progress.html) stays synchronized with the ledger. Add real screenshots and their evidence context as UI/runtime checks produce them.
 

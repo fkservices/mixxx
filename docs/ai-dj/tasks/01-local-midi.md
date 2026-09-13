@@ -289,7 +289,7 @@
 
 **Worker:** L3 / `gpt-5.6-sol` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** M02, M03, M04, F12, M10. **Leases:** app-entry. **Status:** planned.
+**Dependencies:** M02, M03, M04, F12, M10. **Leases:** app-entry. **Status:** split.
 
 **Owns:** `ai-dj/main.ts`, `ai-dj/local-ui/cli.ts`, `ai-dj/test/integration/conventional.test.ts`
 

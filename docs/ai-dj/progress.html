@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T20:25:04.480617+00:00",
+  "updated_at": "2026-09-13T20:28:30.557961+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -386,11 +386,13 @@
       "id": "M11",
       "title": "Wire a minimal local communicator CLI",
       "stage": "01-local-midi",
-      "status": "planned",
+      "status": "split",
       "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
-      "checks": [],
+      "checks": [
+        "Service core accepted as M11-SERVICE; M11-CLI remains required for separate-client persistence and durable capture."
+      ],
       "updated": null,
       "dynamic": false
     },
@@ -2283,6 +2285,34 @@
         "Sync and cue remain extension-needed pending independent verified host guards."
       ],
       "updated": "2026-09-13T20:08:58.744361+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "M11-SERVICE",
+      "title": "Implement persistent conventional communicator service core",
+      "stage": "setup",
+      "status": "accepted",
+      "model": "gpt-5.6-sol",
+      "evidence": "work/evidence/M11-SERVICE.md",
+      "verified": true,
+      "checks": [
+        "Manual fixture service core connects transport callbacks, codecs, conservative raw state and bounded F12 diagnostics.",
+        "96 tests, typecheck and build passed; stale/unknown rejection, independent state, send/loss uncertainty and capture gaps covered.",
+        "IPC client lifetime, durable recording and real native startup remain M11-CLI; parent M11 incomplete."
+      ],
+      "updated": "2026-09-13T20:28:30.557961+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "M11-CLI",
+      "title": "Expose service through separate local CLI client",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": null,
       "dynamic": true
     }
   ],

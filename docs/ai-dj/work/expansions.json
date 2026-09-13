@@ -368,6 +368,98 @@
         "All F09 shape/address/scaling/vector checks and 57 package tests passed; typecheck and build passed.",
         "Sync and cue remain extension-needed pending independent verified host guards."
       ]
+    },
+    {
+      "id": "M11-SERVICE",
+      "title": "Implement persistent conventional communicator service core",
+      "parent": "M11",
+      "blocks": [
+        "M11"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "M02",
+        "M03",
+        "M04",
+        "F12",
+        "M10"
+      ],
+      "owns": [
+        "ai-dj/main.ts",
+        "ai-dj/test/integration/conventional.test.ts"
+      ],
+      "locks": [
+        "app-entry"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "accepted",
+      "perform": [
+        "Connect transport callbacks, fixed codecs, conservative raw observed store and F12 diagnostics.",
+        "Provide explicit disarmed-by-default manual fixture arm/disarm/status and bounded command handling; keep semantic host guards."
+      ],
+      "validate": [
+        "Fake transport verifies command bytes, independent feedback, stale/unknown status, loss disarm and diagnostics gaps.",
+        "Run package tests, typecheck and build."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/M11-SERVICE.md",
+      "executor": "coordinator",
+      "source_revision": "fb10682",
+      "accepted_at": "2026-09-13T20:28:30.557961+00:00",
+      "evidence_sha256": "1af1ce1da4908c615550a0f1d6433ca510befee0e7e983ac9e1d0e2e6cf96594",
+      "checks": [
+        "Manual fixture service core connects transport callbacks, codecs, conservative raw state and bounded F12 diagnostics.",
+        "96 tests, typecheck and build passed; stale/unknown rejection, independent state, send/loss uncertainty and capture gaps covered.",
+        "IPC client lifetime, durable recording and real native startup remain M11-CLI; parent M11 incomplete."
+      ]
+    },
+    {
+      "id": "M11-CLI",
+      "title": "Expose service through separate local CLI client",
+      "parent": "M11",
+      "blocks": [
+        "M11"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "M11-SERVICE"
+      ],
+      "owns": [
+        "ai-dj/local-ui/cli.ts",
+        "ai-dj/main.ts",
+        "ai-dj/test/integration/conventional.test.ts"
+      ],
+      "locks": [
+        "app-entry"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Add local bounded IPC service runner and separate CLI client, preserving service lifetime when a client exits.",
+        "Add durable capture output and native transport startup with explicit profile/session and no automatic arming."
+      ],
+      "validate": [
+        "Verify client close leaves service and transport connected, malformed IPC bounds, capture persistence and clean service shutdown.",
+        "Run integrated tests and document exact launch/client commands."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/M11-CLI.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

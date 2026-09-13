@@ -493,6 +493,13 @@
         "92 tests, typecheck/build and reproducible bundle check passed.",
         "Native Mixxx initialized four fragments and 18 subscriptions; all initial output routes logged and subset received by Node. No performance or timing claim."
       ]
+    },
+    "M11": {
+      "status": "split",
+      "source_revision": "fb10682",
+      "checks": [
+        "Service core accepted as M11-SERVICE; M11-CLI remains required for separate-client persistence and durable capture."
+      ]
     }
   },
   "jobs": {
