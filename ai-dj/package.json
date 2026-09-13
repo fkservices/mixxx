@@ -16,5 +16,11 @@
   "devDependencies": {
     "@types/node": "26.5.1",
     "typescript": "7.0.2"
+  },
+  "dependencies": {
+    "@julusian/midi": "3.8.1"
+  },
+  "allowScripts": {
+    "@julusian/midi@3.8.1": true
   }
 }

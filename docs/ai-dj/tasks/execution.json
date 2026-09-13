@@ -7,10 +7,10 @@
     "F01": "accepted",
     "F02": "accepted",
     "F03": "accepted",
-    "F04": "planned",
+    "F04": "accepted",
     "F05": "planned",
     "F06": "accepted",
-    "F07": "planned",
+    "F07": "running",
     "F08": "planned",
     "F09": "planned",
     "F10": "planned",
@@ -180,11 +180,11 @@
     "F01",
     "F02",
     "F03",
+    "F04",
     "F06"
   ],
   "dependency_frontier": [
-    "F04",
-    "F07"
+    "F05"
   ],
   "dispatchable_now": [],
   "dynamic_task_status": {

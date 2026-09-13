@@ -94,7 +94,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F03. **Leases:** package-manifest, install-job. **Status:** planned.
+**Dependencies:** F03. **Leases:** package-manifest, install-job. **Status:** accepted.
 
 **Owns:** `docs/ai-dj/work/jobs/native-install.json`, `ai-dj/package.json`, `ai-dj/package-lock.json`
 
@@ -178,7 +178,7 @@
 
 **Worker:** L4 / `gpt-6-astra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** F06. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** F06. **Leases:** Exact path reservation. **Status:** running.
 
 **Owns:** `ai-dj/core/state.ts`, `ai-dj/core/capabilities.ts`, `docs/ai-dj/work/contracts/state.md`
 

@@ -107,6 +107,49 @@
         "Integrated TypeScript typecheck/build and default/focused smoke passed.",
         "Play/cue/load/jog semantics, stale generations, release obligations and evidence states reviewed; executor/runtime validator remain separate work."
       ]
+    },
+    "F04": {
+      "status": "accepted",
+      "worker": "/root/f04_native_install",
+      "model": "gpt-5.6-terra",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-13T18:59:59.949Z",
+      "interrupt_by": "2026-09-13T19:26:59.949Z",
+      "deadline": "2026-09-13T19:29:59.949Z",
+      "monitor_cell": "195",
+      "source_revision": "b5dc433cadee8def071705967aa893b014f21883",
+      "owned_paths": [
+        "docs/ai-dj/work/jobs/native-install.json",
+        "ai-dj/package.json",
+        "ai-dj/package-lock.json",
+        "docs/ai-dj/work/evidence/F04.md"
+      ],
+      "accepted_at": "2026-09-13T19:03:14.988149+00:00",
+      "evidence": "docs/ai-dj/work/evidence/F04.md",
+      "evidence_sha256": "1ca4b2f0ed29a9d28f17cd6b6fb199f99f7a83e145e744aa1fbf3fa594b8378c",
+      "checks": [
+        "Terminal npm install exit 0 and exact dependency/policy verified.",
+        "Captured install/approval logs and arm64 prebuild hashes match.",
+        "Native import and endpoint enumeration remain required by F05."
+      ],
+      "monitor_status": "worker_complete_shared_monitor_retained_for_F07"
+    },
+    "F07": {
+      "status": "running",
+      "worker": "/root/f07_state",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-13T18:59:59.949Z",
+      "interrupt_by": "2026-09-13T19:26:59.949Z",
+      "deadline": "2026-09-13T19:29:59.949Z",
+      "monitor_cell": "195",
+      "source_revision": "b5dc433cadee8def071705967aa893b014f21883",
+      "owned_paths": [
+        "ai-dj/core/state.ts",
+        "ai-dj/core/capabilities.ts",
+        "docs/ai-dj/work/contracts/state.md",
+        "docs/ai-dj/work/evidence/F07.md"
+      ]
     }
   },
   "jobs": {
@@ -132,6 +175,13 @@
       "result": "~/Library/Application Support/Mixxx-AI-DJ/jobs/install-mixxx-2.5.6-arm/resume-result.json",
       "recipe": "Reuse and rehash downloaded artifact; respond to standard open-source license display; mount read-only, install absent destination, unmount and verify. No relaunch of download.",
       "ended_at": "2026-09-13T18:50:25.392144+00:00"
+    },
+    "F04-native-install-20260913T190051Z": {
+      "status": "succeeded",
+      "source_revision": "b5dc433cadee8def071705967aa893b014f21883",
+      "record": "docs/ai-dj/work/jobs/native-install.json",
+      "ended_at": "2026-09-13T19:00:52Z",
+      "exit_code": 0
     }
   },
   "resource_leases": {},

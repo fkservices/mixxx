@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T18:58:21.237143+00:00",
+  "updated_at": "2026-09-13T19:03:14.988149+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -56,12 +56,16 @@
       "id": "F04",
       "title": "Launch candidate native MIDI installation",
       "stage": "00-foundation",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/F04.md",
+      "verified": true,
+      "checks": [
+        "Terminal npm install exit 0 and exact dependency/policy verified.",
+        "Captured install/approval logs and arm64 prebuild hashes match.",
+        "Native import and endpoint enumeration remain required by F05."
+      ],
+      "updated": "2026-09-13T19:03:14.988149+00:00",
       "dynamic": false
     },
     {
@@ -96,12 +100,12 @@
       "id": "F07",
       "title": "Define observed state and capability contracts",
       "stage": "00-foundation",
-      "status": "planned",
+      "status": "running",
       "model": "gpt-6-astra",
       "evidence": null,
       "verified": false,
       "checks": [],
-      "updated": null,
+      "updated": "2026-09-13T18:59:59.949Z",
       "dynamic": false
     },
     {

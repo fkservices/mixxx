@@ -11,6 +11,8 @@ On 2026-09-13, Chrome loaded `http://127.0.0.1:8768/docs/ai-dj/progress.html` wi
 - Searching `F03` returned exactly one of 173 task rows.
 - Selecting Accepted initially returned exactly four rows: F01, F02 and the two setup children.
 - After regeneration and browser reload, the view showed four of 171 reference tasks accepted, two of two setup tasks accepted, no active workers and seven open delivery gates.
+- Selecting Added tasks returned exactly the two setup rows; restoring All work returned 173 rows.
+- Without a reload, the local feed showed F04/F07 start, two active tasks and the new ledger timestamp after regeneration.
 - The overview was inspected in a real browser screenshot at 1440 × 806 pixels. Text and cards were legible, with no overlap or clipped overview content.
 - [Overview capture](../screenshots/progress-overview-2026-09-13.jpg) is the progress page itself, captured at 2026-09-13T18:58:59.871Z after F03/F06 acceptance. It is not the DJ application or Mixxx, and proves no MIDI, audio, UI response timing or musical behavior.
 
