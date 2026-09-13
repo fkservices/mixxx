@@ -63,6 +63,13 @@
       "caption": "Actual build journal with 22 reference tasks and eight expansion tasks accepted. The separate communicator CLI is in progress; native reconnection and performance tests remain pending.",
       "captured_at": "2026-09-13T20:36:37.672Z",
       "evidence": "work/evidence/progress-page.md"
+    },
+    {
+      "path": "work/screenshots/mixxx-service-feedback-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Actual enabled AI DJ mapping after service feedback recovery. All nine initial control readings became fresh; M12 separately verified play, both deck volumes and crossfader against native widgets.",
+      "captured_at": "2026-09-13T20:55:24.575Z",
+      "evidence": "work/evidence/M12.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

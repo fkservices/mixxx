@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T20:51:54.160761+00:00",
+  "updated_at": "2026-09-13T20:59:39.235701+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -401,12 +401,15 @@
       "id": "M12",
       "title": "Prove play, volume and fader in actual Mixxx",
       "stage": "01-local-midi",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/M12.md",
+      "verified": true,
+      "checks": [
+        "Actual Mixxx widgets, returned state and raw packets agree for both deck play/volume controls and crossfader.",
+        "Repeated play remains playing on both decks. Twelve setters captured; final paused/restored/disarmed state and zero drops verified."
+      ],
+      "updated": "2026-09-13T20:59:39.235701+00:00",
       "dynamic": false
     },
     {
@@ -2421,8 +2424,8 @@
     "detail": "User explicitly said they will connect later. Exact model identified; physical MIDI/controller evidence remains pending. Continue independent software work without asking again."
   },
   "music": {
-    "status": "reload_verification_pending",
-    "detail": "Two approved local Music-library diagnostic fixtures were previously loaded and analyzed. Mixxx restarted for the communicator port handoff; current deck loading and feedback must be reverified. Audible playback and musical quality remain unverified."
+    "status": "two_native_fixtures_loaded",
+    "detail": "Both approved Music-library diagnostic fixtures restored paused in isolated Mixxx. Nine controls have fresh feedback; musical quality remains unverified."
   },
   "screenshots": [
     {
@@ -2487,6 +2490,13 @@
       "caption": "Actual build journal with 22 reference tasks and eight expansion tasks accepted. The separate communicator CLI is in progress; native reconnection and performance tests remain pending.",
       "captured_at": "2026-09-13T20:36:37.672Z",
       "evidence": "work/evidence/progress-page.md"
+    },
+    {
+      "path": "work/screenshots/mixxx-service-feedback-2026-09-13.jpg",
+      "kind": "native_ui",
+      "caption": "Actual enabled AI DJ mapping after service feedback recovery. All nine initial control readings became fresh; M12 separately verified play, both deck volumes and crossfader against native widgets.",
+      "captured_at": "2026-09-13T20:55:24.575Z",
+      "evidence": "work/evidence/M12.md"
     }
   ]
 }</script>

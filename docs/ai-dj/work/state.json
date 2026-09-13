@@ -556,6 +556,19 @@
       "accepted_at": "2026-09-13T20:51:54.160761+00:00",
       "evidence": "docs/ai-dj/work/evidence/R04.md",
       "evidence_sha256": "41f155e6baa499c931a9171c2872167ea0aa3a3579916b3ab64487eeef1c0775"
+    },
+    "M12": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "edf8c5a",
+      "started_at": "2026-09-13T20:56:34.405038+00:00",
+      "checks": [
+        "Actual Mixxx widgets, returned state and raw packets agree for both deck play/volume controls and crossfader.",
+        "Repeated play remains playing on both decks. Twelve setters captured; final paused/restored/disarmed state and zero drops verified."
+      ],
+      "accepted_at": "2026-09-13T20:59:39.235701+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M12.md",
+      "evidence_sha256": "9b47485b0e83a744c43a57d627c66f4b4a1ef7ebdf13fc4d37be4680d109f5a1"
     }
   },
   "jobs": {
@@ -618,9 +631,9 @@
     "m11-runtime": {
       "status": "running",
       "pid": 4355,
-      "mixxx_pid": 6235,
+      "mixxx_pid": 23046,
       "handle": "~/Library/Application Support/Mixxx-AI-DJ/jobs/m11-runtime/job.json",
-      "scope": "Disarmed local fixture communicator, private Unix socket and durable capture; no performance commands",
+      "scope": "Persistent fixture communicator with recovered native feedback; M12 completed, both decks paused, volumes 1, crossfader 0.5, service disarmed.",
       "expected_end": "Two hours from 2026-09-13T20:31:07Z or explicit verified shutdown"
     }
   },
@@ -629,8 +642,8 @@
   },
   "external_requirements": {
     "musical_fixtures": {
-      "status": "reload_verification_pending",
-      "detail": "Two approved local Music-library diagnostic fixtures were previously loaded and analyzed. Mixxx restarted for the communicator port handoff; current deck loading and feedback must be reverified. Audible playback and musical quality remain unverified."
+      "status": "two_native_fixtures_loaded",
+      "detail": "Both approved Music-library diagnostic fixtures restored paused in isolated Mixxx. Nine controls have fresh feedback; musical quality remains unverified."
     },
     "physical_controller": {
       "status": "operator_will_connect_later",

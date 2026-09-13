@@ -1,0 +1,650 @@
+{
+  "schema_version": 1,
+  "task": "M12",
+  "recorded_at": "2026-09-13T20:58:57.612745+00:00",
+  "source_revision": "edf8c5a1bb296a94de6dda02aa8910dfd512b005",
+  "service_pid": 4355,
+  "mixxx_pid": 23046,
+  "profile": "mixxx-2.5.6-latenight-f01",
+  "host_version": "2.5.6 ARM",
+  "fixture_ids": [
+    "fixture-A",
+    "fixture-B"
+  ],
+  "source_hashes": {
+    "ai-dj/main.ts": "2a124dc66814b1f7c6c1c32aa4370dccdd8535e2839d8ea902c14685e0e730cc",
+    "ai-dj/local-ui/cli.ts": "e358fc5584a398232b8cad948cdb56bddfd2370ddba35cad7f9467cd42b17928",
+    "ai-dj/midi/connection.ts": "d4eee78e9f7d363b1924e17af71f74b1d5e36c933caf7bc6dd929aec92f5893d",
+    "res/controllers/AI-DJ-scripts.js": "ffb60047f262bc3bbdf240410fe439a0fc93b8b148f26aa2d470ffa928a57b4b",
+    "res/controllers/AI-DJ.midi.xml": "cb7c630e5f1ade7594af3a3e837c9ae22e094eab6db90c2e50615de0385cd5bf"
+  },
+  "commands": [
+    {
+      "at": "2026-09-13T20:56:55.913456+00:00",
+      "command": [
+        "arm"
+      ],
+      "response": {
+        "ok": true,
+        "armed": true
+      },
+      "before": null,
+      "after": null
+    },
+    {
+      "at": "2026-09-13T20:56:56.220081+00:00",
+      "command": [
+        "set",
+        "deck-1.volume",
+        "0.25"
+      ],
+      "response": {
+        "ok": true,
+        "status": "sent",
+        "controlId": "deck-1.volume",
+        "packet": [
+          176,
+          33,
+          32
+        ],
+        "observation": "not-confirmed",
+        "scope": "manual-fixture"
+      },
+      "before": {
+        "controlId": "deck-1.volume",
+        "presence": "present",
+        "presenceAtMs": 1548870.97325,
+        "value": 1,
+        "valueAtMs": 1548871.028875,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      "after": {
+        "controlId": "deck-1.volume",
+        "presence": "present",
+        "presenceAtMs": 1549070.525375,
+        "value": 0.25196850393700787,
+        "valueAtMs": 1549070.558459,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      }
+    },
+    {
+      "at": "2026-09-13T20:56:56.531343+00:00",
+      "command": [
+        "set",
+        "deck-2.volume",
+        "0.75"
+      ],
+      "response": {
+        "ok": true,
+        "status": "sent",
+        "controlId": "deck-2.volume",
+        "packet": [
+          177,
+          33,
+          95
+        ],
+        "observation": "not-confirmed",
+        "scope": "manual-fixture"
+      },
+      "before": {
+        "controlId": "deck-2.volume",
+        "presence": "present",
+        "presenceAtMs": 1549174.434125,
+        "value": 1,
+        "valueAtMs": 1549174.503542,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      "after": {
+        "controlId": "deck-2.volume",
+        "presence": "present",
+        "presenceAtMs": 1549471.707542,
+        "value": 0.7480314960629921,
+        "valueAtMs": 1549471.717917,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      }
+    },
+    {
+      "at": "2026-09-13T20:56:56.849409+00:00",
+      "command": [
+        "set",
+        "mixer.crossfader",
+        "0.25"
+      ],
+      "response": {
+        "ok": true,
+        "status": "sent",
+        "controlId": "mixer.crossfader",
+        "packet": [
+          178,
+          36,
+          32
+        ],
+        "observation": "not-confirmed",
+        "scope": "manual-fixture"
+      },
+      "before": {
+        "controlId": "mixer.crossfader",
+        "presence": "present",
+        "presenceAtMs": 1549570.742417,
+        "value": 0.5,
+        "valueAtMs": 1549570.753209,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      "after": {
+        "controlId": "mixer.crossfader",
+        "presence": "present",
+        "presenceAtMs": 1549771.608125,
+        "value": 0.25,
+        "valueAtMs": 1549771.618792,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      }
+    },
+    {
+      "at": "2026-09-13T20:57:15.187812+00:00",
+      "command": [
+        "set",
+        "deck-1.play",
+        "true"
+      ],
+      "response": {
+        "ok": true,
+        "status": "sent",
+        "controlId": "deck-1.play",
+        "packet": [
+          176,
+          32,
+          127
+        ],
+        "observation": "not-confirmed",
+        "scope": "manual-fixture"
+      },
+      "before": {
+        "controlId": "deck-1.play",
+        "presence": "present",
+        "presenceAtMs": 1567870.682792,
+        "value": false,
+        "valueAtMs": 1567870.758542,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      "after": {
+        "controlId": "deck-1.play",
+        "presence": "present",
+        "presenceAtMs": 1568070.795542,
+        "value": true,
+        "valueAtMs": 1568070.862792,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      }
+    },
+    {
+      "at": "2026-09-13T20:57:24.192881+00:00",
+      "command": [
+        "set",
+        "deck-1.play",
+        "true"
+      ],
+      "response": {
+        "ok": true,
+        "status": "sent",
+        "controlId": "deck-1.play",
+        "packet": [
+          176,
+          32,
+          127
+        ],
+        "observation": "not-confirmed",
+        "scope": "manual-fixture"
+      },
+      "before": {
+        "controlId": "deck-1.play",
+        "presence": "present",
+        "presenceAtMs": 1576871.30675,
+        "value": true,
+        "valueAtMs": 1576871.389334,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      "after": {
+        "controlId": "deck-1.play",
+        "presence": "present",
+        "presenceAtMs": 1577070.848625,
+        "value": true,
+        "valueAtMs": 1577070.914959,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      }
+    },
+    {
+      "at": "2026-09-13T20:57:33.434304+00:00",
+      "command": [
+        "set",
+        "deck-1.play",
+        "false"
+      ],
+      "response": {
+        "ok": true,
+        "status": "sent",
+        "controlId": "deck-1.play",
+        "packet": [
+          176,
+          32,
+          0
+        ],
+        "observation": "not-confirmed",
+        "scope": "manual-fixture"
+      },
+      "before": {
+        "controlId": "deck-1.play",
+        "presence": "present",
+        "presenceAtMs": 1586070.738834,
+        "value": true,
+        "valueAtMs": 1586070.827375,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      "after": {
+        "controlId": "deck-1.play",
+        "presence": "present",
+        "presenceAtMs": 1586371.166667,
+        "value": false,
+        "valueAtMs": 1586371.26475,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      }
+    },
+    {
+      "at": "2026-09-13T20:57:33.755031+00:00",
+      "command": [
+        "set",
+        "deck-2.play",
+        "true"
+      ],
+      "response": {
+        "ok": true,
+        "status": "sent",
+        "controlId": "deck-2.play",
+        "packet": [
+          177,
+          32,
+          127
+        ],
+        "observation": "not-confirmed",
+        "scope": "manual-fixture"
+      },
+      "before": {
+        "controlId": "deck-2.play",
+        "presence": "present",
+        "presenceAtMs": 1586471.058792,
+        "value": false,
+        "valueAtMs": 1586471.069709,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      "after": {
+        "controlId": "deck-2.play",
+        "presence": "present",
+        "presenceAtMs": 1586671.571542,
+        "value": true,
+        "valueAtMs": 1586671.590542,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      }
+    },
+    {
+      "at": "2026-09-13T20:57:42.023321+00:00",
+      "command": [
+        "set",
+        "deck-2.play",
+        "true"
+      ],
+      "response": {
+        "ok": true,
+        "status": "sent",
+        "controlId": "deck-2.play",
+        "packet": [
+          177,
+          32,
+          127
+        ],
+        "observation": "not-confirmed",
+        "scope": "manual-fixture"
+      },
+      "before": {
+        "controlId": "deck-2.play",
+        "presence": "present",
+        "presenceAtMs": 1594671.663875,
+        "value": true,
+        "valueAtMs": 1594671.674584,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      "after": {
+        "controlId": "deck-2.play",
+        "presence": "present",
+        "presenceAtMs": 1594871.697334,
+        "value": true,
+        "valueAtMs": 1594871.707959,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      }
+    },
+    {
+      "at": "2026-09-13T20:57:54.387221+00:00",
+      "command": [
+        "set",
+        "deck-2.play",
+        "false"
+      ],
+      "response": {
+        "ok": true,
+        "status": "sent",
+        "controlId": "deck-2.play",
+        "packet": [
+          177,
+          32,
+          0
+        ],
+        "observation": "not-confirmed",
+        "scope": "manual-fixture"
+      },
+      "before": {
+        "controlId": "deck-2.play",
+        "presence": "present",
+        "presenceAtMs": 1607071.578834,
+        "value": true,
+        "valueAtMs": 1607071.601709,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      "after": {
+        "controlId": "deck-2.play",
+        "presence": "present",
+        "presenceAtMs": 1607271.656834,
+        "value": false,
+        "valueAtMs": 1607271.666917,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      }
+    },
+    {
+      "at": "2026-09-13T20:57:54.702089+00:00",
+      "command": [
+        "set",
+        "deck-1.volume",
+        "1"
+      ],
+      "response": {
+        "ok": true,
+        "status": "sent",
+        "controlId": "deck-1.volume",
+        "packet": [
+          176,
+          33,
+          127
+        ],
+        "observation": "not-confirmed",
+        "scope": "manual-fixture"
+      },
+      "before": {
+        "controlId": "deck-1.volume",
+        "presence": "present",
+        "presenceAtMs": 1607371.755625,
+        "value": 0.25196850393700787,
+        "valueAtMs": 1607371.768292,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      "after": {
+        "controlId": "deck-1.volume",
+        "presence": "present",
+        "presenceAtMs": 1607571.456209,
+        "value": 1,
+        "valueAtMs": 1607571.469209,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      }
+    },
+    {
+      "at": "2026-09-13T20:57:55.022474+00:00",
+      "command": [
+        "set",
+        "deck-2.volume",
+        "1"
+      ],
+      "response": {
+        "ok": true,
+        "status": "sent",
+        "controlId": "deck-2.volume",
+        "packet": [
+          177,
+          33,
+          127
+        ],
+        "observation": "not-confirmed",
+        "scope": "manual-fixture"
+      },
+      "before": {
+        "controlId": "deck-2.volume",
+        "presence": "present",
+        "presenceAtMs": 1607671.255542,
+        "value": 0.7480314960629921,
+        "valueAtMs": 1607671.26575,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      "after": {
+        "controlId": "deck-2.volume",
+        "presence": "present",
+        "presenceAtMs": 1607871.208459,
+        "value": 1,
+        "valueAtMs": 1607871.219334,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      }
+    },
+    {
+      "at": "2026-09-13T20:57:55.348894+00:00",
+      "command": [
+        "set",
+        "mixer.crossfader",
+        "0.5"
+      ],
+      "response": {
+        "ok": true,
+        "status": "sent",
+        "controlId": "mixer.crossfader",
+        "packet": [
+          178,
+          36,
+          64
+        ],
+        "observation": "not-confirmed",
+        "scope": "manual-fixture"
+      },
+      "before": {
+        "controlId": "mixer.crossfader",
+        "presence": "present",
+        "presenceAtMs": 1608071.174167,
+        "value": 0.25,
+        "valueAtMs": 1608071.184,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      "after": {
+        "controlId": "mixer.crossfader",
+        "presence": "present",
+        "presenceAtMs": 1608271.958,
+        "value": 0.5,
+        "valueAtMs": 1608271.967875,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      }
+    },
+    {
+      "at": "2026-09-13T20:57:55.601830+00:00",
+      "command": [
+        "disarm"
+      ],
+      "response": {
+        "ok": true,
+        "armed": false
+      },
+      "before": null,
+      "after": null
+    }
+  ],
+  "native_ui_observations": {
+    "baseline": "Both decks paused; volumes at top; crossfader centered.",
+    "volumes-fader": "Left deck slider near quarter, right near three quarters; crossfader quarter from left.",
+    "deck1-play": "Deck 1 play button orange; position 4.62 seconds; deck 2 paused.",
+    "deck1-repeat-play": "Deck 1 remains orange/playing at 12.46 seconds after repeated true.",
+    "deck2-play": "Deck 1 paused at 18.08 seconds; deck 2 orange/playing at 3.70 seconds.",
+    "deck2-repeat-play": "Deck 2 remains orange/playing at 14.08 seconds after repeated true.",
+    "restored-paused": "Both play buttons off, positions 18.08 and 20.63 seconds; volumes top; crossfader centered."
+  },
+  "private_artifacts": {
+    "directory": "~/Library/Application Support/Mixxx-AI-DJ/jobs/m12-runtime",
+    "screenshots": [
+      {
+        "name": "volumes-fader.jpg",
+        "sha256": "5e6aa9230041290c91a14e866e746c4091a4d8724f71926dcc4db73d56ae7510",
+        "bytes": 215579
+      },
+      {
+        "name": "deck1-play.jpg",
+        "sha256": "efe5d7934f569acd6c7d2d84a561009b37e8cc04a2472bba134c350002d1ef4b",
+        "bytes": 216160
+      },
+      {
+        "name": "deck1-repeat-play.jpg",
+        "sha256": "6fd3141b6efe9a035d142d7c3cebcc8605b2e0a143aa26f6744ed71c2e7022a4",
+        "bytes": 216533
+      },
+      {
+        "name": "baseline.jpg",
+        "sha256": "4d986eda4be93d884203002f05be2dde36fedaa6a67d08cd0396c49bf28a5576",
+        "bytes": 215553
+      },
+      {
+        "name": "deck2-play.jpg",
+        "sha256": "a18987a1d605d163e86ebce6f7185a86486193e7956f1fb98bf850235097abf1",
+        "bytes": 212410
+      },
+      {
+        "name": "deck2-repeat-play.jpg",
+        "sha256": "12677bf54412186634d6fc15fa22ec67e7e0aea2e3ad3c1ee8028d4548739f02",
+        "bytes": 212949
+      },
+      {
+        "name": "restored-paused.jpg",
+        "sha256": "4df7885a70776421270d45ccf393df23d52139b54d729c5450bcffb596eb332f",
+        "bytes": 210700
+      }
+    ],
+    "capture": {
+      "name": "capture-through-m12.jsonl",
+      "sha256": "48a0ebc62ec1fc074710334bc336edb747c858e8982ec97ba9ce28a0dc06dc65",
+      "bytes": 23270561
+    }
+  },
+  "final_status": {
+    "armed": false,
+    "transport": "open",
+    "controls": [
+      {
+        "controlId": "deck-1.play",
+        "presence": "present",
+        "presenceAtMs": 1608471.264417,
+        "value": false,
+        "valueAtMs": 1608471.350459,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      {
+        "controlId": "deck-1.volume",
+        "presence": "present",
+        "presenceAtMs": 1608471.367875,
+        "value": 1,
+        "valueAtMs": 1608471.382417,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      {
+        "controlId": "deck-1.cue",
+        "presence": "present",
+        "presenceAtMs": 1608471.393917,
+        "value": false,
+        "valueAtMs": 1608471.404959,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      {
+        "controlId": "deck-1.sync",
+        "presence": "present",
+        "presenceAtMs": 1608471.415709,
+        "value": false,
+        "valueAtMs": 1608471.425917,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      {
+        "controlId": "deck-2.play",
+        "presence": "present",
+        "presenceAtMs": 1608471.4365,
+        "value": false,
+        "valueAtMs": 1608471.446792,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      {
+        "controlId": "deck-2.volume",
+        "presence": "present",
+        "presenceAtMs": 1608471.456792,
+        "value": 1,
+        "valueAtMs": 1608471.467,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      {
+        "controlId": "deck-2.cue",
+        "presence": "present",
+        "presenceAtMs": 1608471.546792,
+        "value": false,
+        "valueAtMs": 1608471.585792,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      {
+        "controlId": "deck-2.sync",
+        "presence": "present",
+        "presenceAtMs": 1608471.600584,
+        "value": false,
+        "valueAtMs": 1608471.61275,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      },
+      {
+        "controlId": "mixer.crossfader",
+        "presence": "present",
+        "presenceAtMs": 1608471.623792,
+        "value": 0.5,
+        "valueAtMs": 1608471.634542,
+        "status": "fresh",
+        "provenance": "raw-midi-unverified"
+      }
+    ],
+    "capture_dropped": 0
+  },
+  "limits": [
+    "Raw conventional feedback carries no request correlation, verified host identity or actor attribution.",
+    "One B8 77 2A packet came from a local test helper before native feedback recovery; unmapped and not host evidence.",
+    "No latency percentile, audio recording, musical quality, cue/sync, physical-controller or full-set acceptance."
+  ]
+}

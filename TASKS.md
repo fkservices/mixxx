@@ -4,7 +4,7 @@
 
 **Current work: implementation authorized and started.** The active goal is “perform tasks.md as proposed.” [GOALS.md](GOALS.md) remains authoritative. The reference catalog has 171 cards and 17 expansion templates. [Execution state and acceptance evidence](docs/ai-dj/work/state.json) are authoritative; a card's presence is not completion.
 
-**Now: twenty-seven reference tasks and nine of ten expansion tasks accepted.** R04 adds bounded incoming SysEx parsing, strict payload decoding and fragment expiry. The package passes 114 tests, typecheck and build. Next: actual host endpoint and lifecycle integration, alongside restoring native Mixxx feedback for M12/M13. Performance, timing, AI/B2B and later delivery gates remain open.
+**Now: twenty-eight reference tasks and nine of ten expansion tasks accepted.** Native Mixxx feedback is restored. M12 proved play and volume on both decks plus crossfader movement, with independent returned values and actual widget captures; repeated play did not toggle off. Both fixtures are paused, faders restored and service disarmed. The package has 114 passing tests. Cue/sync, timing, physical-controller coexistence, AI/B2B and later delivery gates remain open.
 
 [Visual progress page](docs/ai-dj/progress.html) stays synchronized with the ledger. Add real screenshots and their evidence context as UI/runtime checks produce them.
 

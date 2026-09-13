@@ -317,7 +317,7 @@
 
 **Worker:** L3 / `gpt-5.6-sol` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** M10, M11, F11. **Leases:** mixxx-runtime. **Status:** planned.
+**Dependencies:** M10, M11, F11. **Leases:** mixxx-runtime. **Status:** accepted.
 
 **Owns:** `docs/ai-dj/work/runs/M12.json`
 
