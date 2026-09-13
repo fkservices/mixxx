@@ -1,0 +1,35 @@
+{
+  "task": "R05-FRAGMENT-SENDER",
+  "status": "partial",
+  "sourceRevision": "81fb705",
+  "recordedAt": "2026-09-13T22:35:06.018101+00:00",
+  "receipts": [
+    {
+      "sequence": 50,
+      "length": 3500,
+      "allX": true
+    },
+    {
+      "sequence": 51,
+      "length": 65536,
+      "allX": true
+    }
+  ],
+  "exactNativeFrameMatches": 135,
+  "overflowWarnings": 0,
+  "maxTransferSpanMs": 787.4984999999997,
+  "helperExitCode": 0,
+  "hostStopped": true,
+  "diagnosticBootstrapRemoved": true,
+  "evidenceHashes": {
+    "runner.mjs": "3580bf5e87e10b90378482a625771ca94b6aaf4bdf039760568e320e0996fe96",
+    "probe.js": "04af4ac59a9da78753d3b33ffb1f2928dd927e80f614386a2c4b4e3a0cb14f1d",
+    "capture.jsonl": "d64f0647d5b5ef811423de9d04fb3b6197d7695d151aa8ef8f59ef2e2a387dd8",
+    "host-evidence.log": "e8bd29ac4c8a845d70e87c89d363e32d75865ed2db8427939a31adecb7ee56e7",
+    "full-host.log": "2b465ceb3e9acb6bbf9236bab4bc28cb6eb4c7ab4a5b9238acbf141f7fbf16e0"
+  },
+  "limitations": [
+    "Client-to-host path only; receipt replies are short. Native large outbound messages are not verified.",
+    "Single run per size; no timing percentile, load, cancellation or soak acceptance."
+  ]
+}

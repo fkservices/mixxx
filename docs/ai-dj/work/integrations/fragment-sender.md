@@ -34,4 +34,18 @@ The 5 ms interval is a candidate budget, not a demonstrated transport guarantee.
 The native host-to-client encoder path still needs bounded transmission review;
 this Node sender alone does not bound native replies.
 
+## Native maximum-message proof
+
+The real automatic sender transferred a 3,500-byte diagnostic string (seven
+frames) and a 65,536-byte string (128 frames) to the rebuilt native host. Mixxx
+validated each string contained only the expected character and returned its
+exact length and sequence. All 135 outbound frame byte arrays match the native
+incoming frame logs exactly. No PortMidi overflow appeared in this run.
+
+The receipt messages were short: this proves the client-to-host maximum message,
+not the native outbound maximum. It is one run per size, not a loaded latency or
+soak result. Native cancellation and outbound pacing remain required. The helper
+and host exited, and the diagnostic bootstrap was removed. The
+[partial run record](../runs/R05-FRAGMENT-SENDER.json) preserves exact evidence hashes.
+
 > End of autonomously AI-generated implementation notes.
