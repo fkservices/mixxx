@@ -258,11 +258,9 @@
     "R12-SUSPEND-RESUME": "planned",
     "R05-NATIVE-INPUT-LOSS": "accepted",
     "R05-FRAGMENT-SENDER": "in_review",
-    "R05-HOST-FRAGMENT-SENDER": "planned"
+    "R05-HOST-FRAGMENT-SENDER": "in_review"
   },
-  "dynamic_dependency_frontier": [
-    "R05-HOST-FRAGMENT-SENDER"
-  ],
+  "dynamic_dependency_frontier": [],
   "global_requirements": [
     "User instruction to start implementation",
     "Current integrated revision and scoped context",

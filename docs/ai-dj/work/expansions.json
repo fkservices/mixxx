@@ -1084,7 +1084,8 @@
       "owns": [
         "ai-dj/hosts/mixxx/fragments/wire-send.js",
         "ai-dj/test/host/wire-send.test.ts",
-        "docs/ai-dj/work/integrations/host-fragment-sender.md"
+        "docs/ai-dj/work/integrations/host-fragment-sender.md",
+        "ai-dj/scripts/build-host-sender.mjs"
       ],
       "locks": [],
       "estimate_minutes": {
@@ -1094,7 +1095,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "in_review",
       "perform": [
         "Create a bounded native-clock scheduler for host replies using engine timers; cap queued bytes/results and avoid synchronous maximum-message bursts.",
         "Integrate through the mapping owner so shutdown, input loss and cancellation retire pending replies; distinguish queue acceptance, send return and observed delivery."
@@ -1103,7 +1104,14 @@
         "Test maximum payload, cancellation, stale callbacks, timer cleanup and stalled-clock deadlines using actual generated mapping integration.",
         "Verify native-to-Node maximum-message delivery with full payload comparison and no overflow; short receipt replies do not satisfy this check."
       ],
-      "evidence": "docs/ai-dj/work/evidence/R05-HOST-FRAGMENT-SENDER.md"
+      "evidence": "docs/ai-dj/work/evidence/R05-HOST-FRAGMENT-SENDER.md",
+      "executor": "coordinator",
+      "source_revision": "4baf1f6",
+      "started_at": "2026-09-13T22:37:54.767314+00:00",
+      "checks": [
+        "Generated native-timer reply scheduler from the bounded Node sender with checked adaptation points.",
+        "175 software tests, typecheck/build and regeneration check passed; mapping integration and native outbound maximum proof pending."
+      ]
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."
