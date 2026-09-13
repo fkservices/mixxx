@@ -11,6 +11,7 @@ function harness() {
   const connections:{key:string,isConnected:boolean,callback:(v:unknown)=>void,disconnect:()=>void}[]=[];
   const timers=new Map<number,()=>void>();
   const engine={
+    makeUnbufferedConnection:()=>{throw Error("Coalescing connection must not be used");},
     makeConnection:(group:string,key:string,callback:(v:unknown)=>void)=>{
       const name=group+key;
       if(unavailable.has(name))throw Error("unavailable");
@@ -104,5 +105,16 @@ test("non-disposable connection handles fail initialization rather than claim cl
   assert.equal(h.observer.status().cleanupFailed,true);
   assert.equal(h.observer.status().queued,0);
   assert.equal(h.timers.size,0);
+});
+
+test("missing FIFO API reports unavailable instead of using a coalescing fallback",()=>{
+  const h=harness();
+  delete (h.engine as Partial<typeof h.engine>).makeConnection;
+  h.observer.start();
+  const records=h.drain().records;
+  assert.equal(records.length,16);
+  assert.ok(records.every((r:any)=>r.presence==="unavailable"&&r.value===null));
+  assert.equal(h.connections.length,0);
+  h.observer.shutdown();
 });
 // End of autonomously AI-generated file.

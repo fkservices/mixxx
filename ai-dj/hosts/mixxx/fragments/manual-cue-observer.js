@@ -43,6 +43,8 @@ AIDJ.createManualCueObserver = function(options) {
         var route = {deck:deck, group:"[Channel" + deck + "]", key:key, connection:null};
         routes.push(route);
         try {
+            // Mixxx makeConnection preserves FIFO events. The unbuffered variant
+            // skips superseded values and is unsuitable for button edges.
             route.connection = engine.makeConnection(route.group, route.key, function(value) {
                 if (!active || generation !== token || !connected(route)) return;
                 // Preserve the callback edge; rereading here can replace it with a later zero.
