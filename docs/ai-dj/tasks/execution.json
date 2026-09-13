@@ -260,7 +260,8 @@
     "R05-NATIVE-INPUT-LOSS": "accepted",
     "R05-FRAGMENT-SENDER": "accepted",
     "R05-HOST-FRAGMENT-SENDER": "accepted",
-    "R05-NATIVE-SEND-TIMER": "accepted"
+    "R05-NATIVE-SEND-TIMER": "accepted",
+    "M13-CUE-INTEGRATE": "in_review"
   },
   "dynamic_dependency_frontier": [],
   "global_requirements": [

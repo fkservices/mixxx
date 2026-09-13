@@ -10,12 +10,13 @@ var AIDJ = (function() {
     var timers = [];
     var api = {};
     var wireConfiguration = null;
+    var cueConfiguration = null, cueStream = null;
     var wireEndpoint = null;
     var wireClock = null;
     var wireGeneration = 0;
     api.incomingData = function() {};
     api.configureWire = function(options) {
-        if (active || wireConfiguration) throw new Error("Configure wire only once before initialization");
+        if (active || wireConfiguration || cueConfiguration) throw new Error("Configure wire only once before initialization");
         if (!options || typeof options.now !== "function" || typeof options.onFault !== "function" ||
                 !Array.isArray(options.handlers) || options.handlers.length > 8 ||
                 typeof options.clockDomainId !== "string" || !/^[A-Za-z0-9_.:-]{1,128}$/.test(options.clockDomainId) ||
@@ -28,6 +29,16 @@ var AIDJ = (function() {
         wireConfiguration = {now:options.now,onFault:options.onFault,handlers:handlers,allowDiagnostic:options.allowDiagnostic,
             clockKind:options.clockKind,clockDomainId:options.clockDomainId};
     };
+    // Autonomously AI-generated diagnostic cue activation; excludes a second SysEx sender.
+    api.configureCueDiagnostic = function(options) {
+        if (active || wireConfiguration || cueConfiguration) throw new Error("Configure one extended service before initialization");
+        if (!options || options.diagnostic !== true || typeof options.now !== "function" ||
+                typeof options.session !== "string" || !/^[0-9a-f]{32}$/.test(options.session) ||
+                typeof options.clockDomainId !== "string" || !/^[A-Za-z0-9_.:-]{1,128}$/.test(options.clockDomainId)) throw new Error("Invalid diagnostic cue configuration");
+        cueConfiguration = {diagnostic:true,now:options.now,session:options.session,clockDomainId:options.clockDomainId};
+    };
+    api.cueDiagnosticStatus = function() { return cueStream ? cueStream.status() : {active:false}; };
+    // End of autonomously AI-generated diagnostic activation.
     api.wireStatus = function() {
         var status = wireEndpoint ? wireEndpoint.status() : null;
         return {enabled:status !== null && !status.closed,clock:wireClock,clockProvenance:"caller-supplied-unverified",endpoint:status};
@@ -41,13 +52,16 @@ var AIDJ = (function() {
     api.drainWireSendResults = function() { return wireEndpoint ? wireEndpoint.drainSendResults() : []; };
     // Autonomously AI-generated native short-message reset route.
     api.resetInput = function(channel, control, value, status, group) {
-        if (!active || !wireEndpoint || status !== 0xFF || control !== 0 || value !== 0 || group !== "[Master]") return;
-        return wireEndpoint.receive(new Uint8Array([0xFF]), 1, wireGeneration);
+        if (!active || (!wireEndpoint && !cueStream) || status !== 0xFF || control !== 0 || value !== 0 || group !== "[Master]") return;
+        return (wireEndpoint || cueStream).receive(new Uint8Array([0xFF]), 1, wireGeneration);
     };
     // End of autonomously AI-generated reset route.
     // Autonomously AI-generated opt-in native loss handler; no MIDI reset attribution.
     api.inputError = function(reason) {
-        if (wireEndpoint && (reason === "portmidi-overflow" || reason === "portmidi-read-error")) wireEndpoint.invalidate();
+        if (reason === "portmidi-overflow" || reason === "portmidi-read-error") {
+            if (wireEndpoint) wireEndpoint.invalidate();
+            if (cueStream) cueStream.invalidate();
+        }
     };
     // End of autonomously AI-generated loss handler.
     api.profileId = "mixxx-2.5.6-latenight-conventional-v1";
@@ -79,6 +93,11 @@ var AIDJ = (function() {
         active = false;
         var failed = cleanupFailed;
         wireConfiguration = null;
+        cueConfiguration = null;
+        if (cueStream) {
+            try { if (!cueStream.shutdown()) failed = true; } catch (error) { failed = true; }
+            cueStream = null;
+        }
         api.incomingData = function() {};
         var closingWire = wireEndpoint;
         wireEndpoint = null;
@@ -107,6 +126,7 @@ var AIDJ = (function() {
     };
     api.init = function(id, debugging) {
         var requestedWire = wireConfiguration;
+        var requestedCue = cueConfiguration;
         if (!api.shutdown()) throw new Error("AI DJ cleanup failed before initialization");
         active = true;
         try {
@@ -116,6 +136,17 @@ var AIDJ = (function() {
                     started.push(module);
                     module.init(id, debugging, api);
                 }
+            }
+            if (requestedCue) {
+                if (wireGeneration >= 9007199254740991) throw new Error("Wire generation exhausted");
+                requestedCue.generation = ++wireGeneration;
+                var stream = api.createManualCueWire(requestedCue), cueToken = wireGeneration;
+                cueStream = stream;
+                stream.start();
+                api.incomingData = function(data, length) {
+                    if (!active || cueStream !== stream || wireGeneration !== cueToken) return;
+                    return stream.receive(data, length, cueToken);
+                };
             }
             if (requestedWire) {
                 if (wireGeneration >= 9007199254740991) throw new Error("Wire generation exhausted");
@@ -1185,6 +1216,227 @@ AIDJ.createWireEndpoint = function(options) {
         sender.close();
         try { parser.close(); } catch (error) { fail("parser-cleanup-failed"); }
     },status:function() { usable(); return {closed:closed,fault:fault,generation:generation,parser:parser.status(),sender:sender.status()}; }};
+};
+// End of autonomously AI-generated file.
+
+// Fragment: manual-cue-observer.js
+// Autonomously AI-generated read-only observer factory. Integration owns its lifecycle.
+// ES5-compatible host source: no Node APIs, native writes or MIDI output.
+AIDJ.createManualCueObserver = function(options) {
+    var keys = ["cue_default", "cue_gotoandstop", "cue_point", "cue_mode", "cue_preview", "cue_indicator", "play", "play_latched"];
+    var max = 9007199254740991;
+    var now = options.now;
+    var clock = options.clockDomainId;
+    if (typeof now !== "function" || typeof clock !== "string" || !/^[A-Za-z0-9_.:-]{1,128}$/.test(clock)) throw new Error("Invalid observer clock");
+    var generation = 0, sequence = 0, lastTime = -1;
+    var active = false, fault = null, cleanupFailed = false, timer = null;
+    var routes = [], queue = [], gap = null;
+    function finite(n) { return typeof n === "number" && isFinite(n); }
+    function connected(route) { return route.connection && route.connection.isConnected === true; }
+    function timestamp() {
+        var at;
+        try { at = now(); } catch (error) { fault = "clock-failed"; active = false; return null; }
+        if (!finite(at) || at < 0 || at < lastTime) { fault = "clock-invalid-or-regressed"; active = false; return null; }
+        lastTime = at;
+        return at;
+    }
+    function emit(route, trigger, presence, value) {
+        if (!active) return;
+        if (sequence === max) { fault = "sequence-exhausted"; active = false; return; }
+        var at = timestamp();
+        if (at === null) return;
+        var record = {schemaVersion:1, generation:generation, sequence:sequence++, deck:route.deck,
+            controlKey:route.key, clockDomainId:clock, observedAtMs:at, trigger:trigger,
+            presence:presence, value:value};
+        if (queue.length >= 256) {
+            if (gap === null) gap = {generation:generation, firstSequence:record.sequence, lastSequence:record.sequence, count:1};
+            else { gap.lastSequence = record.sequence; gap.count++; }
+        } else queue.push(record);
+    }
+    function sample(route, trigger) {
+        if (!active) return;
+        if (!connected(route)) { emit(route, "unavailable", "unavailable", null); return; }
+        try {
+            var value = engine.getValue(route.group, route.key);
+            emit(route, trigger, finite(value) ? "present" : "unknown", finite(value) ? value : null);
+        } catch (error) { emit(route, trigger, "unknown", null); }
+    }
+    function subscribe(deck, key, token) {
+        var route = {deck:deck, group:"[Channel" + deck + "]", key:key, connection:null};
+        routes.push(route);
+        try {
+            // Mixxx makeConnection preserves FIFO events. The unbuffered variant
+            // skips superseded values and is unsuitable for button edges.
+            route.connection = engine.makeConnection(route.group, route.key, function(value) {
+                if (!active || generation !== token || !connected(route)) return;
+                // Preserve the callback edge; rereading here can replace it with a later zero.
+                emit(route, "callback", finite(value) ? "present" : "unknown", finite(value) ? value : null);
+            });
+        } catch (error) { route.connection = null; }
+        if (route.connection && typeof route.connection.disconnect !== "function") {
+            cleanupFailed = true;
+            fault = "invalid-connection-handle";
+            active = false;
+            return;
+        }
+        sample(route, "initial");
+    }
+    function shutdown() {
+        active = false;
+        if (timer !== null) {
+            try { engine.stopTimer(timer); } catch (error) { cleanupFailed = true; }
+            timer = null;
+        }
+        for (var i = 0; i < routes.length; i++) {
+            var connection = routes[i].connection;
+            routes[i].connection = null;
+            if (connection && typeof connection.disconnect === "function") {
+                try { connection.disconnect(); } catch (error) { cleanupFailed = true; }
+            }
+        }
+        routes = [];
+        return !cleanupFailed;
+    }
+    function start() {
+        if (active || routes.length || timer !== null) throw new Error("Observer already started; shut down before restart");
+        if (cleanupFailed || fault !== null) throw new Error("Observer fault requires a new instance");
+        if (queue.length || gap !== null) throw new Error("Drain prior generation before restart");
+        if (generation === max) throw new Error("Observer generation exhausted");
+        generation++; sequence = 0; active = true;
+        var token = generation;
+        try {
+            for (var deck = 1; deck <= 2 && active; deck++) {
+                for (var i = 0; i < keys.length && active; i++) subscribe(deck, keys[i], token);
+            }
+            if (!active) throw new Error("Observer initialization failed: " + fault);
+            timer = engine.beginTimer(100, function() {
+                if (!active || generation !== token) return;
+                for (var i = 0; i < routes.length && active; i++) sample(routes[i], "refresh");
+            });
+            if (!finite(timer) || timer <= 0 || Math.floor(timer) !== timer) { timer = null; throw new Error("Invalid observer timer"); }
+        } catch (error) { shutdown(); throw error; }
+    }
+    function drain(limit) {
+        if (!finite(limit) || Math.floor(limit) !== limit || limit < 1 || limit > 256) throw new Error("Drain limit must be 1..256");
+        var records = queue.splice(0, limit);
+        var reportedGap = gap;
+        gap = null;
+        // Caller receives detached records; no retained object can be mutated through this result.
+        return {records:records, gap:reportedGap};
+    }
+    return {start:start, shutdown:shutdown, drain:drain, status:function() {
+        return {active:active, generation:generation, nextSequence:sequence, queued:queue.length,
+            gapPending:gap !== null, fault:fault, cleanupFailed:cleanupFailed};
+    }};
+};
+// End of autonomously AI-generated file.
+
+// Fragment: manual-cue-wire.js
+// Autonomously AI-generated diagnostic-only cue stream. Owns a dedicated endpoint and observer.
+AIDJ.createManualCueWire = function(options) {
+    if (!options || options.diagnostic !== true || typeof options.session !== "string" ||
+            !/^[0-9a-f]{32}$/.test(options.session) || !Number.isSafeInteger(options.generation) ||
+            options.generation < 0 || typeof options.now !== "function" ||
+            typeof options.clockDomainId !== "string" || !/^[A-Za-z0-9_.:-]{1,128}$/.test(options.clockDomainId)) {
+        throw new Error("Invalid diagnostic cue configuration");
+    }
+    var session = options.session, generation = options.generation, now = options.now;
+    var clock = options.clockDomainId, endpoint = null, observer = null;
+    var active = false, started = false, fault = null, cleanupFailed = false, timer = null;
+    var pending = [], inFlight = null, wireSequence = 0, sent = 0, pumping = false;
+    function shutdown() {
+        active = false; started = true;
+        if (timer !== null) {
+            var old = timer; timer = null;
+            try { engine.stopTimer(old); } catch (error) { cleanupFailed = true; }
+        }
+        if (observer) {
+            try { if (!observer.shutdown()) cleanupFailed = true; } catch (error) { cleanupFailed = true; }
+        }
+        if (endpoint) {
+            try {
+                endpoint.close();
+                var state = endpoint.status();
+                if (state.sender.fault === "timer-cleanup" ||
+                        (state.fault && state.fault.indexOf("cleanup") >= 0)) cleanupFailed = true;
+            } catch (error) { cleanupFailed = true; }
+        }
+        pending = []; inFlight = null;
+        return !cleanupFailed;
+    }
+    function fail(reason) {
+        if (fault === null) fault = reason;
+        shutdown();
+    }
+    function text(record) {
+        if (record.observedAtMs !== undefined && record.observedAtMs > 9007199254740991) throw new Error("Cue clock exceeds protocol range");
+        var value = JSON.stringify(record);
+        if (record.value === 0 && 1 / record.value === -Infinity) value = value.replace(/"value":0(?=[,}])/, '"value":-0');
+        if (value.length > 1024) throw new Error("Cue record too large");
+        return value;
+    }
+    function schedule() {
+        if (!active || timer !== null) return;
+        timer = engine.beginMidiSendTimer(function() {
+            timer = null;
+            if (active) pump();
+        });
+        if (!Number.isSafeInteger(timer) || timer <= 0) {
+            timer = null;
+            throw new Error("Invalid cue stream timer");
+        }
+    }
+    function pump() {
+        if (!active || pumping) return;
+        pumping = true;
+        try {
+            var host = observer.status(), wire = endpoint.status();
+            if (!host.active || host.fault || wire.closed || wire.fault) { fail("cue-stream-dependency-failed"); return; }
+            var results = endpoint.drainSendResults();
+            for (var i = 0; i < results.length; i++) {
+                if (!inFlight || results[i].id !== inFlight || results[i].reason !== "sent") {
+                    fail("cue-stream-send-incomplete"); return;
+                }
+                inFlight = null; sent++;
+            }
+            if (inFlight === null) {
+                if (!pending.length) {
+                    // Drain the complete queue before appending its later overflow interval.
+                    var batch = observer.drain(256);
+                    pending = batch.records;
+                    if (batch.gap) pending.push({schemaVersion:1,kind:"gap",generation:batch.gap.generation,
+                        clockDomainId:clock,firstSequence:batch.gap.firstSequence,
+                        lastSequence:batch.gap.lastSequence,count:batch.gap.count});
+                }
+                if (pending.length) {
+                    if (wireSequence >= 9007199254740991) { fail("cue-wire-sequence-exhausted"); return; }
+                    var reply = endpoint.send({opcode:113,session:session,sequence:wireSequence++,payload:text(pending[0])});
+                    if (!reply.queued) { fail("cue-stream-admission-failed"); return; }
+                    inFlight = reply.id; pending.shift();
+                }
+            }
+            schedule();
+        } catch (error) { fail("cue-stream-pump-failed"); }
+        finally { pumping = false; }
+    }
+    function start() {
+        if (started) throw new Error("Cue stream requires a new instance to restart");
+        started = true;
+        try {
+            observer = AIDJ.createManualCueObserver({now:now,clockDomainId:clock});
+            endpoint = AIDJ.createWireEndpoint({generation:generation,now:now,allowDiagnostic:true,handlers:[],
+                onFault:function() { fail("cue-endpoint-failed"); }});
+            observer.start(); active = true; pump();
+            if (!active) throw new Error("Cue stream failed to start");
+        } catch (error) { fail("cue-stream-start-failed"); throw error; }
+    }
+    return {start:start,shutdown:shutdown,invalidate:function() { fail("native-input-loss"); },
+        receive:function(data,length,inputGeneration) {
+            if (!active) return {closed:true,dispatched:0};
+            return endpoint.receive(data,length,inputGeneration);
+        },status:function() { return {active:active,started:started,fault:fault,cleanupFailed:cleanupFailed,
+            pending:pending.length,inFlight:inFlight !== null,nextWireSequence:wireSequence,sent:sent,
+            delivery:"unconfirmed",observer:observer ? observer.status() : null}; }};
 };
 // End of autonomously AI-generated file.
 // AI-DJ-FRAGMENTS-END

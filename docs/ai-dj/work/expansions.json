@@ -641,11 +641,11 @@
         "Verify only host-produced observations reach diagnostic capture; no fixture injection, actor claim or production authoritative state."
       ],
       "evidence": "docs/ai-dj/work/evidence/M13-CUE-TRANSPORT.md",
-      "updated_at": "2026-09-13T23:04:39.430233+00:00",
+      "updated_at": "2026-09-13T23:08:04.694863+00:00",
       "checks": [
-        "Diagnostic cue receiver implemented: exact numeric values, separate host and receipt clocks, explicit wire and observer gaps, and strict context validation.",
-        "All 183 software tests passed; TypeScript typecheck and build passed. Fixture packets are software evidence only.",
-        "Still required: host sender integration and host-produced capture. Native manual cue validation remains a separate pending task."
+        "Host cue observer now sends ordered diagnostic records through the actual JS endpoint into the strict receiver; overflow intervals remain explicit.",
+        "All 189 software tests, TypeScript typecheck and build passed. A 400-callback burst verifies loss ordering.",
+        "Assembled mapping is default-disabled and uses one dedicated extended sender; actual Mixxx capture remains pending."
       ]
     },
     {
@@ -1185,6 +1185,54 @@
       "updated_at": "2026-09-13T22:55:25.714068+00:00",
       "accepted_at": "2026-09-13T22:55:25.714068+00:00",
       "evidence_sha256": "9d6cebfb14a087115c46214c779a8bf0d62299e0245e18f88c18ce5998fc22c9"
+    },
+    {
+      "id": "M13-CUE-INTEGRATE",
+      "title": "Integrate diagnostic cue lifecycle into the assembled mapping",
+      "parent": "M13",
+      "blocks": [
+        "M13"
+      ],
+      "template": "INTEGRATE",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "M13-CUE-OBSERVER",
+        "R05"
+      ],
+      "owns": [
+        "res/controllers/AI-DJ-scripts.js",
+        "ai-dj/tools/build-mapping.ts",
+        "ai-dj/test/host/assembly.test.ts",
+        "docs/ai-dj/work/evidence/M13-CUE-INTEGRATE.md"
+      ],
+      "locks": [
+        "mapping-entry"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "in_review",
+      "perform": [
+        "Add a mutually exclusive diagnostic cue configuration with a dedicated sender and one-initialization lifetime.",
+        "Assemble observer and cue stream with the existing trusted builder; preserve conventional routes and default-disabled extended services."
+      ],
+      "validate": [
+        "Verify opt-in, reload without configuration, conventional coexistence, old input closure retirement and shutdown cleanup.",
+        "Run all integrated software tests and exact mapping regeneration. Native UI and MIDI capture remain M13-CUE-NATIVE."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/M13-CUE-INTEGRATE.md",
+      "updated_at": "2026-09-13T23:08:04.694863+00:00",
+      "checks": [
+        "Ten-fragment assembly passes all 189 software tests and exact regeneration.",
+        "Exclusive opt-in, ordinary volume coexistence, reload without configuration and input-loss/reset cleanup verified in VM.",
+        "Native capture and final review pending; no native acceptance claimed."
+      ]
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

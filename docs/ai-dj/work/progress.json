@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T23:04:39.430233+00:00",
+  "updated_at": "2026-09-13T23:08:04.694863+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2386,11 +2386,11 @@
       "evidence": null,
       "verified": false,
       "checks": [
-        "Diagnostic cue receiver implemented: exact numeric values, separate host and receipt clocks, explicit wire and observer gaps, and strict context validation.",
-        "All 183 software tests passed; TypeScript typecheck and build passed. Fixture packets are software evidence only.",
-        "Still required: host sender integration and host-produced capture. Native manual cue validation remains a separate pending task."
+        "Host cue observer now sends ordered diagnostic records through the actual JS endpoint into the strict receiver; overflow intervals remain explicit.",
+        "All 189 software tests, TypeScript typecheck and build passed. A 400-callback burst verifies loss ordering.",
+        "Assembled mapping is default-disabled and uses one dedicated extended sender; actual Mixxx capture remains pending."
       ],
-      "updated": "2026-09-13T23:04:39.430233+00:00",
+      "updated": "2026-09-13T23:08:04.694863+00:00",
       "dynamic": true
     },
     {
@@ -2554,6 +2554,22 @@
         "Caller admission budget must cover encoding/queue residence; no hard realtime or musical claim."
       ],
       "updated": "2026-09-13T22:55:25.714068+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "M13-CUE-INTEGRATE",
+      "title": "Integrate diagnostic cue lifecycle into the assembled mapping",
+      "stage": "setup",
+      "status": "in_review",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [
+        "Ten-fragment assembly passes all 189 software tests and exact regeneration.",
+        "Exclusive opt-in, ordinary volume coexistence, reload without configuration and input-loss/reset cleanup verified in VM.",
+        "Native capture and final review pending; no native acceptance claimed."
+      ],
+      "updated": "2026-09-13T23:08:04.694863+00:00",
       "dynamic": true
     }
   ],

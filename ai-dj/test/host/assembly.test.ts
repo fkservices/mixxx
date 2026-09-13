@@ -180,3 +180,41 @@ test("failed reply timer cleanup prevents reinitialization even after an earlier
   }
 });
 // End of autonomously AI-generated cleanup latch regression.
+
+// Autonomously AI-generated diagnostic cue assembly verification.
+import {createManualCueReceiver} from '../../diagnostics/manual-cue.ts';
+test('assembled cue diagnostics require exclusive opt-in, preserve short controls and retire on reload',()=>{
+ const h=createHostHarness([],true);
+ h.evaluate(`var cuePackets=[],cueTime=100;midi.sendSysexMsg=(data)=>cuePackets.push(Array.from(data));
+  var cueOptions={diagnostic:true,now:()=>cueTime,clockDomainId:'host',session:'${'1'.repeat(32)}'};
+  AIDJ.configureCueDiagnostic(cueOptions);cueOptions.session='2'.repeat(32);`);
+ assert.throws(()=>h.evaluate("AIDJ.configureWire({})"));
+ h.mapping.init('AI DJ',false);assert.equal(h.connections.size,34);
+ assert.equal(h.evaluate('AIDJ.cueDiagnosticStatus().active'),true);
+ assert.equal(h.evaluate('AIDJ.wireStatus().enabled'),false);
+ assert.throws(()=>h.evaluate("AIDJ.sendWire({})"));
+ assert.throws(()=>h.evaluate('AIDJ.configureCueDiagnostic(cueOptions)'));
+ h.mapping.input(0,0x21,64,0xb0,'[Channel1]');assert.equal(h.writes.at(-1)?.key,'volume');
+ h.tick();
+ const packets=JSON.parse(h.evaluate('JSON.stringify(cuePackets)')) as number[][];
+ const receiver=createManualCueReceiver({diagnostic:true,transportGeneration:1,session:'1'.repeat(32),observerGeneration:1,hostClockDomainId:'host',now:()=>1000});
+ assert.equal(packets.length,1);const result=receiver.receive(Uint8Array.from(packets[0]!),1);
+ assert.deepEqual(result.errors,[]);assert.equal(result.events[0]?.kind,'observation');receiver.close();
+ h.evaluate('var oldCueInput=AIDJ.incomingData');assert.equal(h.mapping.shutdown(),true);
+ assert.equal(h.connections.size,0);assert.equal(h.timers.size,0);
+ h.mapping.init('AI DJ',false);assert.equal(h.connections.size,18);assert.equal(h.timers.size,1);
+ assert.equal(h.evaluate('AIDJ.cueDiagnosticStatus().active'),false);
+ h.evaluate('oldCueInput(new Uint8Array([255]),1)');h.tick();
+ assert.equal(h.evaluate('cuePackets.length'),1);h.mapping.shutdown();
+});
+test('assembled reset and native input-loss hooks stop cue stream timers',()=>{
+ for(const command of ["AIDJ.resetInput(0,0,0,255,'[Master]')","AIDJ.inputError('portmidi-overflow')","AIDJ.inputError('portmidi-read-error')"]){
+  const h=createHostHarness([],true);h.evaluate(`midi.sendSysexMsg=()=>{};AIDJ.configureCueDiagnostic({diagnostic:true,now:()=>100,clockDomainId:'host',session:'${'1'.repeat(32)}'})`);
+  h.mapping.init('AI DJ',false);h.evaluate(command);
+  assert.equal(h.evaluate('AIDJ.cueDiagnosticStatus().active'),false);
+  assert.equal(h.timers.size,1);assert.equal(h.connections.size,18);h.mapping.shutdown();
+ }
+ const h=createHostHarness([],true);h.evaluate("AIDJ.configureWire({now:()=>100,onFault:()=>{},handlers:[],clockKind:'monotonic',clockDomainId:'host'})");
+ assert.throws(()=>h.evaluate('AIDJ.configureCueDiagnostic({})'));h.mapping.shutdown();
+});
+// End of autonomously AI-generated cue assembly verification.
