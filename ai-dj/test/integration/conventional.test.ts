@@ -108,3 +108,30 @@ test("oversized and batched socket requests cannot arm the communicator",async()
   assert.equal((await requestCommand(socket,"status") as {transport:string}).transport,"open");
  }finally{await service.close();await rm(dir,{recursive:true,force:true});}
 });
+
+test("disarm cancels an older arm waiting for durable capture",async()=>{
+ const dir=await mkdtemp(join(tmpdir(),"dj-"));const socket=join(dir,"s");
+ let release!:()=>void,entered!:()=>void,holding=false;
+ const held=new Promise<void>(resolve=>{release=resolve;});
+ const started=new Promise<void>(resolve=>{entered=resolve;});
+ const service=await startLocalService({socketPath:socket,capturePath:join(dir,"unused"),context:serviceContext,clockId:"ipc-clock",now:()=>100,
+  openCapture:async()=>({append:async(line:string)=>{const record=JSON.parse(line);if(record.kind==="client-command"&&record.command==="arm"){entered();await held;}},sync:async()=>{},close:async()=>{}}),
+  openTransport:async()=>({portName:"AI DJ",status:"open",send:()=>{},close:()=>{}})});
+ try{
+  const arm=requestCommand(socket,"arm");holding=true;await started;
+  const disarm=requestCommand(socket,"disarm");
+  // Independent status requests remain responsive while persistence is held.
+  // Observe generation cancellation by allowing the disarm connection to be read
+  // before releasing the writer, without assuming wall-clock scheduling speed.
+  await new Promise<void>((resolve,reject)=>{
+   const client=createConnection(socket);let data="";
+   client.setTimeout(2000,()=>{client.destroy();reject(new Error("status timeout"));});
+   client.on("error",reject);client.on("connect",()=>client.write("status\n"));
+   client.on("data",chunk=>{data+=chunk;});client.on("end",()=>{try{assert.equal(JSON.parse(data).armed,false);assert.equal(JSON.parse(data).disarmReason,"operator");resolve();}catch(error){reject(error);}});
+  });
+  release();holding=false;
+  assert.deepEqual(await arm,{ok:false,reason:"cancelled"});
+  assert.equal((await disarm as {armed:boolean}).armed,false);
+  assert.equal(service.status().armed,false);
+ }finally{if(holding)release();await service.close();await rm(dir,{recursive:true,force:true});}
+});

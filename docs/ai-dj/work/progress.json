@@ -2288,7 +2288,10 @@
       "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
-      "checks": [],
+      "checks": [
+        "101 integrated tests, typecheck and build passed; separate client, durable capture failures and pending-arm cancellation verified.",
+        "Native service remains disarmed with unknown feedback; Mixxx is alive but native UI inspection times out. Host reconnection acceptance remains pending."
+      ],
       "updated": "2026-09-13T20:31:32.313518+00:00",
       "dynamic": true
     }

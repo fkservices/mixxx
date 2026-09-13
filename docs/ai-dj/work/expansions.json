@@ -462,7 +462,11 @@
       "evidence": "docs/ai-dj/work/evidence/M11-CLI.md",
       "executor": "coordinator",
       "source_revision": "9dfdfb9",
-      "started_at": "2026-09-13T20:31:32.313518+00:00"
+      "started_at": "2026-09-13T20:31:32.313518+00:00",
+      "checks": [
+        "101 integrated tests, typecheck and build passed; separate client, durable capture failures and pending-arm cancellation verified.",
+        "Native service remains disarmed with unknown feedback; Mixxx is alive but native UI inspection times out. Host reconnection acceptance remains pending."
+      ]
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."
