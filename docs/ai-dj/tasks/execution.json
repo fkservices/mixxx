@@ -256,7 +256,7 @@
     "R05-ENDPOINT-NATIVE": "planned",
     "R05-NATIVE-CLOCK": "accepted",
     "R12-SUSPEND-RESUME": "planned",
-    "R05-NATIVE-INPUT-LOSS": "in_review",
+    "R05-NATIVE-INPUT-LOSS": "accepted",
     "R05-FRAGMENT-SENDER": "planned"
   },
   "dynamic_dependency_frontier": [

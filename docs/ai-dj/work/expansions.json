@@ -998,7 +998,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "in_review",
+      "status": "accepted",
       "perform": [
         "Clear partial native SysEx state after receive overflow and expose an explicit input-loss signal to interested mappings; distinguish input loss from a physical MIDI reset.",
         "Retire the AI DJ endpoint on the signal through the integration owner; preserve other controller compatibility. Do not merely log and continue with trusted state."
@@ -1009,13 +1009,15 @@
       ],
       "evidence": "docs/ai-dj/work/evidence/R05-NATIVE-INPUT-LOSS.md",
       "executor": "coordinator",
-      "source_revision": "a862e22",
+      "source_revision": "d34bf7a",
       "started_at": "2026-09-13T22:29:13.753682+00:00",
       "checks": [
-        "Input loss clears native partial SysEx and invokes optional mapping inputError hook; AI DJ retires endpoint.",
-        "165 software tests and 55 native PortMidi/script tests passed; native build passed. Staged application overflow proof remains pending."
+        "Actual native overflow notified mapping and retired endpoint; post-loss message did not dispatch.",
+        "55 native tests and 165 software tests passed; helper/app exited and fixture restored."
       ],
-      "updated_at": "2026-09-13T22:30:26.246459+00:00"
+      "updated_at": "2026-09-13T22:32:02.976091+00:00",
+      "accepted_at": "2026-09-13T22:32:02.976091+00:00",
+      "evidence_sha256": "94b054e460609d247a515d28751c0dd4652a85a963440cc3194e544d992e6432"
     },
     {
       "id": "R05-FRAGMENT-SENDER",

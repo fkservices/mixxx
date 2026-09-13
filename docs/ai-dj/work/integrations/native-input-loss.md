@@ -1,6 +1,6 @@
 # Native input-loss propagation
 
-> Autonomously AI-generated implementation notes; native acceptance pending.
+> Autonomously AI-generated implementation notes; native input-loss propagation accepted.
 
 PortMidi read errors now clear partial SysEx assembly before any later input is
 processed. Overflow invokes an explicit `portmidi-overflow` notification; other
@@ -16,8 +16,8 @@ A new native regression injects partial SysEx, overflow, then a fresh frame and
 checks notification ordering and fresh-frame contents. A software regression
 checks endpoint retirement and cleanup. All 165 software tests passed. The native rebuild completed with exit code zero,
 and all 55 tests in the PortMidi/controller-script suites passed, including the
-new partial-frame overflow test. Actual overflow proof in the staged application
-remains pending.
+new partial-frame overflow test. Actual overflow in the staged rebuilt application also passed: the native hook
+closed the endpoint, and the post-loss message did not dispatch.
 
 The native rebuild uses the existing private build directory. Its output is in
 `input-loss-build.log`; build session 12769 and test session 73206 both exited

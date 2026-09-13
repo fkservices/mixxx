@@ -1,15 +1,37 @@
 {
   "task": "R05-NATIVE-INPUT-LOSS",
-  "status": "in_review",
+  "status": "verified",
   "baseRevision": "a862e22",
   "nativeBuildExitCode": 0,
   "nativeTests": 55,
   "nativeTestExitCode": 0,
   "softwareTests": 165,
-  "runtimeProof": "pending",
+  "runtimeProof": "passed actual PortMidi overflow with native mapping notification and endpoint retirement",
   "hashes": {
     "input-loss-build.log": "ae084c746743bdd3da0c8f3599808636a1386c7b1728d7be74f08c9e097bc330",
     "input-loss-tests.log": "e01e78e59c8506cfe42796db336bab0c45a6f55489dfea07493648f3f61b5857",
     "input-loss-tests.json": "4589b8a35538641e880c280064f935dfe53cf32ab321e0d6a368cfe5acdc6411"
+  },
+  "sourceRevision": "d34bf7a",
+  "recordedAt": "2026-09-13T22:32:02.976091+00:00",
+  "nativeProbe": {
+    "preLossReply": 40,
+    "postLossSequence": 42,
+    "postLossResult": {
+      "dispatched": 0,
+      "rejected": 0,
+      "closed": true
+    },
+    "helperExitCode": 0,
+    "hostStopped": true,
+    "diagnosticBootstrapRemoved": true,
+    "evidenceHashes": {
+      "runner.mjs": "d5f10c0563725945fc105080f6716dcc68082ba11be6bc0eff3d448fe3056e51",
+      "probe.js": "01f42a697456c3369a32766b34c904b757c3944a12927ed200cf13a103a555ca",
+      "capture.jsonl": "f54f700ac6d20ec86a60d3af74bc5d4d0ef98ea40fd53858dcb8156ced499f74",
+      "host-evidence.log": "9328c136ee62074d928e0d2fe4d2b4d28fc7406926b0404360a8468b32fbf70b"
+    },
+    "applicationPath": "~/Library/Application Support/Mixxx-AI-DJ/native-build/input-loss-stage/AI DJ Mixxx.app",
+    "binarySha256": "c0df1e73867150e252596c8d7b5d98e1681c45bd064f2454782b51f4e9c9946b"
   }
 }
