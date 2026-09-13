@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T19:59:34.560986+00:00",
+  "updated_at": "2026-09-13T20:07:27.776973+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2206,12 +2206,16 @@
       "id": "INTEGRATE-F09-SYNC-VALIDATION",
       "title": "Validate the explicit sync action and participant guards",
       "stage": "setup",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/INTEGRATE-F09-SYNC-VALIDATION.md",
+      "verified": true,
+      "checks": [
+        "Versioned sync-only admission and exact participant/grant/guard rules reviewed against the accepted contract.",
+        "35 validator tests and 57 integrated tests passed; strict typecheck and build passed.",
+        "Validation remains pure data admission; trusted topology, observations, authority and host-effect proof remain required."
+      ],
+      "updated": "2026-09-13T20:07:27.776973+00:00",
       "dynamic": true
     },
     {

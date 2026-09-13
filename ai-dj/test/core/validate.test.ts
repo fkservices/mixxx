@@ -509,3 +509,167 @@ test("reconciled occurrence association preserves track generation but invalidat
 });
 
 // End of autonomously AI-generated test.
+
+type Mutable<T> = { -readonly [K in keyof T]: Mutable<T[K]> };
+type SyncFixture = Mutable<import("../../core/actions.ts").SyncSemanticAction>;
+function syncAction(count = 2): SyncFixture {
+  const base = action();
+  let serial = 0;
+  const expected = <T extends boolean | number | import("../../core/actions.ts").SyncMode>(value: T) => ({ value, observationId: `sync-observation-${serial++}` });
+  const participants = Array.from({ length: count }, (_, i) => ({
+    deckId: `deck${i + 1}`, syncEnabled: expected(false), syncMode: expected("none" as const),
+    playing: expected(false), audible: expected(false), passthrough: expected(false as const), vinylControl: expected(false as const), quantize: expected(true),
+    eligibility: { kind: "loaded" as const, syncEligible: expected(true as const), beatGridReady: expected(true as const), fileBpm: expected(120), effectiveBpm: expected(120), rateRatio: expected(1), beatPhase: expected(0) },
+  }));
+  return {
+    ...base, schemaVersion: 2,
+    preconditions: { ...(base.preconditions as SyncFixture["preconditions"]),
+      decks: participants.map(({ deckId }) => ({ deckId, deckGeneration: 1, trackGeneration: 1, binding: { kind: "loaded", track: { libraryId: "library1", trackId: `track-${deckId}` }, occurrence: null } })),
+      conditions: [{ kind: "sync-context", topologyEvidenceId: "topology1", topologyRevision: 1, participants,
+        leader: { kind: "none" }, leaderObservationId: "leader-observation", internalClockBpm: expected(120), pendingSyncChange: expected(false as const),
+        effectPolicy: { policyId: "policy1", maxTempoChangeRatio: 0.06, maxPhaseDisplacementBeats: 0 },
+      }],
+    },
+    authority: { ...(base.authority as SyncFixture["authority"]), ownership: [
+      ...participants.map(({ deckId }) => ({ resource: { kind: "deck-sync" as const, deckId }, ownershipGeneration: 1, grantId: `grant-${deckId}` })),
+      { resource: { kind: "sync-engine" }, ownershipGeneration: 1, grantId: "grant-engine" },
+    ] },
+    operation: { kind: "desired-state", action: "deck.set_sync_enabled", deckId: "deck1", args: { enabled: true } },
+  } as SyncFixture;
+}
+
+test("sync v2 admits both desired booleans, one to sixteen participants and immutable JSON copies", () => {
+  for (const count of [1, 2, 16]) for (const enabled of [false, true]) {
+    const input = syncAction(count); input.operation.args.enabled = enabled;
+    const result = validateSemanticAction(JSON.stringify(input));
+    assert.equal(result.ok, true, JSON.stringify(result));
+    if (result.ok && result.value.schemaVersion === 2) {
+      assert.equal(Object.isFrozen(result.value.preconditions.conditions[0].participants[0]?.eligibility), true);
+      input.operation.args.enabled = !enabled;
+      assert.equal(result.value.operation.args.enabled, enabled);
+    }
+  }
+  const largest = JSON.stringify(syncAction(16), (key, value: unknown) =>
+    key.endsWith("Id") && typeof value === "string" ? value.padEnd(128, "x") : value);
+  assert.ok(Buffer.byteLength(largest) <= VALIDATION_LIMITS.maxTransportBytes);
+  assert.equal(validateSemanticAction(largest).ok, true);
+  failure(validateSemanticAction(syncAction(17)), "array-too-large");
+});
+
+test("sync versions cannot reinterpret legacy actions, resources, cleanup authority or arbitrary operations", () => {
+  assert.equal(validateSemanticAction({ ...action(), schemaVersion: 2 }).ok, false);
+  assert.equal(validateSemanticAction({ ...syncAction(), schemaVersion: 1 }).ok, false);
+  for (const version of [0, 3, "2", null]) failure(validateSemanticAction({ ...syncAction(), schemaVersion: version }), "invalid-literal");
+  const bad = syncAction(); bad.authority.ownership = (action().authority as SyncFixture["authority"]).ownership;
+  assert.equal(validateSemanticAction(bad).ok, false);
+  failure(validateSemanticAction({ ...syncAction(), authority: { kind: "release-cleanup", lease: { obligationId: "lease1", pressActionId: "press1", pressGeneration: 1 } } }), "invalid-authority-combination");
+  for (const operation of [
+    { ...syncAction().operation, action: "deck.beatsync" },
+    { ...syncAction().operation, args: { enabled: 127 } },
+    { ...syncAction().operation, args: { enabled: true, bpm: 120 } },
+    { ...syncAction().operation, kind: "trigger" },
+  ]) assert.equal(validateSemanticAction({ ...syncAction(), operation }).ok, false);
+});
+
+test("sync rejects missing, duplicate and unrelated roster, guard and grant entries", () => {
+  const mutations: Array<(s: SyncFixture) => void> = [
+    s => { s.preconditions.conditions = [] as unknown as SyncFixture["preconditions"]["conditions"]; },
+    s => { s.preconditions.conditions.push(structuredClone(s.preconditions.conditions[0])); },
+    s => { s.preconditions.conditions[0].participants = []; },
+    s => { s.preconditions.conditions[0].participants.pop(); },
+    s => { s.preconditions.conditions[0].participants[1]!.deckId = "deck1"; },
+    s => { s.preconditions.conditions[0].participants[1]!.deckId = "deck3"; },
+    s => { s.preconditions.decks.pop(); },
+    s => { s.preconditions.decks[0]!.trackGeneration = -1; },
+    s => { s.preconditions.conditions[0].topologyRevision = 1.5; },
+    s => { s.operation.deckId = "deck3"; },
+    s => { s.authority.ownership.pop(); },
+    s => { s.authority.ownership[0]!.resource = { kind: "deck-sync", deckId: "deck3" }; },
+    s => { s.authority.ownership.push(structuredClone(s.authority.ownership[0]!)); },
+    s => { s.authority.ownership[0]!.ownershipGeneration = -1; },
+    s => { s.authority.mode = "PlaylistOnly" as "B2B"; },
+  ];
+  for (const [index, mutate] of mutations.entries()) {
+    const s = syncAction(); mutate(s); assert.equal(validateSemanticAction(s).ok, false, `mutation ${index}`);
+  }
+});
+
+test("sync validates empty peers without invented BPM data and requires a loaded target", () => {
+  const s = syncAction(); const peer = s.preconditions.conditions[0].participants[1]!;
+  s.preconditions.decks[1]!.binding = { kind: "empty" };
+  peer.eligibility = { kind: "empty", syncEligible: { value: false, observationId: "empty-observation" } };
+  assert.equal(validateSemanticAction(s).ok, true);
+  for (const field of ["playing", "audible", "syncEnabled"] as const) {
+    const bad = structuredClone(s); bad.preconditions.conditions[0].participants[1]![field].value = true;
+    assert.equal(validateSemanticAction(bad).ok, false);
+  }
+  s.operation.deckId = "deck2";
+  failure(validateSemanticAction(s), "unknown-or-empty-binding");
+  const mismatch = syncAction(); mismatch.preconditions.decks[1]!.binding = { kind: "empty" };
+  assert.equal(validateSemanticAction(mismatch).ok, false);
+});
+
+test("sync requires consistent leader modes and distinct observations for every fact", () => {
+  const s = syncAction(); const guard = s.preconditions.conditions[0];
+  guard.participants[0]!.syncEnabled.value = true; guard.participants[0]!.syncMode.value = "leader-soft";
+  guard.leader = { kind: "deck", deckId: "deck1" };
+  assert.equal(validateSemanticAction(s).ok, true);
+  guard.participants[0]!.syncMode.value = "leader-explicit";
+  assert.equal(validateSemanticAction(s).ok, true);
+  for (const leader of [{ kind: "none" }, { kind: "internal-clock" }, { kind: "deck", deckId: "deck2" }, { kind: "deck", deckId: "deck3" }] as const) {
+    const bad = structuredClone(s); bad.preconditions.conditions[0].leader = leader;
+    failure(validateSemanticAction(bad), "sync-leader-mismatch");
+  }
+  guard.participants[1]!.syncEnabled.value = true; guard.participants[1]!.syncMode.value = "leader-soft";
+  failure(validateSemanticAction(s), "sync-leader-mismatch");
+  const modes = syncAction(); modes.preconditions.conditions[0].participants[0]!.syncMode.value = "follower";
+  failure(validateSemanticAction(modes), "sync-mode-mismatch");
+  modes.preconditions.conditions[0].participants[0]!.syncEnabled.value = true;
+  modes.preconditions.conditions[0].leader = { kind: "internal-clock" };
+  assert.equal(validateSemanticAction(modes).ok, true);
+  const duplicate = syncAction(); duplicate.preconditions.conditions[0].participants[1]!.playing.observationId = duplicate.preconditions.conditions[0].leaderObservationId;
+  failure(validateSemanticAction(duplicate), "duplicate-observation");
+  const crossDeck = syncAction(); crossDeck.preconditions.conditions[0].participants[1]!.quantize.observationId = crossDeck.preconditions.conditions[0].participants[0]!.quantize.observationId;
+  failure(validateSemanticAction(crossDeck), "duplicate-observation");
+});
+
+test("sync guards enforce closed boolean, numeric, policy and observation bounds", () => {
+  const s = syncAction(); const g = s.preconditions.conditions[0];
+  for (const field of ["passthrough", "vinylControl"] as const) {
+    const bad = structuredClone(s); Object.assign(bad.preconditions.conditions[0].participants[0]![field], { value: true });
+    assert.equal(validateSemanticAction(bad).ok, false);
+  }
+  for (const [field, values] of Object.entries({ fileBpm: [0, -1, 1001], effectiveBpm: [0, 1001], rateRatio: [0, 4.001], beatPhase: [-0.01, 1] })) {
+    for (const value of values) {
+      const bad = structuredClone(s); const eligibility = bad.preconditions.conditions[0].participants[0]!.eligibility;
+      Object.assign((eligibility as unknown as Record<string, object>)[field]!, { value });
+      failure(validateSemanticAction(bad), "out-of-range");
+    }
+  }
+  for (const [field, max] of [["maxTempoChangeRatio", 3], ["maxPhaseDisplacementBeats", 1]] as const) {
+    for (const value of [0, max]) { g.effectPolicy[field] = value; assert.equal(validateSemanticAction(s).ok, true); }
+    for (const value of [-0.01, max + 0.01]) { const bad = structuredClone(s); bad.preconditions.conditions[0].effectPolicy[field] = value; failure(validateSemanticAction(bad), "out-of-range"); }
+  }
+  for (const mutate of [
+    (x: SyncFixture) => Object.assign(x.preconditions.conditions[0].pendingSyncChange, { value: true }),
+    (x: SyncFixture) => Object.assign(x.preconditions.conditions[0].participants[0]!.playing, { fake: true }),
+    (x: SyncFixture) => { x.preconditions.conditions[0].leaderObservationId = "bad\n"; },
+    (x: SyncFixture) => { x.preconditions.conditions[0].internalClockBpm.value = 0; },
+    (x: SyncFixture) => { x.preconditions.conditions[0].effectPolicy.maxTempoChangeRatio = Number.NaN; },
+  ]) { const bad = syncAction(); mutate(bad); assert.equal(validateSemanticAction(bad).ok, false); }
+});
+
+test("v2 outcomes retain all existing status meanings without granting registry or host authority", () => {
+  const base = { sessionId: "session1", actionId: "sync1", sequence: 1, schemaVersion: 2, eventId: "event1", clockId: "clock1", atMs: 100 };
+  for (const variant of [
+    { status: "requested" }, { status: "sent", attemptId: "attempt1", transportMessageIds: ["m1"] },
+    { status: "accepted", attemptId: "attempt1", hostReceiptId: "receipt1" },
+    { status: "observed", observation: { observationId: "obs1", hostInstanceId: "host1", connectionGeneration: 1, stateRevision: 1 }, condition: "satisfied", correlation: { kind: "state-only" }, attribution: { actor: "unknown" } },
+    { status: "uncertain", attemptId: null, reason: "feedback-lost" }, { status: "rejected", stage: "host", reason: "host-rejected" },
+    { status: "cancelled", reason: "human-takeover" }, { status: "expired", phase: "observation" },
+  ]) {
+    assert.equal(validateActionOutcome({ ...base, ...variant }).ok, true);
+    assert.equal(validateActionOutcome({ ...base, ...variant, schemaVersion: 3 }).ok, false);
+    assert.equal(validateActionOutcome({ ...base, ...variant, success: true }).ok, false);
+  }
+});

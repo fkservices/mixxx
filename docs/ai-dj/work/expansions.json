@@ -280,7 +280,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "accepted",
       "reasoning_effort": "high",
       "locks": [
         "core-contract-integration"
@@ -306,7 +306,17 @@
         "Test both booleans, malformed/extra fields, invalid participants/generations/authority and rejected unknown operations.",
         "Run full tests, typecheck/build and whitespace checks."
       ],
-      "evidence": "docs/ai-dj/work/evidence/INTEGRATE-F09-SYNC-VALIDATION.md"
+      "evidence": "docs/ai-dj/work/evidence/INTEGRATE-F09-SYNC-VALIDATION.md",
+      "executor": "coordinator",
+      "started_at": "2026-09-13T20:05:46.572984+00:00",
+      "source_revision": "463ae0712756875d1c5d3d0d9e6742258def2163",
+      "accepted_at": "2026-09-13T20:07:27.776973+00:00",
+      "evidence_sha256": "76d59a6451ac04bcc0638b78717836c191d20c31d8e842429d260f2de6e33c9e",
+      "checks": [
+        "Versioned sync-only admission and exact participant/grant/guard rules reviewed against the accepted contract.",
+        "35 validator tests and 57 integrated tests passed; strict typecheck and build passed.",
+        "Validation remains pure data admission; trusted topology, observations, authority and host-effect proof remain required."
+      ]
     },
     {
       "parent": "M03",

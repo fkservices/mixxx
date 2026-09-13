@@ -226,11 +226,11 @@
     "F08-ACTION-VALIDATION": "accepted",
     "F08-STATE-VALIDATION": "accepted",
     "INTEGRATE-F09-SYNC-CONTRACT": "accepted",
-    "INTEGRATE-F09-SYNC-VALIDATION": "planned",
+    "INTEGRATE-F09-SYNC-VALIDATION": "accepted",
     "INTEGRATE-F09-SYNC-PROFILE": "planned"
   },
   "dynamic_dependency_frontier": [
-    "INTEGRATE-F09-SYNC-VALIDATION"
+    "INTEGRATE-F09-SYNC-PROFILE"
   ],
   "global_requirements": [
     "User instruction to start implementation",
