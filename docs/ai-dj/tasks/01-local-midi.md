@@ -233,7 +233,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** M05. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** M05. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/hosts/mixxx/fragments/conventional-feedback.js`, `ai-dj/test/host/conventional-feedback.test.ts`
 

@@ -4,7 +4,7 @@
 
 **Current work: implementation authorized and started.** The active goal is “perform tasks.md as proposed.” [GOALS.md](GOALS.md) remains authoritative. The reference catalog has 171 cards and 17 expansion templates. [Execution state and acceptance evidence](docs/ai-dj/work/state.json) are authoritative; a card's presence is not completion.
 
-**Now: twenty reference tasks and seven expansion tasks accepted.** Foundation and M01–M08 are accepted. The package passes 85 tests. The sync fragment writes only the chosen desired boolean and samples host state independently; shutdown never compensates with sync-off. Next is M09 feedback, then M10 assembly and actual performance tests. Production sync/cue guards and full delivery gates remain open.
+**Now: twenty-one reference tasks and seven expansion tasks accepted.** Foundation and M01–M09 are accepted. The package passes 90 tests. All initial control fragments and the nine-control feedback fragment are ready for assembly. Feedback samples actual values, keeps unknown separate from zero, and suppresses stale lifecycle callbacks. Next is M10 deterministic assembly and native loading, followed by actual performance/feedback tests. The full delivery gates remain open.
 
 [Visual progress page](docs/ai-dj/progress.html) stays synchronized with the ledger. Add real screenshots and their evidence context as UI/runtime checks produce them.
 

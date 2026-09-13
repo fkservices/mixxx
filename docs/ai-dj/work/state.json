@@ -466,6 +466,19 @@
         "85 tests, strict typecheck and build passed; rejected requests do not become observations and shutdown emits no compensation.",
         "No installed/live sync proof; full production host guard and tempo/phase effects remain required."
       ]
+    },
+    "M09": {
+      "status": "accepted",
+      "executor": "coordinator",
+      "source_revision": "f29473a",
+      "accepted_at": "2026-09-13T20:22:32.163418+00:00",
+      "evidence": "docs/ai-dj/work/evidence/M09.md",
+      "evidence_sha256": "47561e66d0a5d3a3d2dd2bb2a108d23d91767fa7c235c1cbf6a5ab21147ec5f9",
+      "checks": [
+        "All nine actual-control subscriptions, presence-before-value routes and normalized read APIs reviewed against F09.",
+        "90 tests, typecheck and build passed, including unknown handling, no echo, initial failure cleanup and stale callback generations.",
+        "Configured refresh is not measured timing; receiver expiry and native feedback proof remain required."
+      ]
     }
   },
   "jobs": {

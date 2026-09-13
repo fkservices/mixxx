@@ -25,7 +25,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-13T20:20:50.263514+00:00",
+  "updated_at": "2026-09-13T20:22:32.163418+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -354,12 +354,16 @@
       "id": "M09",
       "title": "Subscribe and emit initial control feedback",
       "stage": "01-local-midi",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/M09.md",
+      "verified": true,
+      "checks": [
+        "All nine actual-control subscriptions, presence-before-value routes and normalized read APIs reviewed against F09.",
+        "90 tests, typecheck and build passed, including unknown handling, no echo, initial failure cleanup and stale callback generations.",
+        "Configured refresh is not measured timing; receiver expiry and native feedback proof remain required."
+      ],
+      "updated": "2026-09-13T20:22:32.163418+00:00",
       "dynamic": false
     },
     {
