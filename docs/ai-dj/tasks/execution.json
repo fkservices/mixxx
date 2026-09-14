@@ -281,13 +281,15 @@
     "I13-PAGE-02": "planned",
     "I13-REORDER-CORRECTION": "accepted",
     "O07-CHUNKS": "accepted",
-    "O07-WORKER": "planned"
+    "O07-WORKER": "split",
+    "O07-IPC": "accepted",
+    "O07-LIFECYCLE": "planned"
   },
   "dynamic_dependency_frontier": [
     "L12-NATIVE-ACCESSIBILITY",
     "M19-UI-CAPTURE",
     "I13-PAGE-02",
-    "O07-WORKER"
+    "O07-LIFECYCLE"
   ],
   "global_requirements": [
     "User instruction to start implementation",

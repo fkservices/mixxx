@@ -1,0 +1,25 @@
+{
+  "disclosure": "Autonomously AI-generated worker test record.",
+  "captured_at": "2026-09-14T00:45:44.006504+00:00",
+  "source_base": "f051c378a3",
+  "source_hashes": {
+    "ai-dj/session/journal.ts": "9944770e793ef2d7d7e1d013cd652eeab90c0788351b137115b9a8fe3ca53394",
+    "ai-dj/session/worker.ts": "fe4520e16aab1111f8b0189acc553a6c66bd28e92c3f1aff14dbf528ea86c2d1",
+    "ai-dj/session/chunks.ts": "f8e850818a9f43f2c76c8421810d253bbaff3d79506847e08af6a5aae514a3d6",
+    "ai-dj/test/session/journal.test.ts": "5e7681d8a7a6eba482c1dd071c35f8908c46b6a9e4b97ac885eea0ad2fecf507"
+  },
+  "build_exit": 0,
+  "focused_tests": 5,
+  "full_passed": 242,
+  "summary": [
+    "\u2139 tests 242",
+    "\u2139 suites 0",
+    "\u2139 pass 242",
+    "\u2139 fail 0",
+    "\u2139 cancelled 0",
+    "\u2139 skipped 0",
+    "\u2139 todo 0",
+    "\u2139 duration_ms 15382.710834"
+  ],
+  "disclosure_end": "End of autonomously AI-generated record."
+}

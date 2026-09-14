@@ -1549,7 +1549,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "split",
       "perform": [
         "Implement worker-owned chunk persistence with bounded producer queue and IPC credits.",
         "Record explicit overflow, producer sequence gaps, pause/resume and failure state without blocking communicator; apply O14 degradation rules."
@@ -1558,8 +1558,106 @@
         "Verify interrupted worker recovery, disk-full, saturation, shutdown, pause gaps and no recorder-induced MIDI stall before accepting O07."
       ],
       "evidence": "docs/ai-dj/work/evidence/O07-WORKER.md",
-      "updated_at": "2026-09-14T00:41:49.132988+00:00",
-      "source_revision": "989d1ac",
+      "updated_at": "2026-09-14T00:45:07.423231+00:00",
+      "source_revision": "f051c378a3",
+      "executor": "coordinator",
+      "started_at": "2026-09-14T00:43:06.991655+00:00",
+      "deadline": "2026-09-14T01:13:06.991655+00:00",
+      "children": [
+        "O07-IPC",
+        "O07-LIFECYCLE"
+      ],
+      "split_reason": "Real worker transport is implemented; pause/resume snapshots, actual disk-full and live responsiveness require remaining integration evidence."
+    },
+    {
+      "id": "O07-IPC",
+      "title": "Implement bounded recorder worker transport",
+      "parent": "O07",
+      "blocks": [
+        "O07"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "O07-CHUNKS"
+      ],
+      "owns": [
+        "ai-dj/session/journal.ts",
+        "ai-dj/session/worker.ts",
+        "ai-dj/session/chunks.ts",
+        "ai-dj/test/session/journal.test.ts"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "accepted",
+      "perform": [
+        "Use a real Node worker for disk persistence, bounded queued bytes/records and one in-flight IPC credit.",
+        "Persist ingress omission markers and producer sequence gaps; expose failures and conservative capture status."
+      ],
+      "validate": [
+        "Verify real worker shutdown, queue saturation, sequence regression, filesystem conflict and termination recovery."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/O07-IPC.md",
+      "updated_at": "2026-09-14T00:45:44.006504+00:00",
+      "source_revision": "f051c378a3",
+      "executor": "coordinator",
+      "accepted_at": "2026-09-14T00:45:44.006504+00:00",
+      "evidence_sha256": "8928c000f05880b9894cd162f3b6d9589c9be722062f2ffe664c0540a841bbff",
+      "checks": [
+        "Five real-worker tests and all 242 package tests pass; build passes.",
+        "One IPC credit and bounded ingress queue preserve explicit overflow/failure status.",
+        "Pause/resume snapshots, ENOSPC and MIDI responsiveness remain O07-LIFECYCLE."
+      ]
+    },
+    {
+      "id": "O07-LIFECYCLE",
+      "title": "Complete recorder pause, degradation and responsiveness evidence",
+      "parent": "O07",
+      "blocks": [
+        "O07"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "O07-IPC"
+      ],
+      "owns": [
+        "ai-dj/session/journal.ts",
+        "ai-dj/session/worker.ts",
+        "ai-dj/session/chunks.ts",
+        "ai-dj/test/session/journal.test.ts"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Implement recorded pause/resume with fresh compatible snapshots and explicit open gaps.",
+        "Apply O14 degradation rules, reconcile admitted-but-unconfirmed events and expose status through service.",
+        "Verify actual ENOSPC, worker stalls/timeouts, pause under saturation, shutdown and no recorder-induced MIDI stalls; preserve raw capture requirements."
+      ],
+      "validate": [
+        "Measure live communicator timing with saturated recorder and prove bounded memory/IPC over the declared test interval.",
+        "Require snapshot/producer/identity admission integration and full failure matrix before O07 closes."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/O07-LIFECYCLE.md",
+      "updated_at": "2026-09-14T00:45:07.423231+00:00",
+      "source_revision": "f051c378a3",
       "executor": "coordinator"
     }
   ],

@@ -48,6 +48,10 @@ export class ChunkWriter {
       this.digest.update(bytes);this.bytes+=bytes.length;this.count++;if(this.count===1)this.first=e.sequence;this.last=e.sequence;
     }catch(error){this.failed=true;throw error;}finally{this.busy=false;}
   }
+  async abort():Promise<void> {
+    if(this.busy)throw Error("writer-busy");
+    this.failed=true;this.ended=true;await this.handle?.close();this.handle=null;
+  }
   async close():Promise<void> {
     if(this.busy)throw Error("writer-busy");
     if(this.ended)return;

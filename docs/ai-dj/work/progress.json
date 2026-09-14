@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T00:42:15.350043+00:00",
+  "updated_at": "2026-09-14T00:45:44.006504+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2709,12 +2709,40 @@
       "id": "O07-WORKER",
       "title": "Isolate recording with bounded worker and IPC",
       "stage": "setup",
+      "status": "split",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": "2026-09-14T00:45:07.423231+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "O07-IPC",
+      "title": "Implement bounded recorder worker transport",
+      "stage": "setup",
+      "status": "accepted",
+      "model": "gpt-5.6-sol",
+      "evidence": "work/evidence/O07-IPC.md",
+      "verified": true,
+      "checks": [
+        "Five real-worker tests and all 242 package tests pass; build passes.",
+        "One IPC credit and bounded ingress queue preserve explicit overflow/failure status.",
+        "Pause/resume snapshots, ENOSPC and MIDI responsiveness remain O07-LIFECYCLE."
+      ],
+      "updated": "2026-09-14T00:45:44.006504+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "O07-LIFECYCLE",
+      "title": "Complete recorder pause, degradation and responsiveness evidence",
+      "stage": "setup",
       "status": "planned",
       "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
       "checks": [],
-      "updated": "2026-09-14T00:41:49.132988+00:00",
+      "updated": "2026-09-14T00:45:07.423231+00:00",
       "dynamic": true
     }
   ],

@@ -871,7 +871,9 @@
       "source_revision": "989d1ac",
       "children": [
         "O07-CHUNKS",
-        "O07-WORKER"
+        "O07-WORKER",
+        "O07-IPC",
+        "O07-LIFECYCLE"
       ],
       "reason": "Storage recovery and worker/IPC overload require separate bounded implementation and validation."
     }
