@@ -79,5 +79,13 @@
     "actor": "planner",
     "details": "Added a compact latest-capture strip to the progress page with thumbnail cards, timestamps, and evidence links so visual progress is visible as screenshots are added.",
     "evidence": "work/evidence/progress-page.md"
+  },
+  {
+    "at": "2026-09-14T03:35:00Z",
+    "type": "milestone",
+    "title": "Committed a continuous visual progress-journal flow",
+    "actor": "planner",
+    "details": "Added user-facing process note and will continue to append live milestones and captures so progress.html stays readable as implementation advances.",
+    "evidence": "work/evidence/progress-page.md"
   }
 ]

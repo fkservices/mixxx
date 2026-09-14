@@ -52,3 +52,12 @@ On 2026-09-14, the dashboard now includes a compact visual evidence strip (`#cap
 - Added `renderSessionStrip()` in `progress.template.html` and wired it into the dashboard render cycle.
 - Added strip-specific styles (`.session-strip`, `.strip-item`, `.strip-meta`) for non-blocking visual progression between text-heavy panels.
 - Regenerated `progress.html` so this visual evidence run is immediately readable to any reviewer opening the page in-browser.
+
+## 2026-09-14 session note
+
+- Added a progress-journal checkpoint entry at the user request to keep HTML visuals current as work continues, and tied it to this evidence so new milestones, notes, and captures remain discoverable in one view.
+
+## 2026-09-14 live usage update
+
+- `work/progress-log.json` includes a milestone record for the active visual-progress workflow.
+- Existing screenshots stay in `work/screenshots.json`; new captures should include `path`, `kind`, `captured_at`, `caption`, and evidence evidence links, then the dashboard auto renders them in the strip/gallery.
