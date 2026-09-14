@@ -1749,7 +1749,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "accepted",
       "perform": [
         "Add closed backend-midi-packet evidence and bounded PortMidi-to-raw conversion without padding or guessed actor authority.",
         "Preserve existing session fixtures; retain unknown/malformed backend packets and retire SysEx/pairing state on gaps."
@@ -1760,7 +1760,15 @@
       "evidence": "docs/ai-dj/work/evidence/O04-CAPTURE-CONTRACT.md",
       "spec_id": "O02",
       "capability_id": "mixxx.capture.physical-midi",
-      "updated_at": "2026-09-14T01:27:37.324597+00:00"
+      "updated_at": "2026-09-14T01:33:03.852636+00:00",
+      "source_revision": "aaa0c97af3ae724f38401339df38d97020b455cf",
+      "accepted_at": "2026-09-14T01:33:03.852636+00:00",
+      "evidence_sha256": "19baa9a65333f1abfead6c4e186f7d6d79d0d421090d57b5adb822880ee58728",
+      "checks": [
+        "TypeScript build passed; full Node suite 270/270 passed.",
+        "Seven focused packet conversion tests passed, including 80 KiB SysEx, gaps, endpoint/clock/filter changes and timestamp wrap.",
+        "Native capture and physical controller evidence remain pending."
+      ]
     },
     {
       "id": "O04-CAPTURE-HOOK",

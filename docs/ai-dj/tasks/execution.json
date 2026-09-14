@@ -285,7 +285,7 @@
     "O07-IPC": "accepted",
     "O07-LIFECYCLE": "planned",
     "I13-REMOVAL-CORRECTION": "accepted",
-    "O04-CAPTURE-CONTRACT": "planned",
+    "O04-CAPTURE-CONTRACT": "accepted",
     "O04-CAPTURE-HOOK": "planned",
     "O04-CAPTURE-BRIDGE": "planned",
     "O04-CAPTURE-INGRESS": "planned"
@@ -295,7 +295,7 @@
     "M19-UI-CAPTURE",
     "I13-PAGE-02",
     "O07-LIFECYCLE",
-    "O04-CAPTURE-CONTRACT"
+    "O04-CAPTURE-HOOK"
   ],
   "global_requirements": [
     "User instruction to start implementation",

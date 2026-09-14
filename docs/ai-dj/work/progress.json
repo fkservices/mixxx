@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T01:27:37.324597+00:00",
+  "updated_at": "2026-09-14T01:33:03.852636+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2774,12 +2774,16 @@
       "id": "O04-CAPTURE-CONTRACT",
       "title": "Define backend packet evidence and bounded MIDI conversion",
       "stage": "setup",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": "2026-09-14T01:27:37.324597+00:00",
+      "evidence": "work/evidence/O04-CAPTURE-CONTRACT.md",
+      "verified": true,
+      "checks": [
+        "TypeScript build passed; full Node suite 270/270 passed.",
+        "Seven focused packet conversion tests passed, including 80 KiB SysEx, gaps, endpoint/clock/filter changes and timestamp wrap.",
+        "Native capture and physical controller evidence remain pending."
+      ],
+      "updated": "2026-09-14T01:33:03.852636+00:00",
       "dynamic": true
     },
     {

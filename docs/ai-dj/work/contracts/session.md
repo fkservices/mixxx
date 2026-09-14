@@ -53,3 +53,19 @@ JSON export is one object with format `ai-dj-session`, schema version 1, history
 Recording ending/pausing does not mean music stopped. Spans can remain open/interrupted/unknown, and an ended recording is not a completed set. An AI-only session records human intervention even when overridden; B2B records scoped holds through the current transition and reclaim only after quiet plus a later transition. Manual transport remains a stronger hold. Playlist-only still records manual performance and AI organization without AI deck loads. O01 does not implement those control policies; it preserves the evidence needed to inspect them.
 
 > End of autonomously AI-generated session contract.
+
+## PortMidi backend evidence (O04-CAPTURE-CONTRACT)
+
+The unreleased v1 union now includes `backend-midi-packet`: backend `portmidi`, endpoint open-generation identity, unsigned 32-bit `packedWord`, signed 32-bit `backendTimestamp`, unsigned 32-bit `effectiveFilterMask`, and delivery order `backend`. The normal envelope supplies independent capture/ingest clocks and producer sequence. This is backend delivery evidence, not a claim to reproduce electrical wire bytes or wire ordering.
+
+`admitBackendMidiPacket` admits exactly these seven payload fields. Invalid numeric representations and unsupported fields/kinds are rejected at this boundary; the receiving adapter must retain/report rejected ingress separately. Valid packed words with malformed MIDI content remain backend events. This function is not the pending O09 hostile session/envelope importer.
+
+`createBackendMidiConverter` accepts an already-admitted envelope and an explicitly selected receiving route. It returns the original packet copy, zero or one separately identified raw event, issues, and a `resetPairing` flag. It does not write journals or decode musical gestures. Derived events use an independent producer stream, link the backend event ID, and keep actor, track, occurrence and host authority unknown. Recorder sequence is a projection placeholder; the recorder assigns ingest order. Count linked backend/raw evidence once, not as two gestures.
+
+Short statuses determine one-, two-, or three-byte framing; unused packed-word bytes are excluded, while Note On velocity zero remains unchanged. PortMidi provides no actual-length field: missing bytes replaced by backend zeros cannot be detected here. SysEx stays in fragments of at most four bytes, stopping at EOX and excluding subsequent padding. Embedded real-time bytes stay in the fragment; standalone real-time packets remain standalone. There is no SysEx accumulation, no 64 KiB allocation and no invented original wire ordering. An 80 KiB synthetic stream verifies fragmentation beyond ordinary message-buffer limits.
+
+One converter holds only one current capture context and no pending message bytes. Use one instance per receiving route. Endpoint, producer stream/epoch, clock epoch, filter policy, explicit reset, sequence gaps, regressions, invalid MIDI and truncated SysEx retire partial parsing or request pairing retirement. Downstream gesture decoding must honor `resetPairing` before using returned raw bytes. Integration of that signal is O04-CAPTURE-INGRESS, not established by these unit tests. Backward/duplicate sequences produce no raw event; original evidence remains returned for recorder reconciliation.
+
+Signed backend timestamp wrap and regression are preserved without clamping or mixing with native/Node monotonic time. Existing fixtures remain valid; native capture, bridge, full import validation and hardware timing remain separate work.
+
+End of autonomously AI-generated backend packet contract addition.

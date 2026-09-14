@@ -81,7 +81,17 @@ export interface RecordedOwnership {
   readonly quietSince: ClockStamp | null;
   readonly evidenceEventIds: readonly OpaqueId[];
 }
+export interface BackendMidiPacket {
+  readonly kind: "backend-midi-packet";
+  readonly backend: "portmidi";
+  readonly endpointInstanceId: OpaqueId;
+  readonly packedWord: number;
+  readonly backendTimestamp: number;
+  readonly effectiveFilterMask: number;
+  readonly deliveryOrder: "backend";
+}
 export type SessionEventPayload =
+  | BackendMidiPacket
   | { readonly kind: "raw-midi"; readonly endpointInstanceId: OpaqueId;
       readonly direction: "ai-outbound" | "physical-ingress" | "host-feedback";
       readonly stage: "attempted" | "submitted" | "received";
