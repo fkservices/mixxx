@@ -288,7 +288,8 @@
     "O04-CAPTURE-CONTRACT": "accepted",
     "O04-CAPTURE-HOOK": "accepted",
     "O04-CAPTURE-BRIDGE": "planned",
-    "O04-CAPTURE-INGRESS": "planned"
+    "O04-CAPTURE-INGRESS": "planned",
+    "I13-INSERT-CORRECTION": "accepted"
   },
   "dynamic_dependency_frontier": [
     "L12-NATIVE-ACCESSIBILITY",

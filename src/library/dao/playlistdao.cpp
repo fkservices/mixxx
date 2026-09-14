@@ -1,6 +1,7 @@
 #include "library/dao/playlistdao.h"
 
 #include <QRandomGenerator>
+#include <limits>
 #include <QtDebug>
 
 #include "library/autodj/autodjprocessor.h"
@@ -898,68 +899,74 @@ bool PlaylistDAO::insertTrackIntoPlaylist(TrackId trackId, const int playlistId,
 int PlaylistDAO::insertTracksIntoPlaylist(const QList<TrackId>& trackIds,
         const int playlistId,
         int position) {
+    // Autonomously AI-generated correction: publish only committed insertions.
     if (playlistId < 0 || position < 0) {
         return 0;
     }
-
-    int numTracksAdded = 0;
-    ScopedTransaction transaction(m_database);
-
-    int max_position = getMaxPosition(playlistId) + 1;
-
-    if (position > max_position) {
-        position = max_position;
+    QList<TrackId> validTrackIds;
+    for (const auto& trackId : trackIds) {
+        if (trackId.isValid()) {
+            validTrackIds.append(trackId);
+        }
     }
-
+    if (validTrackIds.isEmpty()) {
+        return 0;
+    }
+    ScopedTransaction transaction(m_database);
+    if (!transaction.active()) {
+        return 0;
+    }
+    QSqlQuery query(m_database);
+    query.prepare(QStringLiteral(
+            "SELECT COALESCE(MAX(pt.position), 0) FROM Playlists p "
+            "LEFT JOIN PlaylistTracks pt ON pt.playlist_id=p.id "
+            "WHERE p.id=:id GROUP BY p.id"));
+    query.bindValue(":id", playlistId);
+    if (!query.exec() || !query.next()) {
+        return 0;
+    }
+    const qlonglong maxPosition = query.value(0).toLongLong();
+    if (maxPosition < 0 || maxPosition >= static_cast<qlonglong>(std::numeric_limits<int>::max()) - validTrackIds.size()) {
+        return 0;
+    }
+    position = std::min(position, static_cast<int>(maxPosition) + 1);
     QSqlQuery insertQuery(m_database);
     insertQuery.prepare(QStringLiteral(
             "INSERT INTO PlaylistTracks (playlist_id, track_id, position)"
             "VALUES (:playlist_id, :track_id, :position)"));
-    QSqlQuery query(m_database);
-    int insertPositon = position;
-    for (const auto& trackId : trackIds) {
-        if (!trackId.isValid()) {
-            continue;
-        }
-        // Move all tracks in playlist up by 1.
-        // TODO(XXX) We could do this in one query before the for loop.
+    int insertionPosition = position;
+    for (const auto& trackId : validTrackIds) {
         query.prepare(QStringLiteral(
                 "UPDATE PlaylistTracks SET position=position+1 "
-                "WHERE position>=:position AND "
-                "playlist_id=:id"));
+                "WHERE position>=:position AND playlist_id=:id"));
         query.bindValue(":id", playlistId);
-        query.bindValue(":position", insertPositon);
-
+        query.bindValue(":position", insertionPosition);
         if (!query.exec()) {
             LOG_FAILED_QUERY(query);
-            continue;
+            return 0;
         }
-
-        // Insert the track at the given position
         insertQuery.bindValue(":playlist_id", playlistId);
         insertQuery.bindValue(":track_id", trackId.toVariant());
-        insertQuery.bindValue(":position", insertPositon);
+        insertQuery.bindValue(":position", insertionPosition);
         if (!insertQuery.exec()) {
             LOG_FAILED_QUERY(insertQuery);
-            continue;
+            return 0;
         }
-
-        // Increment the insert position for the track.
-        ++insertPositon;
-        ++numTracksAdded;
+        ++insertionPosition;
     }
-
-    transaction.commit();
-
-    insertPositon = position;
-    for (const auto& trackId : trackIds) {
+    if (!transaction.commit()) {
+        m_database.rollback();
+        return 0;
+    }
+    insertionPosition = position;
+    for (const auto& trackId : validTrackIds) {
         m_playlistsTrackIsIn.insert(trackId, playlistId);
-        // TODO(XXX) The position is wrong if any track failed to insert.
-        emit trackAdded(playlistId, trackId, insertPositon++);
+        emit trackAdded(playlistId, trackId, insertionPosition++);
     }
     emit tracksAdded(QSet<int>{playlistId});
     emit playlistContentChanged(QSet<int>{playlistId});
-    return numTracksAdded;
+    return validTrackIds.size();
+    // End of autonomously AI-generated committed insertion correction.
 }
 
 void PlaylistDAO::clearAutoDJQueue() {

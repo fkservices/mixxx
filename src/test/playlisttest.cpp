@@ -402,3 +402,113 @@ TEST_F(PlaylistTest, PlsEndOfLine) {
     EXPECT_TRUE(entries.at(0).endsWith(QStringLiteral("cr.mp3")));
     EXPECT_TRUE(entries.at(1).endsWith(QStringLiteral("lf.mp3")));
 }
+
+// Autonomously AI-generated regression coverage for bulk insertion evidence.
+class PlaylistInsertionTest : public PlaylistReorderTest {};
+
+TEST_F(PlaylistInsertionTest, SkippedInvalidIdsNeverReachCacheOrNotifications) {
+    const TrackId a(QVariant(101)), b(QVariant(202));
+    QList<TrackId> notified;
+    QList<int> positions;
+    QObject::connect(&dao, &PlaylistDAO::trackAdded, [&](int playlist, TrackId id, int position) {
+        EXPECT_EQ(playlist, 1);
+        notified.append(id);
+        positions.append(position);
+    });
+    EXPECT_EQ(dao.insertTracksIntoPlaylist({TrackId(), a, TrackId(), b, a}, 1, 1), 3);
+    EXPECT_EQ(notified, (QList<TrackId>{a,b,a}));
+    EXPECT_EQ(positions, (QList<int>{1,2,3}));
+    EXPECT_FALSE(dao.isTrackInPlaylist(TrackId(), 1));
+    EXPECT_TRUE(dao.isTrackInPlaylist(a, 1));
+    EXPECT_EQ(dao.getTrackIdsInPlaylistOrder(1), (QList<TrackId>{a,b,a}));
+}
+TEST_F(PlaylistInsertionTest, SqlFailureRollsBackEarlierInsertsAndPositionShifts) {
+    const std::array<int,3> tracks{101,202,101};
+    seed(tracks);
+    QSqlQuery query(dbConnection());
+    ASSERT_TRUE(query.exec("CREATE TRIGGER reject_insert BEFORE INSERT ON PlaylistTracks "
+                          "WHEN NEW.track_id=404 BEGIN SELECT RAISE(ABORT,'test insertion failure'); END"));
+    int notifications = 0;
+    QObject::connect(&dao, &PlaylistDAO::trackAdded, [&] { ++notifications; });
+    QObject::connect(&dao, &PlaylistDAO::tracksAdded, [&] { ++notifications; });
+    QObject::connect(&dao, &PlaylistDAO::playlistContentChanged, [&] { ++notifications; });
+    EXPECT_EQ(dao.insertTracksIntoPlaylist({TrackId(QVariant(303)),TrackId(QVariant(404))},1,2),0);
+    expectOrder({1,2,3},tracks);
+    EXPECT_EQ(notifications,0);
+    EXPECT_FALSE(dao.isTrackInPlaylist(TrackId(QVariant(303)),1));
+    EXPECT_FALSE(dao.isTrackInPlaylist(TrackId(QVariant(404)),1));
+}
+TEST_F(PlaylistInsertionTest, FailedTransactionStartCannotWriteOrPublish) {
+    const std::array<int,3> tracks{101,202,101};
+    seed(tracks);
+    ASSERT_TRUE(dbConnection().transaction());
+    int notifications = 0;
+    QObject::connect(&dao, &PlaylistDAO::trackAdded, [&] { ++notifications; });
+    EXPECT_EQ(dao.insertTracksIntoPlaylist({TrackId(QVariant(303))},1,1),0);
+    expectOrder({1,2,3},tracks);
+    EXPECT_EQ(notifications,0);
+    EXPECT_FALSE(dao.isTrackInPlaylist(TrackId(QVariant(303)),1));
+    ASSERT_TRUE(dbConnection().rollback());
+}
+TEST_F(PlaylistInsertionTest, EmptyAndAllInvalidRequestsDoNotAnnounceChanges) {
+    int notifications = 0;
+    QObject::connect(&dao, &PlaylistDAO::trackAdded, [&] { ++notifications; });
+    QObject::connect(&dao, &PlaylistDAO::tracksAdded, [&] { ++notifications; });
+    QObject::connect(&dao, &PlaylistDAO::playlistContentChanged, [&] { ++notifications; });
+    EXPECT_EQ(dao.insertTracksIntoPlaylist({},1,1),0);
+    EXPECT_EQ(dao.insertTracksIntoPlaylist({TrackId()},1,1),0);
+    EXPECT_EQ(notifications,0);
+    EXPECT_FALSE(dao.isTrackInPlaylist(TrackId(),1));
+}
+// End of autonomously AI-generated bulk insertion tests.
+
+// Autonomously AI-generated transaction and target-boundary insertion checks.
+TEST_F(PlaylistInsertionTest, DeferredCommitFailureDoesNotPublishOrKeepRows) {
+    QSqlQuery query(dbConnection());
+    ASSERT_TRUE(query.exec("PRAGMA foreign_keys=ON"));
+    ASSERT_TRUE(query.exec("CREATE TABLE insertion_parent (id INTEGER PRIMARY KEY)"));
+    ASSERT_TRUE(query.exec("CREATE TABLE insertion_guard (id INTEGER REFERENCES insertion_parent(id) DEFERRABLE INITIALLY DEFERRED)"));
+    ASSERT_TRUE(query.exec("CREATE TRIGGER defer_failure AFTER INSERT ON PlaylistTracks "
+                          "BEGIN INSERT INTO insertion_guard VALUES (NEW.track_id); END"));
+    int notifications = 0;
+    QObject::connect(&dao, &PlaylistDAO::trackAdded, [&] { ++notifications; });
+    EXPECT_EQ(dao.insertTracksIntoPlaylist({TrackId(QVariant(303))},1,1),0);
+    EXPECT_EQ(notifications,0);
+    EXPECT_FALSE(dao.isTrackInPlaylist(TrackId(QVariant(303)),1));
+    ASSERT_TRUE(query.exec("SELECT count(*) FROM PlaylistTracks"));
+    ASSERT_TRUE(query.next());
+    EXPECT_EQ(query.value(0).toInt(),0);
+    ASSERT_TRUE(query.exec("SELECT count(*) FROM insertion_guard"));
+    ASSERT_TRUE(query.next());
+    EXPECT_EQ(query.value(0).toInt(),0);
+}
+TEST_F(PlaylistInsertionTest, MissingPlaylistAndExhaustedPositionsDoNotInsert) {
+    QSqlQuery query(dbConnection());
+    const TrackId a(QVariant(101));
+    EXPECT_EQ(dao.insertTracksIntoPlaylist({a},999,1),0);
+    ASSERT_TRUE(query.exec("SELECT count(*) FROM PlaylistTracks"));
+    ASSERT_TRUE(query.next());
+    EXPECT_EQ(query.value(0).toInt(),0);
+    ASSERT_TRUE(query.exec("INSERT INTO PlaylistTracks VALUES (1,1,101,9223372036854775807,'original')"));
+    EXPECT_EQ(dao.insertTracksIntoPlaylist({a},1,1),0);
+    ASSERT_TRUE(query.exec("SELECT position FROM PlaylistTracks"));
+    ASSERT_TRUE(query.next());
+    EXPECT_EQ(query.value(0).toLongLong(),9223372036854775807LL);
+    EXPECT_FALSE(query.next());
+}
+TEST_F(PlaylistInsertionTest, SuccessfulMiddleInsertPreservesOriginalOccurrences) {
+    const std::array<int,3> tracks{101,202,101};
+    seed(tracks);
+    const TrackId a(QVariant(303));
+    EXPECT_EQ(dao.insertTracksIntoPlaylist({a,a},1,2),2);
+    QSqlQuery query(dbConnection());
+    ASSERT_TRUE(query.exec("SELECT id,position,pl_datetime_added FROM PlaylistTracks WHERE id<=3 ORDER BY id"));
+    for(int i=1;i<=3;++i) {
+        ASSERT_TRUE(query.next());
+        EXPECT_EQ(query.value(0).toInt(),i);
+        EXPECT_EQ(query.value(1).toInt(),i==1?1:i+2);
+        EXPECT_EQ(query.value(2).toString(),QString::number(i+9));
+    }
+    EXPECT_EQ(dao.getTrackIdsInPlaylistOrder(1),(QList<TrackId>{TrackId(QVariant(101)),a,a,TrackId(QVariant(202)),TrackId(QVariant(101))}));
+}
+// End of autonomously AI-generated insertion boundary checks.

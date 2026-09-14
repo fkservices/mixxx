@@ -1918,6 +1918,57 @@
       "spec_id": "O02",
       "capability_id": "mixxx.capture.physical-midi",
       "updated_at": "2026-09-14T01:27:37.324597+00:00"
+    },
+    {
+      "id": "I13-INSERT-CORRECTION",
+      "title": "Keep bulk playlist insertion outcomes consistent with committed rows",
+      "parent": "I13",
+      "blocks": [
+        "I13"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "F10",
+        "F01",
+        "F11"
+      ],
+      "owns": [
+        "src/library/dao/playlistdao.cpp",
+        "src/test/playlisttest.cpp"
+      ],
+      "locks": [
+        "mixxx-runtime"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "accepted",
+      "perform": [
+        "Verify skipped invalid inputs and failed SQL cannot create phantom cache membership or notifications.",
+        "Preserve successful duplicate occurrences and existing invalid-ID skip semantics; roll back SQL failure as one operation."
+      ],
+      "validate": [
+        "Native red/green tests compare committed rows, return count, membership and signals on invalid IDs, SQL failure and unavailable transaction."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/I13-INSERT-CORRECTION.md",
+      "updated_at": "2026-09-14T01:45:16.113810+00:00",
+      "source_revision": "a6d29e4afa6691585897918ed5800a7f65000115",
+      "started_at": "2026-09-14T01:42:09.994400+00:00",
+      "deadline": "2026-09-14T02:12:09.994400+00:00",
+      "accepted_at": "2026-09-14T01:45:16.113810+00:00",
+      "evidence_sha256": "8afc7c613aaa9d896ebc6807ed87cf9e4ecc32261ecfef423f46e0d3320ecef5",
+      "checks": [
+        "Four native insertion regressions failed before correction.",
+        "24 native playlist tests passed afterward, including seven insertion cases and deferred commit failure.",
+        "Installed app, MIDI operations and full inventory closure remain unverified."
+      ]
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."
