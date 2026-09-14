@@ -3798,6 +3798,7 @@ if(PORTMIDI)
   target_sources(
     mixxx-lib
     PRIVATE
+      src/controllers/midi/rawmidicapture.cpp
       src/controllers/midi/portmidicontroller.cpp
       src/controllers/midi/portmidienumerator.cpp
   )

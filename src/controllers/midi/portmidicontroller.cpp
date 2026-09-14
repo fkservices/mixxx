@@ -1,6 +1,9 @@
 #include "controllers/midi/portmidicontroller.h"
 
 #include "controllers/midi/midiutils.h"
+#include "controllers/scripting/controllermonotonicclock.h"
+#include <QThread>
+#include <QUuid>
 #include "controllers/scripting/legacy/controllerscriptenginelegacy.h"
 #include "moc_portmidicontroller.cpp"
 
@@ -56,6 +59,7 @@ int PortMidiController::open(const QString& resourcePath) {
 
     m_bInSysex = false;
     m_cReceiveMsg_index = 0;
+    m_captureEnabledThisOpen = false;
 
     if (m_pInputDevice && isInputDevice()) {
         qCInfo(m_logBase) << "PortMidiController: Opening"
@@ -68,6 +72,9 @@ int PortMidiController::open(const QString& resourcePath) {
             return -2;
         }
     }
+    // Autonomously AI-generated new input-open identity; never derive identity from device name.
+    m_captureEndpointId = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    // End of autonomously AI-generated identity.
     if (m_pOutputDevice && isOutputDevice()) {
         qCInfo(m_logBase) << "PortMidiController: Opening"
                           << m_pOutputDevice->info()->name << "index"
@@ -91,6 +98,13 @@ int PortMidiController::close() {
         return -1;
     }
 
+    // Autonomously AI-generated final capture watermark before input close.
+    if (!stopRawMidiCapture() && m_rawCapture) {
+        m_rawCapture->finish();
+        m_rawCapture.reset();
+    }
+    m_captureEndpointId.clear();
+    // End of autonomously AI-generated final capture watermark.
     stopEngine();
     MidiController::close();
 
@@ -124,6 +138,42 @@ void PortMidiController::notifyInputLoss(const QString& reason) {
 }
 // End of autonomously AI-generated input-loss delivery.
 
+// Autonomously AI-generated capture setup and filter lifecycle.
+std::shared_ptr<mixxx::RawMidiCaptureBuffer> PortMidiController::startRawMidiCapture() {
+    if (!isOpen() || !m_pInputDevice || !m_pInputDevice->isOpen() || m_rawCapture) {
+        return {};
+    }
+    auto buffer = mixxx::RawMidiCaptureBuffer::create(m_captureEndpointId);
+    if (!buffer) {
+        return {};
+    }
+    // Initialize the process-wide clock before the hot producer path.
+    mixxx::ControllerMonotonicClock::nowMilliseconds();
+    if (m_pInputDevice->setFilter(0) != pmNoError) {
+        return {};
+    }
+    m_captureEnabledThisOpen = true;
+    m_captureOwnerThread = QThread::currentThread();
+    m_rawCapture = buffer;
+    return buffer;
+}
+bool PortMidiController::stopRawMidiCapture() {
+    if (!m_rawCapture) {
+        return true;
+    }
+    Q_ASSERT(QThread::currentThread() == m_captureOwnerThread);
+    // PortMidi's pre-capture input policy is its default active-sensing filter.
+    const auto result = m_pInputDevice->setFilter(PM_FILT_ACTIVE);
+    if (result != pmNoError) {
+        m_rawCapture->offer(0, 0, mixxx::ControllerMonotonicClock::nowMilliseconds(), 0, result, true);
+        return false;
+    }
+    m_rawCapture->finish();
+    m_rawCapture.reset();
+    return true;
+}
+// End of autonomously AI-generated capture setup.
+
 bool PortMidiController::poll() {
     // Poll the controller for new data if it's an input device
     if (m_pInputDevice.isNull() || !m_pInputDevice->isOpen()) {
@@ -132,7 +182,20 @@ bool PortMidiController::poll() {
 
     int numEvents = m_pInputDevice->read(m_midiBuffer, MIXXX_PORTMIDI_BUFFER_LEN);
 
-    //qDebug() << "PortMidiController::poll()" << numEvents;
+    // Autonomously AI-generated observation copy before any mapping/parser branch.
+    if (m_rawCapture) {
+        Q_ASSERT(QThread::currentThread() == m_captureOwnerThread);
+        const double capturedAtMs = mixxx::ControllerMonotonicClock::nowMilliseconds();
+        if (numEvents < 0) {
+            m_rawCapture->offer(0, 0, capturedAtMs, 0, numEvents);
+        } else {
+            for (int i = 0; i < numEvents; ++i) {
+                m_rawCapture->offer(m_midiBuffer[i].message, m_midiBuffer[i].timestamp,
+                        capturedAtMs, 0);
+            }
+        }
+    }
+    // End of autonomously AI-generated observation copy.
 
     if (numEvents < 0) {
         // Autonomously AI-generated loss boundary: never retain pre-gap SysEx bytes.
@@ -150,6 +213,11 @@ bool PortMidiController::poll() {
         unsigned char status = Pm_MessageStatus(m_midiBuffer[i].message);
         mixxx::Duration timestamp = mixxx::Duration::fromMillis(m_midiBuffer[i].timestamp);
 
+        // Autonomously AI-generated preservation of the pre-capture filter behavior.
+        if (m_captureEnabledThisOpen && status == 0xFE) {
+            continue;
+        }
+        // End of autonomously AI-generated filter preservation.
         if ((status & 0xF8) == 0xF8) {
             // Handle real-time MIDI messages at any time
             receivedShortMessage(status, 0, 0, timestamp);

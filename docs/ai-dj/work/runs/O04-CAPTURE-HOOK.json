@@ -1,0 +1,259 @@
+{
+  "disclosure": "Autonomously AI-generated native validation summary.",
+  "scope": "Mock PortMidi native test binary; not installed app or physical controller.",
+  "captured_at": "2026-09-14T01:39:13.414550+00:00",
+  "base_revision": "27691b1fef",
+  "tests": {
+    "tests": 20,
+    "failures": 0,
+    "disabled": 0,
+    "errors": 0,
+    "timestamp": "2026-09-13T21:38:18Z",
+    "time": "0.034s",
+    "name": "AllTests",
+    "testsuites": [
+      {
+        "name": "PortMidiControllerTest",
+        "tests": 17,
+        "failures": 0,
+        "disabled": 0,
+        "errors": 0,
+        "timestamp": "2026-09-13T21:38:18Z",
+        "time": "0.018s",
+        "testsuite": [
+          {
+            "name": "OpenClose",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 146,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0.002s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "WriteShort",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 178,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0.001s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "WriteSysex",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 200,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "WriteSysex_Malformed",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 213,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "Poll_Read_Basic",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 226,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "Poll_Read_SysExWithRealtime",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 247,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "Poll_Read_SysEx",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 283,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "Poll_Read_SysExWithRealtime_CoincidentalRealtimeByte",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 312,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "Poll_Read_SysExInterrupted_FollowedByNormalMessage",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 345,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0.001s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "Poll_Read_SysExInterrupted_FollowedBySysExMessage",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 368,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0.001s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "Poll_Read_SysEx_BufferOverflow",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 404,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "OverflowDiscardsPartialSysexAndNotifiesBeforeNewInput",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 466,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "CaptureBeforeParserPreservesLegacyDispatch",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 488,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0.001s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "CaptureRetainsLongSysexBeforeLegacyTruncation",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 515,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "CaptureReadLossAndFilterFailureAreDifferentEvidence",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 541,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "CaptureActivationFailureAndReopenIdentity",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 562,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0.001s",
+            "classname": "PortMidiControllerTest"
+          },
+          {
+            "name": "CaptureDisabledStillSuppressesPreviouslyQueuedActiveSensing",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 644,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0s",
+            "classname": "PortMidiControllerTest"
+          }
+        ]
+      },
+      {
+        "name": "RawMidiCaptureBufferTest",
+        "tests": 3,
+        "failures": 0,
+        "disabled": 0,
+        "errors": 0,
+        "timestamp": "2026-09-13T21:38:18Z",
+        "time": "0.016s",
+        "testsuite": [
+          {
+            "name": "BoundedOverflowWrapAndFinalWatermark",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 577,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0s",
+            "classname": "RawMidiCaptureBufferTest"
+          },
+          {
+            "name": "ConcurrentSnapshotsAndDrainsAccountForEveryOffer",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 603,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0.015s",
+            "classname": "RawMidiCaptureBufferTest"
+          },
+          {
+            "name": "RetainedBuffersRespectGlobalMemoryBudget",
+            "file": "src/test/portmidicontroller_test.cpp",
+            "line": 633,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T21:38:18Z",
+            "time": "0s",
+            "classname": "RawMidiCaptureBufferTest"
+          }
+        ]
+      }
+    ]
+  },
+  "producer_arm64_disassembly": {
+    "__ZN5mixxx20RawMidiCaptureBuffer7publishEv": {
+      "external_call_instructions": 0,
+      "sha256": "30b16db03b9346583b68df1cadd8fc5e14abd7ba104b8c065fccb2ce8e6a044a"
+    },
+    "__ZN5mixxx20RawMidiCaptureBuffer5offerEjidjib": {
+      "external_call_instructions": 0,
+      "sha256": "019ad34ef5254ca700b7e32e083822702f0030be5e56ced180906b12d8e7e08c"
+    },
+    "__ZN5mixxx20RawMidiCaptureBuffer6finishEv": {
+      "external_call_instructions": 0,
+      "sha256": "949d7ffa759ab56b9491d0882c79491b3e416d80fd2aae7e84d2246568d1d52c"
+    }
+  },
+  "logs": {
+    "/tmp/ai-dj-capture-build-final.log": "0146c276d2c2b6ebfe3ec0eff09938497f2dbe157c681379a98c6cece76d205e",
+    "/tmp/ai-dj-capture-native.log": "3f150c9f8d0b4b774dad9efa5d49e7b9cbba2005290b844475498307a2f84ccc",
+    "/tmp/ai-dj-capture-disassembly.txt": "f416fa569277df0b26b019d9ce4136fb1beaf0bca34e19cba35ab745847ae5a0"
+  },
+  "end": "End of autonomously AI-generated native validation summary."
+}

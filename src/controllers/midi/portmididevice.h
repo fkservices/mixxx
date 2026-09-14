@@ -50,6 +50,12 @@ class PortMidiDevice {
         return err;
     }
 
+    // Autonomously AI-generated explicit capture filter seam.
+    virtual PmError setFilter(int32_t mask) {
+        return Pm_SetFilter(m_pStream, mask);
+    }
+    // End of autonomously AI-generated filter seam.
+
     virtual PmError poll() {
         return Pm_Poll(m_pStream);
     }

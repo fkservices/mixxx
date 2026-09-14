@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T01:33:03.852636+00:00",
+  "updated_at": "2026-09-14T01:39:13.461117+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2790,12 +2790,16 @@
       "id": "O04-CAPTURE-HOOK",
       "title": "Copy native MIDI input before mapping without changing dispatch",
       "stage": "setup",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": "2026-09-14T01:27:37.324597+00:00",
+      "evidence": "work/evidence/O04-CAPTURE-HOOK.md",
+      "verified": true,
+      "checks": [
+        "Native build and all 20 controller/capture tests passed.",
+        "100,000 concurrent offers accounted for; overflow, wrap, filters and open-generation identity verified.",
+        "Compiled ARM64 producer functions contain no external calls; app/bridge/hardware evidence remains pending."
+      ],
+      "updated": "2026-09-14T01:39:13.461117+00:00",
       "dynamic": true
     },
     {
@@ -3162,6 +3166,13 @@
       "kind": "app_ui",
       "caption": "Actual shell after browser reload: access requires a fresh launcher link, despite the retained HttpOnly cookie.",
       "evidence": "work/evidence/U02.md"
+    },
+    {
+      "path": "work/screenshots/progress-native-capture.jpg",
+      "kind": "progress_page",
+      "caption": "Actual browser view of the native capture milestone: 20 native tests and 100,000 concurrent offers. This is the evidence journal; installed-app, bridge and physical-controller validation remain pending.",
+      "captured_at": "2026-09-14T01:39:54.653095+00:00",
+      "evidence": "work/evidence/O04-CAPTURE-HOOK.md"
     }
   ],
   "transport_checks": [

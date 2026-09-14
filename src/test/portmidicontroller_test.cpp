@@ -2,6 +2,7 @@
 #include <gmock/gmock.h>
 
 #include <QScopedPointer>
+#include <thread>
 
 #include "controllers/midi/portmidicontroller.h"
 #include "controllers/midi/portmididevice.h"
@@ -58,6 +59,7 @@ class MockPortMidiDevice : public PortMidiDevice {
     MOCK_METHOD0(openOutput, PmError());
     MOCK_METHOD0(close, PmError());
     MOCK_METHOD0(poll, PmError());
+    MOCK_METHOD(PmError, setFilter, (int32_t), (override));
     MOCK_METHOD2(read, int(PmEvent*, int32_t));
     MOCK_METHOD1(writeShort, PmError(int32_t));
     MOCK_METHOD1(writeSysEx, PmError(unsigned char*));
@@ -102,6 +104,20 @@ class PortMidiControllerTest : public MixxxTest {
     void pollDevice() {
         m_pController->poll();
     }
+
+    // Autonomously AI-generated fixture setup for capture-only native tests.
+    std::shared_ptr<mixxx::RawMidiCaptureBuffer> beginCapture() {
+        ON_CALL(*m_mockInput, isOpen()).WillByDefault(Return(true));
+        ON_CALL(*m_mockOutput, isOpen()).WillByDefault(Return(true));
+        ON_CALL(*m_mockInput, openInput(_)).WillByDefault(Return(pmNoError));
+        ON_CALL(*m_mockOutput, openOutput()).WillByDefault(Return(pmNoError));
+        ON_CALL(*m_mockInput, close()).WillByDefault(Return(pmNoError));
+        ON_CALL(*m_mockOutput, close()).WillByDefault(Return(pmNoError));
+        EXPECT_CALL(*m_mockInput, setFilter(_)).WillRepeatedly(Return(pmNoError));
+        openDevice();
+        return m_pController->startRawMidiCapture();
+    }
+    // End of autonomously AI-generated fixture setup.
 
     PmDeviceInfo m_inputDeviceInfo;
     PmDeviceInfo m_outputDeviceInfo;
@@ -467,3 +483,174 @@ TEST_F(PortMidiControllerTest, OverflowDiscardsPartialSysexAndNotifiesBeforeNewI
     pollDevice();
 }
 // End of autonomously AI-generated overflow regression.
+
+// Autonomously AI-generated native capture regression tests.
+TEST_F(PortMidiControllerTest, CaptureBeforeParserPreservesLegacyDispatch) {
+    auto capture = beginCapture();
+    ASSERT_TRUE(capture);
+    PmEvent input[] = {{0x004007b0, 1}, {0x004007b0, 2}, {0xfe, 3}, {0xf8, 4},
+            {0x030201f0, 5}, {0x004008b0, 6}};
+    EXPECT_CALL(*m_mockInput, read(_, _)).WillOnce(DoAll(SetArrayArgument<0>(input, input + 6), Return(6)));
+    EXPECT_CALL(*m_pController, receivedShortMessage(0xb0, 7, 64, _)).Times(2);
+    EXPECT_CALL(*m_pController, receivedShortMessage(0xf8, 0, 0, _)).Times(1);
+    EXPECT_CALL(*m_pController, receivedShortMessage(0xfe, _, _, _)).Times(0);
+    EXPECT_CALL(*m_pController, receivedShortMessage(0xb0, 8, 64, _)).Times(1);
+    pollDevice();
+    auto state = capture->status();
+    ASSERT_TRUE(state);
+    EXPECT_EQ(state->offered, 6u);
+    std::array<mixxx::RawMidiCapturePacket, 64> output;
+    ASSERT_EQ(capture->drainThrough(*state, &output), 6u);
+    for (size_t i = 0; i < 6; ++i) {
+        EXPECT_EQ(output[i].sequence, i + 1);
+        EXPECT_EQ(output[i].packedWord, input[i].message);
+        EXPECT_EQ(output[i].backendTimestamp, input[i].timestamp);
+        EXPECT_EQ(output[i].effectiveFilterMask, 0u);
+        EXPECT_EQ(output[i].errorSource, 0u);
+    }
+    EXPECT_CALL(*m_mockInput, setFilter(PM_FILT_ACTIVE)).WillOnce(Return(pmNoError));
+    EXPECT_TRUE(m_pController->stopRawMidiCapture());
+    EXPECT_TRUE(capture->status()->closed);
+}
+TEST_F(PortMidiControllerTest, CaptureRetainsLongSysexBeforeLegacyTruncation) {
+    auto capture = beginCapture();
+    ASSERT_TRUE(capture);
+    std::array<PmEvent, 301> input;
+    input.fill(PmEvent{0x01010101, -2147483647});
+    input.front().message = 0x010101f0;
+    input.back().message = 0xf7;
+    EXPECT_CALL(*m_mockInput, read(_, _)).WillOnce(DoAll(SetArrayArgument<0>(input.begin(), input.end()), Return(input.size())));
+    EXPECT_CALL(*m_pController, receive(_, _)).WillOnce([](const QByteArray& bytes, mixxx::Duration) {
+        EXPECT_EQ(bytes.size(), MIXXX_SYSEX_BUFFER_LEN);
+    });
+    pollDevice();
+    const auto state = capture->status();
+    ASSERT_TRUE(state);
+    EXPECT_EQ(state->offered, input.size());
+    std::array<mixxx::RawMidiCapturePacket, 64> output;
+    size_t consumed = 0;
+    while (auto count = capture->drainThrough(*state, &output)) {
+        for (size_t i = 0; i < count; ++i) {
+            EXPECT_EQ(output[i].packedWord, input[consumed].message);
+            EXPECT_EQ(output[i].backendTimestamp, input[consumed].timestamp);
+            ++consumed;
+        }
+    }
+    EXPECT_EQ(consumed, input.size());
+}
+TEST_F(PortMidiControllerTest, CaptureReadLossAndFilterFailureAreDifferentEvidence) {
+    auto capture = beginCapture();
+    ASSERT_TRUE(capture);
+    EXPECT_CALL(*m_mockInput, read(_, _)).WillOnce(Return(pmBufferOverflow));
+    EXPECT_CALL(*m_pController, notifyInputLoss(QStringLiteral("portmidi-overflow")));
+    pollDevice();
+    EXPECT_CALL(*m_mockInput, setFilter(PM_FILT_ACTIVE)).WillOnce(Return(pmHostError));
+    EXPECT_FALSE(m_pController->stopRawMidiCapture());
+    auto state = capture->status();
+    ASSERT_TRUE(state);
+    EXPECT_EQ(state->readErrors, 1u);
+    EXPECT_FALSE(state->closed);
+    std::array<mixxx::RawMidiCapturePacket, 64> output;
+    ASSERT_EQ(capture->drainThrough(*state, &output), 2u);
+    EXPECT_EQ(output[0].errorSource, 1u);
+    EXPECT_EQ(output[0].readError, pmBufferOverflow);
+    EXPECT_EQ(output[1].errorSource, 2u);
+    EXPECT_EQ(output[1].readError, pmHostError);
+    EXPECT_CALL(*m_mockInput, setFilter(PM_FILT_ACTIVE)).WillOnce(Return(pmNoError));
+    EXPECT_TRUE(m_pController->stopRawMidiCapture());
+}
+TEST_F(PortMidiControllerTest, CaptureActivationFailureAndReopenIdentity) {
+    auto first = beginCapture();
+    ASSERT_TRUE(first);
+    closeDevice();
+    EXPECT_TRUE(first->status()->closed);
+    openDevice();
+    EXPECT_CALL(*m_mockInput, setFilter(0)).WillOnce(Return(pmHostError));
+    EXPECT_FALSE(m_pController->startRawMidiCapture());
+    EXPECT_CALL(*m_mockInput, setFilter(0)).WillOnce(Return(pmNoError));
+    auto next = m_pController->startRawMidiCapture();
+    ASSERT_TRUE(next);
+    EXPECT_NE(first->endpointId(), next->endpointId());
+    EXPECT_NE(first->streamId(), next->streamId());
+    EXPECT_EQ(next->status()->offered, 0u);
+}
+TEST(RawMidiCaptureBufferTest, BoundedOverflowWrapAndFinalWatermark) {
+    auto buffer = mixxx::RawMidiCaptureBuffer::create(QStringLiteral("endpoint"));
+    ASSERT_TRUE(buffer);
+    for (uint64_t i = 0; i < 5000; ++i) buffer->offer(i, 0, 0, 0);
+    auto state = buffer->status();
+    ASSERT_TRUE(state);
+    EXPECT_EQ(state->offered, 5000u);
+    EXPECT_EQ(state->written, 4096u);
+    EXPECT_EQ(state->dropped, 904u);
+    std::array<mixxx::RawMidiCapturePacket, 64> output;
+    uint64_t drained = 0;
+    while (auto count = buffer->drainThrough(*state, &output)) {
+        for (size_t i = 0; i < count; ++i) EXPECT_EQ(output[i].sequence, ++drained);
+    }
+    EXPECT_EQ(drained, 4096u);
+    buffer->offer(99, -1, 1, 0);
+    buffer->finish();
+    state = buffer->status();
+    ASSERT_TRUE(state);
+    ASSERT_EQ(buffer->drainThrough(*state, &output), 1u);
+    EXPECT_EQ(output[0].sequence, 5001u);
+    EXPECT_EQ(output[0].packedWord, 99u);
+    EXPECT_TRUE(state->closed);
+    buffer->offer(100, 0, 0, 0);
+    EXPECT_EQ(buffer->status()->offered, 5001u);
+}
+TEST(RawMidiCaptureBufferTest, ConcurrentSnapshotsAndDrainsAccountForEveryOffer) {
+    auto buffer = mixxx::RawMidiCaptureBuffer::create(QStringLiteral("concurrent"));
+    ASSERT_TRUE(buffer);
+    constexpr uint64_t total = 100000;
+    std::thread producer([&] {
+        for (uint64_t i = 1; i <= total; ++i) buffer->offer(i, -1, i, 0);
+        buffer->finish();
+    });
+    uint64_t last = 0, received = 0;
+    std::array<mixxx::RawMidiCapturePacket, 64> output;
+    for (;;) {
+        auto state = buffer->status();
+        if (!state) continue;
+        EXPECT_EQ(state->offered, state->written + state->dropped);
+        auto count = buffer->drainThrough(*state, &output);
+        for (size_t i = 0; i < count; ++i) {
+            EXPECT_GT(output[i].sequence, last);
+            EXPECT_LE(output[i].sequence, state->offered);
+            EXPECT_EQ(output[i].packedWord, output[i].sequence);
+            last = output[i].sequence;
+            ++received;
+        }
+        if (state->closed && count == 0) {
+            EXPECT_EQ(received, state->written);
+            EXPECT_EQ(received + state->dropped, total);
+            break;
+        }
+    }
+    producer.join();
+}
+TEST(RawMidiCaptureBufferTest, RetainedBuffersRespectGlobalMemoryBudget) {
+    std::array<std::shared_ptr<mixxx::RawMidiCaptureBuffer>, 32> buffers;
+    for (auto& b : buffers) {
+        b = mixxx::RawMidiCaptureBuffer::create(QStringLiteral("budget"));
+        ASSERT_TRUE(b);
+        b->finish();
+    }
+    EXPECT_FALSE(mixxx::RawMidiCaptureBuffer::create(QStringLiteral("overflow")));
+    buffers[0].reset();
+    EXPECT_TRUE(mixxx::RawMidiCaptureBuffer::create(QStringLiteral("available")));
+}
+TEST_F(PortMidiControllerTest, CaptureDisabledStillSuppressesPreviouslyQueuedActiveSensing) {
+    auto capture = beginCapture();
+    ASSERT_TRUE(capture);
+    ASSERT_TRUE(m_pController->stopRawMidiCapture());
+    PmEvent input[] = {{0xfe, 0}, {0x004007b0, 1}};
+    EXPECT_CALL(*m_mockInput, read(_, _)).WillOnce(DoAll(SetArrayArgument<0>(input, input + 2), Return(2)));
+    EXPECT_CALL(*m_pController, receivedShortMessage(0xfe, _, _, _)).Times(0);
+    EXPECT_CALL(*m_pController, receivedShortMessage(0xb0, 7, 64, _)).Times(1);
+    pollDevice();
+    EXPECT_EQ(capture->status()->offered, 0u);
+    EXPECT_TRUE(capture->status()->closed);
+}
+// End of autonomously AI-generated native capture tests.

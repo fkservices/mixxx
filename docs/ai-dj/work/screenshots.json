@@ -259,6 +259,13 @@
       "kind": "app_ui",
       "caption": "Actual shell after browser reload: access requires a fresh launcher link, despite the retained HttpOnly cookie.",
       "evidence": "work/evidence/U02.md"
+    },
+    {
+      "path": "work/screenshots/progress-native-capture.jpg",
+      "kind": "progress_page",
+      "caption": "Actual browser view of the native capture milestone: 20 native tests and 100,000 concurrent offers. This is the evidence journal; installed-app, bridge and physical-controller validation remain pending.",
+      "captured_at": "2026-09-14T01:39:54.653095+00:00",
+      "evidence": "work/evidence/O04-CAPTURE-HOOK.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

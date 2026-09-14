@@ -1802,7 +1802,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "accepted",
       "perform": [
         "Implement preallocated packet copy immediately after read, per-open identities, effective filter configuration and explicit loss/final-watermark accounting.",
         "Preserve existing mapping behavior, including legacy active-sensing suppression; never serialize or send from the observer."
@@ -1814,7 +1814,18 @@
       "evidence": "docs/ai-dj/work/evidence/O04-CAPTURE-HOOK.md",
       "spec_id": "O02",
       "capability_id": "mixxx.capture.physical-midi",
-      "updated_at": "2026-09-14T01:27:37.324597+00:00"
+      "updated_at": "2026-09-14T01:39:13.461117+00:00",
+      "started_at": "2026-09-14T01:36:14.421838+00:00",
+      "deadline": "2026-09-14T02:06:14.421838+00:00",
+      "source_revision": "27691b1fef10f6f572ebf34ae78e222dce660262",
+      "executor": "coordinator",
+      "accepted_at": "2026-09-14T01:39:13.461117+00:00",
+      "evidence_sha256": "d2cd0bae88495f419c840d76380adfe72a0ec93b63e428c7475306cc8bd76b38",
+      "checks": [
+        "Native build and all 20 controller/capture tests passed.",
+        "100,000 concurrent offers accounted for; overflow, wrap, filters and open-generation identity verified.",
+        "Compiled ARM64 producer functions contain no external calls; app/bridge/hardware evidence remains pending."
+      ]
     },
     {
       "id": "O04-CAPTURE-BRIDGE",

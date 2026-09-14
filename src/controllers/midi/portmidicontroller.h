@@ -6,6 +6,7 @@
 
 #include "controllers/midi/midicontroller.h"
 #include "controllers/midi/portmididevice.h"
+#include "controllers/midi/rawmidicapture.h"
 
 // Note:
 // A standard Midi device runs at 31.25 kbps, with 10 bits / byte
@@ -85,6 +86,11 @@ class PortMidiController : public MidiController {
         return std::nullopt;
     }
 
+    // Autonomously AI-generated setup-only capture access; call on controller owner thread.
+    std::shared_ptr<mixxx::RawMidiCaptureBuffer> startRawMidiCapture();
+    bool stopRawMidiCapture();
+    // End of autonomously AI-generated capture access.
+
   private slots:
     bool poll() override;
 
@@ -119,6 +125,13 @@ class PortMidiController : public MidiController {
 
     QScopedPointer<PortMidiDevice> m_pInputDevice;
     QScopedPointer<PortMidiDevice> m_pOutputDevice;
+
+    // Autonomously AI-generated per-open capture state.
+    bool m_captureEnabledThisOpen = false;
+    QThread* m_captureOwnerThread = nullptr;
+    QString m_captureEndpointId;
+    std::shared_ptr<mixxx::RawMidiCaptureBuffer> m_rawCapture;
+    // End of autonomously AI-generated per-open capture state.
 
     PmEvent m_midiBuffer[MIXXX_PORTMIDI_BUFFER_LEN];
 
