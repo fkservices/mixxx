@@ -754,6 +754,28 @@
         "Eight storage tests including SIGKILL recovery and stale-writer conflict; all 205 package tests and build passed.",
         "Reopened JSON stays untrusted and requires disarmed reconciliation; no host or MIDI dispatch path added."
       ]
+    },
+    "O01": {
+      "status": "accepted",
+      "worker": "/root",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-14T00:15:08.035906+00:00",
+      "updated_at": "2026-09-14T00:17:10.956098+00:00",
+      "deadline": "2026-09-14T00:45:08.035906+00:00",
+      "source_revision": "24e8c26",
+      "owned_paths": [
+        "ai-dj/core/session.ts",
+        "docs/ai-dj/work/contracts/session.md"
+      ],
+      "accepted_at": "2026-09-14T00:17:10.956098+00:00",
+      "evidence": "docs/ai-dj/work/evidence/O01.md",
+      "evidence_sha256": "577236a7d01cc7170f223b10d54c5481df2ae301fab6eab4ae7a13407e4ce179",
+      "checks": [
+        "Session event, decoder, clock, gap, visual-snapshot and versioned-export contracts reviewed against SESSION-UI and existing core types.",
+        "TypeScript build and synthetic volume/jog/counting walkthrough passed; emitted module has no runtime behavior.",
+        "Recorder, validators, physical capture and live/history UI remain separate unimplemented tasks."
+      ]
     }
   },
   "jobs": {

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T00:13:36.528417+00:00",
+  "updated_at": "2026-09-14T00:17:10.956098+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -1580,12 +1580,16 @@
       "id": "O01",
       "title": "Freeze session event schema and clock rules",
       "stage": "07-observability",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-6-astra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/O01.md",
+      "verified": true,
+      "checks": [
+        "Session event, decoder, clock, gap, visual-snapshot and versioned-export contracts reviewed against SESSION-UI and existing core types.",
+        "TypeScript build and synthetic volume/jog/counting walkthrough passed; emitted module has no runtime behavior.",
+        "Recorder, validators, physical capture and live/history UI remain separate unimplemented tasks."
+      ],
+      "updated": "2026-09-14T00:17:10.956098+00:00",
       "dynamic": false
     },
     {
