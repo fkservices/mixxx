@@ -1,0 +1,23 @@
+{
+  "disclosure": "Autonomously AI-generated fixture projection run.",
+  "source_base": "82e011872e",
+  "captured_at": "2026-09-14T01:01:53.552982+00:00",
+  "build_exit": 0,
+  "full_passed": 253,
+  "focused_tests": 3,
+  "summary": [
+    "\u2139 tests 253",
+    "\u2139 suites 0",
+    "\u2139 pass 253",
+    "\u2139 fail 0",
+    "\u2139 cancelled 0",
+    "\u2139 skipped 0",
+    "\u2139 todo 0",
+    "\u2139 duration_ms 12348.296"
+  ],
+  "source_hashes": {
+    "ai-dj/diagnostics/fixture-session.ts": "12a8d27f8c6d6116a4466d7335db27bd3c5fa55385a4ea73e0befa98c895ef53",
+    "ai-dj/test/diagnostics/fixture-session.test.ts": "6b18eda8c509eda2bdbf7076980f94117781f563d59cb8cbdd156fcfdb640685"
+  },
+  "disclosure_end": "End of autonomously AI-generated record."
+}

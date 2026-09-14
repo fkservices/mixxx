@@ -1636,7 +1636,9 @@
         "ai-dj/session/worker.ts",
         "ai-dj/session/chunks.ts",
         "ai-dj/test/session/journal.test.ts",
-        "ai-dj/test/session/deadline.test.ts"
+        "ai-dj/test/session/deadline.test.ts",
+        "ai-dj/diagnostics/fixture-session.ts",
+        "ai-dj/test/diagnostics/fixture-session.test.ts"
       ],
       "locks": [],
       "estimate_minutes": {
@@ -1657,12 +1659,12 @@
         "Require snapshot/producer/identity admission integration and full failure matrix before O07 closes."
       ],
       "evidence": "docs/ai-dj/work/evidence/O07-LIFECYCLE.md",
-      "updated_at": "2026-09-14T00:59:05.101547+00:00",
-      "source_revision": "f1b1bee7db",
+      "updated_at": "2026-09-14T01:01:53.552982+00:00",
+      "source_revision": "82e011872e",
       "executor": "coordinator",
       "started_at": "2026-09-14T00:47:03.166658+00:00",
       "deadline": "2026-09-14T01:17:03.166658+00:00",
-      "progress": "Pause/resume, failure accounting, actual ENOSPC, worker deadlines and two saturated private CoreMIDI comparisons verified. Current-host snapshot admission/indexing, production service capture integration and sustained native responsiveness remain."
+      "progress": "Manual fixture diagnostic projection implemented and tested; actual service wiring remains. Production AI capture still requires R10/O03, current-host snapshots and remaining integration evidence."
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

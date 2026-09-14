@@ -52,4 +52,14 @@ Run 1 recovered all 17,970 admitted fixture records and accounted for 55,230 omi
 
 These short, fixed-order comparisons prove delivery and recorder accounting for the private native loopback under the tested load. They do not close production communicator/service integration, host observation, human cancellation, audible onset, long-session capacity or physical-controller capture gates. No production code changed in this step; the unchanged implementation's last package run passed 250 tests. The native probe itself was executed twice and planning validation passed. Current source and installed binding documentation supplied the evidence because graph coverage was unavailable.
 
+## Manual fixture diagnostic projection
+
+Source base `82e011872e`. Inspection confirmed that M11's existing service is a manual fixture interface with caller-supplied, unverified host context. O03 requires R10 and therefore cannot yet be accepted as production AI capture. `createFixtureSessionProjection` now provides a bounded conversion for admitted legacy raw diagnostics and their explicit command-sent links. This adapter is not yet wired into the service.
+
+Outgoing raw diagnostics become attempted MIDI; matching command-sent records produce separately linked submitted MIDI with the original bytes. Correlation survives drain boundaries, is bounded to 1,024 pending entries by default (maximum 4,096), and rejects mismatched context or backwards send time. Eviction and reset expose unresolved links. Absence of command-sent never manufactures submission. Direction describes the communicator route; actor remains unknown, host/track authority is absent and manual fixture output is never labeled a proven AI performance action.
+
+Feedback becomes received MIDI. Unknown directions and diagnostic host/UI/audio observations return explicit retain-original issues because their legacy shapes do not establish a v1 authoritative host observation. Original diagnostic logs and returned source-event mappings must be retained by integration; this is not complete capture conversion. Inputs must already satisfy diagnostic admission and unique identity requirements. The future drain adapter must persist issues/gaps and keep the original stream, rather than dropping records it cannot translate.
+
+Three tests verify cross-batch attempt/submission links, no false authorship, unresolved sends, mismatched context, bounded eviction/reset and unknown direction handling. Build and all **253 package tests passed**; [run record](../runs/O07-FIXTURE-PROJECTION.json) contains hashes and summary. Runtime service wiring, production R10/O03 capture, current host snapshots and all remaining lifecycle gates stay open.
+
 > End of autonomously AI-generated partial implementation evidence.
