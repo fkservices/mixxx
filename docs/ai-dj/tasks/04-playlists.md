@@ -260,7 +260,7 @@
 
 **Worker:** L3 / `gpt-5.6-sol` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** P09. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** P09. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/sets/edits.ts`, `ai-dj/test/sets/edits.test.ts`
 

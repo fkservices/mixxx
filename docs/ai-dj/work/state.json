@@ -799,6 +799,28 @@
         "Ten focused semantic tests and all 215 package tests pass; TypeScript build passes.",
         "Physical capture, recorder integration and live/history equivalence remain separate gates."
       ]
+    },
+    "P10": {
+      "status": "accepted",
+      "worker": "/root",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-14T00:24:14.122821+00:00",
+      "updated_at": "2026-09-14T00:27:55.999133+00:00",
+      "deadline": "2026-09-14T00:54:14.122821+00:00",
+      "source_revision": "259db40",
+      "owned_paths": [
+        "ai-dj/sets/edits.ts",
+        "ai-dj/test/sets/edits.test.ts"
+      ],
+      "accepted_at": "2026-09-14T00:27:55.999133+00:00",
+      "evidence": "docs/ai-dj/work/evidence/P10.md",
+      "evidence_sha256": "431f0d84f08d81ae2032a2d5dc24836898e7b3fbdca5410d5e7986d070ece4e6",
+      "checks": [
+        "Version-checked move/pin/skip/add reducer preserves source, protected slots and distinct occurrences.",
+        "Nine focused edit tests and all 224 package tests pass; build passes.",
+        "Accepted edits require replanning and carry no load, resume or performance authority."
+      ]
     }
   },
   "jobs": {

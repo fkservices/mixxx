@@ -92,7 +92,7 @@
     "P07": "accepted",
     "P08": "planned",
     "P09": "accepted",
-    "P10": "planned",
+    "P10": "accepted",
     "P11": "planned",
     "P12": "planned",
     "P13": "planned",
@@ -216,6 +216,7 @@
     "P01",
     "P07",
     "P09",
+    "P10",
     "O01",
     "O05"
   ],
@@ -242,7 +243,7 @@
     "I20",
     "I21",
     "I22",
-    "P10",
+    "P11",
     "O02",
     "O07",
     "U01"
