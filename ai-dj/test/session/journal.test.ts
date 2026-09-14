@@ -1,7 +1,7 @@
 // Autonomously AI-generated real worker tests; no live MIDI timing claim.
 import {test} from "node:test";
 import assert from "node:assert/strict";
-import {mkdtemp,rm,writeFile} from "node:fs/promises";
+import {mkdtemp,rm,writeFile,readFile} from "node:fs/promises";
 import {tmpdir} from "node:os";
 import {join} from "node:path";
 import {setTimeout as delay} from "node:timers/promises";
@@ -43,5 +43,23 @@ test("append acknowledgements are distinct from synchronized close and known pro
 test("omission reporting is unconfirmed until its worker acknowledgement",async t=>{
  const {j}=await fixture(t,1);j.offer(line(1));j.offer(line(2));j.offer(line(3));assert.equal(j.status().accounting.unreportedOmissions,2);assert.equal(j.status().accounting.reportedOmissions,0);
  await j.close();assert.equal(j.status().accounting.unreportedOmissions,0);assert.equal(j.status().accounting.reportedOmissions,2);
+});
+test("pause under saturation records gaps and resume persists a matching snapshot",async t=>{
+ const {j,directory}=await fixture(t,1);j.offer(line(1));j.offer(line(2));const pausing=j.pause();assert.equal(j.offer(line(3)),"omitted");const receipt=await pausing;
+ assert.equal(j.status().state,"paused");assert.equal(j.offer(line(4)),"omitted");
+ await j.resume(async context=>({schemaVersion:1,snapshotId:"resume1",recordingId:"r",throughRecorderSequence:context.throughRecorderSequence,streamCursors:[],observedState:null,mode:null,ownership:[],setPlan:null,setHistory:null,openGapEventIds:[],access:"visualization-only"}));
+ assert.equal(j.status().state,"recording");j.offer(line(5));await j.close();
+ const r=await records(directory),events=r.filter(e=>e.kind==="record").map(e=>e.event);assert(events.some(e=>e.state==="paused"));assert(events.some(e=>e.state==="resumed"));assert(events.some(e=>e.kind==="capture-gap"));
+ const snapshot=JSON.parse(await readFile(join(directory,"snapshot-resume1.json"),"utf8"));assert(snapshot.throughRecorderSequence>=receipt.throughRecorderSequence);assert.equal(snapshot.access,"visualization-only");assert.equal(snapshot.openGapEventIds.length,1);assert.equal(j.status().captureCompleteness,"gaps-present");
+});
+test("resume rejects a stale cutoff and a hung sampler without reopening capture",async t=>{
+ const {j}=await fixture(t);await j.pause();
+ await assert.rejects(j.resume(async()=>({schemaVersion:1,snapshotId:"old",recordingId:"r",throughRecorderSequence:0,streamCursors:[],observedState:null,mode:null,ownership:[],setPlan:null,setHistory:null,openGapEventIds:[],access:"visualization-only"})),/stale/);assert.equal(j.status().state,"paused");
+ await assert.rejects(j.resume(()=>new Promise(()=>{})),/timeout/);assert.equal(j.status().state,"paused");await j.close();await assert.rejects(j.pause(),/not-recording/);
+});
+test("a failed snapshot write cannot resume capture",async t=>{
+ const {j,directory}=await fixture(t);await j.pause();await writeFile(join(directory,"snapshot-conflict.json"),"existing");
+ await assert.rejects(j.resume(async c=>({schemaVersion:1,snapshotId:"conflict",recordingId:"r",throughRecorderSequence:c.throughRecorderSequence,streamCursors:[],observedState:null,mode:null,ownership:[],setPlan:null,setHistory:null,openGapEventIds:[],access:"visualization-only"})));
+ assert.equal(j.status().state,"failed");assert.equal(j.offer(line(1)),"unavailable");assert.equal(await readFile(join(directory,"snapshot-conflict.json"),"utf8"),"existing");
 });
 // End of autonomously AI-generated worker tests.

@@ -1,0 +1,24 @@
+{
+  "disclosure": "Autonomously AI-generated partial recorder lifecycle run.",
+  "source_base": "643297d54b",
+  "captured_at": "2026-09-14T00:54:15.208047+00:00",
+  "build_exit": 0,
+  "full_passed": 248,
+  "worker_tests": 11,
+  "summary": [
+    "\u2139 tests 248",
+    "\u2139 suites 0",
+    "\u2139 pass 248",
+    "\u2139 fail 0",
+    "\u2139 cancelled 0",
+    "\u2139 skipped 0",
+    "\u2139 todo 0",
+    "\u2139 duration_ms 9735.9075"
+  ],
+  "source_hashes": {
+    "ai-dj/session/journal.ts": "fbdcdd54dafcba5b647b41c006e50e64fec51ec142f15ac5e3c215d2bf090aac",
+    "ai-dj/session/worker.ts": "88d3bebd1acd6b241085b044faa915e05722873577bf45b7a43f5480c3e7503e",
+    "ai-dj/test/session/journal.test.ts": "1e12d85acc2644c9bef8a44fb1992dcc68260f992f6ffba980857782824f3f0b"
+  },
+  "disclosure_end": "End of autonomously AI-generated record."
+}
