@@ -29,4 +29,19 @@ test("worker shutdown filesystem failure is surfaced and does not report closed"
 test("terminating the actual worker preserves an uncertain recoverable recording",async t=>{
  const {j,directory}=await fixture(t);j.offer(line(1));await until(()=>j.status().inFlight===0);await j.abort();assert.equal(j.status().state,"failed");const r=await records(directory);assert(r.some(e=>e.kind==="record"&&e.event.kind==="raw-midi"));assert(r.some(e=>e.kind==="gap"));
 });
+test("failure retains exact queued versus unconfirmed input accounting",async t=>{
+ const {j}=await fixture(t);for(let i=1;i<=20;i++)assert.equal(j.offer(line(i)),"queued");
+ const stopping=j.abort();const a=j.status().accounting;
+ assert.equal(a.acceptedOffers,20);assert.equal(a.appendAcknowledgedOffers,0);assert.equal(a.notSubmittedOnFailure,19);assert.equal(a.unconfirmedOnFailure,1);assert.equal(a.queuedOffers,0);assert.equal(a.inFlightOffers,0);assert.equal(a.synchronizedAtCloseOffers,null);
+ await stopping;assert.deepEqual(j.status().accounting,a);
+});
+test("append acknowledgements are distinct from synchronized close and known producer gaps",async t=>{
+ const {j}=await fixture(t);j.offer(line(3));await until(()=>j.status().accounting.appendAcknowledgedOffers===1);
+ assert.equal(j.status().captureCompleteness,"gaps-present");assert.equal(j.status().accounting.synchronizedAtCloseOffers,null);
+ await j.close();assert.equal(j.status().accounting.synchronizedAtCloseOffers,1);assert.equal(j.status().captureCompleteness,"gaps-present");
+});
+test("omission reporting is unconfirmed until its worker acknowledgement",async t=>{
+ const {j}=await fixture(t,1);j.offer(line(1));j.offer(line(2));j.offer(line(3));assert.equal(j.status().accounting.unreportedOmissions,2);assert.equal(j.status().accounting.reportedOmissions,0);
+ await j.close();assert.equal(j.status().accounting.unreportedOmissions,0);assert.equal(j.status().accounting.reportedOmissions,2);
+});
 // End of autonomously AI-generated worker tests.

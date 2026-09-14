@@ -17,7 +17,7 @@ await writeInternal({kind:"recording-state",state:"started",reason:"worker-creat
 port.postMessage({kind:"ready"});
 port.on("message",async(message:{kind:string;id:number;line?:string;first?:number;last?:number;reason?:string})=>{
  if(busy){port.postMessage({kind:"failed",reason:"ipc-credit-violation"});port.close();return;}
- busy=true;
+ busy=true;let hasGap=false;
  try {
   if(message.kind==="event"){
    if(typeof message.line!=="string"||message.line.length>256*1024)throw Error("invalid-event-size");
@@ -26,16 +26,17 @@ port.on("message",async(message:{kind:string;id:number;line?:string;first?:numbe
    const key=JSON.stringify([e.producerId,e.stream.streamId,e.stream.epoch]),prior=streams.get(key)??0;
    if(!streams.has(key)&&streams.size>=256)throw Error("stream-capacity-exceeded");
    if(e.producerSequence<=prior)throw Error("producer-sequence-regression");
-   if(e.producerSequence!==prior+1)await writeInternal({kind:"capture-gap",affectedStream:e.stream,missing:{kind:"known",firstSequence:prior+1,lastSequence:e.producerSequence-1},start:null,end:e.capturedAt??null,reason:"sequence-gap"});
+   if(e.producerSequence!==prior+1){hasGap=true;await writeInternal({kind:"capture-gap",affectedStream:e.stream,missing:{kind:"known",firstSequence:prior+1,lastSequence:e.producerSequence-1},start:null,end:e.capturedAt??null,reason:"sequence-gap"});}
    await writer.append(JSON.stringify({...e,recorderSequence:++sequence,ingestedAt:stamp()}));streams.set(key,e.producerSequence);
   }else if(message.kind==="loss"){
+   hasGap=true;
    await writeInternal({kind:"capture-gap",affectedStream:{streamId:"recorder-ingress",epoch:0},missing:{kind:"unknown"},start:null,end:stamp(),reason:message.reason==="queue-overflow"?"queue-overflow":"unknown"});
    await writeInternal({kind:"recording-state",state:"degraded",reason:`ingress offers ${message.first}-${message.last} omitted: ${message.reason}`,musicStopped:"not-implied"});
   }else if(message.kind==="close"){
    await writeInternal({kind:"recording-state",state:"ended",reason:"operator-close",musicStopped:"not-implied"});await writer.close();
    port.postMessage({kind:"closed",id:message.id});port.close();return;
   }else throw Error("invalid-worker-command");
-  port.postMessage({kind:"ack",id:message.id});
+  port.postMessage({kind:"ack",id:message.id,hasGap});
  }catch(error){try{await writer.abort();}catch{}port.postMessage({kind:"failed",reason:error instanceof Error?error.message:"storage-failure"});port.close();}
  finally{busy=false;}
 });
