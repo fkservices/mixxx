@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T00:27:55.999133+00:00",
+  "updated_at": "2026-09-14T00:35:10.002836+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -1236,12 +1236,16 @@
       "id": "P11",
       "title": "Validate complete planned occurrence coverage",
       "stage": "04-playlists",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/P11.md",
+      "verified": true,
+      "checks": [
+        "Exact occurrence coverage, scoped exceptions and protected pins verified.",
+        "Eight focused tests and all 232 package tests pass; typecheck and build pass.",
+        "Duration conflicts require resolution; no performance authority granted."
+      ],
+      "updated": "2026-09-14T00:35:10.002836+00:00",
       "dynamic": false
     },
     {
@@ -2973,6 +2977,13 @@
       "caption": "Native Create New Playlist dialog inspected during inventory, then cancelled without saving. This locates a UI entry point; no MIDI create/read operation is verified.",
       "captured_at": "2026-09-13T23:55:45.121090+00:00",
       "evidence": "work/evidence/I13.md"
+    },
+    {
+      "path": "work/screenshots/progress-p11.jpg",
+      "kind": "progress_page",
+      "caption": "Actual browser capture of the P11 occurrence-coverage panel and accepted milestone. Eight focused and 232 package tests passed; this image shows the journal, not native playback.",
+      "captured_at": "2026-09-14T00:35:29.872346+00:00",
+      "evidence": "work/evidence/P11.md"
     }
   ],
   "transport_checks": [

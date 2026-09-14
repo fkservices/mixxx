@@ -821,6 +821,28 @@
         "Nine focused edit tests and all 224 package tests pass; build passes.",
         "Accepted edits require replanning and carry no load, resume or performance authority."
       ]
+    },
+    "P11": {
+      "status": "accepted",
+      "worker": "/root",
+      "model": "gpt-5.6-terra",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-14T00:29:43.376692+00:00",
+      "updated_at": "2026-09-14T00:35:10.002836+00:00",
+      "deadline": "2026-09-14T00:59:43.376692+00:00",
+      "source_revision": "b38aefc",
+      "owned_paths": [
+        "ai-dj/sets/validate-plan.ts",
+        "ai-dj/test/sets/validate-plan.test.ts"
+      ],
+      "accepted_at": "2026-09-14T00:35:10.002836+00:00",
+      "evidence": "docs/ai-dj/work/evidence/P11.md",
+      "evidence_sha256": "660b1de5e3d0e3f14a5c2ca6793a68ccbfc2e997838e6d71ecb11c333eda4731",
+      "checks": [
+        "Exact occurrence coverage, scoped exceptions and protected pins verified.",
+        "Eight focused tests and all 232 package tests pass; typecheck and build pass.",
+        "Duration conflicts require resolution; no performance authority granted."
+      ]
     }
   },
   "jobs": {

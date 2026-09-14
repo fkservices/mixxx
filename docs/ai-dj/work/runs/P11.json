@@ -1,0 +1,36 @@
+{
+  "disclosure": "Autonomously AI-generated P11 validation record.",
+  "captured_at": "2026-09-14T00:35:10.002836+00:00",
+  "source_base": "b38aefc",
+  "source_hashes": {
+    "ai-dj/sets/validate-plan.ts": "27895ad9668aaf2d755e2656e4d77a2534ffc75a041e621245696cfdb8e9449d",
+    "ai-dj/test/sets/validate-plan.test.ts": "19986948d8796e1a99ab976f670726218ed5073d713059b73c9dd8a7670c3a1c"
+  },
+  "build_exit": 0,
+  "typecheck_exit": 0,
+  "focused_tests": 8,
+  "full_tests": {
+    "passed": 232,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "exit": 0
+  },
+  "test_log_sha256": "100ea884032c77708ef2b8f9a2f97a33dabaa86184ba47ecd78a4246c7bad232",
+  "test_summary": [
+    "\u2139 tests 232",
+    "\u2139 suites 0",
+    "\u2139 pass 232",
+    "\u2139 fail 0",
+    "\u2139 cancelled 0",
+    "\u2139 skipped 0",
+    "\u2139 todo 0",
+    "\u2139 duration_ms 1448.149041"
+  ],
+  "limitations": [
+    "Typed archive and trusted facts; not hostile JSON admission.",
+    "No audible, MIDI, native host or musical-quality proof.",
+    "Result grants no performance authority."
+  ],
+  "disclosure_end": "End of autonomously AI-generated record."
+}
