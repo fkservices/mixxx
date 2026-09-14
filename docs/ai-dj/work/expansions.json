@@ -1476,6 +1476,91 @@
         "Every three-entry permutation preserves row identity, track, sequential positions and timestamp metadata.",
         "Invalid input, lock state, failed transaction start and injected write failure leave rows unchanged; app/UI integration remains separate."
       ]
+    },
+    {
+      "id": "O07-CHUNKS",
+      "title": "Implement recoverable session chunk storage",
+      "parent": "O07",
+      "blocks": [
+        "O07"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "O01",
+        "F03"
+      ],
+      "owns": [
+        "ai-dj/session/chunks.ts",
+        "ai-dj/test/session/chunks.test.ts"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "accepted",
+      "perform": [
+        "Implement exclusive append storage, bounded records, sealed rotated chunks and read-only recovery."
+      ],
+      "validate": [
+        "Verify rotation, sequence/concurrency rejection, torn tails, corruption and I/O failure; no worker or live capture claim."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/O07-CHUNKS.md",
+      "updated_at": "2026-09-14T00:42:15.350043+00:00",
+      "source_revision": "989d1ac",
+      "executor": "coordinator",
+      "accepted_at": "2026-09-14T00:42:15.350043+00:00",
+      "evidence_sha256": "f42b78ec0a40f757d1dcaf601b52aaa99a50f1a3b8826df066098b061cdef3a7",
+      "checks": [
+        "Five storage tests and all 237 package tests pass; build passes.",
+        "Rotated checksummed records recover with explicit uncertainty; worker isolation remains O07-WORKER."
+      ]
+    },
+    {
+      "id": "O07-WORKER",
+      "title": "Isolate recording with bounded worker and IPC",
+      "parent": "O07",
+      "blocks": [
+        "O07"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "O07-CHUNKS"
+      ],
+      "owns": [
+        "ai-dj/session/journal.ts",
+        "ai-dj/session/worker.ts",
+        "ai-dj/test/session/journal.test.ts"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Implement worker-owned chunk persistence with bounded producer queue and IPC credits.",
+        "Record explicit overflow, producer sequence gaps, pause/resume and failure state without blocking communicator; apply O14 degradation rules."
+      ],
+      "validate": [
+        "Verify interrupted worker recovery, disk-full, saturation, shutdown, pause gaps and no recorder-induced MIDI stall before accepting O07."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/O07-WORKER.md",
+      "updated_at": "2026-09-14T00:41:49.132988+00:00",
+      "source_revision": "989d1ac",
+      "executor": "coordinator"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

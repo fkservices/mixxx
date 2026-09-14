@@ -1,0 +1,23 @@
+{
+  "disclosure": "Autonomously AI-generated storage test record.",
+  "source_base": "989d1ac",
+  "captured_at": "2026-09-14T00:42:15.350043+00:00",
+  "build_exit": 0,
+  "passed": 237,
+  "focused_tests": 5,
+  "summary": [
+    "\u2139 tests 237",
+    "\u2139 suites 0",
+    "\u2139 pass 237",
+    "\u2139 fail 0",
+    "\u2139 cancelled 0",
+    "\u2139 skipped 0",
+    "\u2139 todo 0",
+    "\u2139 duration_ms 5077.738333"
+  ],
+  "source_hashes": {
+    "ai-dj/session/chunks.ts": "44cf190148f469e05c5a0d5d0e5e8db1e56d7e8a57475e22c99681bf7758f205",
+    "ai-dj/test/session/chunks.test.ts": "9b6e0432b4edf8c30dba5d942bda003bb1eb70b7d74fe3b5b554826bb1c2133c"
+  },
+  "disclosure_end": "End of autonomously AI-generated record."
+}

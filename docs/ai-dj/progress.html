@@ -28,6 +28,7 @@
 <section class="panel"><h2>Edit the remaining set without rewriting the past</h2><p><span class="pill accepted">Move future entries</span> <span class="pill accepted">Pin next / closer</span> <span class="pill accepted">Explicit user skips</span> <span class="pill accepted">Add distinct occurrences</span></p><p class="muted">Active and loaded entries stay fixed. Original playlist rows and partial playback history survive edits. Every accepted change requires replanning.</p><p class="notice">Nine edit tests and all 224 package tests pass. Live protection still needs the host integration; these tests do not demonstrate B2B performance.</p><a class="evidence" href="work/evidence/P10.md">Read set-edit evidence ↗</a></section>
 <section class="panel" id="plan-integrity"><h2>Every playlist entry stays accounted for</h2><div class="booth"><div><h3>Occurrence coverage</h3><p><span class="pill accepted">A · entry 1</span> → <span class="pill accepted">B · entry 2</span> → <span class="pill accepted">A · entry 3</span></p><p class="muted">Reorder freely. Keep both A entries. Skips and additions need explicit, matching evidence.</p></div><div><h3>Duration conflicts stay visible</h3><p><span class="pill">Time limit</span> + <span class="pill">Meaningful sections</span> → <span class="pill">Validate or resolve</span></p><p class="muted">A short requested set never silently drops songs or approves tiny snippets.</p></div></div><p class="notice">Eight planning tests and all 232 package tests pass. This checks a plan against trusted facts; audible coverage and live execution remain separate gates.</p><a class="evidence" href="work/evidence/P11.md">Read plan-validation evidence ↗</a></section>
 <section class="panel"><h2>The desktop flow is specified</h2><p><span class="pill">Playlist</span> → <span class="pill">Arrange + review</span> → <span class="pill">Live booth</span> → <span class="pill">Session history</span></p><p class="muted">Persistent mode and Disarm controls. Human ownership shown per control. History plays the visualization and cannot replay MIDI.</p><p class="notice">Screen and local API contract accepted. These screens and endpoints still need implementation and runtime tests.</p><a class="evidence" href="work/contracts/ui.md">Read the desktop contract ↗</a></section>
+<section class="panel"><h2>Recording storage can recover an interrupted tail</h2><p><span class="pill accepted">Append records</span> → <span class="pill accepted">Seal chunks</span> → <span class="pill">Recover + flag gaps</span></p><p class="notice">Five storage tests and 237 package tests pass. Worker isolation, disk-full and live MIDI load tests remain; the full recorder is not complete.</p><a class="evidence" href="work/evidence/O07-CHUNKS.md">Read storage evidence ↗</a></section>
 <section class="panel"><h2>Recently accepted</h2><div id="recent"></div></section>
 <section><h2>Every task, in view</h2><div class="controls"><label class="visually-hidden" for="search">Search tasks</label><input id="search" type="search" placeholder="Find MIDI, playlists, B2B, history…"><label class="visually-hidden" for="filter">Task status</label><select id="filter"><option value="all">All statuses</option><option value="running">In progress</option><option value="accepted">Accepted</option><option value="planned">Planned</option><option value="waiting">Waiting</option></select><label class="visually-hidden" for="scope">Task scope</label><select id="scope"><option value="all">All work</option><option value="static">Reference cards</option><option value="dynamic">Added tasks</option></select></div><div class="table-wrap"><table><thead><tr><th scope="col">ID</th><th scope="col">Work</th><th scope="col">Status</th><th scope="col">Evidence</th></tr></thead><tbody id="tasks"></tbody></table></div><p id="table-count" class="table-count" aria-live="polite"></p></section>
 </main>
@@ -36,7 +37,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T00:38:27.055023+00:00",
+  "updated_at": "2026-09-14T00:42:15.350043+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -1702,12 +1703,12 @@
       "id": "O07",
       "title": "Implement bounded recoverable session journal",
       "stage": "07-observability",
-      "status": "planned",
+      "status": "split",
       "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
       "checks": [],
-      "updated": null,
+      "updated": "2026-09-14T00:41:49.132988+00:00",
       "dynamic": false
     },
     {
@@ -2722,6 +2723,33 @@
         "Invalid input, lock state, failed transaction start and injected write failure leave rows unchanged; app/UI integration remains separate."
       ],
       "updated": "2026-09-14T00:05:06.348801+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "O07-CHUNKS",
+      "title": "Implement recoverable session chunk storage",
+      "stage": "setup",
+      "status": "accepted",
+      "model": "gpt-5.6-sol",
+      "evidence": "work/evidence/O07-CHUNKS.md",
+      "verified": true,
+      "checks": [
+        "Five storage tests and all 237 package tests pass; build passes.",
+        "Rotated checksummed records recover with explicit uncertainty; worker isolation remains O07-WORKER."
+      ],
+      "updated": "2026-09-14T00:42:15.350043+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "O07-WORKER",
+      "title": "Isolate recording with bounded worker and IPC",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": "2026-09-14T00:41:49.132988+00:00",
       "dynamic": true
     }
   ],

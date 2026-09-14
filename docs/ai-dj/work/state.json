@@ -864,6 +864,16 @@
         "All three mode walkthroughs preserve disarm, occurrence identity and history isolation.",
         "Planning validation and generated-file checks pass; runtime UI/API remains to implement."
       ]
+    },
+    "O07": {
+      "status": "split",
+      "updated_at": "2026-09-14T00:41:49.132988+00:00",
+      "source_revision": "989d1ac",
+      "children": [
+        "O07-CHUNKS",
+        "O07-WORKER"
+      ],
+      "reason": "Storage recovery and worker/IPC overload require separate bounded implementation and validation."
     }
   },
   "jobs": {

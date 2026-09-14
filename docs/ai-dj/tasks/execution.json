@@ -128,7 +128,7 @@
     "O04": "planned",
     "O05": "accepted",
     "O06": "planned",
-    "O07": "planned",
+    "O07": "split",
     "O08": "planned",
     "O09": "planned",
     "O10": "planned",
@@ -246,7 +246,6 @@
     "I21",
     "I22",
     "O02",
-    "O07",
     "U02"
   ],
   "dispatchable_now": [],
@@ -280,12 +279,15 @@
     "L12-NATIVE-ACCESSIBILITY": "planned",
     "M19-UI-CAPTURE": "planned",
     "I13-PAGE-02": "planned",
-    "I13-REORDER-CORRECTION": "accepted"
+    "I13-REORDER-CORRECTION": "accepted",
+    "O07-CHUNKS": "accepted",
+    "O07-WORKER": "planned"
   },
   "dynamic_dependency_frontier": [
     "L12-NATIVE-ACCESSIBILITY",
     "M19-UI-CAPTURE",
-    "I13-PAGE-02"
+    "I13-PAGE-02",
+    "O07-WORKER"
   ],
   "global_requirements": [
     "User instruction to start implementation",

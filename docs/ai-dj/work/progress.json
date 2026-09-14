@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T00:38:27.055023+00:00",
+  "updated_at": "2026-09-14T00:42:15.350043+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -1668,12 +1668,12 @@
       "id": "O07",
       "title": "Implement bounded recoverable session journal",
       "stage": "07-observability",
-      "status": "planned",
+      "status": "split",
       "model": "gpt-5.6-sol",
       "evidence": null,
       "verified": false,
       "checks": [],
-      "updated": null,
+      "updated": "2026-09-14T00:41:49.132988+00:00",
       "dynamic": false
     },
     {
@@ -2688,6 +2688,33 @@
         "Invalid input, lock state, failed transaction start and injected write failure leave rows unchanged; app/UI integration remains separate."
       ],
       "updated": "2026-09-14T00:05:06.348801+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "O07-CHUNKS",
+      "title": "Implement recoverable session chunk storage",
+      "stage": "setup",
+      "status": "accepted",
+      "model": "gpt-5.6-sol",
+      "evidence": "work/evidence/O07-CHUNKS.md",
+      "verified": true,
+      "checks": [
+        "Five storage tests and all 237 package tests pass; build passes.",
+        "Rotated checksummed records recover with explicit uncertainty; worker isolation remains O07-WORKER."
+      ],
+      "updated": "2026-09-14T00:42:15.350043+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "O07-WORKER",
+      "title": "Isolate recording with bounded worker and IPC",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": "2026-09-14T00:41:49.132988+00:00",
       "dynamic": true
     }
   ],

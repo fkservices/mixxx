@@ -176,7 +176,7 @@
 
 **Worker:** L3 / `gpt-5.6-sol` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** O01, F03. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** O01, F03. **Leases:** Exact path reservation. **Status:** split.
 
 **Owns:** `ai-dj/session/journal.ts`, `ai-dj/test/session/journal.test.ts`
 
