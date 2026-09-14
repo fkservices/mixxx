@@ -1,0 +1,534 @@
+{
+  "disclosure": "Autonomously AI-generated native DAO regression evidence.",
+  "captured_at": "2026-09-14T00:05:06.348801+00:00",
+  "source_base": "8ea8216ee6600fb1f5903322eb344704c419d4f6",
+  "source_hashes": {
+    "src/library/dao/playlistdao.cpp": "604e8b3ecb1596f1addf70d7c5094d12216fc8e9db379353cc730a04c28740da",
+    "src/test/playlisttest.cpp": "ffb512e880e6a38d9d1e42f1f94fa45fe317d4e5d49d3268164f1fdb8f61702d"
+  },
+  "test_binary_sha256": "ac51de7aa2202a167c4746b653d981c1c7994d4d9fdac86f513173efbdba2d49",
+  "filter": "PlaylistReorderTest.*:PlaylistTest.*",
+  "red": {
+    "tests": 3,
+    "failures": 2,
+    "disabled": 0,
+    "errors": 0,
+    "timestamp": "2026-09-13T20:02:46Z",
+    "time": "0.009s",
+    "name": "AllTests",
+    "testsuites": [
+      {
+        "name": "PlaylistReorderTest",
+        "tests": 3,
+        "failures": 2,
+        "disabled": 0,
+        "errors": 0,
+        "timestamp": "2026-09-13T20:02:46Z",
+        "time": "0.009s",
+        "testsuite": [
+          {
+            "name": "EveryThreeEntryPermutationPreservesOccurrences",
+            "file": "src/test/playlisttest.cpp",
+            "line": 80,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:02:46Z",
+            "time": "0.005s",
+            "classname": "PlaylistReorderTest",
+            "failures": [
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 1\n  order[i]\n    Which is: 3\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 2\n  i + 1\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <32-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 3\n  order[i]\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <32-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 2\n  order[i]\n    Which is: 3\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:70\nExpected equality of these values:\n  query.value(1).toInt()\n    Which is: 202\n  tracks[order[i] - 1]\n    Which is: 101\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 2\n  i + 1\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <32-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 1\n  order[i]\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:70\nExpected equality of these values:\n  query.value(1).toInt()\n    Which is: 101\n  tracks[order[i] - 1]\n    Which is: 202\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 3\n  i + 1\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 3\n  order[i]\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <32-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 2\n  order[i]\n    Which is: 3\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 3\n  i + 1\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <32-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 3\n  order[i]\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <32-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 1\n  order[i]\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 2\n  i + 1\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 2\n  order[i]\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 3\n  order[i]\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 2\n  i + 1\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <32-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 1\n  order[i]\n    Which is: 3\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 3\n  i + 1\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <32-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 2\n  order[i]\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 1\n  order[i]\n    Which is: 3\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 3\n  i + 1\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <32-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 2\n  order[i]\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 3\n  i + 1\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 3\n  order[i]\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <32-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 2\n  order[i]\n    Which is: 3\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 2\n  i + 1\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <32-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 1\n  order[i]\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 3\n  i + 1\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 3\n  order[i]\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <32-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n",
+                "type": ""
+              }
+            ]
+          },
+          {
+            "name": "InvalidOccurrenceReferencesLeavePlaylistUnchanged",
+            "file": "src/test/playlisttest.cpp",
+            "line": 96,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:02:46Z",
+            "time": "0.002s",
+            "classname": "PlaylistReorderTest",
+            "failures": [
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 3\n  order[i]\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:70\nExpected equality of these values:\n  query.value(1).toInt()\n    Which is: 101\n  tracks[order[i] - 1]\n    Which is: 202\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 1\n  i + 1\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <32-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 2\n  order[i]\n    Which is: 3\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:70\nExpected equality of these values:\n  query.value(1).toInt()\n    Which is: 202\n  tracks[order[i] - 1]\n    Which is: 101\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 2\n  i + 1\n    Which is: 3\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <32-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 2\n  order[i]\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:70\nExpected equality of these values:\n  query.value(1).toInt()\n    Which is: 202\n  tracks[order[i] - 1]\n    Which is: 101\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 2\n  i + 1\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 1\n  order[i]\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:70\nExpected equality of these values:\n  query.value(1).toInt()\n    Which is: 101\n  tracks[order[i] - 1]\n    Which is: 202\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 3\n  i + 1\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 2\n  order[i]\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:70\nExpected equality of these values:\n  query.value(1).toInt()\n    Which is: 202\n  tracks[order[i] - 1]\n    Which is: 101\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 2\n  i + 1\n    Which is: 1\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:69\nExpected equality of these values:\n  query.value(0).toInt()\n    Which is: 1\n  order[i]\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:70\nExpected equality of these values:\n  query.value(1).toInt()\n    Which is: 101\n  tracks[order[i] - 1]\n    Which is: 202\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:71\nExpected equality of these values:\n  query.value(2).toInt()\n    Which is: 3\n  i + 1\n    Which is: 2\n",
+                "type": ""
+              },
+              {
+                "failure": "src/test/playlisttest.cpp:72\nExpected equality of these values:\n  query.value(3).toString()\n    Which is: { 2-byte object <31-00>, 2-byte object <30-00> }\n  QString::number(order[i] + 9)\n    Which is: { 2-byte object <31-00>, 2-byte object <31-00> }\n",
+                "type": ""
+              }
+            ]
+          },
+          {
+            "name": "LockedPlaylistAndFailedWriteRemainUnchanged",
+            "file": "src/test/playlisttest.cpp",
+            "line": 107,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:02:46Z",
+            "time": "0.001s",
+            "classname": "PlaylistReorderTest"
+          }
+        ]
+      }
+    ]
+  },
+  "green": {
+    "tests": 14,
+    "failures": 0,
+    "disabled": 0,
+    "errors": 0,
+    "timestamp": "2026-09-13T20:04:37Z",
+    "time": "0.017s",
+    "name": "AllTests",
+    "testsuites": [
+      {
+        "name": "PlaylistReorderTest",
+        "tests": 4,
+        "failures": 0,
+        "disabled": 0,
+        "errors": 0,
+        "timestamp": "2026-09-13T20:04:37Z",
+        "time": "0.011s",
+        "testsuite": [
+          {
+            "name": "EveryThreeEntryPermutationPreservesOccurrences",
+            "file": "src/test/playlisttest.cpp",
+            "line": 80,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:04:37Z",
+            "time": "0.006s",
+            "classname": "PlaylistReorderTest"
+          },
+          {
+            "name": "InvalidOccurrenceReferencesLeavePlaylistUnchanged",
+            "file": "src/test/playlisttest.cpp",
+            "line": 96,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:04:37Z",
+            "time": "0.001s",
+            "classname": "PlaylistReorderTest"
+          },
+          {
+            "name": "LockedPlaylistAndFailedWriteRemainUnchanged",
+            "file": "src/test/playlisttest.cpp",
+            "line": 110,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:04:37Z",
+            "time": "0.001s",
+            "classname": "PlaylistReorderTest"
+          },
+          {
+            "name": "InvalidInputAndUnavailableTransactionDoNotWrite",
+            "file": "src/test/playlisttest.cpp",
+            "line": 124,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:04:37Z",
+            "time": "0.001s",
+            "classname": "PlaylistReorderTest"
+          }
+        ]
+      },
+      {
+        "name": "PlaylistTest",
+        "tests": 10,
+        "failures": 0,
+        "disabled": 0,
+        "errors": 0,
+        "timestamp": "2026-09-13T20:04:37Z",
+        "time": "0.005s",
+        "testsuite": [
+          {
+            "name": "IsPlaylistFilenameSupported",
+            "file": "src/test/playlisttest.cpp",
+            "line": 147,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:04:37Z",
+            "time": "0s",
+            "classname": "PlaylistTest"
+          },
+          {
+            "name": "ParseAllLocations",
+            "file": "src/test/playlisttest.cpp",
+            "line": 152,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:04:37Z",
+            "time": "0s",
+            "classname": "PlaylistTest"
+          },
+          {
+            "name": "ParseEmptyFile",
+            "file": "src/test/playlisttest.cpp",
+            "line": 167,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:04:37Z",
+            "time": "0s",
+            "classname": "PlaylistTest"
+          },
+          {
+            "name": "ParseWithDifferentLocationColumnNamesAndFormats",
+            "file": "src/test/playlisttest.cpp",
+            "line": 177,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:04:37Z",
+            "time": "0.002s",
+            "classname": "PlaylistTest"
+          },
+          {
+            "name": "ParseWithLocationColumn",
+            "file": "src/test/playlisttest.cpp",
+            "line": 230,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:04:37Z",
+            "time": "0s",
+            "classname": "PlaylistTest"
+          },
+          {
+            "name": "Normalize",
+            "file": "src/test/playlisttest.cpp",
+            "line": 248,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:04:37Z",
+            "time": "0s",
+            "classname": "PlaylistTest"
+          },
+          {
+            "name": "Relative",
+            "file": "src/test/playlisttest.cpp",
+            "line": 270,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:04:37Z",
+            "time": "0s",
+            "classname": "PlaylistTest"
+          },
+          {
+            "name": "M3uEndOfLine",
+            "file": "src/test/playlisttest.cpp",
+            "line": 281,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:04:37Z",
+            "time": "0.001s",
+            "classname": "PlaylistTest"
+          },
+          {
+            "name": "CsvEndOfLine",
+            "file": "src/test/playlisttest.cpp",
+            "line": 301,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:04:37Z",
+            "time": "0s",
+            "classname": "PlaylistTest"
+          },
+          {
+            "name": "PlsEndOfLine",
+            "file": "src/test/playlisttest.cpp",
+            "line": 315,
+            "status": "RUN",
+            "result": "COMPLETED",
+            "timestamp": "2026-09-13T20:04:37Z",
+            "time": "0s",
+            "classname": "PlaylistTest"
+          }
+        ]
+      }
+    ]
+  },
+  "scope": "Native C++ DAO with temporary in-memory tables; offscreen Qt. Not installed application, MIDI, or UI verification.",
+  "disclosure_end": "End of autonomously AI-generated native evidence."
+}

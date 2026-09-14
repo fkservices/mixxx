@@ -5,16 +5,20 @@ import itertools
 import json
 import re
 import sqlite3
+import subprocess
 from pathlib import Path
 
 repo = Path(__file__).resolve().parents[4]
-source_path = repo / 'src/library/dao/playlistdao.cpp'
-schema_path = repo / 'res/schema.xml'
-source = source_path.read_text()
+revision = '8ea8216ee6600fb1f5903322eb344704c419d4f6'
+source_bytes = subprocess.check_output(
+    ['git', 'show', revision + ':src/library/dao/playlistdao.cpp'], cwd=repo)
+schema_bytes = subprocess.check_output(
+    ['git', 'show', revision + ':res/schema.xml'], cwd=repo)
+source = source_bytes.decode()
 body = source.split('void PlaylistDAO::orderTracksByCurrPos(', 1)[1].split(
     '\nvoid PlaylistDAO::moveTrack(', 1)[0]
 query = ''.join(re.findall(r'"([^"\n]*)"', body.split('query.prepare(', 1)[1].split('));', 1)[0]))
-schema = schema_path.read_text()
+schema = schema_bytes.decode()
 ddl = re.search(r'CREATE TABLE PlaylistTracks\s*\(.*?\);', schema, re.S).group()
 indexes = re.findall(r'CREATE INDEX IF NOT EXISTS idx_PlaylistTracks_.*?;', schema, re.S)
 
@@ -40,8 +44,8 @@ cases = [run(tracks, order) for tracks in [(101, 202, 303), (101, 202, 101), (10
          for order in itertools.permutations((1, 2, 3))]
 print(json.dumps(dict(
     disclosure='Autonomously AI-generated query reproduction; not a native Mixxx test.',
-    source_sha256=hashlib.sha256(source_path.read_bytes()).hexdigest(),
-    schema_sha256=hashlib.sha256(schema_path.read_bytes()).hexdigest(),
+    source_sha256=hashlib.sha256(source_bytes).hexdigest(),
+    schema_sha256=hashlib.sha256(schema_bytes).hexdigest(),
     sqlite_version=sqlite3.sqlite_version, query=query, schema=ddl, indexes=indexes,
     case_count=len(cases), mismatches=sum(not c['matches'] for c in cases), cases=cases,
     disclosure_end='End of autonomously AI-generated probe output.'), indent=2))

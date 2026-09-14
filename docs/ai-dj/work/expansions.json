@@ -1442,7 +1442,10 @@
       ],
       "owns": [
         "docs/ai-dj/work/evidence/I13-REORDER-CORRECTION.md",
-        "src/library/dao/playlistdao.cpp"
+        "src/library/dao/playlistdao.cpp",
+        "src/test/playlisttest.cpp",
+        "docs/ai-dj/work/probes/playlist-reorder.py",
+        "docs/ai-dj/work/runs/I13-REORDER-NATIVE.json"
       ],
       "locks": [
         "mixxx-runtime"
@@ -1454,7 +1457,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "accepted",
       "perform": [
         "Reproduce the preserved source-query failure through native PlaylistDAO tests; discover and declare exact test-file ownership before editing tests.",
         "Correct reorder identity resolution so repeated tracks remain distinct and all input rows are validated before transaction commit; preserve rollback and locked-playlist behavior."
@@ -1464,7 +1467,15 @@
         "Require actual native regression evidence before acceptance; the in-memory SQL probe alone is not application verification."
       ],
       "evidence": "docs/ai-dj/work/evidence/I13-REORDER-CORRECTION.md",
-      "updated_at": "2026-09-14T00:00:51.686076+00:00"
+      "updated_at": "2026-09-14T00:05:06.348801+00:00",
+      "accepted_at": "2026-09-14T00:05:06.348801+00:00",
+      "source_revision": "8ea8216ee6600fb1f5903322eb344704c419d4f6",
+      "evidence_sha256": "eeac658b63c9866d9bd088b2fb63c71ec7d19d51afdc55677c1ebe67140bb6d1",
+      "checks": [
+        "Native red/green regression: two old failures; all fourteen final tests passed.",
+        "Every three-entry permutation preserves row identity, track, sequential positions and timestamp metadata.",
+        "Invalid input, lock state, failed transaction start and injected write failure leave rows unchanged; app/UI integration remains separate."
+      ]
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

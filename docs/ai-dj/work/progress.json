@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T00:00:51.686076+00:00",
+  "updated_at": "2026-09-14T00:05:06.348801+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2650,12 +2650,16 @@
       "id": "I13-REORDER-CORRECTION",
       "title": "Preserve repeated playlist occurrences during native reorder",
       "stage": "setup",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-sol",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": "2026-09-14T00:00:51.686076+00:00",
+      "evidence": "work/evidence/I13-REORDER-CORRECTION.md",
+      "verified": true,
+      "checks": [
+        "Native red/green regression: two old failures; all fourteen final tests passed.",
+        "Every three-entry permutation preserves row identity, track, sequential positions and timestamp metadata.",
+        "Invalid input, lock state, failed transaction start and injected write failure leave rows unchanged; app/UI integration remains separate."
+      ],
+      "updated": "2026-09-14T00:05:06.348801+00:00",
       "dynamic": true
     }
   ],

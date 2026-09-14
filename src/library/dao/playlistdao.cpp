@@ -1173,39 +1173,68 @@ int PlaylistDAO::tracksInPlaylist(const int playlistId) const {
 
 void PlaylistDAO::orderTracksByCurrPos(const int playlistId,
         QList<std::pair<TrackId, int>>& newOrder) {
-    if (newOrder.isEmpty() ||
-            playlistId == kInvalidPlaylistId ||
-            isPlaylistLocked(playlistId) ||
-            newOrder.size() != tracksInPlaylist(playlistId)) {
+    // Autonomously AI-generated occurrence-preserving reorder at the user's request.
+    if (newOrder.isEmpty() || playlistId == kInvalidPlaylistId) {
         return;
     }
 
     ScopedTransaction transaction(m_database);
+    if (!transaction.active()) {
+        return;
+    }
     QSqlQuery query(m_database);
+    query.prepare(QStringLiteral("SELECT locked FROM Playlists WHERE id=:pl_id"));
+    query.bindValue(":pl_id", playlistId);
+    if (!query.exec() || !query.next() || query.value(0).toBool()) {
+        return;
+    }
     query.prepare(QStringLiteral(
-            "UPDATE PlaylistTracks "
-            "SET position=:new_pos "
-            "WHERE position=:old_pos AND "
-            "track_id=:track_id AND "
-            "playlist_id=:pl_id"));
-    int newPos = 1;
-    for (auto [trackId, oldPos] : newOrder) {
-        VERIFY_OR_DEBUG_ASSERT(trackId.isValid()) {
+            "SELECT id, track_id, position FROM PlaylistTracks WHERE playlist_id=:pl_id"));
+    query.bindValue(":pl_id", playlistId);
+    if (!query.exec()) {
+        LOG_FAILED_QUERY(query);
+        return;
+    }
+    QHash<int, std::pair<QVariant, TrackId>> occurrences;
+    while (query.next()) {
+        const int position = query.value(2).toInt();
+        if (occurrences.contains(position)) {
             return;
         }
+        occurrences.insert(position, {query.value(0), TrackId(query.value(1))});
+    }
+    if (query.lastError().isValid() || occurrences.size() != newOrder.size()) {
+        return;
+    }
+    QList<QVariant> rowIds;
+    rowIds.reserve(newOrder.size());
+    for (const auto& [trackId, oldPos] : newOrder) {
+        auto occurrence = occurrences.find(oldPos);
+        if (!trackId.isValid() || occurrence == occurrences.end() ||
+                occurrence->second != trackId) {
+            return;
+        }
+        rowIds.append(occurrence->first);
+        occurrences.erase(occurrence);
+    }
+    query.prepare(QStringLiteral(
+            "UPDATE PlaylistTracks SET position=:new_pos "
+            "WHERE id=:row_id AND playlist_id=:pl_id"));
+    int newPos = 1;
+    for (const auto& rowId : rowIds) {
         query.bindValue(":new_pos", newPos++);
-        query.bindValue(":old_pos", oldPos);
-        query.bindValue(":track_id", trackId.toVariant());
+        query.bindValue(":row_id", rowId);
         query.bindValue(":pl_id", playlistId);
-        if (!query.exec()) {
-            // We temporarily have duplicate positions, so abort the entire operation
-            // to not leave the playlist with an invalid state.
+        if (!query.exec() || query.numRowsAffected() != 1) {
             LOG_FAILED_QUERY(query);
             return;
         }
     }
-
-    transaction.commit();
+    if (!transaction.commit()) {
+        m_database.rollback();
+        return;
+    }
+    // End of autonomously AI-generated occurrence-preserving reorder.
 
     emit tracksMoved(QSet<int>{playlistId});
 }

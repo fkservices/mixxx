@@ -5,6 +5,11 @@
 #include <QTemporaryFile>
 #include <QUrl>
 #include <QtGlobal>
+#include <algorithm>
+#include <array>
+
+#include "library/dao/playlistdao.h"
+#include "test/mixxxdbtest.h"
 
 #include "library/parser.h"
 #include "library/parsercsv.h"
@@ -24,6 +29,120 @@ class DummyParser : public Parser {
 };
 
 class PlaylistTest : public testing::Test {};
+
+// Autonomously AI-generated native regression tests at the user's request.
+class PlaylistReorderTest : public MixxxDbTest {
+  protected:
+    PlaylistReorderTest()
+            : MixxxDbTest(true) {
+    }
+
+    void SetUp() override {
+        QSqlQuery query(dbConnection());
+        ASSERT_TRUE(query.exec("CREATE TABLE Playlists (id INTEGER PRIMARY KEY, locked INTEGER)"));
+        ASSERT_TRUE(query.exec("INSERT INTO Playlists VALUES (1,0)"));
+        ASSERT_TRUE(query.exec("CREATE TABLE PlaylistTracks (id INTEGER PRIMARY KEY, "
+                               "playlist_id INTEGER, track_id INTEGER, position INTEGER, "
+                               "pl_datetime_added TEXT)"));
+        dao.initialize(dbConnection());
+    }
+
+    void seed(const std::array<int, 3>& tracks) {
+        QSqlQuery query(dbConnection());
+        ASSERT_TRUE(query.exec("DELETE FROM PlaylistTracks"));
+        for (int i = 0; i < 3; ++i) {
+            query.prepare("INSERT INTO PlaylistTracks VALUES (?,1,?,?,?)");
+            query.addBindValue(i + 1);
+            query.addBindValue(tracks[i]);
+            query.addBindValue(i + 1);
+            query.addBindValue(QString::number(i + 10));
+            ASSERT_TRUE(query.exec());
+        }
+    }
+
+    void expectOrder(const std::array<int, 3>& order, const std::array<int, 3>& tracks) {
+        QSqlQuery query(dbConnection());
+        ASSERT_TRUE(query.exec("SELECT id,track_id,position,pl_datetime_added "
+                               "FROM PlaylistTracks ORDER BY position,id"));
+        for (int i = 0; i < 3; ++i) {
+            ASSERT_TRUE(query.next());
+            EXPECT_EQ(query.value(0).toInt(), order[i]);
+            EXPECT_EQ(query.value(1).toInt(), tracks[order[i] - 1]);
+            EXPECT_EQ(query.value(2).toInt(), i + 1);
+            EXPECT_EQ(query.value(3).toString(), QString::number(order[i] + 9));
+        }
+        EXPECT_FALSE(query.next());
+    }
+
+    PlaylistDAO dao;
+};
+
+TEST_F(PlaylistReorderTest, EveryThreeEntryPermutationPreservesOccurrences) {
+    for (const auto& tracks : {std::array<int, 3>{101, 202, 303},
+                 std::array<int, 3>{101, 202, 101}, std::array<int, 3>{101, 101, 101}}) {
+        std::array<int, 3> order{1, 2, 3};
+        do {
+            seed(tracks);
+            QList<std::pair<TrackId, int>> requested;
+            for (int row : order) {
+                requested.append({TrackId(QVariant(tracks[row - 1])), row});
+            }
+            dao.orderTracksByCurrPos(1, requested);
+            expectOrder(order, tracks);
+        } while (std::next_permutation(order.begin(), order.end()));
+    }
+}
+
+TEST_F(PlaylistReorderTest, InvalidOccurrenceReferencesLeavePlaylistUnchanged) {
+    int notifications = 0;
+    QObject::connect(&dao, &PlaylistDAO::tracksMoved, [&notifications] { ++notifications; });
+    const std::array<int, 3> tracks{101, 202, 101};
+    for (auto requested : {QList<std::pair<TrackId, int>>{{TrackId(QVariant(101)), 3}, {TrackId(QVariant(202)), 2}, {TrackId(QVariant(101)), 3}},
+                 QList<std::pair<TrackId, int>>{{TrackId(QVariant(101)), 3}, {TrackId(QVariant(999)), 2}, {TrackId(QVariant(101)), 1}},
+                 QList<std::pair<TrackId, int>>{{TrackId(QVariant(101)), 3}, {TrackId(QVariant(202)), 4}, {TrackId(QVariant(101)), 1}}}) {
+        seed(tracks);
+        dao.orderTracksByCurrPos(1, requested);
+        expectOrder({1, 2, 3}, tracks);
+        EXPECT_EQ(notifications, 0);
+    }
+}
+
+TEST_F(PlaylistReorderTest, LockedPlaylistAndFailedWriteRemainUnchanged) {
+    const std::array<int, 3> tracks{101, 202, 101};
+    seed(tracks);
+    QList<std::pair<TrackId, int>> requested{{TrackId(QVariant(101)), 3}, {TrackId(QVariant(202)), 2}, {TrackId(QVariant(101)), 1}};
+    QSqlQuery query(dbConnection());
+    ASSERT_TRUE(query.exec("UPDATE Playlists SET locked=1"));
+    dao.orderTracksByCurrPos(1, requested);
+    expectOrder({1, 2, 3}, tracks);
+    ASSERT_TRUE(query.exec("UPDATE Playlists SET locked=0"));
+    ASSERT_TRUE(query.exec("CREATE TRIGGER reject_second BEFORE UPDATE ON PlaylistTracks "
+                          "WHEN OLD.id=2 BEGIN SELECT RAISE(ABORT,'test failure'); END"));
+    dao.orderTracksByCurrPos(1, requested);
+    expectOrder({1, 2, 3}, tracks);
+}
+TEST_F(PlaylistReorderTest, InvalidInputAndUnavailableTransactionDoNotWrite) {
+    const std::array<int, 3> tracks{101, 202, 101};
+    seed(tracks);
+    QList<std::pair<TrackId, int>> requested{{TrackId(), 3},
+            {TrackId(QVariant(202)), 2}, {TrackId(QVariant(101)), 1}};
+    dao.orderTracksByCurrPos(1, requested);
+    expectOrder({1, 2, 3}, tracks);
+    requested[0].first = TrackId(QVariant(101));
+    dao.orderTracksByCurrPos(999, requested);
+    expectOrder({1, 2, 3}, tracks);
+    ASSERT_TRUE(dbConnection().transaction());
+    dao.orderTracksByCurrPos(1, requested);
+    expectOrder({1, 2, 3}, tracks);
+    ASSERT_TRUE(dbConnection().rollback());
+    requested.removeLast();
+    dao.orderTracksByCurrPos(1, requested);
+    expectOrder({1, 2, 3}, tracks);
+    requested.clear();
+    dao.orderTracksByCurrPos(1, requested);
+    expectOrder({1, 2, 3}, tracks);
+}
+// End of autonomously AI-generated native regression tests.
 
 TEST_F(PlaylistTest, IsPlaylistFilenameSupported) {
     EXPECT_TRUE(ParserCsv::isPlaylistFilenameSupported("test.csv"));
