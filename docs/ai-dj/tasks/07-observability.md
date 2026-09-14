@@ -120,7 +120,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** O01, F09, R20. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** O01, F09, R20. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/diagnostics/semantic.ts`, `ai-dj/test/diagnostics/semantic.test.ts`
 

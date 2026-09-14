@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T00:17:10.956098+00:00",
+  "updated_at": "2026-09-14T00:22:07.346579+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -1632,12 +1632,16 @@
       "id": "O05",
       "title": "Implement versioned semantic MIDI decoding",
       "stage": "07-observability",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/O05.md",
+      "verified": true,
+      "checks": [
+        "Profile-verified musical decoding preserves raw links and unknown messages without output or attribution.",
+        "Ten focused semantic tests and all 215 package tests pass; TypeScript build passes.",
+        "Physical capture, recorder integration and live/history equivalence remain separate gates."
+      ],
+      "updated": "2026-09-14T00:22:07.346579+00:00",
       "dynamic": false
     },
     {

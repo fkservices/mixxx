@@ -33,13 +33,16 @@ export interface RecordedDecoderProfile {
   readonly mappingVersion: string;
   readonly bindings: readonly ({ readonly controlId: OpaqueId; readonly label: string; readonly unit: string } & (
     | { readonly kind: "cc-absolute"; readonly channelZeroBased: number; readonly controller: number;
-        readonly minimum: number; readonly maximum: number; readonly inverted: boolean }
+        readonly minimum: number; readonly maximum: number; readonly inverted: boolean;
+        readonly curve?: "linear" | "centered-7bit" }
+    | { readonly kind: "cc-boolean"; readonly channelZeroBased: number; readonly controller: number }
     | { readonly kind: "cc-relative"; readonly channelZeroBased: number; readonly controller: number;
         readonly encoding: "twos-complement" | "binary-offset" | "sign-magnitude";
         readonly multiplier: number }
     | { readonly kind: "cc14"; readonly channelZeroBased: number; readonly msbController: number;
         readonly lsbController: number; readonly pairingWindowMs: number;
-        readonly minimum: number; readonly maximum: number; readonly inverted: boolean }
+        readonly minimum: number; readonly maximum: number; readonly inverted: boolean;
+        readonly curve?: "linear" | "centered-14bit" }
     | { readonly kind: "note"; readonly channelZeroBased: number; readonly note: number;
         readonly noteOnZero: "release" }
   ))[];

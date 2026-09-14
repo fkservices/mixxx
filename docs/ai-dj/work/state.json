@@ -776,6 +776,29 @@
         "TypeScript build and synthetic volume/jog/counting walkthrough passed; emitted module has no runtime behavior.",
         "Recorder, validators, physical capture and live/history UI remain separate unimplemented tasks."
       ]
+    },
+    "O05": {
+      "status": "accepted",
+      "worker": "/root",
+      "model": "gpt-5.6-terra",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-14T00:18:08.649451+00:00",
+      "updated_at": "2026-09-14T00:22:07.346579+00:00",
+      "deadline": "2026-09-14T00:48:08.649451+00:00",
+      "source_revision": "e9d2e19",
+      "owned_paths": [
+        "ai-dj/diagnostics/semantic.ts",
+        "ai-dj/test/diagnostics/semantic.test.ts",
+        "ai-dj/core/session.ts"
+      ],
+      "accepted_at": "2026-09-14T00:22:07.346579+00:00",
+      "evidence": "docs/ai-dj/work/evidence/O05.md",
+      "evidence_sha256": "d68999a96d06e398d7b114facfd7fbb2c43e91dca8a4fe55bc97826dd0f165b0",
+      "checks": [
+        "Profile-verified musical decoding preserves raw links and unknown messages without output or attribution.",
+        "Ten focused semantic tests and all 215 package tests pass; TypeScript build passes.",
+        "Physical capture, recorder integration and live/history equivalence remain separate gates."
+      ]
     }
   },
   "jobs": {
