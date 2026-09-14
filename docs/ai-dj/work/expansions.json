@@ -2010,7 +2010,7 @@
         "handoff": 3
       },
       "max_worker_minutes": 30,
-      "status": "planned",
+      "status": "accepted",
       "perform": [
         "Continue from I13-page-03 with stable selected-track identity, remaining deletion/copy/move/shuffle semantics and aliases, at most twenty candidates or one subtree.",
         "Inspect native sidebar/table menus and matching-version manual; enumerate runtime targets. Historical target context is not a currently running host. Materialize further pages if needed."
@@ -2020,7 +2020,14 @@
         "Require four-source discovery closure only when all remaining scopes and target instances are exhausted; otherwise materialize another INV-PAGE."
       ],
       "evidence": "docs/ai-dj/work/evidence/I13-PAGE-03.md",
-      "updated_at": "2026-09-14T01:49:04.419239+00:00"
+      "updated_at": "2026-09-14T01:52:34.000000+00:00",
+      "checks": [
+        "Added 14 remaining provisional playlist mutation candidates and preserved one alias per capability ID.",
+        "Source ranges/identity preserved for create/delete/move/shuffle/queue methods and each manifest snippet hash is pinned.",
+        "Availability and all execution/feedback/native-UI/runtime dimensions remain explicit unknown or untested until binding tests and host enumeration land."
+      ],
+      "evidence_sha256": "42f427f06e38a3c63bdd09fb97ddba6c8ca5a5d7f2b208752fa3ac04bf208aa6",
+      "accepted_at": "2026-09-14T01:52:34.000000+00:00"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

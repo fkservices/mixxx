@@ -222,7 +222,8 @@
     "O02",
     "O05",
     "U01",
-    "U02"
+    "U02",
+    "I13-PAGE-03"
   ],
   "dependency_frontier": [
     "M18",
@@ -290,13 +291,12 @@
     "O04-CAPTURE-BRIDGE": "planned",
     "O04-CAPTURE-INGRESS": "planned",
     "I13-INSERT-CORRECTION": "accepted",
-    "I13-PAGE-03": "planned"
+    "I13-PAGE-03": "accepted"
   },
   "dynamic_dependency_frontier": [
     "L12-NATIVE-ACCESSIBILITY",
     "M19-UI-CAPTURE",
-    "O07-LIFECYCLE",
-    "I13-PAGE-03"
+    "O07-LIFECYCLE"
   ],
   "global_requirements": [
     "User instruction to start implementation",

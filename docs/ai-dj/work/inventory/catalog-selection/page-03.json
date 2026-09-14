@@ -1,0 +1,1200 @@
+{
+  "schemaVersion": 1,
+  "kind": "inventory-page",
+  "inventoryId": "native-clock-inventory",
+  "inventoryRevision": 1,
+  "context": {
+    "sessionId": "I13-native-menu-20260913",
+    "hostInstanceId": "I13-menu-host",
+    "connectionGeneration": 0,
+    "capabilityRevision": 0,
+    "profile": {
+      "profileId": "native-clock-inventory",
+      "profileRevision": 1,
+      "host": "mixxx",
+      "version": "2.7.0",
+      "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+      "platform": "macos",
+      "skinId": "LateNight",
+      "skinRevision": "source-7adf82c",
+      "configurationId": "native-clock"
+    }
+  },
+  "family": "autonomous-track-selection",
+  "pageId": "I13-page-03",
+  "pageNumber": 2,
+  "previousPageId": "I13-page-02",
+  "rowLimit": 20,
+  "sources": [
+    {
+      "sourceId": "I13-dao-remaining",
+      "kind": "source",
+      "scope": "Remaining playlist DAO mutation candidates from mutation cursor continuation",
+      "revision": "e580c20e080654b1ddecee01a8a4f1daaa94df7a",
+      "cursorBefore": "I13-page-03",
+      "cursorAfter": "I13-dao-exhausted",
+      "exhausted": false,
+      "evidence": [
+        {
+          "evidenceId": "I13-p3-source-scope",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "Remaining mutation review over playlistdao.cpp from `I13-page-03` cursor boundary."
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.create-unique",
+      "family": "autonomous-track-selection",
+      "label": "Create unique playlist",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Wrapper delegates to createPlaylist and returns playlist id or invalid sentinel only. Duplicate-name behavior is internal side-effect and untyped at API edge.",
+          "evidence": [
+            "I13-p3-create-unique"
+          ]
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Name-uniqueness strategy and failure reporting are not stable API contracts for MIDI bridging yet."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Source path located; closed service contract and MIDI admission remain untested.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Playlist creation UI remains discovered only for dialog save path; create-unique behavior not inspected yet."
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p3-create-unique",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "src/library/dao/playlistdao.cpp:97-110 PlaylistDAO::createUniquePlaylist delegates to createPlaylist after name probing."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p3-create-unique-q0",
+          "question": "Resolve whether create-unique should be an AI-control admission in this family and whether name collisions should be surfaced as deterministic MIDI responses.",
+          "continuationId": "I13-PAGE-04"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.delete",
+      "family": "autonomous-track-selection",
+      "label": "Delete playlist",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Void return gives no explicit confirmation. Deletion emits broad UI signals and cache cleanup.",
+          "evidence": [
+            "I13-p3-delete"
+          ]
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Deletion path combines playlist and tracks tables with implicit transaction rollback on early failure, but no result envelope for MIDI-safe orchestration."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Source path located; closed service contract and runtime feedback remain unproven.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Sidebar/context delete affordance not inspected for this pass."
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p3-delete",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "src/library/dao/playlistdao.cpp:197-254 PlaylistDAO::deletePlaylist: transaction, track cleanup, cache erase, emits deleted signal."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p3-delete-q0",
+          "question": "Resolve stable target identity and explicit no-op/failed deletion outcomes before allowing AI-write admission.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.delete-bulk",
+      "family": "autonomous-track-selection",
+      "label": "Delete playlists in bulk",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Boolean delete result does not separate empty input, bad SQL, malformed IDs, and zero-row outcomes.",
+          "evidence": [
+            "I13-p3-delete-bulk"
+          ]
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Comma-joined ID SQL string and emitted deleted(kInvalidPlaylistId) lack per-playlist outcome surface."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Source located but no native admission contract.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "No native multi-delete sidebar/menu walk-through completed in this page."
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p3-delete-bulk",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "src/library/dao/playlistdao.cpp:256-281 PlaylistDAO::deletePlaylists uses IN (:ids) SQL and emits deleted(kInvalidPlaylistId)."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p3-delete-bulk-q0",
+          "question": "Resolve SQL injection risk, deterministic ID normalization, and returned outcome before adding MIDI admission.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.delete-category",
+      "family": "autonomous-track-selection",
+      "label": "Delete playlists by category",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Delete result depends on a prior selector query plus delegation; category emptiness and delete failure both map to low-information states."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "No versioned snapshot from selected-category through delete outcome."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Symbol resolved; no native command/feedback bridge yet.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Menu path not verified for category-delete semantics."
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p3-delete-category",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "src/library/dao/playlistdao.cpp:283-309 PlaylistDAO::deletePlaylistsByType delegates bulk delete from category query."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p3-delete-category-q0",
+          "question": "Resolve whether category and selected IDs should be versioned together in one AI-capable write contract.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.delete-unlocked",
+      "family": "autonomous-track-selection",
+      "label": "Delete unlocked playlists",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Boolean return conflates SQL failure, empty list and locked-only filter behavior.",
+          "evidence": [
+            "I13-p3-delete-unlocked"
+          ]
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Returns success/failure without per-entity acknowledgment."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Source located, no MIDI admission yet."
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "No UI evidence collected for unlocked-only bulk deletion flow."
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p3-delete-unlocked",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "src/library/dao/playlistdao.cpp:311-332 PlaylistDAO::deleteUnlockedPlaylists removes locked IDs then delegates deletePlaylists."
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.delete-short-playlists",
+      "family": "autonomous-track-selection",
+      "label": "Delete short unlocked playlists",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Returns false when no candidates match. Selection and delete phases are distinct."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "No per-playlist result, no operation envelope, and threshold-based targeting is non-deterministic without snapshot metadata."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Source path only; no closed bridge yet."
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "No native UI confirmation on threshold/deletion flow."
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p3-delete-short",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "src/library/dao/playlistdao.cpp:334-382 PlaylistDAO::deleteAllUnlockedPlaylistsWithFewerTracks selects short playlists and delegates deletePlaylists."
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.remove-hidden-tracks",
+      "family": "autonomous-track-selection",
+      "label": "Remove hidden or invalid tracks",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Tracks are discovered via inner position query then inner-removal is called; no returned count or transaction outcome contract."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "No explicit per-track success state for MIDI replays or debouncing logic."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Source located; bridge not admitted."
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "No cleaned-up UI mapping for this path."
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p3-remove-hidden",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "src/library/dao/playlistdao.cpp:704-740 PlaylistDAO::removeHiddenTracks scans invalid positions and calls removeTracksFromPlaylistInner.",
+          "artifactId": "I13-source-manifest-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.copy",
+      "family": "autonomous-track-selection",
+      "label": "Copy tracks between playlists",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Copies all rows for source position range with transaction, but no per-item outcome returned.",
+          "evidence": [
+            "I13-p3-copy"
+          ]
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "No affected-row breakdown and no duplicate/occurrence disambiguation before insertion.",
+          "continuationId": "I13-PAGE-03"
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Source path exists; no MIDI bridge."
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Copy-flow UI interaction remains uninspected in this page."
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p3-copy",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "src/library/dao/playlistdao.cpp:1044-1105 PlaylistDAO::copyPlaylistTracks inserts duplicated rows with position offsets and emits trackAdded events."
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.remove-from-all-playlists",
+      "family": "autonomous-track-selection",
+      "label": "Remove tracks from all playlists",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Function has no return value and no per-playlist outcome count."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Broad mutation over cached membership snapshot with aggregate signals only."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "No bridge acceptance yet."
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "No dedicated bulk-delete-from-all UI path inspected."
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p3-remove-from-all",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "src/library/dao/playlistdao.cpp:1127-1165 PlaylistDAO::removeTracksFromPlaylists iterates membership hash and deletes matching track IDs across playlists."
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.move-entry",
+      "family": "autonomous-track-selection",
+      "label": "Move playlist entry by position",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "No explicit lock/status check before mutation and no affected-row contract.",
+          "evidence": [
+            "I13-p3-move"
+          ]
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Uses position-mutable command tokens only; stable occurrence identity must be represented separately before AI writes."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Bridge remains unimplemented and native acknowledgement contract is unresolved."
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Table drag/drop UI behavior to occurrence identity not yet enumerated."
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p3-move",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "src/library/dao/playlistdao.cpp:1254-1319 PlaylistDAO::moveTrack shifts position window and writes destination position.",
+          "artifactId": "I13-source-manifest-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.shuffle-entries",
+      "family": "autonomous-track-selection",
+      "label": "Shuffle playlist entries",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "No operation returns and no position-identity pre-check contract.",
+          "evidence": [
+            "I13-p3-shuffle"
+          ]
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Shuffle algorithm mutates positions via internal heuristics but does not return conflict-free committed revision.",
+          "continuationId": "I13-PAGE-03"
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "No native MIDI admission contract.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Shuffle action in table is inferred by table model but not yet validated against occurrence identity.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p3-shuffle",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "src/library/dao/playlistdao.cpp:1341-1524 PlaylistDAO::shuffleTracks swaps within provided positions and updates positions via position-based SQL."
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.autodj.queue-clear",
+      "family": "autonomous-track-selection",
+      "label": "Clear Auto-DJ queue entries",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "No direct return contract."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Uses internal Auto-DJ state and then delegates removal by position."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "No native queue control mapping yet."
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Auto-DJ clear behavior remains to be validated in UI/runtime."
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p3-autodj-clear",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "src/library/dao/playlistdao.cpp:972-980 PlaylistDAO::clearAutoDJQueue removes tracks after current pointer state."
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.autodj.queue-append",
+      "family": "autonomous-track-selection",
+      "label": "Add playlist to Auto-DJ queue",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "No committed result metadata returned."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Track position ordering is local and unverified by bridge contract."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "No runtime queue command admission yet."
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Auto-DJ queue UI path not inspected."
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p3-autodj-append",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "src/library/dao/playlistdao.cpp:982-1004 PlaylistDAO::addPlaylistToAutoDJQueue reads playlist entries and sends to addTracksToAutoDJQueue."
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.autodj.queue-send",
+      "family": "autonomous-track-selection",
+      "label": "Add tracks to Auto-DJ queue location",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "No return value from branched queue mode operation."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "TOP/BOTTOM/REPLACE modes are not currently versioned for MIDI retries or conflict resolution."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "No native queue bridge yet."
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Auto-DJ queue-send UI remains to inspect."
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p3-autodj-send",
+          "artifactId": "I13-source-manifest-03",
+          "runId": "I13-PAGE-03",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T02:05:03.111222Z",
+          "description": "src/library/dao/playlistdao.cpp:1545-1568 PlaylistDAO::addTracksToAutoDJQueue branches TOP/BOTTOM/REPLACE and delegates insert/append.",
+          "artifactId": "I13-source-manifest-03"
+        }
+      ]
+    }
+  ],
+  "boundary": {
+    "status": "complete",
+    "nextCursor": "I13-page-03-complete",
+    "remainingScopes": [
+      "Selected-track identity and stable occurrence revision remain unresolved across drag/position operations.",
+      "Native sidebar/table UI path details and run-time target enumeration are pending before runtime admission."
+    ]
+  },
+  "end": "End of autonomously AI-generated I13 page-03 provisional inventory."
+}

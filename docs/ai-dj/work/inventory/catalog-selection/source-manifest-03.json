@@ -1,0 +1,154 @@
+{
+  "disclosure": "Autonomously AI-generated source discovery; no current native session or MIDI capability proof.",
+  "artifactId": "I13-source-manifest-03",
+  "revision": "e580c20e080654b1ddecee01a8a4f1daaa94df7a",
+  "context": {
+    "sessionId": "I13-native-menu-20260913",
+    "hostInstanceId": "I13-menu-host",
+    "connectionGeneration": 0,
+    "capabilityRevision": 0,
+    "profile": {
+      "profileId": "native-clock-inventory",
+      "profileRevision": 1,
+      "host": "mixxx",
+      "version": "2.7.0",
+      "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+      "platform": "macos",
+      "skinId": "LateNight",
+      "skinRevision": "source-7adf82c",
+      "configurationId": "native-clock"
+    }
+  },
+  "target_context_note": "Inherited comparison target from page 1 only. No host instance was running or revalidated; current source differs from the recorded target binary.",
+  "source_path": "src/library/dao/playlistdao.cpp",
+  "source_sha256": "9fa3528f35ff56596b93f6396378974146b7956c519346cc1dbeb821bf1efde0",
+  "entries": [
+    {
+      "capabilityId": "mixxx.playlist.create-unique",
+      "symbol": "PlaylistDAO::createUniquePlaylist",
+      "startLine": 97,
+      "endLine": 110,
+      "snippet_sha256": "4fffd97ebac6ddc21427ee136a3e2b89bced0734794b7b427cc561302a0061e0",
+      "finding": "Looks up unique name suffixes and delegates PlaylistDAO::createPlaylist. No dedicated result contract beyond createPlaylist return value; duplicate-name behavior happens before any transaction.",
+      "binding_status": "delegate"
+    },
+    {
+      "capabilityId": "mixxx.playlist.delete",
+      "symbol": "PlaylistDAO::deletePlaylist",
+      "startLine": 197,
+      "endLine": 254,
+      "snippet_sha256": "0c8b675767f2ab1d114361584f0c73f29a83e74b6010ce7ede3dd3a5fdc8a968",
+      "finding": "Deletes playlist and tracks inside a scoped transaction and emits deleted/played-history signal, but public API returns void with no row outcome, and cache updates on playlist-id keyed membership include all rows without a success contract.",
+      "binding_status": "provisional"
+    },
+    {
+      "capabilityId": "mixxx.playlist.delete-bulk",
+      "symbol": "PlaylistDAO::deletePlaylists",
+      "startLine": 256,
+      "endLine": 281,
+      "snippet_sha256": "027c60f7b5c05138d754af9cf6ffa1ae48038256318dada78b3692bbbb44f754",
+      "finding": "Deletes tracks and playlists by string-joined ID list in one shot, then emits deleted(kInvalidPlaylistId). Result is boolean and SQL path is vulnerable to malformed identifiers and ambiguous failure semantics.",
+      "binding_status": "unresolved"
+    },
+    {
+      "capabilityId": "mixxx.playlist.delete-category",
+      "symbol": "PlaylistDAO::deletePlaylistsByType",
+      "startLine": 283,
+      "endLine": 309,
+      "snippet_sha256": "1dfa088098f13f5c8e8eacecc281cecc1812881c80506e9fd921e1a3ae778506",
+      "finding": "Collects IDs by hidden type then delegates deletePlaylists. Empty category and delete failure both map to false/false-like surfaces; no explicit versioned snapshot.",
+      "binding_status": "delegated"
+    },
+    {
+      "capabilityId": "mixxx.playlist.delete-unlocked",
+      "symbol": "PlaylistDAO::deleteUnlockedPlaylists",
+      "startLine": 311,
+      "endLine": 332,
+      "snippet_sha256": "8e18308fffd21553f3308b0c3d6be415786462dbced49650585c3ffa592337d0",
+      "finding": "Removes duplicates, filters locked IDs, then delegates bulk deletion. Duplicates and locking are mutable runtime state; no stable identity revision for deleted set.",
+      "binding_status": "delegated"
+    },
+    {
+      "capabilityId": "mixxx.playlist.delete-short-playlists",
+      "symbol": "PlaylistDAO::deleteAllUnlockedPlaylistsWithFewerTracks",
+      "startLine": 334,
+      "endLine": 382,
+      "snippet_sha256": "2b8857b7be3ef68efc9849bdbedbdd39db073e0e320698f10a497af38359730c",
+      "finding": "Finds unlocked playlists below threshold and delegates deletePlaylists. Returns false for both SQL failure and empty result set; selection + delete remain separate operations.",
+      "binding_status": "delegated"
+    },
+    {
+      "capabilityId": "mixxx.playlist.remove-hidden-tracks",
+      "symbol": "PlaylistDAO::removeHiddenTracks",
+      "startLine": 704,
+      "endLine": 740,
+      "snippet_sha256": "b642762697135b05fa1028a1631925550c2aa1492ae320ed39b299d6bf3f6740",
+      "finding": "Deletes tracks whose IDs are missing/invalid for a specific playlist using position iteration and scoped transaction. Uses stale iterator state through inner removals; no explicit result envelope exposed.",
+      "binding_status": "unresolved"
+    },
+    {
+      "capabilityId": "mixxx.playlist.copy",
+      "symbol": "PlaylistDAO::copyPlaylistTracks",
+      "startLine": 1044,
+      "endLine": 1105,
+      "snippet_sha256": "cb409b1044213e7b81ee01d437d773108070c72050ab75c43dacaf592d4e5690",
+      "finding": "Copies rows from source to target with position offset and signals each added row. Returns bool but does not expose affected-row breakdown; no position/occurrence pre-validation when source has duplicates.",
+      "binding_status": "unresolved"
+    },
+    {
+      "capabilityId": "mixxx.playlist.remove-from-all-playlists",
+      "symbol": "PlaylistDAO::removeTracksFromPlaylists",
+      "startLine": 1127,
+      "endLine": 1165,
+      "snippet_sha256": "5177ea6c5315f8403061953d336bf7cecaa700e26909be7fb359cf20497d6b9f",
+      "finding": "Copies membership cache then deletes matching track IDs in all playlists. Uses scoped transaction with broad iteration and emits signals for all touched playlists in aggregate; no per-playlist contract or outcome.",
+      "binding_status": "unresolved"
+    },
+    {
+      "capabilityId": "mixxx.playlist.move-entry",
+      "symbol": "PlaylistDAO::moveTrack",
+      "startLine": 1254,
+      "endLine": 1319,
+      "snippet_sha256": "f5c1f51360d1744b3375d3cc9f65b51bcae3300942bc34deeda7b116ea92fdb1",
+      "finding": "Three-query shift-to-dummy update then set-to-destination. No transaction-active gate and commits without affected-row checks, and stale/missing positions can still produce partial success states.",
+      "binding_status": "unresolved"
+    },
+    {
+      "capabilityId": "mixxx.playlist.shuffle-entries",
+      "symbol": "PlaylistDAO::shuffleTracks",
+      "startLine": 1341,
+      "endLine": 1524,
+      "snippet_sha256": "14ae9622632431310ddf105f15fa4920f2fa2b7343d83b5c5fe85aa9ea323a3f",
+      "finding": "Mutates all selected positions with algorithm + debug swaps and three SQL updates per pair. No return status and no occurrence-revision guard; success/failure currently only observable by callbacks and side effects.",
+      "binding_status": "unresolved"
+    },
+    {
+      "capabilityId": "mixxx.playlist.autodj.queue-clear",
+      "symbol": "PlaylistDAO::clearAutoDJQueue",
+      "startLine": 972,
+      "endLine": 980,
+      "snippet_sha256": "0f0c98a412f77b19b2146ef20774240e8f40ece2d381d166cfb7f8cd94bd7048",
+      "finding": "Removes tracks from Auto-DJ queue below first loaded position. Delegate into removeTracksFromPlaylist with implicit current state; no direct command result or queue-state contract.",
+      "binding_status": "unresolved"
+    },
+    {
+      "capabilityId": "mixxx.playlist.autodj.queue-append",
+      "symbol": "PlaylistDAO::addPlaylistToAutoDJQueue",
+      "startLine": 982,
+      "endLine": 1004,
+      "snippet_sha256": "6c837cfb3acec7986e799cd2a209558e8d9938fdeda00e4290438b86762a0060",
+      "finding": "Loads selected playlist tracks and forwards them through addTracksToAutoDJQueue; no validation of track order, duplicates, or admission contract before queue insert.",
+      "binding_status": "unresolved"
+    },
+    {
+      "capabilityId": "mixxx.playlist.autodj.queue-send",
+      "symbol": "PlaylistDAO::addTracksToAutoDJQueue",
+      "startLine": 1545,
+      "endLine": 1568,
+      "finding": "Chooses insert position by AutoDJ mode (TOP/BOTTOM/REPLACE), delegates insert/append and clear behavior; returns void and no outcome envelope for each branch.",
+      "snippet_sha256": "025d453eacdbffcd2e89ae895db5578b3188bd109727200a74c578a327c0b7f2",
+      "binding_status": "unresolved"
+    }
+  ],
+  "end": "End of autonomously AI-generated source discovery manifest."
+}
