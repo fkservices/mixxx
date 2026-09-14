@@ -272,12 +272,14 @@
     "M13-FINAL-HOST": "accepted",
     "L12-NATIVE-ACCESSIBILITY": "planned",
     "M19-UI-CAPTURE": "planned",
-    "I13-PAGE-02": "planned"
+    "I13-PAGE-02": "planned",
+    "I13-REORDER-CORRECTION": "planned"
   },
   "dynamic_dependency_frontier": [
     "L12-NATIVE-ACCESSIBILITY",
     "M19-UI-CAPTURE",
-    "I13-PAGE-02"
+    "I13-PAGE-02",
+    "I13-REORDER-CORRECTION"
   ],
   "global_requirements": [
     "User instruction to start implementation",

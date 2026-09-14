@@ -1,0 +1,953 @@
+{
+  "disclosure": "Autonomously AI-generated query reproduction; not a native Mixxx test.",
+  "source_sha256": "adc1638d2b8b785c5513b358d2c2cbf30fbc97deb293bfbd13be1853156c2f43",
+  "schema_sha256": "75b87df7d3b726dddd110bd8850565486f2679000f1d86684d15288a92b302c2",
+  "sqlite_version": "3.37.2",
+  "query": "UPDATE PlaylistTracks SET position=:new_pos WHERE position=:old_pos AND track_id=:track_id AND playlist_id=:pl_id",
+  "schema": "CREATE TABLE PlaylistTracks (\n        id INTEGER PRIMARY KEY,\n        playlist_id INTEGER REFERENCES Playlists(id),\n        track_id INTEGER REFERENCES library(id),\n        position INTEGER);",
+  "indexes": [
+    "CREATE INDEX IF NOT EXISTS idx_PlaylistTracks_playlist_id_track_id ON PlaylistTracks (\n          playlist_id,\n          track_id\n      );",
+    "CREATE INDEX IF NOT EXISTS idx_PlaylistTracks_track_id ON PlaylistTracks (\n          track_id\n      );"
+  ],
+  "case_count": 18,
+  "mismatches": 7,
+  "cases": [
+    {
+      "tracks": [
+        101,
+        202,
+        303
+      ],
+      "requested_row_ids": [
+        1,
+        2,
+        3
+      ],
+      "affected_rows": [
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 2
+        },
+        {
+          "row_id": 3,
+          "track_id": 303,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 2
+        },
+        {
+          "row_id": 3,
+          "track_id": 303,
+          "position": 3
+        }
+      ],
+      "matches": true
+    },
+    {
+      "tracks": [
+        101,
+        202,
+        303
+      ],
+      "requested_row_ids": [
+        1,
+        3,
+        2
+      ],
+      "affected_rows": [
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 3,
+          "track_id": 303,
+          "position": 2
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 3,
+          "track_id": 303,
+          "position": 2
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 3
+        }
+      ],
+      "matches": true
+    },
+    {
+      "tracks": [
+        101,
+        202,
+        303
+      ],
+      "requested_row_ids": [
+        2,
+        1,
+        3
+      ],
+      "affected_rows": [
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 1
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 3,
+          "track_id": 303,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 1
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 3,
+          "track_id": 303,
+          "position": 3
+        }
+      ],
+      "matches": true
+    },
+    {
+      "tracks": [
+        101,
+        202,
+        303
+      ],
+      "requested_row_ids": [
+        2,
+        3,
+        1
+      ],
+      "affected_rows": [
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 1
+        },
+        {
+          "row_id": 3,
+          "track_id": 303,
+          "position": 2
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 1
+        },
+        {
+          "row_id": 3,
+          "track_id": 303,
+          "position": 2
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "matches": true
+    },
+    {
+      "tracks": [
+        101,
+        202,
+        303
+      ],
+      "requested_row_ids": [
+        3,
+        1,
+        2
+      ],
+      "affected_rows": [
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        {
+          "row_id": 3,
+          "track_id": 303,
+          "position": 1
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 3,
+          "track_id": 303,
+          "position": 1
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 3
+        }
+      ],
+      "matches": true
+    },
+    {
+      "tracks": [
+        101,
+        202,
+        303
+      ],
+      "requested_row_ids": [
+        3,
+        2,
+        1
+      ],
+      "affected_rows": [
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        {
+          "row_id": 3,
+          "track_id": 303,
+          "position": 1
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 2
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 3,
+          "track_id": 303,
+          "position": 1
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 2
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "matches": true
+    },
+    {
+      "tracks": [
+        101,
+        202,
+        101
+      ],
+      "requested_row_ids": [
+        1,
+        2,
+        3
+      ],
+      "affected_rows": [
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 2
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 2
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "matches": true
+    },
+    {
+      "tracks": [
+        101,
+        202,
+        101
+      ],
+      "requested_row_ids": [
+        1,
+        3,
+        2
+      ],
+      "affected_rows": [
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 3
+        }
+      ],
+      "matches": true
+    },
+    {
+      "tracks": [
+        101,
+        202,
+        101
+      ],
+      "requested_row_ids": [
+        2,
+        1,
+        3
+      ],
+      "affected_rows": [
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 1
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 1
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "matches": true
+    },
+    {
+      "tracks": [
+        101,
+        202,
+        101
+      ],
+      "requested_row_ids": [
+        2,
+        3,
+        1
+      ],
+      "affected_rows": [
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 1
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 1
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "matches": true
+    },
+    {
+      "tracks": [
+        101,
+        202,
+        101
+      ],
+      "requested_row_ids": [
+        3,
+        1,
+        2
+      ],
+      "affected_rows": [
+        1,
+        2,
+        1
+      ],
+      "expected": [
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 3
+        }
+      ],
+      "matches": false
+    },
+    {
+      "tracks": [
+        101,
+        202,
+        101
+      ],
+      "requested_row_ids": [
+        3,
+        2,
+        1
+      ],
+      "affected_rows": [
+        1,
+        1,
+        2
+      ],
+      "expected": [
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 2
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 2,
+          "track_id": 202,
+          "position": 2
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 3
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "matches": false
+    },
+    {
+      "tracks": [
+        101,
+        101,
+        101
+      ],
+      "requested_row_ids": [
+        1,
+        2,
+        3
+      ],
+      "affected_rows": [
+        1,
+        1,
+        1
+      ],
+      "expected": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 2,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 2,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "matches": true
+    },
+    {
+      "tracks": [
+        101,
+        101,
+        101
+      ],
+      "requested_row_ids": [
+        1,
+        3,
+        2
+      ],
+      "affected_rows": [
+        1,
+        1,
+        2
+      ],
+      "expected": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 2,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 2,
+          "track_id": 101,
+          "position": 3
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "matches": false
+    },
+    {
+      "tracks": [
+        101,
+        101,
+        101
+      ],
+      "requested_row_ids": [
+        2,
+        1,
+        3
+      ],
+      "affected_rows": [
+        1,
+        2,
+        1
+      ],
+      "expected": [
+        {
+          "row_id": 2,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 2,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "matches": false
+    },
+    {
+      "tracks": [
+        101,
+        101,
+        101
+      ],
+      "requested_row_ids": [
+        2,
+        3,
+        1
+      ],
+      "affected_rows": [
+        1,
+        1,
+        2
+      ],
+      "expected": [
+        {
+          "row_id": 2,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 3
+        },
+        {
+          "row_id": 2,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "matches": false
+    },
+    {
+      "tracks": [
+        101,
+        101,
+        101
+      ],
+      "requested_row_ids": [
+        3,
+        1,
+        2
+      ],
+      "affected_rows": [
+        1,
+        2,
+        3
+      ],
+      "expected": [
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 2,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 3
+        },
+        {
+          "row_id": 2,
+          "track_id": 101,
+          "position": 3
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "matches": false
+    },
+    {
+      "tracks": [
+        101,
+        101,
+        101
+      ],
+      "requested_row_ids": [
+        3,
+        2,
+        1
+      ],
+      "affected_rows": [
+        1,
+        1,
+        2
+      ],
+      "expected": [
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 1
+        },
+        {
+          "row_id": 2,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "actual": [
+        {
+          "row_id": 2,
+          "track_id": 101,
+          "position": 2
+        },
+        {
+          "row_id": 1,
+          "track_id": 101,
+          "position": 3
+        },
+        {
+          "row_id": 3,
+          "track_id": 101,
+          "position": 3
+        }
+      ],
+      "matches": false
+    }
+  ],
+  "disclosure_end": "End of autonomously AI-generated probe output."
+}
