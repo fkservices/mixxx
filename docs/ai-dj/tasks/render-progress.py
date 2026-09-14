@@ -33,6 +33,8 @@ milestones = [dict(id=c['id'], title=c['title'], requires=c['requires'],
                    accepted=all(k in accepted for k in c['requires'])) for c in execution['checkpoints']]
 gallery_path = docs/'work/screenshots.json'
 gallery = json.loads(gallery_path.read_text())['items'] if gallery_path.exists() else []
+journal_path = docs/'work/progress-log.json'
+journal = json.loads(journal_path.read_text()) if journal_path.exists() else []
 for item in gallery:
     assert item['kind'] in ('native_ui', 'app_ui', 'mockup', 'progress_page')
     path = Path(item['path'])
@@ -49,6 +51,7 @@ payload = dict(schema_version=1, goal=ledger['authorization'], goal_status=ledge
                updated_at=updated, tasks=rows, children=children, milestones=milestones,
                controller=ledger['external_requirements']['physical_controller'],
                music=ledger['external_requirements']['musical_fixtures'], screenshots=gallery, transport_checks=transport_summary)
+payload['journal'] = journal
 timings = []
 for task_id, label in [('M15', 'Idle'), ('M16', 'CPU load')]:
     path = docs/f'work/runs/{task_id}.json'

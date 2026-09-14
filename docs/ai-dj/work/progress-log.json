@@ -1,0 +1,43 @@
+[
+  {
+    "at": "2026-09-13T20:14:38.000Z",
+    "type": "milestone",
+    "title": "Mapped Mixxx mapping bootstrap and registration in Mixxx UI",
+    "actor": "runtime",
+    "details": "M05 milestone accepted; Mixxx XML mapping bootstrap loaded with controller registration.",
+    "evidence": "work/evidence/M05.md"
+  },
+  {
+    "at": "2026-09-14T00:35:29.000Z",
+    "type": "task",
+    "title": "Accepted plan-coverage task P11",
+    "actor": "planner",
+    "details": "Occurrences, duration constraints and explicit keep/delete behavior are now accepted in set planning validation.",
+    "evidence": "work/evidence/P11.md"
+  },
+  {
+    "at": "2026-09-14T01:15:14.000Z",
+    "type": "screenshot",
+    "title": "Captured desktop shell session and stale snapshot behavior",
+    "actor": "test",
+    "details": "Shell evidence now includes connected, keyboard, stale and disconnected states for recovery behavior review.",
+    "screenshot": "work/screenshots/ui-shell-disconnected.jpg",
+    "evidence": "work/evidence/U02.md"
+  },
+  {
+    "at": "2026-09-14T01:52:34.000Z",
+    "type": "evidence",
+    "title": "Progress dashboard refreshed with visual timeline and gallery",
+    "actor": "planner",
+    "details": "Added session log and expanded progress capture integration in the visual progress page.",
+    "evidence": "work/evidence/progress-page.md"
+  },
+  {
+    "at": "2026-09-14T02:05:00.000Z",
+    "type": "evidence",
+    "title": "Build progress HTML now records checkpoints as a session log",
+    "actor": "planner",
+    "details": "Updated dashboard template, renderer, and proof manifest so this session shows checkpoint lines with evidence and screenshot links.",
+    "evidence": "work/evidence/progress-page.md"
+  }
+]
