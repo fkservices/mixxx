@@ -51,6 +51,8 @@ payload = dict(schema_version=1, goal=ledger['authorization'], goal_status=ledge
                updated_at=updated, tasks=rows, children=children, milestones=milestones,
                controller=ledger['external_requirements']['physical_controller'],
                music=ledger['external_requirements']['musical_fixtures'], screenshots=gallery, transport_checks=transport_summary)
+payload['frontier'] = execution['dependency_frontier']
+payload['dispatchable'] = execution['dispatchable_now']
 payload['journal'] = journal
 timings = []
 for task_id, label in [('M15', 'Idle'), ('M16', 'CPU load')]:

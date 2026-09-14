@@ -3241,6 +3241,31 @@
       "stopped": true
     }
   ],
+  "frontier": [
+    "M18",
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+    "I10",
+    "I11",
+    "I12",
+    "I14",
+    "I15",
+    "I16",
+    "I17",
+    "I18",
+    "I19",
+    "I20",
+    "I21",
+    "I22"
+  ],
+  "dispatchable": [],
   "journal": [
     {
       "at": "2026-09-13T20:14:38.000Z",
@@ -3297,6 +3322,30 @@
       "title": "Progress dashboard now highlights latest screenshot",
       "actor": "planner",
       "details": "Added a dedicated latest-screenshot panel and wired live refresh so the newest capture stays top of the journal-driven progress page.",
+      "evidence": "work/evidence/progress-page.md"
+    },
+    {
+      "at": "2026-09-14T04:38:00Z",
+      "type": "evidence",
+      "title": "Progress page now shows live execution queue",
+      "actor": "planner",
+      "details": "Added a dependency-frontier + dispatch-ready execution queue panel to progress.html via template changes and regenerated visual output.",
+      "evidence": "work/evidence/progress-page.md"
+    },
+    {
+      "at": "2026-09-14T03:28:07Z",
+      "type": "evidence",
+      "title": "Added visual activity pulse and snapshot export to progress page",
+      "actor": "planner",
+      "details": "Added a \"What changed recently\" section, helper pills for pulse events, and one-click snapshot JSON download in progress.html. Also added supporting screenshot evidence panel polish.",
+      "evidence": "work/evidence/progress-page.md"
+    },
+    {
+      "at": "2026-09-14T05:00:00Z",
+      "type": "evidence",
+      "title": "Progress dashboard now shows a visual evidence strip",
+      "actor": "planner",
+      "details": "Added a compact latest-capture strip to the progress page with thumbnail cards, timestamps, and evidence links so visual progress is visible as screenshots are added.",
       "evidence": "work/evidence/progress-page.md"
     }
   ],

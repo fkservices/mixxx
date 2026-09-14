@@ -35,3 +35,20 @@ On 2026-09-14, the dashboard now also renders the most recent screenshot as a de
 On 2026-09-14, the dashboard was upgraded with a live "Progress by stage" strip (e.g., foundation, local-midi, capability, observability) and a compact acceptance/active/waiting gauge. This keeps the same progress feed and does not change any MIDI or Mixxx runtime behavior.
 
 > End of autonomously AI-generated evidence.
+
+## 2026-09-14 session note
+
+- Added queue visibility to `progress.template.html` and regenerated `progress.html` through `tasks/render-progress.py`.
+- The dashboard now renders:
+  - `Current execution queue` cards showing dependency-frontier tasks and dispatch-ready state.
+  - A `dispatchable` and `frontier` payload in `work/progress.json` so the page stays synchronized.
+  - Freshened screenshots/timeline view after renderer refresh (`Render visual progress` now reports 38 screenshots available in the manifest).
+
+
+- Added visual activity pulse and one-click snapshot export to progress.html via template refresh. The page now has a `What changed recently` section (`#progress-pulse`) driven from `work/progress-log.json`, and a `Download snapshot` button that saves the current JSON payload for sharing in local sessions.
+
+On 2026-09-14, the dashboard now includes a compact visual evidence strip (`#capture-strip`) showing the latest screenshots as linked cards in a quick visual timeline.
+
+- Added `renderSessionStrip()` in `progress.template.html` and wired it into the dashboard render cycle.
+- Added strip-specific styles (`.session-strip`, `.strip-item`, `.strip-meta`) for non-blocking visual progression between text-heavy panels.
+- Regenerated `progress.html` so this visual evidence run is immediately readable to any reviewer opening the page in-browser.

@@ -222,8 +222,7 @@
     "O02",
     "O05",
     "U01",
-    "U02",
-    "I13-PAGE-03"
+    "U02"
   ],
   "dependency_frontier": [
     "M18",
