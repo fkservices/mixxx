@@ -36,9 +36,9 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** U01, F03. **Leases:** ui-entry. **Status:** planned.
+**Dependencies:** U01, F03, F05. **Leases:** ui-entry. **Status:** accepted.
 
-**Owns:** `ai-dj/local-ui/app.ts`, `ai-dj/local-ui/index.html`, `ai-dj/local-ui/styles.css`, `ai-dj/local-ui/service.ts`
+**Owns:** `ai-dj/local-ui/app.ts`, `ai-dj/local-ui/index.html`, `ai-dj/local-ui/styles.css`, `ai-dj/local-ui/service.ts`, `ai-dj/test/local-ui/service.test.ts`, `ai-dj/package.json`, `ai-dj/package-lock.json`
 
 **Scope:** Shell/navigation and reconnect/stale indicator only.
 

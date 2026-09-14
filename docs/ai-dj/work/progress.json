@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T01:01:53.552982+00:00",
+  "updated_at": "2026-09-14T01:15:14.252803+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -1744,12 +1744,17 @@
       "id": "U02",
       "title": "Scaffold the local UI and service connection",
       "stage": "08-desktop-ui",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/U02.md",
+      "verified": true,
+      "checks": [
+        "Authenticated shell and bounded snapshot subscription implemented; no performance authority exposed.",
+        "Build and all 263 package tests passed, including six HTTP/WebSocket/client tests.",
+        "Actual browser navigation, reconnect, suspended-service stale display, recovery, fresh-access reload and visible keyboard focus verified.",
+        "Actual browser close left local shell service answering HTTP 200."
+      ],
+      "updated": "2026-09-14T01:15:14.252803+00:00",
       "dynamic": false
     },
     {
@@ -3057,6 +3062,34 @@
       "kind": "progress_page",
       "caption": "Actual browser capture of optional manual-fixture session recording progress. Worker and socket tests use fake MIDI; native playback and physical capture remain unverified.",
       "evidence": "work/evidence/O07-LIFECYCLE.md"
+    },
+    {
+      "path": "work/screenshots/ui-shell-connected.jpg",
+      "captured_at": "2026-09-14T01:15:14.252803+00:00",
+      "kind": "app_ui",
+      "caption": "Actual desktop shell connected to its authenticated local service. Host and performance remain unverified; no live MIDI controls are enabled.",
+      "evidence": "work/evidence/U02.md"
+    },
+    {
+      "path": "work/screenshots/ui-shell-keyboard.jpg",
+      "captured_at": "2026-09-14T01:15:14.252803+00:00",
+      "kind": "app_ui",
+      "caption": "Actual browser Session history navigation with visible keyboard focus on Playlist & set. This is shell navigation, not the historical session reader.",
+      "evidence": "work/evidence/U02.md"
+    },
+    {
+      "path": "work/screenshots/ui-shell-stale.jpg",
+      "captured_at": "2026-09-14T01:15:14.252803+00:00",
+      "kind": "app_ui",
+      "caption": "Actual shell during service SIGSTOP: stale updates and 10.2-second snapshot age. AI state remains unknown; no false disarm confirmation.",
+      "evidence": "work/evidence/U02.md"
+    },
+    {
+      "path": "work/screenshots/ui-shell-disconnected.jpg",
+      "captured_at": "2026-09-14T01:15:14.252803+00:00",
+      "kind": "app_ui",
+      "caption": "Actual shell after browser reload: access requires a fresh launcher link, despite the retained HttpOnly cookie.",
+      "evidence": "work/evidence/U02.md"
     }
   ],
   "transport_checks": [

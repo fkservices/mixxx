@@ -231,6 +231,34 @@
       "kind": "progress_page",
       "caption": "Actual browser capture of optional manual-fixture session recording progress. Worker and socket tests use fake MIDI; native playback and physical capture remain unverified.",
       "evidence": "work/evidence/O07-LIFECYCLE.md"
+    },
+    {
+      "path": "work/screenshots/ui-shell-connected.jpg",
+      "captured_at": "2026-09-14T01:15:14.252803+00:00",
+      "kind": "app_ui",
+      "caption": "Actual desktop shell connected to its authenticated local service. Host and performance remain unverified; no live MIDI controls are enabled.",
+      "evidence": "work/evidence/U02.md"
+    },
+    {
+      "path": "work/screenshots/ui-shell-keyboard.jpg",
+      "captured_at": "2026-09-14T01:15:14.252803+00:00",
+      "kind": "app_ui",
+      "caption": "Actual browser Session history navigation with visible keyboard focus on Playlist & set. This is shell navigation, not the historical session reader.",
+      "evidence": "work/evidence/U02.md"
+    },
+    {
+      "path": "work/screenshots/ui-shell-stale.jpg",
+      "captured_at": "2026-09-14T01:15:14.252803+00:00",
+      "kind": "app_ui",
+      "caption": "Actual shell during service SIGSTOP: stale updates and 10.2-second snapshot age. AI state remains unknown; no false disarm confirmation.",
+      "evidence": "work/evidence/U02.md"
+    },
+    {
+      "path": "work/screenshots/ui-shell-disconnected.jpg",
+      "captured_at": "2026-09-14T01:15:14.252803+00:00",
+      "kind": "app_ui",
+      "caption": "Actual shell after browser reload: access requires a fresh launcher link, despite the retained HttpOnly cookie.",
+      "evidence": "work/evidence/U02.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

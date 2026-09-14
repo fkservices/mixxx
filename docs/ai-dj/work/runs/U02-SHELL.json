@@ -1,0 +1,32 @@
+{
+  "disclosure": "Autonomously AI-generated shell verification record.",
+  "source_base": "269935e5a6",
+  "recorded_at": "2026-09-14T01:15:14.252803+00:00",
+  "source_sha256": {
+    "ai-dj/local-ui/service.ts": "0f05797cc8578554759ed0ed29695466271ca1fca2b337c662a60f5a17c6e868",
+    "ai-dj/local-ui/app.ts": "8d19d0fec6a73526d6808d698ddf1431c4793e6aee68bbfe6113650780aca705",
+    "ai-dj/local-ui/index.html": "5ac137c94814714686d755939db3271cd66d9682b869e6e3544e62e7c194cf3a",
+    "ai-dj/local-ui/styles.css": "c51098d2fd67ee99fba6268a48e0c54f66fbfb8fd2e86cbde463dfeee1a7caba",
+    "ai-dj/test/local-ui/service.test.ts": "bb608bcc289b2b1305530888db4ad1dde893161aff639afe7d6230f1801a87df",
+    "ai-dj/package.json": "7c6a074f8a650d18f63e468a734fad76a6ec98f31ba78e540203c905f79a6b8e",
+    "ai-dj/package-lock.json": "b53033048943354dff570885a38ae6dbd74ef52fca49c9ab63bef87eb476b065"
+  },
+  "validation": {
+    "build": "passed",
+    "tests": 263,
+    "failed": 0,
+    "test_log_sha256": "73274ce37f555c6744738d3ff64e5134a01b68474219ebe86f0b36cd353373dc"
+  },
+  "browser": {
+    "connected": true,
+    "navigation": true,
+    "reconnect": true,
+    "stale_during_actual_service_suspend": true,
+    "recovered_after_resume": true,
+    "reload_requires_fresh_access": true,
+    "keyboard_focus": "solid outline on Playlist & set",
+    "http_after_browser_close": 200
+  },
+  "scope": "Shell and authenticated loopback connection only. No performance or history handlers and no MIDI handles.",
+  "end_disclosure": "End of autonomously AI-generated shell verification record."
+}

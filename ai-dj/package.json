@@ -15,10 +15,12 @@
   },
   "devDependencies": {
     "@types/node": "26.5.1",
+    "@types/ws": "8.18.1",
     "typescript": "7.0.2"
   },
   "dependencies": {
-    "@julusian/midi": "3.8.1"
+    "@julusian/midi": "3.8.1",
+    "ws": "8.21.3"
   },
   "allowScripts": {
     "@julusian/midi@3.8.1": true

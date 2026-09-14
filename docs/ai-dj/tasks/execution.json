@@ -1,7 +1,7 @@
 {
   "disclosure": "Autonomously AI-generated reference execution plan. Actual states derive from the acceptance ledger; batch membership is not runtime evidence.",
   "schema_version": 1,
-  "catalog_sha256": "e4ddb308e6b80f65089969678fff87689040823e8c7adbfc43976827c6ff5a4f",
+  "catalog_sha256": "5da7c7ba91c1e21adcdc8256daddf9f353074091f3bd10d9dd37d425e71f0ca0",
   "authorization": "implementation_authorized",
   "current_task_status": {
     "F01": "accepted",
@@ -134,7 +134,7 @@
     "O10": "planned",
     "O11": "planned",
     "U01": "accepted",
-    "U02": "planned",
+    "U02": "accepted",
     "U03": "planned",
     "U04": "planned",
     "U05": "planned",
@@ -220,7 +220,8 @@
     "P11",
     "O01",
     "O05",
-    "U01"
+    "U01",
+    "U02"
   ],
   "dependency_frontier": [
     "M18",
@@ -245,8 +246,7 @@
     "I20",
     "I21",
     "I22",
-    "O02",
-    "U02"
+    "O02"
   ],
   "dispatchable_now": [],
   "dynamic_task_status": {
