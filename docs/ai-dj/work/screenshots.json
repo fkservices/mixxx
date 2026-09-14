@@ -217,6 +217,13 @@
       "caption": "Actual browser capture of the P11 occurrence-coverage panel and accepted milestone. Eight focused and 232 package tests passed; this image shows the journal, not native playback.",
       "captured_at": "2026-09-14T00:35:29.872346+00:00",
       "evidence": "work/evidence/P11.md"
+    },
+    {
+      "path": "work/screenshots/progress-enospc.jpg",
+      "kind": "progress_page",
+      "caption": "Actual browser capture of the completed disposable-volume ENOSPC test summary. This is the evidence journal, not native MIDI or audible performance proof.",
+      "captured_at": "2026-09-14T00:50:23.986475+00:00",
+      "evidence": "work/evidence/O07-LIFECYCLE.md"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

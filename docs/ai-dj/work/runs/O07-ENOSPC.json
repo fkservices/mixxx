@@ -1,0 +1,58 @@
+{
+  "disclosure": "Autonomously AI-generated actual disk-full probe.",
+  "imageMiB": 32,
+  "filesystem": "HFS+",
+  "scope": "Disposable disk image only; no native MIDI or audio test",
+  "startedAt": "2026-09-14T00:49:23.508Z",
+  "passed": true,
+  "cleanup": true,
+  "volumeBytes": 33513472,
+  "fillError": "ENOSPC",
+  "fillerBytes": 32722944,
+  "freeBytesAfterFill": 0,
+  "failureObservedMs": 52.85866699999997,
+  "offerMaximumMs": 2.6066249999998945,
+  "heartbeatSamples": 7,
+  "heartbeatMaximumIntervalMs": 23.245458000000326,
+  "status": {
+    "state": "failed",
+    "queuedRecords": 0,
+    "queuedBytes": 0,
+    "inFlight": 0,
+    "omittedOffers": 0,
+    "reason": "ENOSPC: no space left on device, write",
+    "captureCompleteness": "gaps-present",
+    "accounting": {
+      "acceptedOffers": 20,
+      "appendAcknowledgedOffers": 1,
+      "queuedOffers": 0,
+      "inFlightOffers": 0,
+      "notSubmittedOnFailure": 18,
+      "unconfirmedOnFailure": 1,
+      "reportedOmissions": 0,
+      "unreportedOmissions": 0,
+      "synchronizedAtCloseOffers": null
+    }
+  },
+  "recoveredRecords": 2,
+  "recoveryGaps": [
+    "unsealed-chunk",
+    "truncated-tail",
+    "missing-or-invalid-end"
+  ],
+  "recoveryEnd": {
+    "kind": "end",
+    "cleanStorageClose": false,
+    "lastSequence": 2,
+    "grantsPerformanceAuthority": false
+  },
+  "finishedAt": "2026-09-14T00:49:26.982Z",
+  "disclosureEnd": "End of autonomously AI-generated probe.",
+  "source_base": "3d6dfda2a0",
+  "source_hashes": {
+    "docs/ai-dj/work/probes/recorder-enospc.mjs": "da584857aadac5104161068ca6b573e82647b3f835ac98a289ef07eefb0af8cd",
+    "ai-dj/session/journal.ts": "2ef7ab0ff162077db36e3a8869fdc1e4eafe51fb07305effb9826bb7e18c12a0",
+    "ai-dj/session/worker.ts": "36c5a5fd3aaae1447a25882f6c8fb96aec0ac4a881745800a7aaa6ba18d7f6d7",
+    "ai-dj/session/chunks.ts": "f8e850818a9f43f2c76c8421810d253bbaff3d79506847e08af6a5aae514a3d6"
+  }
+}

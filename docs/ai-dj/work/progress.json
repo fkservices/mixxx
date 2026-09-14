@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T00:48:08.992542+00:00",
+  "updated_at": "2026-09-14T00:49:52.589809+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2742,7 +2742,7 @@
       "evidence": null,
       "verified": false,
       "checks": [],
-      "updated": "2026-09-14T00:48:08.992542+00:00",
+      "updated": "2026-09-14T00:49:52.589809+00:00",
       "dynamic": true
     }
   ],
@@ -3043,6 +3043,13 @@
       "caption": "Actual browser capture of the P11 occurrence-coverage panel and accepted milestone. Eight focused and 232 package tests passed; this image shows the journal, not native playback.",
       "captured_at": "2026-09-14T00:35:29.872346+00:00",
       "evidence": "work/evidence/P11.md"
+    },
+    {
+      "path": "work/screenshots/progress-enospc.jpg",
+      "kind": "progress_page",
+      "caption": "Actual browser capture of the completed disposable-volume ENOSPC test summary. This is the evidence journal, not native MIDI or audible performance proof.",
+      "captured_at": "2026-09-14T00:50:23.986475+00:00",
+      "evidence": "work/evidence/O07-LIFECYCLE.md"
     }
   ],
   "transport_checks": [
