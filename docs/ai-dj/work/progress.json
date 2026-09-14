@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T01:20:22.210198+00:00",
+  "updated_at": "2026-09-14T01:27:37.324597+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -1604,12 +1604,16 @@
       "id": "O02",
       "title": "Specify raw physical MIDI capture hook",
       "stage": "07-observability",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-6-astra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/O02.md",
+      "verified": true,
+      "checks": [
+        "Pre-dispatch PortMidi hook, endpoint/output identity, filtering and backend normalization verified from current source.",
+        "Bounded raw/lifecycle capture and read-only feedback operation specified; no runtime capture claimed.",
+        "Four required implementation children materialized under O04; physical acceptance remains pending."
+      ],
+      "updated": "2026-09-14T01:27:37.324597+00:00",
       "dynamic": false
     },
     {
@@ -2764,6 +2768,54 @@
         "Installed app and full inventory remain unverified."
       ],
       "updated": "2026-09-14T01:20:22.210198+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "O04-CAPTURE-CONTRACT",
+      "title": "Define backend packet evidence and bounded MIDI conversion",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": "2026-09-14T01:27:37.324597+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "O04-CAPTURE-HOOK",
+      "title": "Copy native MIDI input before mapping without changing dispatch",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": "2026-09-14T01:27:37.324597+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "O04-CAPTURE-BRIDGE",
+      "title": "Expose bounded raw capture through the configured AI feedback endpoint",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": "2026-09-14T01:27:37.324597+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "O04-CAPTURE-INGRESS",
+      "title": "Admit and record physical capture batches with explicit uncertainty",
+      "stage": "setup",
+      "status": "planned",
+      "model": "gpt-5.6-sol",
+      "evidence": null,
+      "verified": false,
+      "checks": [],
+      "updated": "2026-09-14T01:27:37.324597+00:00",
       "dynamic": true
     }
   ],

@@ -36,7 +36,7 @@
 
 **Worker:** L4 / `gpt-6-astra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** O01, M05. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** O01, M05. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `docs/ai-dj/work/operations/midi-capture.md`
 

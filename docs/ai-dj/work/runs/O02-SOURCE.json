@@ -1,0 +1,26 @@
+{
+  "disclosure": "Autonomously AI-generated source/design evidence.",
+  "source_base": "c00c4ae200",
+  "captured_at": "2026-09-14T01:27:37.324597+00:00",
+  "source_sha256": {
+    "src/controllers/controller.cpp": "0b543954fd52df0bd2febd076f8c0a880bc5b7dfcb358ebc7828bcac3af101da",
+    "src/controllers/controllermanager.cpp": "8b802554a981ce1b0f2fcded968868a524063fd01b56217ec88364a364708ace",
+    "src/controllers/controllermanager.h": "d79d49694c22178164f2648987e9522e59dc50844e039b8d41e8eb119bf9aaa5",
+    "src/controllers/midi/portmidicontroller.cpp": "8e00c4cbb2f31e7e94320e56cdc99e008fbd791742c55b746236bdb91b2aca40",
+    "src/controllers/midi/portmidicontroller.h": "340d75a48979a57d94537695361b1277dd3559a3bc548324c010b7b3e49376b8",
+    "src/controllers/midi/portmididevice.h": "83e54f6711b68fe5195d342c78ec29c08cb039c66d59700d01eee271965f0f93",
+    "src/controllers/midi/midicontroller.cpp": "e2c3509c73e5b790f84db26cb9b2ec2dd791c29f46393c463ad80ec00ce2f331",
+    "src/controllers/scripting/legacy/controllerscriptenginelegacy.cpp": "bae3bfb076a85df1fb65eb111eaffaea8eda1ae0ad494b0a6c198b274a736da7",
+    "src/controllers/scripting/controllermonotonicclock.h": "7554e3ca565a4fd886c12bbb4978ff1d1a6b32392efa03f072d8ce13dadd9d43",
+    "src/test/portmidicontroller_test.cpp": "e292b62b9fb613c20772119aa4f091208574485c1a267fc5768056ca55d413a8",
+    "ai-dj/core/session.ts": "3a11ce980976e93935dd72fb4271323ff1ad1e3db9b56c3aba3631a533a899a5"
+  },
+  "portmidi_header": {
+    "path": "/Users/faizkhalid/Library/Application Support/Mixxx-AI-DJ/native-build/dependencies/mixxx-deps-2.7-arm64-osx-rel-ee6dc7fe/installed/arm64-osx-min1100-release/include/portmidi.h",
+    "sha256": "04499c0721597872896132d8bb8a4a2db633ea61064eb1c2f0805a4d4e1887b0",
+    "scope": "Effective filters and PmEvent packing/timestamps; delivered order may differ from original wire order."
+  },
+  "graph_generation": "2026-09-13T16:44:03Z",
+  "scope": "Selected PortMidi capture boundary and proposed implementation ownership; no runtime or hardware capture.",
+  "end_disclosure": "End of autonomously AI-generated source/design evidence."
+}

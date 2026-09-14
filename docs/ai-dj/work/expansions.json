@@ -1720,6 +1720,185 @@
         "17 native tests passed after correction, including 32 A/B layouts, single-occurrence cache updates and cross-playlist isolation.",
         "Installed app and full inventory remain unverified."
       ]
+    },
+    {
+      "id": "O04-CAPTURE-CONTRACT",
+      "title": "Define backend packet evidence and bounded MIDI conversion",
+      "parent": "O04",
+      "blocks": [
+        "O04"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "O02"
+      ],
+      "owns": [
+        "ai-dj/core/session.ts",
+        "ai-dj/diagnostics/backend-midi.ts",
+        "ai-dj/test/diagnostics/backend-midi.test.ts",
+        "docs/ai-dj/work/contracts/session.md"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Add closed backend-midi-packet evidence and bounded PortMidi-to-raw conversion without padding or guessed actor authority.",
+        "Preserve existing session fixtures; retain unknown/malformed backend packets and retire SysEx/pairing state on gaps."
+      ],
+      "validate": [
+        "Validate 1/2/3-byte messages, real-time/SysEx interleaving, long fragments, timestamp wrap, invalid words and distinct endpoint generations."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/O04-CAPTURE-CONTRACT.md",
+      "spec_id": "O02",
+      "capability_id": "mixxx.capture.physical-midi",
+      "updated_at": "2026-09-14T01:27:37.324597+00:00"
+    },
+    {
+      "id": "O04-CAPTURE-HOOK",
+      "title": "Copy native MIDI input before mapping without changing dispatch",
+      "parent": "O04",
+      "blocks": [
+        "O04"
+      ],
+      "template": "OP-BUILD",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "O02",
+        "O04-CAPTURE-CONTRACT"
+      ],
+      "owns": [
+        "src/controllers/midi/rawmidicapture.h",
+        "src/controllers/midi/rawmidicapture.cpp",
+        "src/controllers/midi/portmidicontroller.h",
+        "src/controllers/midi/portmidicontroller.cpp",
+        "src/controllers/midi/portmididevice.h",
+        "src/test/portmidicontroller_test.cpp",
+        "CMakeLists.txt"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Implement preallocated packet copy immediately after read, per-open identities, effective filter configuration and explicit loss/final-watermark accounting.",
+        "Preserve existing mapping behavior, including legacy active-sensing suppression; never serialize or send from the observer."
+      ],
+      "validate": [
+        "Native tests prove unmapped/repeated/ignored/long-SysEx packets captured once and legacy dispatch unchanged.",
+        "Verify bounded concurrent drains, overflow, filter failure, disabled capture, close/reopen and no producer allocation."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/O04-CAPTURE-HOOK.md",
+      "spec_id": "O02",
+      "capability_id": "mixxx.capture.physical-midi",
+      "updated_at": "2026-09-14T01:27:37.324597+00:00"
+    },
+    {
+      "id": "O04-CAPTURE-BRIDGE",
+      "title": "Expose bounded raw capture through the configured AI feedback endpoint",
+      "parent": "O04",
+      "blocks": [
+        "O04"
+      ],
+      "template": "OP-BUILD",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "O04-CAPTURE-HOOK",
+        "R06"
+      ],
+      "owns": [
+        "src/controllers/midi/rawmidicapturebridge.h",
+        "src/controllers/midi/rawmidicapturebridge.cpp",
+        "src/controllers/controllermanager.h",
+        "src/controllers/controllermanager.cpp",
+        "src/controllers/controller.h",
+        "src/controllers/controller.cpp",
+        "src/controllers/scripting/legacy/controllerscriptenginelegacy.cpp",
+        "CMakeLists.txt",
+        "ai-dj/hosts/mixxx/fragments/raw-capture.js",
+        "ai-dj/test/host/raw-capture.test.ts",
+        "ai-dj/tools/build-mapping.ts"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Implement setup-authorized capture access handle and read-only take/ACK/status operations with owner-thread marshalling.",
+        "Send at most one immutable bounded batch via the designated AI output, with deadline/cancellation and fair endpoint draining."
+      ],
+      "validate": [
+        "Test stale session/ACK, overload, mapping reload, object retirement, route isolation and no arbitrary invocation.",
+        "Validate native bridge build and host fragment harness; split integration if bounded task window is exceeded."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/O04-CAPTURE-BRIDGE.md",
+      "spec_id": "O02",
+      "capability_id": "mixxx.capture.physical-midi",
+      "updated_at": "2026-09-14T01:27:37.324597+00:00"
+    },
+    {
+      "id": "O04-CAPTURE-INGRESS",
+      "title": "Admit and record physical capture batches with explicit uncertainty",
+      "parent": "O04",
+      "blocks": [
+        "O04"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "O04-CAPTURE-CONTRACT",
+        "O04-CAPTURE-BRIDGE",
+        "O07"
+      ],
+      "owns": [
+        "ai-dj/diagnostics/physical-events.ts",
+        "ai-dj/test/integration/physical-capture.test.ts"
+      ],
+      "locks": [],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "planned",
+      "perform": [
+        "Admit current epoch packet batches, deduplicate retained read-only retries and create linked backend/raw session records.",
+        "Preserve gaps, filter/identity limits and recorder omission accounting without history-to-MIDI dispatch."
+      ],
+      "validate": [
+        "Prove bounded host-to-recorder accounting under lost/late/duplicate batches and producer restart.",
+        "Leave O04 actual physical-controller and native UI verification mandatory."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/O04-CAPTURE-INGRESS.md",
+      "spec_id": "O02",
+      "capability_id": "mixxx.capture.physical-midi",
+      "updated_at": "2026-09-14T01:27:37.324597+00:00"
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

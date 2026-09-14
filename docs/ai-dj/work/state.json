@@ -902,6 +902,25 @@
         "Actual browser navigation, reconnect, suspended-service stale display, recovery, fresh-access reload and visible keyboard focus verified.",
         "Actual browser close left local shell service answering HTTP 200."
       ]
+    },
+    "O02": {
+      "status": "accepted",
+      "worker": "coordinator",
+      "source_revision": "c00c4ae200",
+      "started_at": "2026-09-14T01:23:33.830298+00:00",
+      "deadline": "2026-09-14T01:53:33.830298+00:00",
+      "owned_paths": [
+        "docs/ai-dj/work/operations/midi-capture.md"
+      ],
+      "accepted_at": "2026-09-14T01:27:37.324597+00:00",
+      "updated_at": "2026-09-14T01:27:37.324597+00:00",
+      "evidence": "docs/ai-dj/work/evidence/O02.md",
+      "evidence_sha256": "6510b02b6f2a36d4a1258659f2b7f5c895b723f911d9e4cc7021f6adc5cd4ba9",
+      "checks": [
+        "Pre-dispatch PortMidi hook, endpoint/output identity, filtering and backend normalization verified from current source.",
+        "Bounded raw/lifecycle capture and read-only feedback operation specified; no runtime capture claimed.",
+        "Four required implementation children materialized under O04; physical acceptance remains pending."
+      ]
     }
   },
   "jobs": {

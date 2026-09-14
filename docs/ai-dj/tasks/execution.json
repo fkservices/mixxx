@@ -123,7 +123,7 @@
     "A13": "planned",
     "A14": "planned",
     "O01": "accepted",
-    "O02": "planned",
+    "O02": "accepted",
     "O03": "planned",
     "O04": "planned",
     "O05": "accepted",
@@ -219,6 +219,7 @@
     "P10",
     "P11",
     "O01",
+    "O02",
     "O05",
     "U01",
     "U02"
@@ -245,8 +246,7 @@
     "I19",
     "I20",
     "I21",
-    "I22",
-    "O02"
+    "I22"
   ],
   "dispatchable_now": [],
   "dynamic_task_status": {
@@ -284,13 +284,18 @@
     "O07-WORKER": "split",
     "O07-IPC": "accepted",
     "O07-LIFECYCLE": "planned",
-    "I13-REMOVAL-CORRECTION": "accepted"
+    "I13-REMOVAL-CORRECTION": "accepted",
+    "O04-CAPTURE-CONTRACT": "planned",
+    "O04-CAPTURE-HOOK": "planned",
+    "O04-CAPTURE-BRIDGE": "planned",
+    "O04-CAPTURE-INGRESS": "planned"
   },
   "dynamic_dependency_frontier": [
     "L12-NATIVE-ACCESSIBILITY",
     "M19-UI-CAPTURE",
     "I13-PAGE-02",
-    "O07-LIFECYCLE"
+    "O07-LIFECYCLE",
+    "O04-CAPTURE-CONTRACT"
   ],
   "global_requirements": [
     "User instruction to start implementation",
