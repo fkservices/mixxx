@@ -176,7 +176,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** P01, F08. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** P01, F08. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/catalog/m3u8.ts`, `ai-dj/test/catalog/m3u8.test.ts`
 
