@@ -1638,7 +1638,9 @@
         "ai-dj/test/session/journal.test.ts",
         "ai-dj/test/session/deadline.test.ts",
         "ai-dj/diagnostics/fixture-session.ts",
-        "ai-dj/test/diagnostics/fixture-session.test.ts"
+        "ai-dj/test/diagnostics/fixture-session.test.ts",
+        "ai-dj/main.ts",
+        "ai-dj/test/integration/fixture-recording.test.ts"
       ],
       "locks": [],
       "estimate_minutes": {

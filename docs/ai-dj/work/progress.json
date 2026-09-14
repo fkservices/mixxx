@@ -3050,6 +3050,13 @@
       "caption": "Actual browser capture of the completed disposable-volume ENOSPC test summary. This is the evidence journal, not native MIDI or audible performance proof.",
       "captured_at": "2026-09-14T00:50:23.986475+00:00",
       "evidence": "work/evidence/O07-LIFECYCLE.md"
+    },
+    {
+      "path": "work/screenshots/progress-fixture-recording.jpg",
+      "captured_at": "2026-09-14T01:06:58.468844+00:00",
+      "kind": "progress_page",
+      "caption": "Actual browser capture of optional manual-fixture session recording progress. Worker and socket tests use fake MIDI; native playback and physical capture remain unverified.",
+      "evidence": "work/evidence/O07-LIFECYCLE.md"
     }
   ],
   "transport_checks": [

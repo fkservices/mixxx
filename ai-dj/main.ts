@@ -98,11 +98,15 @@ import { open, chmod } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { SessionJournal } from "./session/journal.ts";
+import { createFixtureSessionProjection } from "./diagnostics/fixture-session.ts";
+import type { SessionEventPayload, SessionEvent } from "./core/session.ts";
 import { openNativeVirtualMidiConnection } from "./midi/connection.ts";
 interface CaptureSink { append(line: string): Promise<void>; sync(): Promise<void>; close(): Promise<void> }
 export interface LocalServiceOptions extends CommunicatorOptions {
   readonly socketPath: string;
   readonly capturePath: string;
+  readonly sessionDirectory?: string;
   readonly openCapture?: () => Promise<CaptureSink>;
 }
 export async function startLocalService(options: LocalServiceOptions) {
@@ -110,8 +114,21 @@ export async function startLocalService(options: LocalServiceOptions) {
     const file=await open(options.capturePath,"wx",0o600);
     return {append:async(line:string)=>{await file.writeFile(line);},sync:()=>file.sync(),close:()=>file.close()};
   })();
+  const recordingId=randomUUID();
+  let journal:SessionJournal|undefined;
+  const projection=createFixtureSessionProjection(recordingId,"manual-fixture-midi");
+  let projectionIssues=0, upstreamDropped=0, metadataSequence=0;
+  const metadata=(payload:SessionEventPayload)=>{
+    const stamp={clockId:options.clockId,epoch:0,ms:options.now()};
+    const n=++metadataSequence;
+    const event:SessionEvent={schemaVersion:1,recordingId,eventId:randomUUID(),recorderSequence:n,stream:{streamId:"fixture-capture-metadata",epoch:0},producerSequence:n,producerId:"manual-fixture-service",deviceInstanceId:null,capturedAt:stamp,ingestedAt:stamp,actor:{actor:"unknown"},track:null,occurrence:null,hostContext:null,relatedEventIds:[],...payload};
+    return journal!.offer(JSON.stringify(event));
+  };
   let app: Awaited<ReturnType<typeof createCommunicator>>;
-  try {app=await createCommunicator(options);}catch(error){await sink.close();throw error;}
+  try {
+    if(options.sessionDirectory){journal=new SessionJournal({directory:options.sessionDirectory,recordingId});await journal.ready;}
+    app=await createCommunicator(options);
+  }catch(error){await journal?.abort();await sink.close();throw error;}
   let captureError: string|null=null, stopping=false, generation=0;
   let queue=Promise.resolve();
   const write=(record:object)=>{
@@ -121,14 +138,26 @@ export async function startLocalService(options: LocalServiceOptions) {
   };
   let flushing:Promise<void>|null=null;
   const flush=():Promise<void>=>{
+    if(journal?.status().state==="failed"){captureError=journal.status().reason??"session-recorder-failed";app.execute("disarm");}
     if(flushing)return flushing;
     const batch=app.drain(4096);
     if(!batch.events.length&&!batch.gaps.length)return Promise.resolve();
-    flushing=write({kind:"diagnostics",...batch}).finally(()=>{flushing=null;});return flushing;
+    let sessionProjection:object|null=null;
+    if(journal){
+      const projected=projection.project(batch.events.map(entry=>entry.event));
+      projectionIssues+=projected.issues.length;
+      upstreamDropped+=batch.gaps.reduce((n,g)=>n+g.droppedEventCount,0);
+      const records=projected.records.map(({sourceEventId,event})=>({sourceEventId,eventId:event.eventId,offer:journal!.offer(JSON.stringify(event))}));
+      for(const gap of batch.gaps)metadata({kind:"capture-gap",affectedStream:{streamId:"fixture-diagnostic-buffer",epoch:0},missing:gap.contiguous?{kind:"known",firstSequence:gap.firstDroppedCaptureSequence,lastSequence:gap.lastDroppedCaptureSequence}:{kind:"unknown"},start:null,end:null,reason:"queue-overflow"});
+      if(projected.issues.length)metadata({kind:"recording-state",state:"degraded",reason:"Projection issues retained in original diagnostic log",musicStopped:"not-implied"});
+      sessionProjection={recordingId,records,issues:projected.issues,pendingCorrelations:projected.pendingCorrelations};
+    }
+    flushing=write({kind:"diagnostics",...batch,sessionProjection}).finally(()=>{flushing=null;});return flushing;
   };
   const clients=new Set<Socket>();
   let inFlight=0;
-  const serviceStatus=()=>({...app.status(),captureError,scope:"manual-fixture",pid:process.pid});
+  const checkRecorder=()=>{if(journal?.status().state==="failed"){captureError=journal.status().reason??"session-recorder-failed";app.execute("disarm");}};
+  const serviceStatus=()=>{checkRecorder();return {...app.status(),captureError,sessionRecording:journal?{recordingId,...journal.status(),captureCompleteness:projectionIssues||upstreamDropped||captureError?"gaps-present":journal.status().captureCompleteness,projectionIssues,upstreamDropped}:null,scope:"manual-fixture",pid:process.pid};};
   const server=createServer(socket=>{
     if(stopping||clients.size>=8){socket.destroy();return;}
     clients.add(socket);socket.setTimeout(2000,()=>socket.destroy());
@@ -146,12 +175,14 @@ export async function startLocalService(options: LocalServiceOptions) {
       inFlight++;
       const epoch=generation;
       void (async()=>{
+        checkRecorder();
         let response:object;
         if(command==="status")response=serviceStatus();
-        else if(captureError)response=command==="disarm"?{ok:true,armed:false,captureError}:{ok:false,reason:"capture-failed"};
+        else if(captureError||journal?.status().state==="failed")response=command==="disarm"?{ok:true,armed:false,captureError}:{ok:false,reason:"capture-failed"};
         else {
           await write({kind:"client-command",command,atMs:options.now(),source:"local-cli"});
-          response=stopping||epoch!==generation?{ok:false,reason:"cancelled"}:app.execute(command);
+          checkRecorder();
+          response=captureError?{ok:false,reason:"capture-failed"}:stopping||epoch!==generation?{ok:false,reason:"cancelled"}:app.execute(command);
           await write({kind:"client-result",command,response,atMs:options.now()});
         }
         if(!socket.destroyed)socket.end(JSON.stringify(response)+"\n");
@@ -166,8 +197,16 @@ export async function startLocalService(options: LocalServiceOptions) {
     await new Promise<void>(r=>server.close(()=>r()));
     let error:unknown;
     try {app.close();}catch(e){error=e;}
-    try {while(app.status().capture.queuedEventCount)await flush();await queue;await write({kind:"service-closed",atMs:options.now()});}catch(e){error??=e;}
-    await sink.close();if(error)throw error;
+    try {while(app.status().capture.queuedEventCount||app.status().capture.pendingGap)await flush();await queue;await write({kind:"service-closed",atMs:options.now()});}catch(e){error??=e;}
+    try {
+      if(journal){
+        if(captureError)metadata({kind:"recording-state",state:"degraded",reason:"Original diagnostic capture failed; inspect service failure",musicStopped:"not-implied"});
+        const unresolved=projection.reset();
+        if(unresolved.length){projectionIssues+=unresolved.length;metadata({kind:"recording-state",state:"degraded",reason:`${unresolved.length} attempts lack linked transport submission; original IDs in diagnostic log`,musicStopped:"not-implied"});await write({kind:"session-unresolved-attempts",recordingId,sourceEventIds:unresolved});}
+        await journal.close();
+      }
+    }catch(e){error??=e;await journal?.abort();}
+    try{await sink.close();}catch(e){error??=e;}if(error)throw error;
   })();
   try {
     await write({kind:"service-started",schemaVersion:1,scope:"manual-fixture",contextProvenance:"caller-supplied-unverified",context:options.context,clockId:options.clockId,atMs:options.now()});
@@ -180,10 +219,10 @@ export async function startLocalService(options: LocalServiceOptions) {
 }
 
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
-  const [command,socketPath,capturePath,...extra]=process.argv.slice(2);
-  if(command!=="serve-fixture"||!socketPath||!capturePath||extra.length)throw new Error("Usage: main.ts serve-fixture SOCKET CAPTURE.jsonl");
+  const [command,socketPath,capturePath,sessionDirectory,...extra]=process.argv.slice(2);
+  if(command!=="serve-fixture"||!socketPath||!capturePath||extra.length)throw new Error("Usage: main.ts serve-fixture SOCKET CAPTURE.jsonl [SESSION_DIRECTORY]");
   const id=randomUUID();
-  const service=await startLocalService({socketPath,capturePath,clockId:`local-${id}`,now:()=>performance.now(),context:{sessionId:`fixture-${id}`,correlationId:null,host:{hostInstanceId:`unverified-${id}`,connectionGeneration:0,profileId:"mixxx-2.5.6-latenight-conventional-v1",profileRevision:2,capabilityRevision:0,stateRevision:0}},openTransport:openNativeVirtualMidiConnection});
+  const service=await startLocalService({socketPath,capturePath,...(sessionDirectory?{sessionDirectory}:{}),clockId:`local-${id}`,now:()=>performance.now(),context:{sessionId:`fixture-${id}`,correlationId:null,host:{hostInstanceId:`unverified-${id}`,connectionGeneration:0,profileId:"mixxx-2.5.6-latenight-conventional-v1",profileRevision:2,capabilityRevision:0,stateRevision:0}},openTransport:openNativeVirtualMidiConnection});
   console.log(JSON.stringify({ready:true,pid:process.pid,socketPath,capturePath,scope:"manual-fixture",armed:false}));
   let closing=false;
   const stop=()=>{if(closing)return;closing=true;void service.close().then(()=>process.exit(0),error=>{console.error(String(error));process.exit(1);});};

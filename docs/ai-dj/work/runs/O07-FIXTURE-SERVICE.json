@@ -1,0 +1,19 @@
+{
+  "disclosure": "Autonomously AI-generated verification record.",
+  "source_base": "bef5fabc8f",
+  "recorded_at": "2026-09-14T01:06:58.468844+00:00",
+  "source_sha256": {
+    "ai-dj/main.ts": "11fc5bf8947b6570160a3aadf1cc0373ee1db254e79580aaed0fdf68149b38a6",
+    "ai-dj/test/integration/fixture-recording.test.ts": "e64cca5f644c07d7b4601d3d0c4468e97e5add01b566fbc942d357c546f803da",
+    "ai-dj/diagnostics/fixture-session.ts": "12a8d27f8c6d6116a4466d7335db27bd3c5fa55385a4ea73e0befa98c895ef53",
+    "ai-dj/session/journal.ts": "fbdcdd54dafcba5b647b41c006e50e64fec51ec142f15ac5e3c215d2bf090aac"
+  },
+  "validation": {
+    "build": "passed",
+    "tests": 257,
+    "failed": 0,
+    "test_log_sha256": "60505df5b85773b7b45202f8469ae436c918a7e09663a79ec8bdc4f1b3d92848"
+  },
+  "scope": "Real worker, Unix socket and file recovery; fake MIDI transport. Partial O07 lifecycle; no production AI or physical controller acceptance.",
+  "end_disclosure": "End of autonomously AI-generated verification record."
+}

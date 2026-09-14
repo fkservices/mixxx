@@ -62,4 +62,16 @@ Feedback becomes received MIDI. Unknown directions and diagnostic host/UI/audio 
 
 Three tests verify cross-batch attempt/submission links, no false authorship, unresolved sends, mismatched context, bounded eviction/reset and unknown direction handling. Build and all **253 package tests passed**; [run record](../runs/O07-FIXTURE-PROJECTION.json) contains hashes and summary. Runtime service wiring, production R10/O03 capture, current host snapshots and all remaining lifecycle gates stay open.
 
+## Optional manual-fixture service recording
+
+Source base `bef5fabc8f`. The service accepts `sessionDirectory` or the optional fourth CLI argument: `main.ts serve-fixture SOCKET CAPTURE.jsonl SESSION_DIRECTORY`. The recording directory must not exist. Recorder readiness is awaited before opening MIDI; failed startup closes the legacy sink and recorder. This remains the manual fixture service, not the production AI executor.
+
+Diagnostic drains outside MIDI callbacks project raw attempts, linked submissions and feedback into the real bounded worker. Original events, capture sequences, projection issues, v1 event mappings and each ingress offer result remain in the diagnostic JSONL. Diagnostic-buffer loss also produces session capture-gap events; unresolved attempts at shutdown produce a degraded marker and preserve original IDs in the diagnostic log. Service status combines worker accounting with upstream loss and projection issues. Worker failure is checked at drains, status and command execution; it disarms the fixture and prevents new commands. This is not a measured real-time failure-detection bound. Direct Disarm still executes before queued diagnostic writes.
+
+Shutdown drains pending diagnostic events and gaps, records unresolved links and closes the worker before completing resource cleanup. Recorder close failures reject service close. Append admission is not durable confirmation; only acknowledged synchronized close establishes the worker's closed accounting. A healthy capture remains completeness-unknown rather than claiming every possible external action was observed.
+
+Four integration tests exercise real Unix sockets, the real recorder worker and temporary files with a fake MIDI transport: linked attempt/submission recovery without invented host authority; persisted upstream overflow; uncertain send without fabricated submission; and startup directory collision without opening MIDI. Build and all **257 package tests pass**. [Run record](../runs/O07-FIXTURE-SERVICE.json) preserves source hashes and verification summary. [Browser screenshot](../screenshots/progress-fixture-recording.jpg) shows the visual journal, not native playback.
+
+O07-LIFECYCLE remains partial. Production O03/R10 integration, current-host snapshots, physical capture, sustained service load and musical acceptance remain open. No host or controller was opened for these tests. Graph generation 2026-09-13T16:44:03Z has no tracked coverage for these TypeScript paths; current source reads supplied verification.
+
 > End of autonomously AI-generated partial implementation evidence.
