@@ -843,6 +843,27 @@
         "Eight focused tests and all 232 package tests pass; typecheck and build pass.",
         "Duration conflicts require resolution; no performance authority granted."
       ]
+    },
+    "U01": {
+      "status": "accepted",
+      "worker": "/root",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-14T00:36:56.956397+00:00",
+      "updated_at": "2026-09-14T00:38:27.055023+00:00",
+      "deadline": "2026-09-14T01:06:56.956397+00:00",
+      "source_revision": "57203c4",
+      "owned_paths": [
+        "docs/ai-dj/work/contracts/ui.md"
+      ],
+      "accepted_at": "2026-09-14T00:38:27.055023+00:00",
+      "evidence": "docs/ai-dj/work/evidence/U01.md",
+      "evidence_sha256": "a7c10e7cb4b293979998ec45e5bd0902d744d2f2558798b3438943e8e63033fc",
+      "checks": [
+        "Screen and loopback API contract reviewed against P01/O01/R15 and SESSION-UI.",
+        "All three mode walkthroughs preserve disarm, occurrence identity and history isolation.",
+        "Planning validation and generated-file checks pass; runtime UI/API remains to implement."
+      ]
     }
   },
   "jobs": {

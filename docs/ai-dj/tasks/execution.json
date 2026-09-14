@@ -133,7 +133,7 @@
     "O09": "planned",
     "O10": "planned",
     "O11": "planned",
-    "U01": "planned",
+    "U01": "accepted",
     "U02": "planned",
     "U03": "planned",
     "U04": "planned",
@@ -219,7 +219,8 @@
     "P10",
     "P11",
     "O01",
-    "O05"
+    "O05",
+    "U01"
   ],
   "dependency_frontier": [
     "M18",
@@ -246,7 +247,7 @@
     "I22",
     "O02",
     "O07",
-    "U01"
+    "U02"
   ],
   "dispatchable_now": [],
   "dynamic_task_status": {

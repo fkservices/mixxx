@@ -4,7 +4,7 @@
 
 **Current work: implementation authorized and started.** The active goal is “perform tasks.md as proposed.” [GOALS.md](GOALS.md) remains authoritative. The reference catalog has 171 cards and 17 expansion templates. [Execution state and acceptance evidence](docs/ai-dj/work/state.json) are authoritative; a card's presence is not completion.
 
-**Now: twenty-eight reference tasks and nine of ten expansion tasks accepted.** Native Mixxx feedback is restored. M12 proved play and volume on both decks plus crossfader movement, with independent returned values and actual widget captures; repeated play did not toggle off. Both fixtures are paused, faders restored and service disarmed. The package has 114 passing tests. Cue/sync, timing, physical-controller coexistence, AI/B2B and later delivery gates remain open.
+**Current status:** See the [live evidence ledger](docs/ai-dj/work/state.json) and [visual journal](docs/ai-dj/progress.html) for accepted tasks, active work and test reports. Foundation, MIDI transport and playlist/session modules have partial verified implementations; the complete desktop, physical-controller B2B, endurance and musical acceptance gates remain open.
 
 [Visual progress page](docs/ai-dj/progress.html) stays synchronized with the ledger. Add real screenshots and their evidence context as UI/runtime checks produce them.
 
