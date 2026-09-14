@@ -21,6 +21,7 @@
 <section class="panel" id="ui-timing-panel" hidden><h2>When the native fader becomes visible</h2><p id="ui-timing-status" class="muted"></p><div id="ui-timing-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px"></div><p class="muted" style="font-size:12px;margin-top:16px">Each bar is a conservative visible-by upper bound, not exact repaint latency. Scale: 0–200 ms; the marker is the 150 ms target. Amber means the capture cannot resolve the target, not a proven slow UI update. <a href="work/runs/M17.json">Frames and clock calibration ↗</a></p></section>
 <section><div class="work-heading"><h2>Evidence, as it happens</h2><span id="gallery-count" class="pill"></span></div><div id="gallery" class="gallery"></div></section>
 <section class="panel"><h2>Protecting repeated songs</h2><p class="muted">A source-query probe found an ordering collision when repeated songs change places. The native DAO correction now passes its regression tests.</p><div class="two"><div><h3>Requested occurrence order</h3><p><span class="pill accepted">A · entry 3 · position 1</span> → <span class="pill">B · entry 2 · position 2</span> → <span class="pill accepted">A · entry 1 · position 3</span></p></div><div><h3>Before the fix</h3><p><span class="pill">B · entry 2 · position 2</span> → <span class="pill waiting_for_evidence">A · entries 1 + 3 · both position 3</span></p></div></div><p class="notice">Before: 7 of 18 source-query permutations mismatched. After: all 18 permutations pass native C++ checks, with 14 tests passing overall. Installed-app UI and MIDI integration remain unverified.</p><a class="evidence" href="work/evidence/I13-REORDER-CORRECTION.md">Investigation and next correction ↗</a></section>
+<section class="panel"><h2>Playlist import keeps the whole set</h2><p class="muted">M3U8 import now preserves order and repeated entries. Every entry stays visible, including files needing attention.</p><div class="two"><div><h3>What is implemented</h3><p><span class="pill accepted">Unicode + relative paths</span> <span class="pill accepted">Separate repeated entries</span> <span class="pill accepted">Explicit file problems</span></p></div><div><h3>What comes next</h3><p><span class="pill waiting_for_evidence">Resolve native track IDs</span> <span class="pill waiting_for_evidence">Preflight + load through Mixxx</span></p></div></div><p class="notice">Five import tests and all 197 package tests pass. Finding a file does not establish audio playability or permission to load a deck.</p><a class="evidence" href="work/evidence/P07.md">Read import evidence ↗</a></section>
 <section class="panel"><h2>Recently accepted</h2><div id="recent"></div></section>
 <section><h2>Every task, in view</h2><div class="controls"><label class="visually-hidden" for="search">Search tasks</label><input id="search" type="search" placeholder="Find MIDI, playlists, B2B, history…"><label class="visually-hidden" for="filter">Task status</label><select id="filter"><option value="all">All statuses</option><option value="running">In progress</option><option value="accepted">Accepted</option><option value="planned">Planned</option><option value="waiting">Waiting</option></select><label class="visually-hidden" for="scope">Task scope</label><select id="scope"><option value="all">All work</option><option value="static">Reference cards</option><option value="dynamic">Added tasks</option></select></div><div class="table-wrap"><table><thead><tr><th scope="col">ID</th><th scope="col">Work</th><th scope="col">Status</th><th scope="col">Evidence</th></tr></thead><tbody id="tasks"></tbody></table></div><p id="table-count" class="table-count" aria-live="polite"></p></section>
 </main>
@@ -29,7 +30,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T00:05:06.348801+00:00",
+  "updated_at": "2026-09-14T00:08:41.295296+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -1203,12 +1204,16 @@
       "id": "P07",
       "title": "Implement early M3U8 import fallback",
       "stage": "04-playlists",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/P07.md",
+      "verified": true,
+      "checks": [
+        "Bounded local M3U8 import preserves every occurrence and explicitly reports file problems.",
+        "Five focused filesystem tests and all 197 package tests passed; TypeScript build passed.",
+        "Imported provenance and unresolved identities cannot be mistaken for an admitted native playlist or live-load authority."
+      ],
+      "updated": "2026-09-14T00:08:41.295296+00:00",
       "dynamic": false
     },
     {

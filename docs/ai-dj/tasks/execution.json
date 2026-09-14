@@ -89,7 +89,7 @@
     "P04": "planned",
     "P05": "planned",
     "P06": "planned",
-    "P07": "planned",
+    "P07": "accepted",
     "P08": "planned",
     "P09": "planned",
     "P10": "planned",
@@ -213,7 +213,8 @@
     "R05",
     "R15",
     "R20",
-    "P01"
+    "P01",
+    "P07"
   ],
   "dependency_frontier": [
     "M18",
@@ -238,7 +239,6 @@
     "I20",
     "I21",
     "I22",
-    "P07",
     "P09",
     "O01"
   ],
