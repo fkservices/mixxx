@@ -1,0 +1,1132 @@
+{
+  "schemaVersion": 1,
+  "kind": "inventory-page",
+  "inventoryId": "native-clock-inventory",
+  "inventoryRevision": 1,
+  "context": {
+    "sessionId": "I13-native-menu-20260913",
+    "hostInstanceId": "I13-menu-host",
+    "connectionGeneration": 0,
+    "capabilityRevision": 0,
+    "profile": {
+      "profileId": "native-clock-inventory",
+      "profileRevision": 1,
+      "host": "mixxx",
+      "version": "2.7.0",
+      "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+      "platform": "macos",
+      "skinId": "LateNight",
+      "skinRevision": "source-7adf82c",
+      "configurationId": "native-clock"
+    }
+  },
+  "family": "autonomous-track-selection",
+  "pageId": "I13-page-02",
+  "pageNumber": 1,
+  "previousPageId": "I13-page-01",
+  "rowLimit": 20,
+  "sources": [
+    {
+      "sourceId": "I13-dao",
+      "kind": "source",
+      "scope": "Twelve selected PlaylistDAO mutation candidates; exact current source ranges and hashes in manifest-02",
+      "revision": "e580c20e080654b1ddecee01a8a4f1daaa94df7a",
+      "cursorBefore": "I13-dao-mutations-and-selection",
+      "cursorAfter": "I13-dao-remaining-mutations-selection",
+      "exhausted": false,
+      "evidence": [
+        {
+          "evidenceId": "I13-p2-source-scope",
+          "artifactId": "I13-source-manifest-02",
+          "runId": "I13-PAGE-02",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T01:48:20.938122Z",
+          "description": "Current source review of twelve mutations, including corrected bulk insertion and occurrence reorder. Other DAO methods and four-source closure remain open."
+        }
+      ]
+    },
+    {
+      "sourceId": "I13-library-menu",
+      "kind": "native-menu",
+      "scope": "Top-level Library menu and Create New Playlist dialog only",
+      "revision": "sha256-c6a2f96bb0112ae1c18a0e53",
+      "cursorBefore": "I13-sidebar-context-menu",
+      "cursorAfter": "I13-sidebar-context-menu",
+      "exhausted": false,
+      "evidence": [
+        {
+          "evidenceId": "I13-native-dialog",
+          "artifactId": "I13-dialog-jpeg",
+          "runId": "I13-PAGE-01",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-13T23:55:03Z",
+          "description": "Native Library menu includes Create New Playlist; dialog with name field and Cancel/Create buttons inspected, then cancelled without saving. No API or MIDI result established."
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.rename",
+      "family": "autonomous-track-selection",
+      "label": "Rename playlist",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Source return/signals are not a closed, acknowledged MIDI operation result."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Updates name by numeric playlist ID and emits renamed after successful SQL execution; no affected-row check or explicit result distinguishes missing target from changed target."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p2-rename",
+          "artifactId": "I13-source-manifest-02",
+          "runId": "I13-PAGE-02",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T01:48:20.938122Z",
+          "description": "src/library/dao/playlistdao.cpp:384-395 PlaylistDAO::renamePlaylist: Updates name by numeric playlist ID and emits renamed after successful SQL execution; no affected-row check or explicit result distinguishes missing target from changed target."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p2-rename-q0",
+          "question": "Resolve versioned target/occurrence identity, explicit outcome and source-to-installed-host equivalence; native UI/MIDI/runtime remain untested.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.set-locked",
+      "family": "autonomous-track-selection",
+      "label": "Set playlist lock",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Source return/signals are not a closed, acknowledged MIDI operation result."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Updates locked flag by ID; SQL success returns true and emits lockChanged without proving that a row existed or changed."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p2-set-locked",
+          "artifactId": "I13-source-manifest-02",
+          "runId": "I13-PAGE-02",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T01:48:20.938122Z",
+          "description": "src/library/dao/playlistdao.cpp:397-412 PlaylistDAO::setPlaylistLocked: Updates locked flag by ID; SQL success returns true and emits lockChanged without proving that a row existed or changed."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p2-set-locked-q0",
+          "question": "Resolve versioned target/occurrence identity, explicit outcome and source-to-installed-host equivalence; native UI/MIDI/runtime remain untested.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.set-locked-category",
+      "family": "autonomous-track-selection",
+      "label": "Set locks by playlist category",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Source return/signals are not a closed, acknowledged MIDI operation result."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Selects IDs by hidden category then delegates bulk locking. A failed selection returns zero, indistinguishable from an empty category. Selection and write are not one versioned service snapshot."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p2-set-locked-category",
+          "artifactId": "I13-source-manifest-02",
+          "runId": "I13-PAGE-02",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T01:48:20.938122Z",
+          "description": "src/library/dao/playlistdao.cpp:414-435 PlaylistDAO::setPlaylistsLockedByType: Selects IDs by hidden category then delegates bulk locking. A failed selection returns zero, indistinguishable from an empty category. Selection and write are not one versioned service snapshot."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p2-set-locked-category-q0",
+          "question": "Resolve versioned target/occurrence identity, explicit outcome and source-to-installed-host equivalence; native UI/MIDI/runtime remain untested.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.set-locked-batch",
+      "family": "autonomous-track-selection",
+      "label": "Set locks for playlist IDs",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Source return/signals are not a closed, acknowledged MIDI operation result."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Updates the requested ID set and returns requested set size, not affected-row count. Returns -1 on SQL failure and zero for empty input."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p2-set-locked-batch",
+          "artifactId": "I13-source-manifest-02",
+          "runId": "I13-PAGE-02",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T01:48:20.938122Z",
+          "description": "src/library/dao/playlistdao.cpp:437-469 PlaylistDAO::setPlaylistsLocked: Updates the requested ID set and returns requested set size, not affected-row count. Returns -1 on SQL failure and zero for empty input."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p2-set-locked-batch-q0",
+          "question": "Resolve versioned target/occurrence identity, explicit outcome and source-to-installed-host equivalence; native UI/MIDI/runtime remain untested.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.append-entries",
+      "family": "autonomous-track-selection",
+      "label": "Append playlist entries",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Source return/signals are not a closed, acknowledged MIDI operation result."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Appends ordered TrackIds at maximum position plus one, retaining repeats and adding timestamps. Commit result and transaction-active state are unchecked; signals/cache alone cannot certify durable success."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p2-append-entries",
+          "artifactId": "I13-source-manifest-02",
+          "runId": "I13-PAGE-02",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T01:48:20.938122Z",
+          "description": "src/library/dao/playlistdao.cpp:526-568 PlaylistDAO::appendTracksToPlaylist: Appends ordered TrackIds at maximum position plus one, retaining repeats and adding timestamps. Commit result and transaction-active state are unchecked; signals/cache alone cannot certify durable success."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p2-append-entries-q0",
+          "question": "Resolve versioned target/occurrence identity, explicit outcome and source-to-installed-host equivalence; native UI/MIDI/runtime remain untested.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.append-entry",
+      "family": "autonomous-track-selection",
+      "label": "Append one playlist entry",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Source return/signals are not a closed, acknowledged MIDI operation result."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Wraps one TrackId in a list and delegates appendTracksToPlaylist. Potential parameterized alias, but no wire/service equivalence has been admitted."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p2-append-entry",
+          "artifactId": "I13-source-manifest-02",
+          "runId": "I13-PAGE-02",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T01:48:20.938122Z",
+          "description": "src/library/dao/playlistdao.cpp:570-574 PlaylistDAO::appendTrackToPlaylist: Wraps one TrackId in a list and delegates appendTracksToPlaylist. Potential parameterized alias, but no wire/service equivalence has been admitted."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p2-append-entry-q0",
+          "question": "Resolve versioned target/occurrence identity, explicit outcome and source-to-installed-host equivalence; native UI/MIDI/runtime remain untested.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.remove-track-occurrences",
+      "family": "autonomous-track-selection",
+      "label": "Remove occurrences by track ID",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Source return/signals are not a closed, acknowledged MIDI operation result."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Removes matching track occurrences via position lookup and inner removal. Distinct from removing one occurrence; public void result and unchecked commit do not provide an acknowledged service outcome."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p2-remove-track-occurrences",
+          "artifactId": "I13-source-manifest-02",
+          "runId": "I13-PAGE-02",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T01:48:20.938122Z",
+          "description": "src/library/dao/playlistdao.cpp:742-748 PlaylistDAO::removeTracksFromPlaylistById: Removes matching track occurrences via position lookup and inner removal. Distinct from removing one occurrence; public void result and unchecked commit do not provide an acknowledged service outcome."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p2-remove-track-occurrences-q0",
+          "question": "Resolve versioned target/occurrence identity, explicit outcome and source-to-installed-host equivalence; native UI/MIDI/runtime remain untested.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.remove-entry-position",
+      "family": "autonomous-track-selection",
+      "label": "Remove entry at position",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Source return/signals are not a closed, acknowledged MIDI operation result."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Removes one current playlist position then shifts positions. Recent cache correction preserves surviving repeats, but position is mutable and needs an occurrence/revision guard in the bridge."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p2-remove-entry-position",
+          "artifactId": "I13-source-manifest-02",
+          "runId": "I13-PAGE-02",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T01:48:20.938122Z",
+          "description": "src/library/dao/playlistdao.cpp:770-778 PlaylistDAO::removeTrackFromPlaylist: Removes one current playlist position then shifts positions. Recent cache correction preserves surviving repeats, but position is mutable and needs an occurrence/revision guard in the bridge."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p2-remove-entry-position-q0",
+          "question": "Resolve versioned target/occurrence identity, explicit outcome and source-to-installed-host equivalence; native UI/MIDI/runtime remain untested.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.remove-entry-positions",
+      "family": "autonomous-track-selection",
+      "label": "Remove entries at positions",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Source return/signals are not a closed, acknowledged MIDI operation result."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Sorts requested positions descending before inner removals. Repeated positions are not deduplicated and could target shifted successors; require unique admitted occurrence references and explicit outcome handling."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p2-remove-entry-positions",
+          "artifactId": "I13-source-manifest-02",
+          "runId": "I13-PAGE-02",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T01:48:20.938122Z",
+          "description": "src/library/dao/playlistdao.cpp:780-794 PlaylistDAO::removeTracksFromPlaylist: Sorts requested positions descending before inner removals. Repeated positions are not deduplicated and could target shifted successors; require unique admitted occurrence references and explicit outcome handling."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p2-remove-entry-positions-q0",
+          "question": "Resolve versioned target/occurrence identity, explicit outcome and source-to-installed-host equivalence; native UI/MIDI/runtime remain untested.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.insert-entry",
+      "family": "autonomous-track-selection",
+      "label": "Insert one playlist entry",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Source return/signals are not a closed, acknowledged MIDI operation result."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Shifts current positions and inserts one TrackId with timestamp. Returns false on statement failure but does not check commit or active transaction; not equivalent to the corrected bulk insertion semantics."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p2-insert-entry",
+          "artifactId": "I13-source-manifest-02",
+          "runId": "I13-PAGE-02",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T01:48:20.938122Z",
+          "description": "src/library/dao/playlistdao.cpp:852-897 PlaylistDAO::insertTrackIntoPlaylist: Shifts current positions and inserts one TrackId with timestamp. Returns false on statement failure but does not check commit or active transaction; not equivalent to the corrected bulk insertion semantics."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p2-insert-entry-q0",
+          "question": "Resolve versioned target/occurrence identity, explicit outcome and source-to-installed-host equivalence; native UI/MIDI/runtime remain untested.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.insert-entries",
+      "family": "autonomous-track-selection",
+      "label": "Insert playlist entries",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Source return/signals are not a closed, acknowledged MIDI operation result."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Corrected bulk insertion skips invalid IDs, requires an active transaction/existing playlist, bounds positions, rolls back SQL/commit failure, and emits only committed rows. Returns committed count; bridge still needs stable occurrence identities and revision guards."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p2-insert-entries",
+          "artifactId": "I13-source-manifest-02",
+          "runId": "I13-PAGE-02",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T01:48:20.938122Z",
+          "description": "src/library/dao/playlistdao.cpp:899-970 PlaylistDAO::insertTracksIntoPlaylist: Corrected bulk insertion skips invalid IDs, requires an active transaction/existing playlist, bounds positions, rolls back SQL/commit failure, and emits only committed rows. Returns committed count; bridge still needs stable occurrence identities and revision guards."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p2-insert-entries-q0",
+          "question": "Resolve versioned target/occurrence identity, explicit outcome and source-to-installed-host equivalence; native UI/MIDI/runtime remain untested.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    },
+    {
+      "kind": "capability",
+      "capabilityId": "mixxx.playlist.reorder-entries",
+      "family": "autonomous-track-selection",
+      "label": "Reorder playlist occurrences",
+      "status": "candidate",
+      "semantics": {
+        "read": {
+          "kind": "unresolved",
+          "reason": "Source return/signals are not a closed, acknowledged MIDI operation result."
+        },
+        "write": {
+          "kind": "unresolved",
+          "reason": "Corrected reorder validates complete track/current-position pairs, resolves immutable row IDs, respects playlist lock and checks commit. Preserves duplicate rows but void result and current-position references still require an explicit revisioned bridge response."
+        }
+      },
+      "binding": {
+        "kind": "unresolved",
+        "reason": "Native C++ symbol located; closed MIDI service mapping and coherent result contract not verified.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "instances": {
+        "kind": "singleton",
+        "assessment": {
+          "availability": {
+            "status": "unknown",
+            "reason": "Candidate host-library service; no MIDI presence probe."
+          },
+          "command": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "feedback": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "nativeUi": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          },
+          "runtime": {
+            "status": "untested",
+            "reason": "Source/menu discovery only; no operation round-trip or outcome verified."
+          }
+        }
+      },
+      "uiSurface": {
+        "kind": "unresolved",
+        "reason": "Corresponding sidebar/table/value surface remains to inspect.",
+        "continuationId": "I13-PAGE-03"
+      },
+      "discoveryEvidence": [
+        {
+          "evidenceId": "I13-p2-reorder-entries",
+          "artifactId": "I13-source-manifest-02",
+          "runId": "I13-PAGE-02",
+          "context": {
+            "sessionId": "I13-native-menu-20260913",
+            "hostInstanceId": "I13-menu-host",
+            "connectionGeneration": 0,
+            "capabilityRevision": 0,
+            "profile": {
+              "profileId": "native-clock-inventory",
+              "profileRevision": 1,
+              "host": "mixxx",
+              "version": "2.7.0",
+              "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+              "platform": "macos",
+              "skinId": "LateNight",
+              "skinRevision": "source-7adf82c",
+              "configurationId": "native-clock"
+            }
+          },
+          "capturedAt": "2026-09-14T01:48:20.938122Z",
+          "description": "src/library/dao/playlistdao.cpp:1186-1252 PlaylistDAO::orderTracksByCurrPos: Corrected reorder validates complete track/current-position pairs, resolves immutable row IDs, respects playlist lock and checks commit. Preserves duplicate rows but void result and current-position references still require an explicit revisioned bridge response."
+        }
+      ],
+      "unresolvedQuestions": [
+        {
+          "id": "I13-p2-reorder-entries-q0",
+          "question": "Resolve versioned target/occurrence identity, explicit outcome and source-to-installed-host equivalence; native UI/MIDI/runtime remain untested.",
+          "continuationId": "I13-PAGE-03"
+        }
+      ]
+    }
+  ],
+  "boundary": {
+    "status": "more",
+    "nextCursor": "I13-page-03",
+    "continuationId": "I13-PAGE-03",
+    "remainingScopes": [
+      "Remaining mutations (delete/copy/move/shuffle), aliases, stable selected-track identity and runtime targets.",
+      "Native sidebar/table menus, matching-version manual and source-to-installed-binary comparison; prior menu evidence is historical only.",
+      "Resolve explicit mutation outcomes, guarded occurrence identities and untested command/feedback/UI/runtime dimensions."
+    ]
+  }
+}

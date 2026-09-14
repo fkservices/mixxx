@@ -278,7 +278,7 @@
     "M13-FINAL-HOST": "accepted",
     "L12-NATIVE-ACCESSIBILITY": "planned",
     "M19-UI-CAPTURE": "planned",
-    "I13-PAGE-02": "planned",
+    "I13-PAGE-02": "accepted",
     "I13-REORDER-CORRECTION": "accepted",
     "O07-CHUNKS": "accepted",
     "O07-WORKER": "split",
@@ -289,13 +289,14 @@
     "O04-CAPTURE-HOOK": "accepted",
     "O04-CAPTURE-BRIDGE": "planned",
     "O04-CAPTURE-INGRESS": "planned",
-    "I13-INSERT-CORRECTION": "accepted"
+    "I13-INSERT-CORRECTION": "accepted",
+    "I13-PAGE-03": "planned"
   },
   "dynamic_dependency_frontier": [
     "L12-NATIVE-ACCESSIBILITY",
     "M19-UI-CAPTURE",
-    "I13-PAGE-02",
-    "O07-LIFECYCLE"
+    "O07-LIFECYCLE",
+    "I13-PAGE-03"
   ],
   "global_requirements": [
     "User instruction to start implementation",

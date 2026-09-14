@@ -1,0 +1,124 @@
+{
+  "disclosure": "Autonomously AI-generated source discovery; no current native session or MIDI capability proof.",
+  "artifactId": "I13-source-manifest-02",
+  "revision": "e580c20e080654b1ddecee01a8a4f1daaa94df7a",
+  "context": {
+    "sessionId": "I13-native-menu-20260913",
+    "hostInstanceId": "I13-menu-host",
+    "connectionGeneration": 0,
+    "capabilityRevision": 0,
+    "profile": {
+      "profileId": "native-clock-inventory",
+      "profileRevision": 1,
+      "host": "mixxx",
+      "version": "2.7.0",
+      "buildId": "sha256-c6a2f96bb0112ae1c18a0e53",
+      "platform": "macos",
+      "skinId": "LateNight",
+      "skinRevision": "source-7adf82c",
+      "configurationId": "native-clock"
+    }
+  },
+  "target_context_note": "Inherited comparison target from page 1 only. No host instance was running or revalidated; current source differs from the recorded target binary.",
+  "source_path": "src/library/dao/playlistdao.cpp",
+  "source_sha256": "9fa3528f35ff56596b93f6396378974146b7956c519346cc1dbeb821bf1efde0",
+  "entries": [
+    {
+      "capabilityId": "mixxx.playlist.rename",
+      "symbol": "PlaylistDAO::renamePlaylist",
+      "startLine": 384,
+      "endLine": 395,
+      "snippet_sha256": "e616d8633d97dfe43331d39b246149b2d38074f8e5fcc43082c668ade078af2a",
+      "finding": "Updates name by numeric playlist ID and emits renamed after successful SQL execution; no affected-row check or explicit result distinguishes missing target from changed target."
+    },
+    {
+      "capabilityId": "mixxx.playlist.set-locked",
+      "symbol": "PlaylistDAO::setPlaylistLocked",
+      "startLine": 397,
+      "endLine": 412,
+      "snippet_sha256": "3a5ae6677a52395871d52bf0cff01a859a37d950cf69a87bf294846238978120",
+      "finding": "Updates locked flag by ID; SQL success returns true and emits lockChanged without proving that a row existed or changed."
+    },
+    {
+      "capabilityId": "mixxx.playlist.set-locked-category",
+      "symbol": "PlaylistDAO::setPlaylistsLockedByType",
+      "startLine": 414,
+      "endLine": 435,
+      "snippet_sha256": "cdbe966c1db611defb97cac1257d770778b1977776297f14847e8842cd6cbf8a",
+      "finding": "Selects IDs by hidden category then delegates bulk locking. A failed selection returns zero, indistinguishable from an empty category. Selection and write are not one versioned service snapshot."
+    },
+    {
+      "capabilityId": "mixxx.playlist.set-locked-batch",
+      "symbol": "PlaylistDAO::setPlaylistsLocked",
+      "startLine": 437,
+      "endLine": 469,
+      "snippet_sha256": "292bcc0cc343fde0d9d43378a6b74d5004b26aa5fd442af7649d3bf6d32f08d0",
+      "finding": "Updates the requested ID set and returns requested set size, not affected-row count. Returns -1 on SQL failure and zero for empty input."
+    },
+    {
+      "capabilityId": "mixxx.playlist.append-entries",
+      "symbol": "PlaylistDAO::appendTracksToPlaylist",
+      "startLine": 526,
+      "endLine": 568,
+      "snippet_sha256": "9eb85ab4d0fe4977229f7c0e65f7c436e5bae78671cc709213c48329c19b68f1",
+      "finding": "Appends ordered TrackIds at maximum position plus one, retaining repeats and adding timestamps. Commit result and transaction-active state are unchecked; signals/cache alone cannot certify durable success."
+    },
+    {
+      "capabilityId": "mixxx.playlist.append-entry",
+      "symbol": "PlaylistDAO::appendTrackToPlaylist",
+      "startLine": 570,
+      "endLine": 574,
+      "snippet_sha256": "d1c2d32b2243d03f678803c426772d21b3fe9cbbc3e67d2441097b19a45c042d",
+      "finding": "Wraps one TrackId in a list and delegates appendTracksToPlaylist. Potential parameterized alias, but no wire/service equivalence has been admitted."
+    },
+    {
+      "capabilityId": "mixxx.playlist.remove-track-occurrences",
+      "symbol": "PlaylistDAO::removeTracksFromPlaylistById",
+      "startLine": 742,
+      "endLine": 748,
+      "snippet_sha256": "4d7bfd4c3515bc39f86d18bbd2dc512de4089bd21a4418d186ca75a9c40f4172",
+      "finding": "Removes matching track occurrences via position lookup and inner removal. Distinct from removing one occurrence; public void result and unchecked commit do not provide an acknowledged service outcome."
+    },
+    {
+      "capabilityId": "mixxx.playlist.remove-entry-position",
+      "symbol": "PlaylistDAO::removeTrackFromPlaylist",
+      "startLine": 770,
+      "endLine": 778,
+      "snippet_sha256": "c48e430e5c3f8d751be2a9920987643ae893644f820aee0649450c4287476973",
+      "finding": "Removes one current playlist position then shifts positions. Recent cache correction preserves surviving repeats, but position is mutable and needs an occurrence/revision guard in the bridge."
+    },
+    {
+      "capabilityId": "mixxx.playlist.remove-entry-positions",
+      "symbol": "PlaylistDAO::removeTracksFromPlaylist",
+      "startLine": 780,
+      "endLine": 794,
+      "snippet_sha256": "1318a1c7a469d0cc06107b69b7e9bfc311670a7488a8c1bb67e93089e7d772db",
+      "finding": "Sorts requested positions descending before inner removals. Repeated positions are not deduplicated and could target shifted successors; require unique admitted occurrence references and explicit outcome handling."
+    },
+    {
+      "capabilityId": "mixxx.playlist.insert-entry",
+      "symbol": "PlaylistDAO::insertTrackIntoPlaylist",
+      "startLine": 852,
+      "endLine": 897,
+      "snippet_sha256": "abe9fa73f0e3ca50c34484ff78cb83bd8884d5637712f2ecd52e47c4486bb52f",
+      "finding": "Shifts current positions and inserts one TrackId with timestamp. Returns false on statement failure but does not check commit or active transaction; not equivalent to the corrected bulk insertion semantics."
+    },
+    {
+      "capabilityId": "mixxx.playlist.insert-entries",
+      "symbol": "PlaylistDAO::insertTracksIntoPlaylist",
+      "startLine": 899,
+      "endLine": 970,
+      "snippet_sha256": "adf6624bf10b5acdeb30382e6734070428cc78d6c44a469a9d6e0d4fa3adfdf0",
+      "finding": "Corrected bulk insertion skips invalid IDs, requires an active transaction/existing playlist, bounds positions, rolls back SQL/commit failure, and emits only committed rows. Returns committed count; bridge still needs stable occurrence identities and revision guards."
+    },
+    {
+      "capabilityId": "mixxx.playlist.reorder-entries",
+      "symbol": "PlaylistDAO::orderTracksByCurrPos",
+      "startLine": 1186,
+      "endLine": 1252,
+      "snippet_sha256": "bc91dc1a583d643b91537467691a9ee3dcc7eada78f4347425ddaddab30bb8d7",
+      "finding": "Corrected reorder validates complete track/current-position pairs, resolves immutable row IDs, respects playlist lock and checks commit. Preserves duplicate rows but void result and current-position references still require an explicit revisioned bridge response."
+    }
+  ],
+  "end": "End of autonomously AI-generated source discovery manifest."
+}
