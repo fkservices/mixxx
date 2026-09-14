@@ -732,6 +732,28 @@
         "Five focused filesystem tests and all 197 package tests passed; TypeScript build passed.",
         "Imported provenance and unresolved identities cannot be mistaken for an admitted native playlist or live-load authority."
       ]
+    },
+    "P09": {
+      "status": "accepted",
+      "worker": "/root",
+      "model": "gpt-5.6-terra",
+      "reasoning_effort": "high",
+      "started_at": "2026-09-14T00:10:30.487599+00:00",
+      "updated_at": "2026-09-14T00:13:36.528417+00:00",
+      "deadline": "2026-09-14T00:40:30.487599+00:00",
+      "source_revision": "7093424",
+      "owned_paths": [
+        "ai-dj/sets/store.ts",
+        "ai-dj/test/sets/store.test.ts"
+      ],
+      "accepted_at": "2026-09-14T00:13:36.528417+00:00",
+      "evidence": "docs/ai-dj/work/evidence/P09.md",
+      "evidence_sha256": "cd95643676a58a03b4b69baf8bf01c25c2f1130bd78326ca80983d7ff0d12547",
+      "checks": [
+        "Atomic versioned set archive preserves separate source snapshots, planned order and actual outcomes.",
+        "Eight storage tests including SIGKILL recovery and stale-writer conflict; all 205 package tests and build passed.",
+        "Reopened JSON stays untrusted and requires disarmed reconciliation; no host or MIDI dispatch path added."
+      ]
     }
   },
   "jobs": {

@@ -232,7 +232,7 @@
 
 **Worker:** L2 / `gpt-5.6-terra` / high. **Budget:** 25 minutes; maximum 30 including handoff.
 
-**Dependencies:** P01, F03. **Leases:** Exact path reservation. **Status:** planned.
+**Dependencies:** P01, F03. **Leases:** Exact path reservation. **Status:** accepted.
 
 **Owns:** `ai-dj/sets/store.ts`, `ai-dj/test/sets/store.test.ts`
 

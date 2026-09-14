@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T00:08:41.295296+00:00",
+  "updated_at": "2026-09-14T00:13:36.528417+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -1204,12 +1204,16 @@
       "id": "P09",
       "title": "Implement durable set storage",
       "stage": "04-playlists",
-      "status": "planned",
+      "status": "accepted",
       "model": "gpt-5.6-terra",
-      "evidence": null,
-      "verified": false,
-      "checks": [],
-      "updated": null,
+      "evidence": "work/evidence/P09.md",
+      "verified": true,
+      "checks": [
+        "Atomic versioned set archive preserves separate source snapshots, planned order and actual outcomes.",
+        "Eight storage tests including SIGKILL recovery and stale-writer conflict; all 205 package tests and build passed.",
+        "Reopened JSON stays untrusted and requires disarmed reconciliation; no host or MIDI dispatch path added."
+      ],
+      "updated": "2026-09-14T00:13:36.528417+00:00",
       "dynamic": false
     },
     {
