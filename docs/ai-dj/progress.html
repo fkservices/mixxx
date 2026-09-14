@@ -33,6 +33,7 @@
 <section class="panel"><h2>A failed recording now explains what is uncertain</h2><p><span class="pill">Still queued</span> · <span class="pill">Sent, unconfirmed</span> · <span class="pill accepted">Append acknowledged</span> · <span class="pill">Synchronized close</span></p><p class="muted">Failure preserves input counts. Missing-event markers are only reported acknowledged after the worker replies.</p><p class="notice">Lifecycle work remains in progress. Eight worker tests and all 245 package tests pass; pause/resume and live load evidence remain open.</p><a class="evidence" href="work/evidence/O07-LIFECYCLE.md">Read partial lifecycle evidence ↗</a></section>
 <section class="panel" id="disk-full-proof"><h2>What happens when the recording disk is full?</h2><p><span class="pill">32 MiB test volume</span> → <span class="pill">0 bytes free</span> → <span class="pill accepted">ENOSPC detected</span></p><div class="booth"><div><h3>20 accepted input events</h3><p>1 append acknowledged · 18 unsent · 1 uncertain</p></div><div><h3>Recovery stays honest</h3><p>Earlier complete records recovered. Torn tail and missing close remain visible.</p></div></div><p class="notice">Actual disposable-volume test passed; image detached and deleted. Caller timers continued, but live MIDI and audio latency remain unverified.</p><a class="evidence" href="work/runs/O07-ENOSPC.json">Read the disk-full run ↗</a></section>
 <section class="panel"><h2>Pausing capture leaves a visible gap</h2><p><span class="pill accepted">Pause boundary</span> → <span class="pill">Snapshot required</span> → <span class="pill accepted">Resume recorded</span></p><p class="muted">Stale snapshots and a stalled snapshot supplier cannot silently reopen capture. Recording gaps survive resumption.</p><p class="notice">Eleven worker tests and all 248 package tests pass. Trusted live-host snapshot admission and sustained MIDI responsiveness remain open.</p><a class="evidence" href="work/evidence/O07-LIFECYCLE.md">Read recorder lifecycle progress ↗</a></section>
+<section class="panel"><h2>A stuck recording worker cannot wait forever</h2><p><span class="pill accepted">Startup stall</span> + <span class="pill accepted">In-flight stall</span> → <span class="pill">Deadline · capture failed</span></p><p class="muted">Actual worker threads were deliberately blocked. Caller timers continued, and unsent versus uncertain record counts survived.</p><p class="notice">Both fault tests and all 250 package tests pass. This is deadline evidence, not a native MIDI timing result.</p><a class="evidence" href="work/runs/O07-DEADLINES.json">Read worker-stall measurements ↗</a></section>
 <section class="panel"><h2>Recently accepted</h2><div id="recent"></div></section>
 <section><h2>Every task, in view</h2><div class="controls"><label class="visually-hidden" for="search">Search tasks</label><input id="search" type="search" placeholder="Find MIDI, playlists, B2B, history…"><label class="visually-hidden" for="filter">Task status</label><select id="filter"><option value="all">All statuses</option><option value="running">In progress</option><option value="accepted">Accepted</option><option value="planned">Planned</option><option value="waiting">Waiting</option></select><label class="visually-hidden" for="scope">Task scope</label><select id="scope"><option value="all">All work</option><option value="static">Reference cards</option><option value="dynamic">Added tasks</option></select></div><div class="table-wrap"><table><thead><tr><th scope="col">ID</th><th scope="col">Work</th><th scope="col">Status</th><th scope="col">Evidence</th></tr></thead><tbody id="tasks"></tbody></table></div><p id="table-count" class="table-count" aria-live="polite"></p></section>
 </main>
@@ -41,7 +42,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T00:53:36.852204+00:00",
+  "updated_at": "2026-09-14T00:56:05.733650+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2781,7 +2782,7 @@
       "evidence": null,
       "verified": false,
       "checks": [],
-      "updated": "2026-09-14T00:53:36.852204+00:00",
+      "updated": "2026-09-14T00:56:05.733650+00:00",
       "dynamic": true
     }
   ],

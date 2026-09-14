@@ -2,7 +2,7 @@
 
 > Autonomously AI-generated partial implementation evidence at the user's request.
 
-This task is not accepted. Pause/resume mechanics and actual ENOSPC are implemented and tested below. Trusted current-host snapshot admission, stalled-worker deadline evidence, service integration and live MIDI responsiveness remain open.
+This task is not accepted. Pause/resume mechanics and actual ENOSPC are implemented and tested below. Trusted current-host snapshot admission, service integration and live MIDI responsiveness remain open. Stalled-worker deadlines are now verified below.
 
 ## Failure accounting implemented
 
@@ -33,5 +33,13 @@ Source base `643297d54b`. `pause()` immediately closes normal capture admission,
 This API relies on a trusted supplier for current observed-state content and full snapshot/reference admission. Calling a supplier within a deadline does not itself prove host freshness. Current tests use snapshots explicitly containing unknown host state. O08/O09 and service integration still need complete snapshot validation, indexing, recovery/import handling and current host evidence; these resume sidecar files do not claim a completed history query service. They grant no performance authority and leave recording gaps visible.
 
 Three additional real-worker tests cover pause under saturated input, persisted matching resume snapshot and gap retention, stale cutoff and hung supplier rejection, and failed exclusive snapshot write. Final build passed; **all 248 package tests passed**, including eleven worker tests. [Pause run record](../runs/O07-PAUSE.json) preserves hashes and the test summary. Native MIDI, audio, actual host snapshot freshness and sustained recorder load remain separate evidence gates. O07-LIFECYCLE and O07 remain incomplete.
+
+## Actual worker deadline faults
+
+Source base `acccd3058f`. Two tests launch isolated Node child processes with a test-only preload. The preload writes an evidence marker from the worker and then blocks that thread in `Atomics.wait`, either before recorder initialization or before dispatching its first inbound packet. Both cases use the unchanged production SessionJournal and its actual Worker. There is no new production worker factory, debug endpoint or stall setting.
+
+With a configured 2,000 ms deadline, startup rejects ready with worker-timeout. An in-flight stall rejects close, retires capture and preserves two never-submitted offers plus one unconfirmed offer; zero append acknowledgements are invented. Both callers continue receiving timer callbacks while awaiting retirement. Every test requires the worker-written stall marker, so an unrelated startup error cannot masquerade as the intended fault. Test child execution has a separate 15-second outer deadline, and worker termination and temporary-directory cleanup finish before return.
+
+The [final run record](../runs/O07-DEADLINES.json) contains both observations, source hashes and test summary. Build and **all 250 package tests passed**. Elapsed observations include startup/scheduling time and are not a hard-realtime guarantee or a MIDI latency measurement. Caller heartbeat counts establish progress only within these fault fixtures. Host snapshot admission, service integration and sustained native MIDI responsiveness remain incomplete; this evidence does not close O07.
 
 > End of autonomously AI-generated partial implementation evidence.

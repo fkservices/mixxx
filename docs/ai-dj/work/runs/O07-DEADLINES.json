@@ -1,0 +1,78 @@
+{
+  "disclosure": "Autonomously AI-generated actual worker-stall test record.",
+  "source_base": "acccd3058f",
+  "captured_at": "2026-09-14T00:56:05.733650+00:00",
+  "build_exit": 0,
+  "full_passed": 250,
+  "focused_tests": 2,
+  "observations": [
+    {
+      "mode": "startup",
+      "deadlineMs": 2000,
+      "elapsedMs": 1993.5265,
+      "callerTicks": 345,
+      "status": {
+        "state": "failed",
+        "queuedRecords": 0,
+        "queuedBytes": 0,
+        "inFlight": 0,
+        "omittedOffers": 0,
+        "reason": "worker-timeout",
+        "captureCompleteness": "gaps-present",
+        "accounting": {
+          "acceptedOffers": 0,
+          "appendAcknowledgedOffers": 0,
+          "queuedOffers": 0,
+          "inFlightOffers": 0,
+          "notSubmittedOnFailure": 0,
+          "unconfirmedOnFailure": 0,
+          "reportedOmissions": 0,
+          "unreportedOmissions": 0,
+          "synchronizedAtCloseOffers": null
+        }
+      }
+    },
+    {
+      "mode": "in-flight",
+      "deadlineMs": 2000,
+      "elapsedMs": 2148.124542,
+      "callerTicks": 354,
+      "status": {
+        "state": "failed",
+        "queuedRecords": 0,
+        "queuedBytes": 0,
+        "inFlight": 0,
+        "omittedOffers": 0,
+        "reason": "worker-timeout",
+        "captureCompleteness": "gaps-present",
+        "accounting": {
+          "acceptedOffers": 3,
+          "appendAcknowledgedOffers": 0,
+          "queuedOffers": 0,
+          "inFlightOffers": 0,
+          "notSubmittedOnFailure": 2,
+          "unconfirmedOnFailure": 1,
+          "reportedOmissions": 0,
+          "unreportedOmissions": 0,
+          "synchronizedAtCloseOffers": null
+        }
+      }
+    }
+  ],
+  "summary": [
+    "\u2139 tests 250",
+    "\u2139 suites 0",
+    "\u2139 pass 250",
+    "\u2139 fail 0",
+    "\u2139 cancelled 0",
+    "\u2139 skipped 0",
+    "\u2139 todo 0",
+    "\u2139 duration_ms 10702.098875"
+  ],
+  "source_hashes": {
+    "ai-dj/test/session/deadline.test.ts": "9c77c940ebc8ebfea5135e8373b4b3f8f52eb2697cf2a0243561849feb6b7f6e",
+    "ai-dj/session/journal.ts": "fbdcdd54dafcba5b647b41c006e50e64fec51ec142f15ac5e3c215d2bf090aac",
+    "ai-dj/session/worker.ts": "88d3bebd1acd6b241085b044faa915e05722873577bf45b7a43f5480c3e7503e"
+  },
+  "disclosure_end": "End of autonomously AI-generated test record."
+}

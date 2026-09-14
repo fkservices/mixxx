@@ -1635,7 +1635,8 @@
         "ai-dj/session/journal.ts",
         "ai-dj/session/worker.ts",
         "ai-dj/session/chunks.ts",
-        "ai-dj/test/session/journal.test.ts"
+        "ai-dj/test/session/journal.test.ts",
+        "ai-dj/test/session/deadline.test.ts"
       ],
       "locks": [],
       "estimate_minutes": {
@@ -1656,12 +1657,12 @@
         "Require snapshot/producer/identity admission integration and full failure matrix before O07 closes."
       ],
       "evidence": "docs/ai-dj/work/evidence/O07-LIFECYCLE.md",
-      "updated_at": "2026-09-14T00:53:36.852204+00:00",
-      "source_revision": "643297d54b",
+      "updated_at": "2026-09-14T00:56:05.733650+00:00",
+      "source_revision": "acccd3058f",
       "executor": "coordinator",
       "started_at": "2026-09-14T00:47:03.166658+00:00",
       "deadline": "2026-09-14T01:17:03.166658+00:00",
-      "progress": "Pause/resume mechanics with bounded trusted-snapshot supplier, failure accounting and actual ENOSPC verified. Current-host snapshot admission/indexing, worker deadline evidence, service integration and native responsiveness remain."
+      "progress": "Pause/resume, failure accounting, actual ENOSPC and real startup/in-flight worker deadline faults verified. Current-host snapshot admission/indexing, service integration and native responsiveness remain."
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."
