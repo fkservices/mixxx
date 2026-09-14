@@ -1667,6 +1667,59 @@
       "started_at": "2026-09-14T00:47:03.166658+00:00",
       "deadline": "2026-09-14T01:17:03.166658+00:00",
       "progress": "Optional manual-fixture recorder integrated and tested at 269935e5a6. Production R10/O03 capture, current-host snapshot admission and sustained service evidence remain."
+    },
+    {
+      "id": "I13-REMOVAL-CORRECTION",
+      "title": "Preserve playlist membership after one repeated occurrence is removed",
+      "parent": "I13",
+      "blocks": [
+        "I13"
+      ],
+      "template": "SPLIT",
+      "level": "L3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "high",
+      "depends_on": [
+        "F10",
+        "F01",
+        "F11",
+        "I13-REORDER-CORRECTION"
+      ],
+      "owns": [
+        "src/library/dao/playlistdao.cpp",
+        "src/test/playlisttest.cpp"
+      ],
+      "locks": [
+        "mixxx-runtime"
+      ],
+      "estimate_minutes": {
+        "read": 4,
+        "execute": 12,
+        "validate": 6,
+        "handoff": 3
+      },
+      "max_worker_minutes": 30,
+      "status": "accepted",
+      "perform": [
+        "Compare the SQLite cursor hypothesis with actual native Qt behavior.",
+        "Fix confirmed membership-cache invalidation after one duplicate occurrence is removed; keep unrelated entries and other playlists intact."
+      ],
+      "validate": [
+        "Execute red/green native regression for surviving duplicate membership.",
+        "Retain 32-layout all-occurrence-removal coverage and other-playlist isolation; do not claim the Python cursor result reproduces in native Qt."
+      ],
+      "evidence": "docs/ai-dj/work/evidence/I13-REMOVAL-CORRECTION.md",
+      "updated_at": "2026-09-14T01:20:22.210198+00:00",
+      "source_revision": "4491bb9fa0",
+      "started_at": "2026-09-14T01:18:08.409383+00:00",
+      "deadline": "2026-09-14T01:48:08.409383+00:00",
+      "accepted_at": "2026-09-14T01:20:22.210198+00:00",
+      "evidence_sha256": "232ebe4bc32537d4b8b6cccb5d2186662b80bdecafb577c7b4b98266f5ef07f3",
+      "checks": [
+        "Confirmed native cache regression failed before correction; both SQL-removal tests passed before correction.",
+        "17 native tests passed after correction, including 32 A/B layouts, single-occurrence cache updates and cross-playlist isolation.",
+        "Installed app and full inventory remain unverified."
+      ]
     }
   ],
   "generation_end": "End of autonomously AI-generated manifest."

@@ -283,7 +283,8 @@
     "O07-CHUNKS": "accepted",
     "O07-WORKER": "split",
     "O07-IPC": "accepted",
-    "O07-LIFECYCLE": "planned"
+    "O07-LIFECYCLE": "planned",
+    "I13-REMOVAL-CORRECTION": "accepted"
   },
   "dynamic_dependency_frontier": [
     "L12-NATIVE-ACCESSIBILITY",

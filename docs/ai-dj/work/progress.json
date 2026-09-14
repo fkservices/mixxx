@@ -2,7 +2,7 @@
   "schema_version": 1,
   "goal": "perform tasks.md as proposed",
   "goal_status": "active",
-  "updated_at": "2026-09-14T01:15:14.252803+00:00",
+  "updated_at": "2026-09-14T01:20:22.210198+00:00",
   "tasks": [
     {
       "id": "F01",
@@ -2748,6 +2748,22 @@
       "verified": false,
       "checks": [],
       "updated": "2026-09-14T01:01:53.552982+00:00",
+      "dynamic": true
+    },
+    {
+      "id": "I13-REMOVAL-CORRECTION",
+      "title": "Preserve playlist membership after one repeated occurrence is removed",
+      "stage": "setup",
+      "status": "accepted",
+      "model": "gpt-5.6-sol",
+      "evidence": "work/evidence/I13-REMOVAL-CORRECTION.md",
+      "verified": true,
+      "checks": [
+        "Confirmed native cache regression failed before correction; both SQL-removal tests passed before correction.",
+        "17 native tests passed after correction, including 32 A/B layouts, single-occurrence cache updates and cross-playlist isolation.",
+        "Installed app and full inventory remain unverified."
+      ],
+      "updated": "2026-09-14T01:20:22.210198+00:00",
       "dynamic": true
     }
   ],

@@ -835,7 +835,12 @@ void PlaylistDAO::removeTracksFromPlaylistInner(int playlistId, int position) {
         LOG_FAILED_QUERY(query);
     }
 
-    m_playlistsTrackIsIn.remove(trackId, playlistId);
+    // Autonomously AI-generated correction: retain membership for surviving occurrences.
+    auto membership = m_playlistsTrackIsIn.find(trackId, playlistId);
+    if (membership != m_playlistsTrackIsIn.end()) {
+        m_playlistsTrackIsIn.erase(membership);
+    }
+    // End of autonomously AI-generated occurrence membership correction.
 
     emit trackRemoved(playlistId, trackId, position);
     if (getHiddenType(playlistId) == PLHT_SET_LOG) {

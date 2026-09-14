@@ -142,6 +142,82 @@ TEST_F(PlaylistReorderTest, InvalidInputAndUnavailableTransactionDoNotWrite) {
     dao.orderTracksByCurrPos(1, requested);
     expectOrder({1, 2, 3}, tracks);
 }
+
+class PlaylistRemovalTest : public PlaylistReorderTest {};
+
+TEST_F(PlaylistRemovalTest, RemoveByTrackPreservesEveryUnrelatedOccurrence) {
+    QSqlQuery query(dbConnection());
+    ASSERT_TRUE(query.exec("ALTER TABLE Playlists ADD COLUMN hidden INTEGER DEFAULT 0"));
+    for (int mask = 0; mask < 32; ++mask) {
+        SCOPED_TRACE(mask);
+        ASSERT_TRUE(query.exec("DELETE FROM PlaylistTracks"));
+        QList<int> survivingIds;
+        for (int i = 0; i < 5; ++i) {
+            const int track = (mask & (1 << i)) ? 101 : 202;
+            query.prepare("INSERT INTO PlaylistTracks VALUES (?,1,?,?,?)");
+            query.addBindValue(i + 1);
+            query.addBindValue(track);
+            query.addBindValue(i + 1);
+            query.addBindValue(QString::number(i + 10));
+            ASSERT_TRUE(query.exec());
+            if (track == 202) {
+                survivingIds.append(i + 1);
+            }
+        }
+        PlaylistDAO removalDao;
+        removalDao.initialize(dbConnection());
+        int removed = 0;
+        QObject::connect(&removalDao, &PlaylistDAO::trackRemoved,
+                [&removed](int playlist, TrackId track, int) {
+                    EXPECT_EQ(playlist, 1);
+                    EXPECT_EQ(track, TrackId(QVariant(101)));
+                    ++removed;
+                });
+        removalDao.removeTracksFromPlaylistById(1, TrackId(QVariant(101)));
+        ASSERT_TRUE(query.exec("SELECT id,track_id,position,pl_datetime_added "
+                               "FROM PlaylistTracks ORDER BY position"));
+        int position = 1;
+        for (int id : survivingIds) {
+            ASSERT_TRUE(query.next());
+            EXPECT_EQ(query.value(0).toInt(), id);
+            EXPECT_EQ(query.value(1).toInt(), 202);
+            EXPECT_EQ(query.value(2).toInt(), position++);
+            EXPECT_EQ(query.value(3).toString(), QString::number(id + 9));
+        }
+        EXPECT_FALSE(query.next());
+        EXPECT_EQ(removed, 5 - survivingIds.size());
+        EXPECT_FALSE(removalDao.isTrackInPlaylist(TrackId(QVariant(101)), 1));
+        EXPECT_EQ(removalDao.isTrackInPlaylist(TrackId(QVariant(202)), 1), !survivingIds.empty());
+    }
+}
+
+TEST_F(PlaylistRemovalTest, SingleOccurrenceRemovalKeepsSurvivingMembership) {
+    QSqlQuery query(dbConnection());
+    ASSERT_TRUE(query.exec("ALTER TABLE Playlists ADD COLUMN hidden INTEGER DEFAULT 0"));
+    const TrackId a(QVariant(101)), b(QVariant(202));
+    ASSERT_TRUE(dao.appendTracksToPlaylist({a,b,a}, 1));
+    dao.removeTrackFromPlaylist(1, 1);
+    EXPECT_TRUE(dao.isTrackInPlaylist(a, 1));
+    EXPECT_TRUE(dao.isTrackInPlaylist(b, 1));
+    EXPECT_EQ(dao.getTrackIdsInPlaylistOrder(1), QList<TrackId>({b,a}));
+    dao.removeTrackFromPlaylist(1, 2);
+    EXPECT_FALSE(dao.isTrackInPlaylist(a, 1));
+    EXPECT_TRUE(dao.isTrackInPlaylist(b, 1));
+}
+
+TEST_F(PlaylistRemovalTest, RemoveByTrackDoesNotChangeOtherPlaylist) {
+    QSqlQuery query(dbConnection());
+    ASSERT_TRUE(query.exec("ALTER TABLE Playlists ADD COLUMN hidden INTEGER DEFAULT 0"));
+    ASSERT_TRUE(query.exec("INSERT INTO Playlists VALUES (2,0,0)"));
+    const TrackId a(QVariant(101)), b(QVariant(202));
+    ASSERT_TRUE(dao.appendTracksToPlaylist({a,a,b}, 1));
+    ASSERT_TRUE(dao.appendTracksToPlaylist({a,b,a}, 2));
+    dao.removeTracksFromPlaylistById(1, a);
+    EXPECT_EQ(dao.getTrackIdsInPlaylistOrder(1), QList<TrackId>({b}));
+    EXPECT_EQ(dao.getTrackIdsInPlaylistOrder(2), QList<TrackId>({a,b,a}));
+    EXPECT_TRUE(dao.isTrackInPlaylist(a, 2));
+    EXPECT_FALSE(dao.isTrackInPlaylist(a, 1));
+}
 // End of autonomously AI-generated native regression tests.
 
 TEST_F(PlaylistTest, IsPlaylistFilenameSupported) {
