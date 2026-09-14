@@ -29,4 +29,9 @@ At the communicator service milestone, the live browser showed 22 accepted refer
 
 Future screenshots must be registered in `work/screenshots.json` with the actual capture time, kind, caption and evidence context. Allowed kinds distinguish native Mixxx UI, application UI, mockup and progress-page captures. Media files and private library paths stay outside Git; review screenshots for unnecessary private details before adding them.
 
+
+On 2026-09-14, the dashboard now also renders the most recent screenshot as a dedicated card (`#latest-capture`) from `work/screenshots.json`, so the page stays visually anchored to the newest capture while the gallery still keeps full history.
+
+On 2026-09-14, the dashboard was upgraded with a live "Progress by stage" strip (e.g., foundation, local-midi, capability, observability) and a compact acceptance/active/waiting gauge. This keeps the same progress feed and does not change any MIDI or Mixxx runtime behavior.
+
 > End of autonomously AI-generated evidence.

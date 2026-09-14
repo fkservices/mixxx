@@ -3282,6 +3282,22 @@
       "actor": "planner",
       "details": "Updated dashboard template, renderer, and proof manifest so this session shows checkpoint lines with evidence and screenshot links.",
       "evidence": "work/evidence/progress-page.md"
+    },
+    {
+      "at": "2026-09-14T03:23:17Z",
+      "type": "evidence",
+      "title": "Progress page upgraded to stage-by-stage visual summary",
+      "actor": "planner",
+      "details": "Added a live stage-level completion strip and stage-summary cards to the dashboard so progress is visible without searching the full task table.",
+      "evidence": "work/evidence/progress-page.md"
+    },
+    {
+      "at": "2026-09-14T04:20:00Z",
+      "type": "evidence",
+      "title": "Progress dashboard now highlights latest screenshot",
+      "actor": "planner",
+      "details": "Added a dedicated latest-screenshot panel and wired live refresh so the newest capture stays top of the journal-driven progress page.",
+      "evidence": "work/evidence/progress-page.md"
     }
   ],
   "timing": {
